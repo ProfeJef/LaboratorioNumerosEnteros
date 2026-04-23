@@ -956,11 +956,6 @@ function resetPartido(){
   document.getElementById('futbol-formula').textContent='Entero del local: 0 − 0 = 0 (neutro)';
 }
 
-/* ── NAVEGACIÓN ── */
-function navegarA(id){
-  try{if(window.parent&&typeof window.parent.showPage==='function'){window.parent.showPage(id);return;}}catch(e){}
-  window.parent.postMessage({action:'cambiarPagina',destino:id},'*');
-}
 </script>
 </body>
 </html>
