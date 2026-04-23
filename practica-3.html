@@ -437,7 +437,7 @@
 <div class="cta-final">
   <h2>¡Práctica <span>completada</span>! 🏆</h2>
   <p>Excelente trabajo. Ahora explora los enteros en situaciones de la vida real.</p>
-  <button class="btn-cta" onclick="navegarA('vida-real')">🌍 Ir a Vida Real →</button>
+  <button class="btn-cta" onclick="irAVidaReal()">🌍 Ir a Vida Real →</button>
 </div>
 
 <script>
@@ -447,14 +447,16 @@
 function leerLS(k){try{return localStorage.getItem(k);}catch(e){return null;}}
 function escribirLS(k,v){try{localStorage.setItem(k,v);}catch(e){}}
 
+// DESPUÉS:
 function navegarA(id){
-  try{
-    if(window.parent && typeof window.parent.showPage==='function'){
-      window.parent.showPage(id); return;
-    }
-  }catch(e){}
-  window.parent.postMessage({action:'cambiarPagina', destino:id},'*');
+  try{if(window.parent&&typeof window.parent.showPage==='function'){window.parent.showPage(id);return;}}catch(e){}
+  window.parent.postMessage({action:'cambiarPagina',destino:id},'*');
 }
+
+function irAVidaReal(){
+  window.open('https://profejef.github.io/LaboratorioNumerosEnteros/vida_real.html','_blank');
+}
+
 
 /* ════════════════════════════════════════
    PUNTOS — núcleo central
