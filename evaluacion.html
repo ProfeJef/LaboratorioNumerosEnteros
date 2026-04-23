@@ -252,7 +252,7 @@
       </div>
       <div class="barras-wrap" id="barras-wrap"></div>
       <div style="margin-top:1.5rem;">
-        <button class="btn-cta" onclick="navegarA('vida_real')">🌍 Explorar Vida Real →</button>
+        <button class="btn-cta" onclick="irAVidaReal()">🌍 Ir a Vida Real →</button>
         <button class="btn-cta sec" onclick="reiniciar()">↺ Nuevo intento</button>
       </div>
     </div>
@@ -849,9 +849,13 @@ const secciones = { sm: 0, ab: 0, vf: 0 };
 ════════════════════════════════════ */
 function leerLS(k) { try { return localStorage.getItem(k); } catch(e) { return null; } }
 function escribirLS(k, v) { try { localStorage.setItem(k, v); } catch(e) {} }
-function navegarA(id) {
-  try { if (window.parent && typeof window.parent.showPage === 'function') { window.parent.showPage(id); return; } } catch(e) {}
-  window.parent.postMessage({ action: 'cambiarPagina', destino: id }, '*');
+function navegarA(id){
+  try{if(window.parent&&typeof window.parent.showPage==='function'){window.parent.showPage(id);return;}}catch(e){}
+  window.parent.postMessage({action:'cambiarPagina',destino:id},'*');
+}
+
+function irAVidaReal(){
+  window.open('https://profejef.github.io/LaboratorioNumerosEnteros/vida_real.html','_blank');
 }
 function togglePista(id) { document.getElementById(id).classList.toggle('vis'); }
 
