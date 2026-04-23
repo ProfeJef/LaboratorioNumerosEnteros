@@ -3,592 +3,964 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vida Real – Números Enteros</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+  <title>Vida Real – Los Enteros | Misión ℤ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --azul:    #1A3C6E;
-      --verde:   #2ECC8A;
-      --naranja: #F4A127;
-      --fondo:   #F9F9F6;
-      --texto:   #2D2D2D;
-      --blanco:  #FFFFFF;
-      --gris:    #f0f2f5;
-      --rojo:    #E74C3C;
-      --celeste: #3498db;
+    :root{
+      --purp:#6C3CE1;--purp2:#9B6DFF;--cian:#00D4FF;--amarillo:#FFE94D;
+      --verde:#2ECC8A;--rojo:#e74c3c;--naranja:#F39C12;--celeste:#3498db;
+      --fondo:#0A0618;--fondo2:#0D0920;--fondo3:#100C24;
+      --blanco:#FFF;--texto:#E8E0FF;--gris:rgba(255,255,255,.55);
     }
-    * { margin:0; padding:0; box-sizing:border-box; }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Space Grotesk',sans-serif;background:var(--fondo);
+      color:var(--texto);overflow-x:hidden;padding-bottom:5rem;}
 
-    body { 
-      font-family:'Open Sans',sans-serif; 
-      /* FONDO DEL INICIO (Gradiente Oscuro) */
-      background: linear-gradient(135deg, #0d2448 0%, #1A3C6E 55%, #1a5276 100%); 
-      color:var(--texto); 
-      padding: 1.5rem;
-      padding-bottom: 5rem;
-      min-height: 100vh;
-      position: relative;
-    }
+    /* ── PARTÍCULAS ── */
+    .particula{position:fixed;font-family:'Nunito',sans-serif;font-weight:900;
+      color:rgba(155,109,255,.06);pointer-events:none;
+      animation:floatP linear infinite;z-index:0;}
+    @keyframes floatP{
+      0%{transform:translateY(100vh) scale(.8) rotate(0deg);opacity:0;}
+      10%{opacity:1;}90%{opacity:1;}
+      100%{transform:translateY(-10vh) scale(1.2) rotate(20deg);opacity:0;}}
 
-    /* PARTÍCULAS DE FONDO */
-    .bg-particles {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 0;
-    }
-    .bg-particles span {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(46,204,138,0.12);
-      animation: floatBubble linear infinite;
-    }
-    @keyframes floatBubble {
-      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 0.6; }
-      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
-    }
+    /* ── HERO ── */
+    .hero{
+      background:
+        radial-gradient(ellipse 55% 70% at 5% 50%,rgba(46,204,138,.1) 0%,transparent 55%),
+        radial-gradient(ellipse 55% 65% at 95% 50%,rgba(108,60,225,.18) 0%,transparent 55%),
+        linear-gradient(160deg,#070412 0%,#0E0924 55%,#060A18 100%);
+      padding:3.5rem 2rem 2.8rem;text-align:center;position:relative;overflow:hidden;z-index:1;}
+    .hero-grid{position:absolute;inset:0;pointer-events:none;
+      background-image:linear-gradient(rgba(108,60,225,.04) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(108,60,225,.04) 1px,transparent 1px);
+      background-size:55px 55px;
+      mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 100%);}
+    .hero-tag{display:inline-flex;align-items:center;gap:.5rem;
+      background:rgba(46,204,138,.1);border:1.5px solid rgba(46,204,138,.35);
+      color:var(--verde);font-family:'Nunito',sans-serif;font-weight:800;
+      font-size:.74rem;letter-spacing:2.5px;text-transform:uppercase;
+      padding:.35rem 1.1rem;border-radius:30px;margin-bottom:1.2rem;position:relative;z-index:2;}
+    .hero h1{font-family:'Nunito',sans-serif;font-weight:900;
+      font-size:clamp(1.9rem,4.5vw,3rem);color:var(--blanco);
+      position:relative;z-index:2;line-height:1.15;margin-bottom:.7rem;}
+    .hero h1 span{background:linear-gradient(135deg,var(--verde),var(--cian));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hero p{color:rgba(255,255,255,.62);font-size:.96rem;max-width:600px;
+      margin:0 auto 1.8rem;line-height:1.8;position:relative;z-index:2;}
+    .hero-badges{display:flex;justify-content:center;gap:.9rem;flex-wrap:wrap;position:relative;z-index:2;}
+    .hb{display:flex;align-items:center;gap:.4rem;
+      background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+      border-radius:20px;padding:.35rem 1rem;
+      font-family:'Nunito',sans-serif;font-weight:700;font-size:.8rem;color:rgba(255,255,255,.72);}
 
-    /* HEADER GAMIFICADO (Ajustado para el fondo oscuro) */
-    .header-vr {
-      background: rgba(18, 40, 76, 0.6);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: var(--blanco);
-      border-radius: 20px;
-      padding: 2.5rem;
-      text-align: center;
-      margin-bottom: 2.5rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-      border-bottom: 5px solid var(--naranja);
-      position: relative;
-      z-index: 2;
-    }
-    .header-vr h1 {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 900;
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      margin-bottom: 0.5rem;
-    }
-    .header-vr p {
-      font-size: 1.1rem;
-      color: rgba(255,255,255,0.85);
-      max-width: 700px;
-      margin: 0 auto;
-    }
+    /* ── TRACKER ── */
+    .premio-wrap{max-width:1100px;margin:1.5rem auto 0;padding:0 1.5rem;
+      display:flex;justify-content:center;position:relative;z-index:2;}
+    .premio-track{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+      border-radius:14px;padding:.8rem 1.4rem;display:flex;align-items:center;
+      gap:.8rem;flex-wrap:wrap;justify-content:center;}
+    .premio-label{font-family:'Nunito',sans-serif;font-weight:800;font-size:.82rem;color:var(--gris);}
+    .sim-dot{display:inline-flex;align-items:center;gap:.35rem;
+      font-family:'Nunito',sans-serif;font-weight:700;font-size:.75rem;
+      padding:.28rem .85rem;border-radius:20px;
+      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+      color:rgba(255,255,255,.45);transition:all .4s;}
+    .sim-dot.ok{background:rgba(46,204,138,.18);border-color:var(--verde);
+      color:var(--verde);box-shadow:0 0 8px rgba(46,204,138,.3);}
 
-    /* GRID DE APLICACIONES */
-    .apps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 2;
-    }
+    /* ── WRAP ── */
+    .wrap{max-width:1100px;margin:2rem auto 0;padding:0 1.5rem;position:relative;z-index:2;}
 
-    .app-card {
-      background: var(--blanco);
-      border-radius: 20px;
-      padding: 2rem;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-      text-align: center;
-      border-top: 5px solid var(--verde);
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.3s ease;
-    }
-    .app-card:hover { transform: translateY(-5px); }
-    .app-card.blue { border-color: var(--celeste); }
-    .app-card.orange { border-color: var(--naranja); }
-    .app-card.green { border-color: var(--verde); }
+    /* ── GRID ── */
+    .apps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;}
 
-    .app-title {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 1.4rem;
-      color: var(--azul);
-      margin-bottom: 0.5rem;
-    }
-    .app-desc {
-      font-size: 0.9rem;
-      color: #666;
-      margin-bottom: 1.5rem;
-    }
+    /* ── APP CARD ── */
+    .app-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+      border-radius:22px;padding:1.8rem 1.6rem;
+      display:flex;flex-direction:column;align-items:center;text-align:center;
+      transition:transform .3s,border-color .3s,background .3s;position:relative;overflow:hidden;}
+    .app-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;border-radius:22px 22px 0 0;}
+    .app-card.blue::before{background:linear-gradient(90deg,var(--celeste),var(--cian));}
+    .app-card.orange::before{background:linear-gradient(90deg,var(--naranja),#f1c40f);}
+    .app-card.green::before{background:linear-gradient(90deg,var(--verde),var(--cian));}
+    .app-card.purp::before{background:linear-gradient(90deg,var(--purp),var(--purp2));}
+    .app-card.red::before{background:linear-gradient(90deg,var(--rojo),var(--naranja));}
+    .app-card:hover{transform:translateY(-4px);background:rgba(255,255,255,.05);}
+    .app-card.blue:hover{border-color:rgba(52,152,219,.4);}
+    .app-card.orange:hover{border-color:rgba(243,156,18,.4);}
+    .app-card.green:hover{border-color:rgba(46,204,138,.4);}
+    .app-card.purp:hover{border-color:rgba(108,60,225,.5);}
+    .app-card.red:hover{border-color:rgba(231,76,60,.4);}
 
-    /* === APP 1: TERMÓMETRO === */
-    .thermo-wrap {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      height: 220px;
-      margin-bottom: 1.5rem;
-      position: relative;
-    }
-    .thermo-glass {
-      width: 40px;
-      height: 180px;
-      background: #e2e8f0;
-      border-radius: 20px 20px 0 0;
-      position: relative;
-      border: 3px solid #cbd5e1;
-      border-bottom: none;
-      z-index: 2;
-    }
-    .thermo-fluid {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 50%;
-      background: var(--rojo);
-      border-radius: 20px 20px 0 0;
-      transition: height 0.4s, background 0.4s;
-    }
-    .thermo-bulb {
-      width: 60px;
-      height: 60px;
-      background: var(--rojo);
-      border-radius: 50%;
-      position: absolute;
-      bottom: 0;
-      z-index: 1;
-      border: 3px solid #cbd5e1;
-      transition: background 0.4s;
-    }
-    .thermo-marks {
-      position: absolute;
-      left: 55px; /* Ajustado para que no se pise */
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 10px 0;
-      font-size: 0.8rem;
-      font-weight: bold;
-      color: #777;
-    }
+    .app-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.2rem;
+      color:var(--blanco);margin-bottom:.4rem;margin-top:.3rem;}
+    .app-desc{font-size:.83rem;color:var(--gris);margin-bottom:1.2rem;
+      line-height:1.7;max-width:290px;}
 
-    .controls {
-      display: flex;
-      gap: 0.5rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .btn-vr {
-      background: var(--gris);
-      border: 2px solid transparent;
-      padding: 0.6rem 1rem;
-      border-radius: 10px;
-      font-family: 'Nunito', sans-serif;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-      color: var(--azul);
-    }
-    .btn-vr:hover { background: #e2e8f0; transform: translateY(-2px); }
-    .btn-vr.red:hover { border-color: var(--rojo); color: var(--rojo); }
-    .btn-vr.blue:hover { border-color: var(--celeste); color: var(--celeste); }
+    /* ── CONTROLES ── */
+    .controls{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-top:.8rem;}
+    .btn-vr{font-family:'Nunito',sans-serif;font-weight:800;font-size:.8rem;
+      padding:.5rem .95rem;border-radius:12px;cursor:pointer;transition:all .2s;
+      background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.15);
+      color:rgba(255,255,255,.8);}
+    .btn-vr:hover{transform:translateY(-2px);}
+    .btn-vr.red:hover{background:rgba(231,76,60,.2);border-color:var(--rojo);color:var(--rojo);}
+    .btn-vr.blue:hover{background:rgba(52,152,219,.2);border-color:var(--celeste);color:var(--celeste);}
+    .btn-vr.green:hover{background:rgba(46,204,138,.2);border-color:var(--verde);color:var(--verde);}
+    .btn-vr.purp:hover{background:rgba(108,60,225,.2);border-color:var(--purp2);color:var(--purp2);}
+    .btn-vr.amarillo:hover{background:rgba(255,233,77,.15);border-color:var(--amarillo);color:var(--amarillo);}
+    .btn-vr.active{background:rgba(108,60,225,.25);border-color:var(--purp2);color:var(--purp2);}
 
-    .status-text {
-      margin-top: 1rem;
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 1.2rem;
-      min-height: 28px;
-    }
+    .status-text{margin-top:.8rem;font-family:'Nunito',sans-serif;font-weight:900;
+      font-size:1rem;min-height:26px;transition:color .3s;line-height:1.4;}
 
-    /* === APP 2: ASCENSOR === */
-    .building {
-      width: 120px;
-      height: 220px;
-      background: #2c3e50;
-      margin: 0 auto 1.5rem auto;
-      border-radius: 10px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      padding: 5px;
-    }
-    .floor {
-      flex: 1;
-      border-bottom: 2px dashed rgba(255,255,255,0.2);
-      display: flex;
-      align-items: center;
-      padding-left: 5px;
-      color: rgba(255,255,255,0.5);
-      font-weight: bold;
-      font-size: 0.8rem;
-    }
-    .floor.ground { border-bottom: 4px solid var(--verde); color: var(--verde); }
-    .elevator {
-      width: 40px;
-      height: 30px;
-      background: var(--naranja);
-      border-radius: 5px;
-      position: absolute;
-      right: 15px;
-      bottom: 40px;
-      transition: bottom 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
-    .elevator::after { content: '🧑‍🤝‍🧑'; font-size: 1rem; }
+    /* ══ APP 1: TERMÓMETRO INTERACTIVO ══ */
+    .thermo-scene{display:flex;align-items:flex-end;justify-content:center;
+      gap:1.5rem;height:230px;margin-bottom:.8rem;position:relative;}
+    .thermo-wrap{display:flex;flex-direction:column;align-items:center;position:relative;}
+    .thermo-glass{width:36px;height:180px;background:rgba(255,255,255,.06);
+      border-radius:18px 18px 0 0;position:relative;
+      border:2px solid rgba(255,255,255,.18);border-bottom:none;z-index:2;overflow:hidden;}
+    .thermo-fluid{position:absolute;bottom:0;left:0;width:100%;height:50%;
+      transition:height .5s cubic-bezier(.4,0,.2,1),background .4s;
+      border-radius:0;}
+    .thermo-bulb{width:54px;height:54px;border-radius:50%;position:absolute;bottom:-2px;
+      left:50%;transform:translateX(-50%);z-index:1;
+      border:2px solid rgba(255,255,255,.18);transition:background .4s;
+      display:flex;align-items:center;justify-content:center;font-size:.9rem;}
+    .thermo-scale{display:flex;flex-direction:column;justify-content:space-between;
+      height:180px;padding:8px 0;}
+    .thermo-scale span{font-family:'Nunito',sans-serif;font-weight:700;font-size:.72rem;
+      color:rgba(255,255,255,.45);display:flex;align-items:center;gap:.3rem;}
+    .thermo-scale span::before{content:'';width:8px;height:1px;
+      background:rgba(255,255,255,.25);display:inline-block;}
+    .thermo-scale span.cero{color:var(--cian);font-weight:900;}
+    .thermo-scale span.cero::before{background:var(--cian);width:12px;}
 
-    /* === APP 3: FINANZAS === */
-    .bank-card {
-      background: #1e293b;
-      border-radius: 15px;
-      padding: 1.5rem;
-      color: white;
-      margin-bottom: 1.5rem;
-      text-align: left;
-    }
-    .bank-header { font-size: 0.9rem; color: #94a3b8; text-transform: uppercase; font-weight: bold; }
-    .bank-balance {
-      font-family: 'Nunito', sans-serif;
-      font-size: 2.5rem;
-      font-weight: 900;
-      margin: 0.5rem 0;
-      transition: color 0.3s;
-    }
-    .bank-history {
-      height: 70px;
-      overflow-y: auto;
-      font-size: 0.85rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding-top: 0.5rem;
-    }
-    .history-item { display: flex; justify-content: space-between; margin-bottom: 0.3rem; }
-    .history-item.plus { color: var(--verde); }
-    .history-item.minus { color: #ff6b6b; }
+    .temp-display{font-family:'Nunito',sans-serif;font-weight:900;font-size:2.8rem;
+      letter-spacing:-1px;transition:color .3s;line-height:1;}
+    .temp-ciudad{font-family:'Nunito',sans-serif;font-weight:700;font-size:.78rem;
+      color:var(--gris);margin-top:.2rem;}
 
-    /* === SECCIÓN DE VIDEO === */
-    .video-section {
-      background: var(--blanco);
-      border-radius: 24px;
-      padding: 3rem 2rem;
-      max-width: 900px;
-      margin: 3rem auto 0 auto;
-      text-align: center;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-      position: relative;
-      z-index: 2;
-      border-top: 6px solid var(--rojo);
-    }
-    .video-section h2 {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 900;
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      color: var(--azul);
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-    .video-section p {
-      color: #555;
-      font-size: 1.05rem;
-      margin-bottom: 2rem;
-    }
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
-      height: 0;
-      overflow: hidden;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-      background: #000;
-    }
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
+    /* Slider */
+    .slider-wrap{width:100%;margin-top:.6rem;}
+    input[type=range].thermo-slider{-webkit-appearance:none;width:100%;height:6px;
+      border-radius:10px;background:rgba(255,255,255,.1);outline:none;cursor:pointer;}
+    input[type=range].thermo-slider::-webkit-slider-thumb{-webkit-appearance:none;
+      width:20px;height:20px;border-radius:50%;background:var(--cian);
+      border:3px solid var(--fondo);box-shadow:0 0 8px rgba(0,212,255,.6);cursor:pointer;
+      transition:transform .2s;}
+    input[type=range].thermo-slider::-webkit-slider-thumb:hover{transform:scale(1.2);}
 
-    @media(max-width: 768px) {
-      .header-vr { padding: 1.5rem; }
-      .video-section { padding: 2rem 1.2rem; margin-top: 2rem; }
+    .ciudad-btns{display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-top:.6rem;}
+    .ciu-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:.72rem;
+      padding:.28rem .75rem;border-radius:20px;cursor:pointer;transition:all .2s;
+      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+      color:rgba(255,255,255,.65);}
+    .ciu-btn:hover,.ciu-btn.sel{background:rgba(0,212,255,.15);
+      border-color:var(--cian);color:var(--cian);}
+
+    /* ══ APP 2: ASCENSOR ══ */
+    .building-wrap{display:flex;gap:1rem;align-items:flex-end;justify-content:center;margin-bottom:.8rem;}
+    .building{width:110px;height:240px;
+      background:linear-gradient(180deg,rgba(108,60,225,.2),rgba(16,12,36,.9));
+      border:1px solid rgba(108,60,225,.3);border-radius:14px;
+      position:relative;display:flex;flex-direction:column;padding:4px;overflow:hidden;}
+    .floor{flex:1;border-bottom:1px dashed rgba(255,255,255,.1);
+      display:flex;align-items:center;padding-left:6px;
+      color:rgba(255,255,255,.3);font-family:'Nunito',sans-serif;
+      font-weight:800;font-size:.75rem;position:relative;}
+    .floor.ground{border-bottom:2px solid var(--verde);color:var(--verde);}
+    .floor.active-floor{background:rgba(255,255,255,.05);}
+    .elevator{width:36px;height:32px;
+      background:linear-gradient(135deg,var(--naranja),#f1c40f);
+      border-radius:8px;position:absolute;right:10px;
+      transition:bottom .7s cubic-bezier(.25,.8,.25,1);
+      display:flex;align-items:center;justify-content:center;
+      font-size:.95rem;box-shadow:0 4px 14px rgba(243,156,18,.5);
+      border:2px solid rgba(255,255,255,.2);}
+    .asc-panel{display:flex;flex-direction:column;gap:.4rem;justify-content:center;}
+    .asc-panel-btn{font-family:'Nunito',sans-serif;font-weight:900;font-size:.75rem;
+      width:52px;height:32px;border-radius:8px;cursor:pointer;
+      border:1.5px solid rgba(255,255,255,.15);
+      background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);
+      transition:all .2s;display:flex;align-items:center;justify-content:center;}
+    .asc-panel-btn:hover{transform:scale(1.08);}
+    .asc-panel-btn.pos:hover{background:rgba(46,204,138,.2);border-color:var(--verde);color:var(--verde);}
+    .asc-panel-btn.neg:hover{background:rgba(231,76,60,.15);border-color:var(--rojo);color:var(--rojo);}
+    .asc-panel-btn.pb:hover{background:rgba(255,233,77,.15);border-color:var(--amarillo);color:var(--amarillo);}
+    .asc-panel-btn.active-btn{background:rgba(108,60,225,.3);border-color:var(--purp2);color:var(--purp2);}
+
+    .asc-formula{background:rgba(108,60,225,.1);border:1px solid rgba(108,60,225,.25);
+      border-radius:10px;padding:.6rem .9rem;font-family:'Nunito',sans-serif;
+      font-weight:800;font-size:.82rem;color:var(--purp2);margin-top:.6rem;
+      min-height:32px;transition:all .3s;width:100%;}
+
+    /* ══ APP 3: BANCO ══ */
+    .bank-card{background:linear-gradient(135deg,rgba(108,60,225,.2),rgba(0,212,255,.08));
+      border:1px solid rgba(108,60,225,.3);border-radius:16px;
+      padding:1.2rem 1.3rem;color:var(--blanco);margin-bottom:.9rem;
+      text-align:left;width:100%;position:relative;overflow:hidden;}
+    .bank-card::after{content:'ℤ';position:absolute;right:1rem;top:50%;
+      transform:translateY(-50%);font-family:'Nunito',sans-serif;font-weight:900;
+      font-size:4rem;color:rgba(255,255,255,.04);pointer-events:none;}
+    .bank-header{font-family:'Nunito',sans-serif;font-weight:800;
+      font-size:.72rem;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:1px;}
+    .bank-balance{font-family:'Nunito',sans-serif;font-size:2.6rem;font-weight:900;
+      margin:.3rem 0;transition:color .3s,transform .2s;color:var(--blanco);display:inline-block;}
+    .bank-balance.bump{animation:bump .3s ease;}
+    @keyframes bump{0%{transform:scale(1)}50%{transform:scale(1.12)}100%{transform:scale(1)}}
+    .bank-history{height:68px;overflow-y:auto;font-size:.8rem;
+      border-top:1px solid rgba(255,255,255,.08);padding-top:.5rem;margin-top:.3rem;}
+    .bank-history::-webkit-scrollbar{width:4px;}
+    .bank-history::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:4px;}
+    .history-item{display:flex;justify-content:space-between;
+      margin-bottom:.3rem;font-family:'Nunito',sans-serif;font-weight:700;font-size:.78rem;}
+    .history-item.plus{color:var(--verde);}
+    .history-item.minus{color:var(--rojo);}
+    .banco-metas{display:flex;gap:.5rem;margin-bottom:.6rem;width:100%;}
+    .meta-card{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+      border-radius:10px;padding:.5rem .7rem;text-align:center;}
+    .meta-card .mn{font-family:'Nunito',sans-serif;font-weight:900;font-size:1rem;color:var(--amarillo);}
+    .meta-card .ml{font-size:.68rem;color:var(--gris);}
+
+    /* ══ APP 4: LÍNEA NUMÉRICA RECTA ══ */
+    .recta-wrap{width:100%;margin-bottom:1rem;position:relative;}
+    .recta-svg{width:100%;overflow:visible;}
+    .recta-punto{transition:all .4s cubic-bezier(.4,0,.2,1);}
+    .recta-input-row{display:flex;gap:.6rem;align-items:center;justify-content:center;
+      flex-wrap:wrap;margin-top:.5rem;}
+    .recta-inp{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.2);
+      border-radius:10px;padding:.5rem .8rem;color:var(--blanco);
+      font-family:'Nunito',sans-serif;font-weight:700;font-size:.95rem;
+      width:80px;text-align:center;outline:none;transition:border-color .2s;}
+    .recta-inp:focus{border-color:var(--cian);}
+    .recta-label-op{font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;
+      color:var(--gris);}
+    .recta-result{margin-top:.7rem;font-family:'Nunito',sans-serif;font-weight:900;
+      font-size:1.1rem;color:var(--amarillo);min-height:26px;}
+    .recta-select{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.2);
+      border-radius:10px;padding:.5rem .7rem;color:var(--blanco);
+      font-family:'Nunito',sans-serif;font-weight:700;font-size:.88rem;outline:none;
+      cursor:pointer;transition:border-color .2s;}
+    .recta-select:focus{border-color:var(--cian);}
+
+    /* ══ APP 5: FÚTBOL / DIFERENCIA DE GOLES ══ */
+    .marcador{display:flex;align-items:center;justify-content:center;gap:1rem;
+      margin-bottom:1rem;flex-wrap:wrap;}
+    .equipo-box{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+      border-radius:16px;padding:1rem 1.2rem;text-align:center;min-width:110px;}
+    .equipo-nombre{font-family:'Nunito',sans-serif;font-weight:800;font-size:.8rem;
+      color:var(--gris);margin-bottom:.4rem;}
+    .equipo-goles{font-family:'Nunito',sans-serif;font-weight:900;font-size:3.5rem;
+      line-height:1;transition:all .3s;}
+    .vs-badge{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.1rem;
+      color:rgba(255,255,255,.3);}
+    .diferencia-box{background:rgba(108,60,225,.12);border:1px solid rgba(108,60,225,.25);
+      border-radius:12px;padding:.6rem 1.2rem;margin-bottom:.8rem;
+      font-family:'Nunito',sans-serif;font-weight:900;font-size:.92rem;
+      color:var(--purp2);transition:all .3s;width:100%;}
+    .gol-btns{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;}
+    .gol-btn{font-family:'Nunito',sans-serif;font-weight:900;font-size:.82rem;
+      padding:.55rem 1rem;border-radius:12px;cursor:pointer;transition:all .2s;
+      border:1.5px solid transparent;}
+    .gol-btn.local{background:rgba(46,204,138,.15);color:var(--verde);border-color:rgba(46,204,138,.35);}
+    .gol-btn.local:hover{background:rgba(46,204,138,.28);transform:translateY(-2px);}
+    .gol-btn.visita{background:rgba(231,76,60,.12);color:var(--rojo);border-color:rgba(231,76,60,.3);}
+    .gol-btn.visita:hover{background:rgba(231,76,60,.24);transform:translateY(-2px);}
+    .gol-btn.reset{background:rgba(255,255,255,.06);color:var(--gris);
+      border-color:rgba(255,255,255,.15);}
+    .gol-btn.reset:hover{background:rgba(255,255,255,.12);}
+    .partido-status{font-family:'Nunito',sans-serif;font-weight:800;font-size:.85rem;
+      margin-top:.5rem;min-height:22px;transition:color .3s;}
+    .timeline-goles{display:flex;gap:.3rem;flex-wrap:wrap;justify-content:center;
+      margin-top:.6rem;min-height:26px;}
+    .gol-chip{font-family:'Nunito',sans-serif;font-weight:700;font-size:.7rem;
+      padding:.2rem .55rem;border-radius:20px;animation:popIn .3s ease;}
+    @keyframes popIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+    .gol-chip.l{background:rgba(46,204,138,.18);color:var(--verde);border:1px solid rgba(46,204,138,.3);}
+    .gol-chip.v{background:rgba(231,76,60,.15);color:var(--rojo);border:1px solid rgba(231,76,60,.3);}
+
+    /* ── VIDEO ── */
+    .video-section{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+      border-top:4px solid var(--rojo);border-radius:22px;
+      padding:2.5rem 2rem;max-width:860px;margin:2.5rem auto 0;
+      text-align:center;position:relative;z-index:2;}
+    .video-section h2{font-family:'Nunito',sans-serif;font-weight:900;
+      font-size:clamp(1.3rem,3vw,1.9rem);color:var(--blanco);margin-bottom:.4rem;
+      display:flex;align-items:center;justify-content:center;gap:.5rem;}
+    .video-section p{color:var(--gris);font-size:.92rem;margin-bottom:1.5rem;line-height:1.75;}
+    .video-container{position:relative;padding-bottom:56.25%;height:0;
+      overflow:hidden;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.4);background:#000;}
+    .video-container iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
+
+    /* ── CTA ── */
+    .cta-box{background:
+      radial-gradient(ellipse 60% 80% at 20% 50%,rgba(108,60,225,.2) 0%,transparent 55%),
+      radial-gradient(ellipse 55% 70% at 80% 50%,rgba(0,212,255,.15) 0%,transparent 50%),
+      var(--fondo3);
+      border:1px solid rgba(108,60,225,.25);border-radius:24px;
+      padding:2.2rem 2rem;text-align:center;
+      max-width:860px;margin:2rem auto 0;position:relative;z-index:2;}
+    .cta-box h2{font-family:'Nunito',sans-serif;font-weight:900;
+      font-size:clamp(1.2rem,2.5vw,1.7rem);color:var(--blanco);margin-bottom:.5rem;}
+    .cta-box p{color:var(--gris);font-size:.9rem;margin-bottom:1.3rem;line-height:1.75;}
+    .cta-btns{display:flex;justify-content:center;gap:.8rem;flex-wrap:wrap;}
+    .btn-cta{display:inline-flex;align-items:center;gap:.5rem;
+      background:linear-gradient(135deg,var(--purp),var(--cian));color:#fff;
+      font-family:'Nunito',sans-serif;font-weight:900;font-size:.9rem;
+      padding:.72rem 1.8rem;border-radius:30px;border:none;cursor:pointer;
+      transition:all .2s;box-shadow:0 8px 26px rgba(108,60,225,.4);}
+    .btn-cta:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(0,212,255,.3);}
+    .btn-cta.sec{background:rgba(255,255,255,.07);box-shadow:none;border:1.5px solid rgba(255,255,255,.2);}
+
+    /* ── TOAST ── */
+    .toast{position:fixed;bottom:24px;right:24px;z-index:9999;
+      padding:1.1rem 1.5rem;border-radius:18px;
+      font-family:'Nunito',sans-serif;text-align:center;
+      border:2px solid rgba(255,255,255,.25);
+      transform:translateY(120px);opacity:0;
+      transition:all .5s cubic-bezier(.175,.885,.32,1.275);pointer-events:none;}
+    .toast.vis{transform:translateY(0);opacity:1;}
+    .toast.verde{background:linear-gradient(135deg,var(--verde),#1a8c5e);
+      color:#fff;box-shadow:0 10px 30px rgba(46,204,138,.45);}
+    .toast.amarillo{background:linear-gradient(135deg,var(--amarillo),var(--naranja));
+      color:#111;box-shadow:0 10px 30px rgba(255,233,77,.4);}
+
+    @media(max-width:768px){
+      .apps-grid{grid-template-columns:1fr;}
+      .video-section{padding:1.8rem 1.2rem;}
     }
+    @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    .app-card{animation:fadeIn .5s ease both;}
+    .app-card:nth-child(2){animation-delay:.1s;}
+    .app-card:nth-child(3){animation-delay:.2s;}
+    .app-card:nth-child(4){animation-delay:.3s;}
+    .app-card:nth-child(5){animation-delay:.4s;}
   </style>
 </head>
 <body>
 
-  <!-- PARTÍCULAS DE FONDO -->
-  <div class="bg-particles" id="particles-container"></div>
+<div id="particulas-bg"></div>
 
-  <div class="header-vr">
-    <h1>🌍 Los Enteros en la Vida Real</h1>
-    <p>Haz clic, juega y descubre cómo los números positivos y negativos están por todas partes. ¡Sin ellos el mundo sería un caos!</p>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-tag">🌍 Vida Real</div>
+  <h1>Los enteros en tu <span>mundo</span></h1>
+  <p>Explora 5 simuladores interactivos y descubre cómo los números positivos y negativos están por todas partes. ¡Sin ellos el mundo sería un caos!</p>
+  <div class="hero-badges">
+    <div class="hb">🌡️ Termómetro</div>
+    <div class="hb">🏢 Ascensor</div>
+    <div class="hb">💰 Banco</div>
+    <div class="hb">📏 Recta numérica</div>
+    <div class="hb">⚽ Fútbol</div>
+    <div class="hb">⭐ +50 pts</div>
   </div>
+</div>
 
-  <div class="apps-grid">
-
-    <!-- APLICACIÓN 1: TERMÓMETRO -->
-    <div class="app-card blue">
-      <h2 class="app-title">🌡️ El Termómetro</h2>
-      <p class="app-desc">El 0°C es donde el agua se congela. Hacia arriba hace calor (+), hacia abajo hace frío (-).</p>
-
-      <div class="thermo-wrap">
-        <div class="thermo-glass">
-          <div class="thermo-fluid" id="t-fluid"></div>
-        </div>
-        <div class="thermo-bulb" id="t-bulb"></div>
-        <div class="thermo-marks">
-          <span>+40°</span>
-          <span>+20°</span>
-          <span>0°</span>
-          <span>-20°</span>
-          <span>-40°</span>
-        </div>
-      </div>
-
-      <div class="status-text" id="t-status">Temperatura: 0°C</div>
-      <div class="controls" style="margin-top:1rem;">
-        <button class="btn-vr blue" onclick="changeTemp(-10)">❄️ Bajar 10°</button>
-        <button class="btn-vr red" onclick="changeTemp(10)">🔥 Subir 10°</button>
-      </div>
-    </div>
-
-    <!-- APLICACIÓN 2: EL ASCENSOR -->
-    <div class="app-card orange">
-      <h2 class="app-title">🏢 El Ascensor</h2>
-      <p class="app-desc">La Planta Baja es el 0. Los pisos son positivos (+), los sótanos o parqueaderos son negativos (-).</p>
-
-      <div class="building">
-        <div class="floor">+3</div>
-        <div class="floor">+2</div>
-        <div class="floor">+1</div>
-        <div class="floor ground">PB (0)</div>
-        <div class="floor">-1</div>
-        <div class="floor">-2</div>
-        <div class="elevator" id="elevator"></div>
-      </div>
-
-      <div class="status-text" id="e-status" style="color:var(--naranja); font-size: 1.05rem;">Estás en la Planta Baja (0)</div>
-
-      <div class="controls" style="margin-top:1rem;">
-        <button class="btn-vr" onclick="goToFloor(3)">Piso 3</button>
-        <button class="btn-vr" onclick="goToFloor(1)">Piso 1</button>
-        <button class="btn-vr" onclick="goToFloor(0)">Planta Baja</button>
-        <button class="btn-vr" onclick="goToFloor(-2)">Sótano -2</button>
-      </div>
-    </div>
-
-    <!-- APLICACIÓN 3: FINANZAS -->
-    <div class="app-card green">
-      <h2 class="app-title">💰 Tu Banco</h2>
-      <p class="app-desc">El dinero que tienes es positivo (+). Las deudas o lo que gastas es negativo (-).</p>
-
-      <div class="bank-card">
-        <div class="bank-header">Saldo Actual</div>
-        <div class="bank-balance" id="b-balance">$0</div>
-        <div class="bank-history" id="b-history">
-          <!-- Historial dinámico -->
-        </div>
-      </div>
-
-      <div class="controls">
-        <button class="btn-vr green" onclick="addMoney(5000, 'Mesada 🎁')">+ $5000 (Ingreso)</button>
-        <button class="btn-vr red" onclick="addMoney(-2000, 'Empanada 🍔')">- $2000 (Gasto)</button>
-        <button class="btn-vr red" onclick="addMoney(-8000, 'Videojuego 🎮')">- $8000 (Gasto)</button>
-      </div>
-      <div class="status-text" id="b-status" style="font-size:0.9rem; margin-top:0.8rem; color:#666; min-height:auto;">
-        No tienes deudas por ahora.
-      </div>
-    </div>
-
+<!-- TRACKER -->
+<div class="premio-wrap">
+  <div class="premio-track">
+    <span class="premio-label">🏆 Exploración:</span>
+    <span class="sim-dot" id="dot-termo">🌡️ Termómetro</span>
+    <span class="sim-dot" id="dot-asc">🏢 Ascensor</span>
+    <span class="sim-dot" id="dot-banco">💰 Banco</span>
+    <span class="sim-dot" id="dot-recta">📏 Recta</span>
+    <span class="sim-dot" id="dot-futbol">⚽ Fútbol</span>
+    <span class="premio-label" style="color:var(--amarillo)">→ +50 ⭐</span>
   </div>
+</div>
 
-  <!-- SECCIÓN DEL VIDEO DE YOUTUBE -->
-  <div class="video-section">
-    <h2>📺 Para terminar de entender...</h2>
-    <p>Observa este genial resumen animado sobre cómo se utilizan los números enteros en distintas situaciones cotidianas.</p>
-    <div class="video-container">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/bIxdV_Tk39w?si=c2jtCguJRRD73pyH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<div class="wrap">
+<div class="apps-grid">
+
+<!-- ══════════════════════════════════
+     APP 1: TERMÓMETRO
+══════════════════════════════════ -->
+<div class="app-card blue">
+  <h2 class="app-title">🌡️ Termómetro Colombiano</h2>
+  <p class="app-desc">El 0°C es el punto de congelación. Positivo = calor ☀️, Negativo = frío ❄️. Arrastra el control o elige una ciudad.</p>
+
+  <div class="thermo-scene">
+    <div class="thermo-wrap">
+      <div class="thermo-glass">
+        <div class="thermo-fluid" id="t-fluid"></div>
+      </div>
+      <div class="thermo-bulb" id="t-bulb"></div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-start;gap:.2rem;">
+      <div class="thermo-scale">
+        <span>+40°</span>
+        <span>+30°</span>
+        <span>+20°</span>
+        <span>+10°</span>
+        <span class="cero">0°</span>
+        <span>−10°</span>
+        <span>−20°</span>
+        <span>−30°</span>
+        <span>−40°</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem;">
+      <div class="temp-display" id="t-display">0°C</div>
+      <div class="temp-ciudad" id="t-ciudad">Ajusta la temperatura</div>
+      <div id="t-emoji" style="font-size:2rem;margin-top:.2rem;">😐</div>
     </div>
   </div>
 
- <script>
-    // ==========================================
-    // 🎮 INTEGRACIÓN CON GAMIFICACIÓN (PUNTOS POR EXPLORAR)
-    // ==========================================
-    let progresoText = localStorage.getItem("edu_progreso");
-    let progresoGlobal = progresoText ? JSON.parse(progresoText) : { practicaPuntaje: 0 };
+  <div class="slider-wrap">
+    <input type="range" class="thermo-slider" id="t-slider"
+      min="-40" max="40" value="0" oninput="sliderTemp(this.value)"/>
+  </div>
 
-    // Banderas para saber si ya interactuó con los simuladores
-    let exploracion = { termo: false, ascensor: false, banco: false };
-    let premioEntregado = false;
+  <div class="ciudad-btns">
+    <button class="ciu-btn" onclick="setCiudad('Bogotá',14)">🏙️ Bogotá +14°</button>
+    <button class="ciu-btn" onclick="setCiudad('Ipiales',-2)">🌧️ Ipiales −2°</button>
+    <button class="ciu-btn" onclick="setCiudad('Cartagena',34)">🏖️ Cartagena +34°</button>
+    <button class="ciu-btn" onclick="setCiudad('Pasto',8)">⛰️ Pasto +8°</button>
+    <button class="ciu-btn" onclick="setCiudad('Medellín',22)">☀️ Medellín +22°</button>
+  </div>
 
-    function verificarPremio() {
-        // Si interactuó con los 3 y aún no tiene el premio
-        if(exploracion.termo && exploracion.ascensor && exploracion.banco && !premioEntregado) {
-            premioEntregado = true;
-            progresoGlobal.practicaPuntaje = (progresoGlobal.practicaPuntaje || 0) + 50;
-            localStorage.setItem("edu_progreso", JSON.stringify(progresoGlobal));
+  <div class="status-text" id="t-status" style="font-size:.85rem;"></div>
+</div>
 
-            // Avisamos al index para que actualice la barra superior
-            window.parent.postMessage({ action: 'actualizarPuntos' }, '*');
+<!-- ══════════════════════════════════
+     APP 2: ASCENSOR
+══════════════════════════════════ -->
+<div class="app-card orange">
+  <h2 class="app-title">🏢 Ascensor — C.C. El Cacique</h2>
+  <p class="app-desc">Planta Baja = 0. Pisos superiores (+), sótanos (−). Observa cómo cambia la posición paso a paso.</p>
 
-            // Le mostramos un mensaje bonito flotante
-            mostrarMensajePremio();
-        }
+  <div class="building-wrap">
+    <div class="building" id="building">
+      <div class="floor" id="fl3">+3 · Cine</div>
+      <div class="floor" id="fl2">+2 · Restaurantes</div>
+      <div class="floor" id="fl1">+1 · Tiendas</div>
+      <div class="floor ground" id="fl0">PB (0) · Entrada</div>
+      <div class="floor" id="fl-1">−1 · Parqueadero</div>
+      <div class="floor" id="fl-2">−2 · Bodega</div>
+      <div class="elevator" id="elevator">🛗</div>
+    </div>
+    <div class="asc-panel">
+      <button class="asc-panel-btn pos" onclick="goToFloor(3)">+3</button>
+      <button class="asc-panel-btn pos" onclick="goToFloor(2)">+2</button>
+      <button class="asc-panel-btn pos" onclick="goToFloor(1)">+1</button>
+      <button class="asc-panel-btn pb"  onclick="goToFloor(0)">PB</button>
+      <button class="asc-panel-btn neg" onclick="goToFloor(-1)">−1</button>
+      <button class="asc-panel-btn neg" onclick="goToFloor(-2)">−2</button>
+    </div>
+  </div>
+
+  <div class="asc-formula" id="asc-formula">Posición actual: 0 (Planta Baja)</div>
+
+  <div class="status-text" id="e-status" style="font-size:.88rem;color:var(--naranja);">
+    Pulsa un piso para mover el ascensor
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     APP 3: BANCO
+══════════════════════════════════ -->
+<div class="app-card green">
+  <h2 class="app-title">💰 Tu Banco Virtual</h2>
+  <p class="app-desc">Dinero que tienes = positivo (+). Gastos y deudas = negativo (−). ¡No caigas en números rojos!</p>
+
+  <div class="banco-metas">
+    <div class="meta-card"><div class="mn" id="b-total-ing">$0</div><div class="ml">Total ingresado</div></div>
+    <div class="meta-card"><div class="mn" id="b-total-gas" style="color:var(--rojo)">$0</div><div class="ml">Total gastado</div></div>
+    <div class="meta-card"><div class="mn" id="b-movs">0</div><div class="ml">Movimientos</div></div>
+  </div>
+
+  <div class="bank-card">
+    <div class="bank-header">Saldo actual</div>
+    <div class="bank-balance" id="b-balance">$0</div>
+    <div class="bank-history" id="b-history"></div>
+  </div>
+
+  <div class="controls" style="flex-wrap:wrap;gap:.4rem;">
+    <button class="btn-vr green" onclick="addMoney(5000,'Mesada 🎁')">+$5.000</button>
+    <button class="btn-vr green" onclick="addMoney(10000,'Premio escolar 🏅')">+$10.000</button>
+    <button class="btn-vr red"   onclick="addMoney(-2000,'Empanada 🥟')">−$2.000</button>
+    <button class="btn-vr red"   onclick="addMoney(-8000,'Videojuego 🎮')">−$8.000</button>
+    <button class="btn-vr red"   onclick="addMoney(-15000,'Deuda 😬')">−$15.000</button>
+    <button class="btn-vr amarillo" onclick="resetBanco()">↺ Reiniciar</button>
+  </div>
+  <div class="status-text" id="b-status" style="font-size:.84rem;min-height:auto;margin-top:.5rem;"></div>
+</div>
+
+<!-- ══════════════════════════════════
+     APP 4: RECTA NUMÉRICA INTERACTIVA
+══════════════════════════════════ -->
+<div class="app-card purp">
+  <h2 class="app-title">📏 Recta Numérica Interactiva</h2>
+  <p class="app-desc">Ingresa dos números y elige una operación. Observa el resultado en la recta y aprende visualmente.</p>
+
+  <div class="recta-wrap">
+    <svg class="recta-svg" id="recta-svg" viewBox="0 0 320 90" xmlns="http://www.w3.org/2000/svg">
+      <!-- Eje -->
+      <line x1="10" y1="45" x2="310" y2="45" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+      <polygon points="308,41 316,45 308,49" fill="rgba(255,255,255,0.3)"/>
+      <!-- Marcas -->
+      <g id="marcas-recta"></g>
+      <!-- Punto A -->
+      <circle id="punto-a" cx="160" cy="45" r="8" fill="var(--cian)" opacity="0.9">
+        <animate attributeName="r" values="8;10;8" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
+      <text id="label-a" x="160" y="30" text-anchor="middle"
+        font-family="Nunito,sans-serif" font-weight="900" font-size="11" fill="var(--cian)">A=0</text>
+      <!-- Punto B -->
+      <circle id="punto-b" cx="160" cy="45" r="8" fill="var(--amarillo)" opacity="0.85">
+        <animate attributeName="r" values="8;10;8" dur="1.8s" repeatCount="indefinite"/>
+      </circle>
+      <text id="label-b" x="160" y="68" text-anchor="middle"
+        font-family="Nunito,sans-serif" font-weight="900" font-size="11" fill="var(--amarillo)">B=0</text>
+      <!-- Flecha operación -->
+      <line id="flecha-op" x1="160" y1="45" x2="160" y2="45"
+        stroke="var(--verde)" stroke-width="2.5" stroke-dasharray="4 3" opacity="0.7"/>
+      <!-- Punto resultado -->
+      <circle id="punto-res" cx="160" cy="45" r="7" fill="var(--verde)" opacity="0">
+        <animate attributeName="r" values="7;9;7" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <text id="label-res" x="160" y="45" text-anchor="middle"
+        font-family="Nunito,sans-serif" font-weight="900" font-size="11" fill="var(--verde)" opacity="0">R=0</text>
+    </svg>
+  </div>
+
+  <div class="recta-input-row">
+    <input type="number" class="recta-inp" id="recta-a" value="0" placeholder="A"
+      min="-10" max="10" oninput="calcRecta()"/>
+    <select class="recta-select" id="recta-op" onchange="calcRecta()">
+      <option value="+">＋ Suma</option>
+      <option value="-">－ Resta</option>
+    </select>
+    <input type="number" class="recta-inp" id="recta-b" value="0" placeholder="B"
+      min="-10" max="10" oninput="calcRecta()"/>
+    <span class="recta-label-op">=</span>
+    <div class="recta-inp" id="recta-res"
+      style="background:rgba(46,204,138,.1);border-color:rgba(46,204,138,.3);
+      color:var(--verde);cursor:default;">0</div>
+  </div>
+
+  <div class="recta-result" id="recta-result"></div>
+
+  <div class="controls" style="margin-top:.5rem;">
+    <button class="btn-vr purp" onclick="ejemploRecta(-5,3,'+')">Ej: −5+3</button>
+    <button class="btn-vr purp" onclick="ejemploRecta(4,-7,'+')">Ej: 4+(−7)</button>
+    <button class="btn-vr purp" onclick="ejemploRecta(-3,-4,'+')">Ej: −3+(−4)</button>
+    <button class="btn-vr purp" onclick="ejemploRecta(2,-5,'-')">Ej: 2−(−5)</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     APP 5: FÚTBOL — DIFERENCIA DE GOLES
+══════════════════════════════════ -->
+<div class="app-card red" style="grid-column: span 1;">
+  <h2 class="app-title">⚽ Fútbol y Diferencia de Goles</h2>
+  <p class="app-desc">La diferencia de goles es un entero: positivo si vas ganando, negativo si vas perdiendo. ¡Anota goles!</p>
+
+  <div class="marcador">
+    <div class="equipo-box">
+      <div class="equipo-nombre">🟢 Local</div>
+      <div class="equipo-goles" id="goles-local" style="color:var(--verde)">0</div>
+    </div>
+    <div class="vs-badge">VS</div>
+    <div class="equipo-box">
+      <div class="equipo-nombre">🔴 Visita</div>
+      <div class="equipo-goles" id="goles-visita" style="color:var(--rojo)">0</div>
+    </div>
+  </div>
+
+  <div class="diferencia-box" id="dif-box">
+    Diferencia de goles: 0 − 0 = <strong>0</strong>
+  </div>
+
+  <div class="timeline-goles" id="timeline-goles"></div>
+
+  <div class="gol-btns">
+    <button class="gol-btn local"  onclick="anotarGol('local')">⚽ Gol Local</button>
+    <button class="gol-btn visita" onclick="anotarGol('visita')">⚽ Gol Visita</button>
+    <button class="gol-btn reset"  onclick="resetPartido()">↺ Nuevo partido</button>
+  </div>
+
+  <div class="partido-status" id="partido-status" style="color:var(--gris);">
+    ¡Bienvenido al estadio! Anota el primer gol.
+  </div>
+
+  <div class="asc-formula" id="futbol-formula" style="margin-top:.7rem;">
+    Entero del local: 0 − 0 = 0 (neutro)
+  </div>
+</div>
+
+</div><!-- /apps-grid -->
+
+<!-- VIDEO -->
+<div class="video-section">
+  <h2>📺 Para terminar de entender…</h2>
+  <p>Observa este resumen animado sobre cómo los números enteros aparecen en la vida cotidiana.</p>
+  <div class="video-container">
+    <iframe src="https://www.youtube.com/embed/bIxdV_Tk39w?si=c2jtCguJRRD73pyH"
+      title="Los enteros en la vida real"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-box">
+  <h2>¿Todo claro? ¡A practicar!</h2>
+  <p>Refuerza lo aprendido con ejercicios gamificados o demuestra todo en la evaluación final.</p>
+  <div class="cta-btns">
+    <button class="btn-cta" onclick="navegarA('practica')">🎮 Ir a Práctica</button>
+    <button class="btn-cta" onclick="navegarA('evaluacion')">📋 Ir a Evaluación</button>
+    <button class="btn-cta sec" onclick="navegarA('recursos')">📚 Ver Recursos</button>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<!-- TOASTS -->
+<div class="toast verde" id="toast-premio">
+  <strong>¡Curiosidad premiada! 🔍</strong><br>
+  Exploraste los 5 simuladores.<br>
+  <span style="font-size:1.5rem;">+50 ⭐</span>
+</div>
+<div class="toast amarillo" id="toast-gol">
+  <strong id="toast-gol-txt">⚽ ¡GOL!</strong>
+</div>
+
+<script>
+/* ═══════════════════════════════
+   PARTÍCULAS
+═══════════════════════════════ */
+(function(){
+  const cont=document.getElementById('particulas-bg');
+  const syms=['-3','+8','-5','0','+12','-1','+4','-7','+2','-10','ℤ','|n|'];
+  for(let i=0;i<14;i++){
+    const el=document.createElement('span');
+    el.className='particula';
+    const sz=Math.random()*38+16;
+    el.style.cssText=`left:${Math.random()*100}%;font-size:${sz}px;
+      animation-duration:${Math.random()*18+12}s;animation-delay:${Math.random()*10}s;`;
+    el.textContent=syms[Math.floor(Math.random()*syms.length)];
+    cont.appendChild(el);
+  }
+})();
+
+/* ═══════════════════════════════
+   GAMIFICACIÓN
+═══════════════════════════════ */
+let progreso={};
+try{const r=localStorage.getItem('edu_progreso');if(r)progreso=JSON.parse(r);}catch(e){}
+const exploracion={termo:false,asc:false,banco:false,recta:false,futbol:false};
+let premioEntregado=false;
+
+function marcarSim(sim){
+  if(exploracion[sim]) return;
+  exploracion[sim]=true;
+  const mapa={termo:'dot-termo',asc:'dot-asc',banco:'dot-banco',recta:'dot-recta',futbol:'dot-futbol'};
+  document.getElementById(mapa[sim]).classList.add('ok');
+  verificarPremio();
+}
+
+function verificarPremio(){
+  if(Object.values(exploracion).every(Boolean)&&!premioEntregado){
+    premioEntregado=true;
+    progreso.practicaPuntaje=(progreso.practicaPuntaje||0)+50;
+    if(!progreso.seccionesVisitadas) progreso.seccionesVisitadas=[];
+    if(!progreso.seccionesVisitadas.includes('vida_real'))
+      progreso.seccionesVisitadas.push('vida_real');
+    try{localStorage.setItem('edu_progreso',JSON.stringify(progreso));}catch(e){}
+    window.parent.postMessage({action:'actualizarPuntos'},'*');
+    mostrarToast('toast-premio',4500);
+  }
+}
+
+function mostrarToast(id,ms){
+  const t=document.getElementById(id);
+  t.classList.add('vis');
+  setTimeout(()=>t.classList.remove('vis'),ms);
+}
+
+/* ═══════════════════════════════
+   APP 1 — TERMÓMETRO
+═══════════════════════════════ */
+let tempActual=0;
+function actualizarTermometro(t){
+  tempActual=t;
+  const fluid=document.getElementById('t-fluid');
+  const bulb=document.getElementById('t-bulb');
+  const disp=document.getElementById('t-display');
+  const st=document.getElementById('t-status');
+  const emoji=document.getElementById('t-emoji');
+  document.getElementById('t-slider').value=t;
+
+  const pct=((t+40)/80)*100;
+  fluid.style.height=pct+'%';
+
+  let col,em,msg;
+  if(t<=-20){col='#3498db';em='🥶';msg='¡Bajo cero! En Colombia solo en zonas de alta montaña.';}
+  else if(t<0){col='#5dade2';em='❄️';msg='Temperatura negativa: hace frío bajo el punto de congelación.';}
+  else if(t===0){col='#76d7ea';em='🧊';msg='0°C: punto de congelación del agua. Ni frío ni calor extremo.';}
+  else if(t<=15){col='#abebc6';em='😊';msg='Temperatura fresca, como Bogotá en la madrugada.';}
+  else if(t<=25){col='#f39c12';em='☀️';msg='Temperatura agradable, como Medellín de día.';}
+  else if(t<=32){col='#e67e22';em='🌞';msg='Calor moderado, como Bucaramanga en verano.';}
+  else{col='#e74c3c';em='🥵';msg='¡Mucho calor! Como Cartagena o Barranquilla.';}
+
+  fluid.style.background=col;
+  bulb.style.background=col;
+  disp.style.color=col;
+  disp.textContent=(t>0?'+':'')+t+'°C';
+  emoji.textContent=em;
+  st.textContent=msg;
+  st.style.color=col;
+  marcarSim('termo');
+}
+
+function sliderTemp(v){actualizarTermometro(parseInt(v));}
+
+function setCiudad(nombre,t){
+  document.querySelectorAll('.ciu-btn').forEach(b=>{
+    b.classList.toggle('sel',b.textContent.includes(nombre));
+  });
+  document.getElementById('t-ciudad').textContent='📍 '+nombre;
+  actualizarTermometro(t);
+}
+
+actualizarTermometro(0);
+
+/* ═══════════════════════════════
+   APP 2 — ASCENSOR
+═══════════════════════════════ */
+let pisoActual=0;
+const FLOOR_MAP={'-2':0,'-1':1,'0':2,'1':3,'2':4,'3':5};
+const FLOOR_H=34, BASE_BOTTOM=10;
+
+function goToFloor(floor){
+  pisoActual=floor;
+  const el=document.getElementById('elevator');
+  const st=document.getElementById('e-status');
+  const fm=document.getElementById('asc-formula');
+  const pos=BASE_BOTTOM+((floor+2)*FLOOR_H);
+  el.style.bottom=pos+'px';
+
+  // resaltar piso activo
+  Object.keys(FLOOR_MAP).forEach(f=>{
+    const id='fl'+(f==='0'?'0':f);
+    const el2=document.getElementById('fl'+f);
+    if(el2) el2.classList.toggle('active-floor',parseInt(f)===floor);
+  });
+  document.querySelectorAll('.asc-panel-btn').forEach(b=>b.classList.remove('active-btn'));
+
+  if(floor===0){
+    st.textContent='🚪 Entrando a la Planta Baja (0) — Nivel de referencia';
+    st.style.color='var(--amarillo)';
+    fm.textContent='Posición actual: 0 (punto neutro de referencia)';
+  } else if(floor>0){
+    st.textContent=`⬆️ Subiste al Piso ${floor>0?'+'+floor:floor} — ${['','Tiendas','Restaurantes','Cine'][floor]||''}`;
+    st.style.color='var(--verde)';
+    fm.textContent=`Posición: ${floor>0?'+'+floor:floor} (${floor} piso${floor!==1?'s':''} sobre la Planta Baja)`;
+  } else {
+    st.textContent=`⬇️ Bajaste al Sótano ${floor} — ${floor===-1?'Parqueadero':'Bodega'}`;
+    st.style.color='var(--rojo)';
+    fm.textContent=`Posición: ${floor} (${Math.abs(floor)} nivel${Math.abs(floor)!==1?'es':''} bajo la Planta Baja)`;
+  }
+  marcarSim('asc');
+}
+goToFloor(0);
+
+/* ═══════════════════════════════
+   APP 3 — BANCO
+═══════════════════════════════ */
+let balance=0, totalIng=0, totalGas=0, movs=0;
+function addMoney(amount,desc){
+  balance+=amount;movs++;
+  if(amount>0) totalIng+=amount; else totalGas+=Math.abs(amount);
+  const bText=document.getElementById('b-balance');
+  const history=document.getElementById('b-history');
+  const st=document.getElementById('b-status');
+  document.getElementById('b-total-ing').textContent='$'+totalIng.toLocaleString('es-CO');
+  document.getElementById('b-total-gas').textContent='$'+totalGas.toLocaleString('es-CO');
+  document.getElementById('b-movs').textContent=movs;
+
+  const signo=balance<0?'−':'';
+  bText.textContent='$'+signo+Math.abs(balance).toLocaleString('es-CO');
+  bText.classList.remove('bump');
+  void bText.offsetWidth;
+  bText.classList.add('bump');
+
+  if(balance<0){
+    bText.style.color='var(--rojo)';
+    st.textContent='🚨 ¡Números rojos! Tienes una deuda de $'+Math.abs(balance).toLocaleString('es-CO');
+    st.style.color='var(--rojo)';
+  } else if(balance===0){
+    bText.style.color='var(--blanco)';
+    st.textContent='⚖️ Cuenta en cero. Sin deudas ni ahorros.';
+    st.style.color='var(--gris)';
+  } else {
+    bText.style.color='var(--verde)';
+    st.textContent='💚 ¡Bien! Tienes $'+balance.toLocaleString('es-CO')+' ahorrados.';
+    st.style.color='var(--verde)';
+  }
+  const item=document.createElement('div');
+  item.className='history-item '+(amount>0?'plus':'minus');
+  const fmt=amount>0?'+$'+amount.toLocaleString('es-CO'):'-$'+Math.abs(amount).toLocaleString('es-CO');
+  item.innerHTML=`<span>${desc}</span><span>${fmt}</span>`;
+  history.insertBefore(item,history.firstChild);
+  marcarSim('banco');
+}
+
+function resetBanco(){
+  balance=0;totalIng=0;totalGas=0;movs=0;
+  document.getElementById('b-balance').textContent='$0';
+  document.getElementById('b-balance').style.color='var(--blanco)';
+  document.getElementById('b-history').innerHTML='';
+  document.getElementById('b-status').textContent='';
+  document.getElementById('b-total-ing').textContent='$0';
+  document.getElementById('b-total-gas').textContent='$0';
+  document.getElementById('b-movs').textContent='0';
+}
+
+/* ═══════════════════════════════
+   APP 4 — RECTA NUMÉRICA
+═══════════════════════════════ */
+const SVG_W=320, SVG_MID=160, SCALE=12;
+
+(function initMarcas(){
+  const g=document.getElementById('marcas-recta');
+  for(let i=-10;i<=10;i++){
+    const x=SVG_MID+(i*SCALE);
+    const tick=document.createElementNS('http://www.w3.org/2000/svg','line');
+    tick.setAttribute('x1',x);tick.setAttribute('y1',i===0?38:42);
+    tick.setAttribute('x2',x);tick.setAttribute('y2',i===0?52:48);
+    tick.setAttribute('stroke',i===0?'rgba(0,212,255,.6)':'rgba(255,255,255,.2)');
+    tick.setAttribute('stroke-width',i===0?2:1);
+    g.appendChild(tick);
+    if(i%2===0){
+      const lbl=document.createElementNS('http://www.w3.org/2000/svg','text');
+      lbl.setAttribute('x',x);lbl.setAttribute('y',i===0?62:60);
+      lbl.setAttribute('text-anchor','middle');lbl.setAttribute('font-size','8');
+      lbl.setAttribute('font-family','Nunito,sans-serif');lbl.setAttribute('font-weight','700');
+      lbl.setAttribute('fill',i===0?'rgba(0,212,255,.7)':'rgba(255,255,255,.3)');
+      lbl.textContent=i;
+      g.appendChild(lbl);
     }
+  }
+})();
 
-    function mostrarMensajePremio() {
-        const msg = document.createElement('div');
-        msg.innerHTML = `<strong>¡Curiosidad Premiada! 🔍</strong><br>Has explorado todas las simulaciones.<br><span style="font-size:1.5rem;">+50 ⭐</span>`;
-        msg.style.cssText = `
-            position: fixed; bottom: 20px; right: 20px;
-            background: linear-gradient(135deg, var(--verde) 0%, #1a8c5e 100%);
-            color: white; padding: 15px 25px; border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(46,204,138,0.5);
-            font-family: 'Nunito', sans-serif; text-align: center;
-            z-index: 9999; transform: translateY(100px); opacity: 0;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid white;
-        `;
-        document.body.appendChild(msg);
+function calcRecta(){
+  marcarSim('recta');
+  let a=parseInt(document.getElementById('recta-a').value)||0;
+  let b=parseInt(document.getElementById('recta-b').value)||0;
+  const op=document.getElementById('recta-op').value;
+  a=Math.max(-10,Math.min(10,a));
+  b=Math.max(-10,Math.min(10,b));
+  const res=op==='+'?a+b:a-b;
+  document.getElementById('recta-res').textContent=res;
 
-        // Animación de entrada
-        setTimeout(() => {
-            msg.style.transform = 'translateY(0)';
-            msg.style.opacity = '1';
-        }, 100);
+  const xA=SVG_MID+(a*SCALE);
+  const xB=SVG_MID+(b*SCALE);
+  const xR=SVG_MID+(res*SCALE);
 
-        // Animación de salida
-        setTimeout(() => {
-            msg.style.transform = 'translateY(100px)';
-            msg.style.opacity = '0';
-            setTimeout(() => msg.remove(), 500);
-        }, 4000);
-    }
+  document.getElementById('punto-a').setAttribute('cx',xA);
+  document.getElementById('label-a').setAttribute('x',xA);
+  document.getElementById('label-a').textContent='A='+(a>=0?'+':'')+a;
 
-    // --- LÓGICA DE PARTÍCULAS DE FONDO ---
-    function createParticles() {
-      const container = document.getElementById('particles-container');
-      const symbols = ['-3', '+2', '0', '-1', '+5', 'n', 'Z', '-7', '+4', '-2'];
-      const count = 22;
-      for (let i = 0; i < count; i++) {
-        const el = document.createElement('span');
-        const size = Math.random() * 38 + 14;
-        el.style.cssText = `
-          width:${size}px; height:${size}px; left:${Math.random()*100}%;
-          font-family:'Nunito',sans-serif; font-weight:900; font-size:${size * 0.55}px;
-          line-height:${size}px; text-align:center; color:rgba(46,204,138,0.35);
-          background:transparent; border-radius:0;
-          animation-duration:${Math.random()*14+8}s; animation-delay:${Math.random()*8}s;
-        `;
-        el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-        container.appendChild(el);
-      }
-    }
-    createParticles();
+  document.getElementById('punto-b').setAttribute('cx',xB);
+  document.getElementById('label-b').setAttribute('x',xB);
+  document.getElementById('label-b').textContent='B='+(b>=0?'+':'')+b;
 
-    // --- LÓGICA DEL TERMÓMETRO ---
-    let temp = 0;
-    function changeTemp(amount) {
-      exploracion.termo = true; // Gamificación
-      verificarPremio();
+  document.getElementById('flecha-op').setAttribute('x1',xA);
+  document.getElementById('flecha-op').setAttribute('y1',45);
+  document.getElementById('flecha-op').setAttribute('x2',xR);
+  document.getElementById('flecha-op').setAttribute('y2',45);
 
-      temp += amount;
-      if(temp > 40) temp = 40;
-      if(temp < -40) temp = -40;
+  document.getElementById('punto-res').setAttribute('cx',xR);
+  document.getElementById('punto-res').setAttribute('opacity','0.9');
+  document.getElementById('label-res').setAttribute('x',xR);
+  document.getElementById('label-res').setAttribute('opacity','1');
+  document.getElementById('label-res').textContent='R='+(res>=0?'+':'')+res;
 
-      const fluid = document.getElementById('t-fluid');
-      const bulb = document.getElementById('t-bulb');
-      const statusText = document.getElementById('t-status');
+  const sigA=a>=0?'+':'';const sigB=b>=0?'+':'';const sigR=res>=0?'+':'';
+  const desc=op==='+'
+    ?(a<0&&b<0?'Ambos negativos: la suma da un número más negativo.'
+      :a*b<0?'Signos distintos: se restan, gana el de mayor valor absoluto.'
+      :'Ambos positivos: la suma crece.')
+    :(b<0?'Restar un negativo equivale a sumar su opuesto positivo.'
+      :'Se desplaza hacia la izquierda en la recta.');
+  document.getElementById('recta-result').textContent=
+    `(${sigA}${a}) ${op} (${sigB}${b}) = ${sigR}${res} · ${desc}`;
+}
 
-      const percentage = ((temp + 40) / 80) * 100;
-      fluid.style.height = percentage + '%';
+function ejemploRecta(a,b,op){
+  document.getElementById('recta-a').value=a;
+  document.getElementById('recta-b').value=b;
+  document.getElementById('recta-op').value=op;
+  calcRecta();
+}
+calcRecta();
 
-      let color = '#E74C3C'; // Rojo
-      if(temp <= 0) color = '#3498db'; // Azul frío
-      if(temp >= 20) color = '#e67e22'; // Naranja calor
+/* ═══════════════════════════════
+   APP 5 — FÚTBOL
+═══════════════════════════════ */
+let golesLocal=0, golesVisita=0, histGoles=[];
 
-      fluid.style.background = color;
-      bulb.style.background = color;
+function anotarGol(equipo){
+  marcarSim('futbol');
+  if(equipo==='local') golesLocal++;
+  else golesVisita++;
+  histGoles.push(equipo);
 
-      let extra = '';
-      if(temp === 0) extra = '<br><span style="font-size:0.8rem;color:#777">Punto de congelación</span>';
-      if(temp <= -20) extra = '<br><span style="font-size:0.8rem;color:#777">¡Qué frío! 🥶</span>';
-      if(temp >= 30) extra = '<br><span style="font-size:0.8rem;color:#777">¡Qué calor! 🥵</span>';
+  document.getElementById('goles-local').textContent=golesLocal;
+  document.getElementById('goles-visita').textContent=golesVisita;
 
-      statusText.innerHTML = `Temperatura: ${temp > 0 ? '+'+temp : temp}°C ${extra}`;
-      statusText.style.color = color;
-    }
+  const dif=golesLocal-golesVisita;
+  const difStr=(dif>0?'+':'')+dif;
+  document.getElementById('dif-box').innerHTML=
+    `Diferencia de goles: ${golesLocal} − ${golesVisita} = <strong style="color:${dif>0?'var(--verde)':dif<0?'var(--rojo)':'var(--amarillo)'}">${difStr}</strong>`;
 
-    // --- LÓGICA DEL ASCENSOR ---
-    let currentFloor = 0;
-    function goToFloor(floor) {
-      exploracion.ascensor = true; // Gamificación
-      verificarPremio();
+  document.getElementById('futbol-formula').textContent=
+    dif>0?`El local va ganando: diferencia = ${difStr} (entero positivo ✅)`
+    :dif<0?`El local va perdiendo: diferencia = ${difStr} (entero negativo ❌)`
+    :'Partido empatado: diferencia = 0 (entero neutro ⚖️)';
 
-      currentFloor = floor;
-      const el = document.getElementById('elevator');
-      const statusText = document.getElementById('e-status');
+  const st=document.getElementById('partido-status');
+  if(dif>0){st.textContent=`⚽ ¡El local gana ${golesLocal}–${golesVisita}! Diferencia: ${difStr}`;st.style.color='var(--verde)';}
+  else if(dif<0){st.textContent=`😰 El local pierde ${golesLocal}–${golesVisita}. Diferencia: ${difStr}`;st.style.color='var(--rojo)';}
+  else{st.textContent=`⚖️ ¡Empate ${golesLocal}–${golesVisita}! Diferencia: 0`;st.style.color='var(--amarillo)';}
 
-      const baseBottom = 10; 
-      const step = 34; 
-      const pos = baseBottom + ((floor + 2) * step); 
-      el.style.bottom = pos + 'px';
+  // Timeline
+  const tl=document.getElementById('timeline-goles');
+  const chip=document.createElement('span');
+  chip.className='gol-chip '+(equipo==='local'?'l':'v');
+  chip.textContent=equipo==='local'?'⚽L':'⚽V';
+  tl.appendChild(chip);
 
-      if(floor === 0) {
-        statusText.textContent = `Estás en la Planta Baja (0)`;
-      } else if (floor > 0) {
-        statusText.textContent = `Subiste al Piso +${floor}`;
-      } else {
-        statusText.textContent = `Bajaste al Sótano ${floor}`;
-      }
-    }
-    goToFloor(0);
+  // Toast
+  document.getElementById('toast-gol-txt').textContent=
+    equipo==='local'?'⚽ ¡GOL DEL LOCAL! +1':'⚽ ¡GOL DE LA VISITA! +1';
+  mostrarToast('toast-gol',1800);
+}
 
-    // --- LÓGICA DE FINANZAS ---
-    let balance = 0;
-    function addMoney(amount, desc) {
-      exploracion.banco = true; // Gamificación
-      verificarPremio();
+function resetPartido(){
+  golesLocal=0;golesVisita=0;histGoles=[];
+  document.getElementById('goles-local').textContent='0';
+  document.getElementById('goles-visita').textContent='0';
+  document.getElementById('dif-box').innerHTML='Diferencia de goles: 0 − 0 = <strong>0</strong>';
+  document.getElementById('timeline-goles').innerHTML='';
+  document.getElementById('partido-status').textContent='¡Nuevo partido! Anota el primer gol.';
+  document.getElementById('partido-status').style.color='var(--gris)';
+  document.getElementById('futbol-formula').textContent='Entero del local: 0 − 0 = 0 (neutro)';
+}
 
-      balance += amount;
-      const bText = document.getElementById('b-balance');
-      const history = document.getElementById('b-history');
-      const statusText = document.getElementById('b-status');
-
-      bText.textContent = `$ ${balance < 0 ? '-' : ''}${Math.abs(balance)}`;
-
-      if(balance < 0) {
-        bText.style.color = '#ff6b6b';
-        statusText.textContent = "¡Estás en números rojos! Tienes una deuda.";
-        statusText.style.color = 'var(--rojo)';
-      } else if (balance === 0) {
-        bText.style.color = 'white';
-        statusText.textContent = "Tu cuenta está vacía (0).";
-        statusText.style.color = '#666';
-      } else {
-        bText.style.color = 'var(--verde)';
-        statusText.textContent = "¡Tienes dinero ahorrado!";
-        statusText.style.color = 'var(--verde)';
-      }
-
-      const item = document.createElement('div');
-      item.className = 'history-item ' + (amount > 0 ? 'plus' : 'minus');
-      item.innerHTML = `<span>${desc}</span> <span>${amount > 0 ? '+'+amount : '-'+Math.abs(amount)}</span>`;
-      history.insertBefore(item, history.firstChild);
-    }
-
-    // Inicializar el termómetro
-    changeTemp(0);
+/* ── NAVEGACIÓN ── */
+function navegarA(id){
+  try{if(window.parent&&typeof window.parent.showPage==='function'){window.parent.showPage(id);return;}}catch(e){}
+  window.parent.postMessage({action:'cambiarPagina',destino:id},'*');
+}
 </script>
 </body>
 </html>
