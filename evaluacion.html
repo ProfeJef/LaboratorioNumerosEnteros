@@ -1050,18 +1050,122 @@ function enviarEvaluacion() {
     if (!p.seccionesVisitadas) p.seccionesVisitadas = [];
     if (!p.seccionesVisitadas.includes('evaluacion')) p.seccionesVisitadas.push('evaluacion');
     escribirLS('edu_progreso', JSON.stringify(p));
- window.parent.postMessage({
-  action:            'evaluacionCompletada',
-  nombre:            leerLS('edu_estudiante') || 'Anónimo',
-  puntos_evaluacion: puntos,   // variable de puntos acumulados en la eval
-  aprobado:          puntos >= 70 ? 'Sí' : 'No'
-}, '*');
+ /* ════════════════════════════════════
+   CIERRE enviarEvaluacion (continuación)
+════════════════════════════════════ */
+    p.evaluacionFinalPuntaje   = puntos;
+    p.evaluacionFinalCorrectas = correctas;
+    p.evaluacionFinalPct       = pct;
+    p.evaluacionCompletada     = true;
+    if (!p.seccionesVisitadas) p.seccionesVisitadas = [];
+    if (!p.seccionesVisitadas.includes('evaluacion')) p.seccionesVisitadas.push('evaluacion');
+    escribirLS('edu_progreso', JSON.stringify(p));
+  } catch(e) {}
+
+  window.parent.postMessage({
+    action:            'evaluacionCompletada',
+    nombre:            leerLS('edu_estudiante') || 'Anónimo',
+    puntos_evaluacion: puntos,
+    aprobado:          puntos >= 70 ? 'Sí ✅' : 'No ❌'
+  }, '*');
 }
 
 /* ════════════════════════════════════
    REINICIAR
 ════════════════════════════════════ */
 function reiniciar() { location.reload(); }
+
+/* ════════════════════════════════════
+   RESPUESTAS — VERDADERO / FALSO
+════════════════════════════════════ */
+function respVF(idx, resp) {
+  if (respondidas.has('vf' + idx)) return;
+  respondidas.add('vf' + idx);
+  const q   = selVF[idx];
+  const card = document.getElementById('p-vf' + idx);
+  const fb   = document.getElementById('fb-vf' + idx);
+  const btnV = document.getElementById('vfV' + idx);
+  const btnF = document.getElementById('vfF' + idx);
+  [btnV, btnF].forEach(b => { if (b) b.disabled = true; });
+  const corr = (resp === q.corr);
+  if (corr) {
+    card.classList.add('resp-ok'); fb.textContent = q.fb_ok; fb.className = 'preg-fb ok';
+    correctas++; puntos += PTS_VF; secciones.vf++;
+    if (resp === true  && btnV) btnV.classList.add('sel-ok');
+    if (resp === false && btnF) btnF.classList.add('sel-ok');
+  } else {
+    card.classList.add('resp-err'); fb.textContent = q.fb_err; fb.className = 'preg-fb err';
+    incorrectas++;
+    if (q.corr === true  && btnV) btnV.classList.add('mostrar-ok');
+    if (q.corr === false && btnF) btnF.classList.add('mostrar-ok');
+    if (resp === true  && btnV) btnV.classList.add('sel-err');
+    if (resp === false && btnF) btnF.classList.add('sel-err');
+  }
+  actualizarMarcador();
+}
+
+/* ════════════════════════════════════
+   RESPUESTAS — ABIERTOS (cierre)
+════════════════════════════════════ */
+function respABfin(idx) {
+  const q    = selAB[idx];
+  const inp  = document.getElementById('ab' + idx);
+  const fb   = document.getElementById('fb-ab' + idx);
+  const card = document.getElementById('p-ab' + idx);
+  if (abRespondidas.has(idx)) return;
+  const val = parseFloat(inp.value);
+  if (isNaN(val)) { inp.style.borderColor = 'var(--amarillo)'; return; }
+  abRespondidas.add(idx);
+  respondidas.add('ab' + idx);
+  inp.disabled = true;
+  const corr = Math.abs(val - q.corr) < 0.01;
+  if (corr) {
+    card.classList.add('resp-ok'); fb.textContent = q.fb_ok; fb.className = 'preg-fb ok';
+    inp.classList.add('ok'); correctas++; puntos += PTS_AB; secciones.ab++;
+  } else {
+    card.classList.add('resp-err'); fb.textContent = q.fb_err; fb.className = 'preg-fb err';
+    inp.classList.add('err'); incorrectas++;
+  }
+  actualizarMarcador();
+}
+
+/* ════════════════════════════════════
+   RENDER INICIAL — INYECTAR HTML
+════════════════════════════════════ */
+(function iniciarEvaluacion() {
+  const zona = document.getElementById('zona-preguntas');
+  if (!zona) return;
+  let html = '';
+  let num  = 1;
+
+  // Bloque Selección Múltiple
+  html += `<div class="bloque-eval">
+    <div class="section-label label-rojo">🔴 Selección Múltiple</div>
+    <h2>Elige la respuesta correcta</h2>
+    <div class="sub">4 preguntas • ${PTS_SM} pts c/u</div>`;
+  selSM.forEach((q, i) => { html += renderSM(q, i, num++); });
+  html += '</div>';
+
+  // Bloque Problemas Abiertos
+  html += `<div class="bloque-eval">
+    <div class="section-label label-cian">🔵 Problemas Abiertos</div>
+    <h2>Escribe el resultado</h2>
+    <div class="sub">4 preguntas • ${PTS_AB} pts c/u</div>`;
+  selAB.forEach((q, i) => { html += renderAB(q, i, num++); });
+  html += '</div>';
+
+  // Bloque Verdadero / Falso
+  html += `<div class="bloque-eval">
+    <div class="section-label label-naranja">🟠 Verdadero o Falso</div>
+    <h2>¿Es verdadero o falso?</h2>
+    <div class="sub">4 preguntas • ${PTS_VF} pts c/u</div>`;
+  selVF.forEach((q, i) => { html += renderVF(q, i, num++); });
+  html += '</div>';
+
+  zona.innerHTML = html;
+  actualizarMarcador();
+})();
+
 </script>
 </body>
 </html>
