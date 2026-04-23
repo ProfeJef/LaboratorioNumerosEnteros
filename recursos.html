@@ -1,310 +1,424 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Recursos Digitales – Números Enteros</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+  <title>Recursos | Misión ℤ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --azul:    #1A3C6E;
-      --verde:   #2ECC8A;
-      --naranja: #F4A127;
-      --fondo:   #F9F9F6;
-      --texto:   #2D2D2D;
-      --blanco:  #FFFFFF;
-
-      --youtube:  #FF0000;
-      --geogebra: #6666FF;
-      --genially: #4028B8;
-      --kahoot:   #46178f;
-      --web:      #00a8ff;
+    :root{
+      --purp:#6C3CE1;--purp2:#9B6DFF;--cian:#00D4FF;--amarillo:#FFE94D;
+      --verde:#2ECC8A;--rojo:#e74c3c;--naranja:#F39C12;
+      --fondo:#0A0618;--fondo2:#0D0920;--fondo3:#100C24;
+      --blanco:#FFF;--texto:#E8E0FF;--gris:rgba(255,255,255,.55);
     }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Space Grotesk',sans-serif;background:var(--fondo);color:var(--texto);overflow-x:hidden;}
 
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { 
-      font-family:'Open Sans',sans-serif; 
-      background:var(--fondo); 
-      color:var(--texto); 
-      padding: 1.5rem;
-      padding-bottom: 5rem;
+    /* ── HERO ── */
+    .hero{
+      background:
+        radial-gradient(ellipse 55% 70% at 5% 50%,rgba(0,212,255,.12) 0%,transparent 55%),
+        radial-gradient(ellipse 55% 65% at 95% 50%,rgba(108,60,225,.18) 0%,transparent 55%),
+        linear-gradient(160deg,#070412 0%,#0E0924 55%,#060A18 100%);
+      padding:3.5rem 2rem 2.8rem;text-align:center;position:relative;overflow:hidden;
     }
+    .hero-grid{position:absolute;inset:0;pointer-events:none;
+      background-image:linear-gradient(rgba(108,60,225,.04) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(108,60,225,.04) 1px,transparent 1px);
+      background-size:55px 55px;
+      mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 100%);}
 
-    /* ENCABEZADO */
-    .header-recursos {
-      background: linear-gradient(135deg, #12284C 0%, #1A3C6E 100%);
-      color: var(--blanco);
-      border-radius: 20px;
-      padding: 3rem 2rem;
-      text-align: center;
-      margin-bottom: 3rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      border-bottom: 6px solid var(--verde);
-      position: relative;
-      overflow: hidden;
-    }
-    .header-recursos::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background-image: radial-gradient(rgba(255,255,255,0.1) 2px, transparent 2px);
-      background-size: 30px 30px; opacity: 0.5; pointer-events: none;
-    }
-    .header-recursos h1 {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 900;
-      font-size: clamp(2rem, 4vw, 3rem);
-      margin-bottom: 0.8rem;
-      position: relative; z-index: 2;
-    }
-    .header-recursos h1 span { color: var(--naranja); }
-    .header-recursos p {
-      font-size: 1.1rem;
-      color: rgba(255,255,255,0.85);
-      max-width: 700px;
-      margin: 0 auto;
-      position: relative; z-index: 2;
-    }
+    /* partículas flotantes */
+    .particula{position:absolute;font-family:'Nunito',sans-serif;font-weight:900;
+      color:rgba(155,109,255,.07);pointer-events:none;animation:floatP linear infinite;z-index:1;}
+    @keyframes floatP{
+      0%{transform:translateY(100%) scale(.8) rotate(0deg);opacity:0;}
+      10%{opacity:1;}90%{opacity:1;}
+      100%{transform:translateY(-120%) scale(1.2) rotate(20deg);opacity:0;}}
 
-    /* CONTENEDOR PRINCIPAL */
-    .container { max-width: 1100px; margin: 0 auto; }
+    .hero-tag{display:inline-flex;align-items:center;gap:.5rem;
+      background:rgba(0,212,255,.1);border:1.5px solid rgba(0,212,255,.35);
+      color:var(--cian);font-family:'Nunito',sans-serif;font-weight:800;
+      font-size:.74rem;letter-spacing:2.5px;text-transform:uppercase;
+      padding:.35rem 1.1rem;border-radius:30px;margin-bottom:1.2rem;position:relative;z-index:2;}
+    .hero h1{font-family:'Nunito',sans-serif;font-weight:900;
+      font-size:clamp(1.9rem,4.5vw,3rem);color:var(--blanco);
+      position:relative;z-index:2;line-height:1.15;margin-bottom:.7rem;}
+    .hero h1 span{background:linear-gradient(135deg,var(--cian),var(--purp2));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hero p{color:rgba(255,255,255,.62);font-size:.96rem;max-width:580px;
+      margin:0 auto 1.8rem;line-height:1.8;position:relative;z-index:2;}
+    .hero-badges{display:flex;justify-content:center;gap:.9rem;flex-wrap:wrap;position:relative;z-index:2;}
+    .hb{display:flex;align-items:center;gap:.4rem;
+      background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+      border-radius:20px;padding:.35rem 1rem;
+      font-family:'Nunito',sans-serif;font-weight:700;font-size:.8rem;color:rgba(255,255,255,.72);}
 
-    /* SECCIONES DE CATEGORÍAS */
-    .category-section { margin-bottom: 4rem; }
-    .category-title {
-      font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.8rem;
-      color: var(--azul); margin-bottom: 1.5rem;
-      display: flex; align-items: center; gap: 0.8rem;
-      border-bottom: 3px solid #ddd; padding-bottom: 0.5rem;
-    }
-    .category-title .badge {
-      background: var(--azul); color: var(--blanco);
-      padding: 0.3rem 0.8rem; border-radius: 12px; font-size: 1.2rem;
-    }
+    /* ── FILTROS ── */
+    .filtros{display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;
+      max-width:900px;margin:2rem auto 0;padding:0 1.5rem;}
+    .filtro-btn{font-family:'Nunito',sans-serif;font-weight:800;font-size:.8rem;
+      padding:.42rem 1.1rem;border-radius:20px;border:1.5px solid rgba(255,255,255,.15);
+      background:rgba(255,255,255,.05);color:rgba(255,255,255,.7);
+      cursor:pointer;transition:all .2s;letter-spacing:.5px;}
+    .filtro-btn:hover{background:rgba(255,255,255,.1);}
+    .filtro-btn.activo[data-tipo="todos"]{background:rgba(108,60,225,.2);border-color:var(--purp2);color:var(--purp2);}
+    .filtro-btn.activo[data-tipo="video"]{background:rgba(231,76,60,.15);border-color:var(--rojo);color:var(--rojo);}
+    .filtro-btn.activo[data-tipo="interactivo"]{background:rgba(0,212,255,.12);border-color:var(--cian);color:var(--cian);}
+    .filtro-btn.activo[data-tipo="juego"]{background:rgba(70,23,143,.2);border-color:#9B59B6;color:#C39BD3;}
+    .filtro-btn.activo[data-tipo="descargable"]{background:rgba(243,156,18,.12);border-color:var(--naranja);color:var(--naranja);}
 
-    /* GRID DE TARJETAS */
-    .resources-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
+    /* ── WRAP ── */
+    .wrap{max-width:900px;margin:0 auto;padding:2.5rem 1.5rem 5rem;}
 
-    /* DISEÑO DE LA TARJETA DE RECURSO */
-    .resource-card {
-      background: var(--blanco); border-radius: 16px; padding: 1.5rem;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.06); transition: all 0.3s ease;
-      display: flex; flex-direction: column; position: relative; overflow: hidden;
-      border: 1px solid #eee;
-    }
-    .resource-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.12); }
+    /* ── SECTION LABEL ── */
+    .section-label{font-family:'Nunito',sans-serif;font-weight:900;font-size:.72rem;
+      text-transform:uppercase;letter-spacing:2px;display:inline-flex;align-items:center;
+      gap:.4rem;padding:.3rem 1rem;border-radius:20px;margin-bottom:1rem;}
+    .label-rojo{background:rgba(231,76,60,.12);color:var(--rojo);border:1px solid rgba(231,76,60,.3);}
+    .label-cian{background:rgba(0,212,255,.1);color:var(--cian);border:1px solid rgba(0,212,255,.25);}
+    .label-kahoot{background:rgba(70,23,143,.2);color:#C39BD3;border:1px solid rgba(70,23,143,.4);}
+    .label-naranja{background:rgba(243,156,18,.1);color:var(--naranja);border:1px solid rgba(243,156,18,.25);}
 
-    /* Colores por plataforma */
-    .card-yt { border-top: 5px solid var(--youtube); }
-    .card-yt .r-icon { color: var(--youtube); }
+    .bloque{margin-bottom:3rem;}
+    .bloque h2{font-family:'Nunito',sans-serif;font-weight:900;
+      font-size:clamp(1.1rem,2.5vw,1.4rem);color:var(--blanco);margin-bottom:.3rem;}
+    .bloque .sub{color:var(--gris);font-size:.87rem;margin-bottom:1.4rem;}
 
-    .card-geo { border-top: 5px solid var(--geogebra); }
-    .card-geo .r-icon { color: var(--geogebra); }
+    /* ── GRID ── */
+    .recursos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.1rem;}
 
-    .card-gen { border-top: 5px solid var(--genially); }
-    .card-gen .r-icon { color: var(--genially); }
+    /* ── TARJETA ── */
+    .rec-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;padding:1.4rem 1.4rem 1.2rem;
+      display:flex;flex-direction:column;gap:.7rem;
+      transition:border-color .2s,transform .2s,background .2s;
+      animation:fadeIn .4s ease both;}
+    .rec-card:hover{transform:translateY(-3px);background:rgba(255,255,255,.05);}
+    .rec-card[data-tipo="video"]:hover{border-color:rgba(231,76,60,.5);}
+    .rec-card[data-tipo="interactivo"]:hover{border-color:rgba(0,212,255,.4);}
+    .rec-card[data-tipo="juego"]:hover{border-color:rgba(70,23,143,.6);}
+    .rec-card[data-tipo="descargable"]:hover{border-color:rgba(243,156,18,.4);}
 
-    .card-kahoot { border-top: 5px solid var(--kahoot); }
-    .card-kahoot .r-icon { color: var(--kahoot); }
+    /* destacado */
+    .rec-card.destacado{border-color:rgba(255,233,77,.2);
+      background:linear-gradient(135deg,rgba(255,233,77,.04),rgba(108,60,225,.06));}
+    .rec-card.destacado::before{content:'⭐ Recomendado';
+      font-family:'Nunito',sans-serif;font-weight:800;font-size:.68rem;
+      color:var(--amarillo);letter-spacing:1px;text-transform:uppercase;display:block;}
 
-    .card-web { border-top: 5px solid var(--web); }
-    .card-web .r-icon { color: var(--web); }
+    .rec-header{display:flex;align-items:center;justify-content:space-between;gap:.5rem;}
+    .rec-icono{width:44px;height:44px;border-radius:12px;
+      display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
+    .ico-video{background:rgba(231,76,60,.15);border:1px solid rgba(231,76,60,.3);}
+    .ico-interactivo{background:rgba(0,212,255,.12);border:1px solid rgba(0,212,255,.25);}
+    .ico-juego{background:rgba(70,23,143,.2);border:1px solid rgba(70,23,143,.4);}
+    .ico-descargable{background:rgba(243,156,18,.12);border:1px solid rgba(243,156,18,.25);}
 
-    .card-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
-    .r-icon {
-      font-size: 2.5rem; background: var(--fondo); width: 50px; height: 50px;
-      display: flex; align-items: center; justify-content: center; border-radius: 12px;
-    }
-    .r-title { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--azul); line-height: 1.2; }
-    .r-desc { font-size: 0.95rem; color: #555; margin-bottom: 1.5rem; flex-grow: 1; /* Empuja el botón hacia abajo */ }
+    .rec-tipo-chip{font-family:'Nunito',sans-serif;font-weight:800;font-size:.68rem;
+      text-transform:uppercase;letter-spacing:1px;padding:.22rem .75rem;border-radius:20px;}
+    .chip-video{background:rgba(231,76,60,.12);color:var(--rojo);border:1px solid rgba(231,76,60,.3);}
+    .chip-interactivo{background:rgba(0,212,255,.1);color:var(--cian);border:1px solid rgba(0,212,255,.25);}
+    .chip-juego{background:rgba(70,23,143,.2);color:#C39BD3;border:1px solid rgba(70,23,143,.4);}
+    .chip-descargable{background:rgba(243,156,18,.1);color:var(--naranja);border:1px solid rgba(243,156,18,.25);}
 
-    .btn-link {
-      display: inline-block; text-align: center; text-decoration: none;
-      font-family: 'Nunito', sans-serif; font-weight: 800; padding: 0.8rem;
-      border-radius: 10px; transition: all 0.2s;
-    }
-    .btn-yt { background: rgba(255,0,0,0.1); color: var(--youtube); }
-    .btn-yt:hover { background: var(--youtube); color: white; }
+    .rec-titulo{font-family:'Nunito',sans-serif;font-weight:900;font-size:.97rem;
+      color:var(--blanco);line-height:1.3;}
+    .rec-desc{font-size:.84rem;color:rgba(255,255,255,.65);line-height:1.7;flex:1;}
+    .rec-meta{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;}
+    .rec-nivel{font-family:'Nunito',sans-serif;font-weight:700;font-size:.72rem;
+      color:rgba(255,255,255,.5);display:flex;align-items:center;gap:.3rem;}
 
-    .btn-geo { background: rgba(102,102,255,0.1); color: var(--geogebra); }
-    .btn-geo:hover { background: var(--geogebra); color: white; }
+    .rec-btn{display:inline-flex;align-items:center;gap:.45rem;
+      font-family:'Nunito',sans-serif;font-weight:900;font-size:.82rem;
+      padding:.52rem 1.2rem;border-radius:20px;cursor:pointer;
+      transition:all .2s;text-decoration:none;width:100%;
+      justify-content:center;margin-top:.2rem;border:1.5px solid transparent;}
+    .btn-video{background:rgba(231,76,60,.15);color:var(--rojo);border-color:rgba(231,76,60,.35);}
+    .btn-video:hover{background:rgba(231,76,60,.28);transform:translateY(-1px);}
+    .btn-interactivo-cian{background:rgba(0,212,255,.12);color:var(--cian);border-color:rgba(0,212,255,.3);}
+    .btn-interactivo-cian:hover{background:rgba(0,212,255,.24);transform:translateY(-1px);}
+    .btn-interactivo-purp{background:rgba(108,60,225,.15);color:var(--purp2);border-color:rgba(108,60,225,.35);}
+    .btn-interactivo-purp:hover{background:rgba(108,60,225,.28);transform:translateY(-1px);}
+    .btn-juego{background:rgba(70,23,143,.2);color:#C39BD3;border-color:rgba(70,23,143,.5);}
+    .btn-juego:hover{background:rgba(70,23,143,.35);transform:translateY(-1px);}
+    .btn-descargable{background:rgba(243,156,18,.12);color:var(--naranja);border-color:rgba(243,156,18,.3);}
+    .btn-descargable:hover{background:rgba(243,156,18,.24);transform:translateY(-1px);}
 
-    .btn-gen { background: rgba(64,40,184,0.1); color: var(--genially); }
-    .btn-gen:hover { background: var(--genially); color: white; }
+    /* ── CONSEJO ── */
+    .consejo{background:rgba(108,60,225,.07);border:1px solid rgba(108,60,225,.2);
+      border-left:4px solid var(--purp2);border-radius:0 14px 14px 0;
+      padding:1rem 1.3rem;margin-bottom:2.5rem;
+      font-size:.88rem;color:rgba(255,255,255,.75);line-height:1.75;}
+    .consejo strong{color:var(--purp2);}
 
-    .btn-kahoot { background: rgba(70,23,143,0.1); color: var(--kahoot); }
-    .btn-kahoot:hover { background: var(--kahoot); color: white; }
+    /* ── CTA ── */
+    .cta-box{background:
+      radial-gradient(ellipse 60% 80% at 20% 50%,rgba(108,60,225,.2) 0%,transparent 55%),
+      radial-gradient(ellipse 55% 70% at 80% 50%,rgba(0,212,255,.15) 0%,transparent 50%),
+      var(--fondo3);
+      border:1px solid rgba(108,60,225,.25);border-radius:24px;
+      padding:2.2rem 2rem;text-align:center;}
+    .cta-box h2{font-family:'Nunito',sans-serif;font-weight:900;
+      font-size:clamp(1.2rem,2.5vw,1.7rem);color:var(--blanco);margin-bottom:.5rem;}
+    .cta-box p{color:rgba(255,255,255,.62);font-size:.9rem;margin-bottom:1.3rem;line-height:1.75;}
+    .cta-btns{display:flex;justify-content:center;gap:.8rem;flex-wrap:wrap;}
+    .btn-cta{display:inline-flex;align-items:center;gap:.5rem;
+      background:linear-gradient(135deg,var(--purp),var(--cian));color:#fff;
+      font-family:'Nunito',sans-serif;font-weight:900;font-size:.9rem;
+      padding:.72rem 1.8rem;border-radius:30px;border:none;cursor:pointer;
+      transition:all .2s;box-shadow:0 8px 26px rgba(108,60,225,.4);}
+    .btn-cta:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(0,212,255,.3);}
+    .btn-cta.sec{background:rgba(255,255,255,.07);box-shadow:none;border:1.5px solid rgba(255,255,255,.2);}
 
-    .btn-web { background: rgba(0,168,255,0.1); color: var(--web); }
-    .btn-web:hover { background: var(--web); color: white; }
-
-    @media(max-width: 768px){
-      .header-recursos { padding: 2rem 1.5rem; }
-      .category-title { font-size: 1.5rem; }
-    }
-
-    /* PARTÍCULAS DE FONDO SUAVES */
-    .bg-particles { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: -1; }
-    .bg-particles span {
-      position: absolute; font-family: 'Nunito', sans-serif; font-weight: 900;
-      color: rgba(26, 60, 110, 0.05); /* Color azul MUY transparente (5%) */
-      animation: floatNumber linear infinite;
-    }
-    @keyframes floatNumber {
-      0% { transform: translateY(100vh) scale(0.8) rotate(0deg); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { transform: translateY(-10vh) scale(1.2) rotate(20deg); opacity: 0; }
-    }
+    .rec-card.oculto{display:none;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
   </style>
 </head>
 <body>
 
-  <div class="bg-particles" id="particles-container"></div>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div id="particulas-hero"></div>
+  <div class="hero-tag">📚 Recursos didácticos</div>
+  <h1>Tu mochila de <span>recursos</span></h1>
+  <p>Videos, simuladores, juegos y materiales descargables seleccionados para reforzar los números enteros a tu ritmo.</p>
+  <div class="hero-badges">
+    <div class="hb">🎬 2 videos</div>
+    <div class="hb">🖥️ 2 interactivos</div>
+    <div class="hb">🎮 1 Kahoot</div>
+    <div class="hb">📄 2 descargables</div>
+    <div class="hb">📐 Grado 6° – 7°</div>
+  </div>
+</div>
 
-  <!-- ENCABEZADO -->
-  <div class="header-recursos">
-    <h1>Mochila de <span>Recursos</span></h1>
-    <p>Explora todos los materiales digitales externos que hemos seleccionado para que lleves tus conocimientos matemáticos al siguiente nivel.</p>
+<!-- FILTROS -->
+<div class="filtros" role="navigation" aria-label="Filtrar recursos">
+  <button class="filtro-btn activo" data-tipo="todos"        onclick="filtrar('todos')">🔎 Todos</button>
+  <button class="filtro-btn"        data-tipo="video"        onclick="filtrar('video')">🎬 Videos</button>
+  <button class="filtro-btn"        data-tipo="interactivo"  onclick="filtrar('interactivo')">🖥️ Interactivos</button>
+  <button class="filtro-btn"        data-tipo="juego"        onclick="filtrar('juego')">🎮 Kahoot</button>
+  <button class="filtro-btn"        data-tipo="descargable"  onclick="filtrar('descargable')">📄 Descargables</button>
+</div>
+
+<div class="wrap">
+
+  <div class="consejo" style="margin-top:1.5rem;">
+    💡 <strong>Orden recomendado:</strong> Empieza por los <strong>videos</strong> para entender el concepto, luego explora los <strong>interactivos</strong> para visualizarlo, pon a prueba tu velocidad en el <strong>Kahoot</strong> y finaliza practicando con los <strong>descargables</strong>.
   </div>
 
-  <div class="container">
+  <!-- ══ VIDEOS ══ -->
+  <div class="bloque">
+    <span class="section-label label-rojo">🎬 Parte 1 · Videos de YouTube</span>
+    <h2>Aprende viendo y escuchando</h2>
+    <p class="sub">Explicaciones visuales paso a paso con contextos cotidianos.</p>
+    <div class="recursos-grid">
 
-    <!-- ==============================================
-         1. VIDEOS DE YOUTUBE 
-         ============================================== -->
-    <div class="category-section">
-      <h2 class="category-title"><span class="badge">1</span> Aprende con Videos YouTube</h2>
-      <div class="resources-grid">
-
-        <div class="resource-card card-yt">
-          <div class="card-header">
-            <div class="r-icon">▶️</div>
-            <div class="r-title">Método "Debo y Tengo"</div>
-          </div>
-          <p class="r-desc">Una de las estrategias más efectivas usando finanzas cotidianas: los positivos son dinero que tienes, los negativos son deudas.</p>
-          <a href="https://www.youtube.com/watch?v=dayfz0ff1Mc&list=PLDjtbBXUusIyJaSgmTDrNOESYLsLuNOFH&index=3" target="_blank" class="btn-link btn-yt">Ver Video 1</a>
+      <div class="rec-card destacado" data-tipo="video">
+        <div class="rec-header">
+          <div class="rec-icono ico-video">▶️</div>
+          <span class="rec-tipo-chip chip-video">YouTube</span>
         </div>
-
-        <div class="resource-card card-yt">
-          <div class="card-header">
-            <div class="r-icon">▶️</div>
-            <div class="r-title">Método de Eliminación</div>
-          </div>
-          <p class="r-desc">Conoce un método alternativo y avanzado para resolver operaciones con números enteros anulando positivos con negativos.</p>
-          <a href="https://www.youtube.com/watch?v=UF5ZzjiGYwU&list=PLDjtbBXUusIyJaSgmTDrNOESYLsLuNOFH&index=4" target="_blank" class="btn-link btn-yt">Ver Video 2</a>
+        <div class="rec-titulo">Método "Debo y Tengo"</div>
+        <div class="rec-desc">Una de las estrategias más efectivas usando finanzas cotidianas: los positivos son dinero que tienes, los negativos son deudas. Ideal para comenzar.</div>
+        <div class="rec-meta">
+          <span class="rec-nivel">📐 Nivel básico</span>
+          <span class="rec-nivel">🇨🇴 Contexto real</span>
         </div>
-
+        <a class="rec-btn btn-video"
+           href="https://www.youtube.com/watch?v=dayfz0ff1Mc&list=PLDjtbBXUusIyJaSgmTDrNOESYLsLuNOFH&index=3"
+           target="_blank" rel="noopener">▶️ Ver Video 1</a>
       </div>
-    </div>
 
-
-    <!-- ==============================================
-         2. EXPLORACIÓN INTERACTIVA (Genially y GeoGebra)
-         ============================================== -->
-    <div class="category-section">
-      <h2 class="category-title"><span class="badge">2</span> Exploración Interactiva</h2>
-      <div class="resources-grid">
-
-        <!-- Tarjeta Genially -->
-        <div class="resource-card card-gen">
-          <div class="card-header">
-            <div class="r-icon">✨</div>
-            <div class="r-title">Aventura en Genially</div>
-          </div>
-          <p class="r-desc">Recorre esta genial presentación interactiva diseñada especialmente para hacer de los números enteros un aprendizaje divertido.</p>
-          <a href="https://view.genially.com/69cd3164a6ac2e9978d2fb33" target="_blank" class="btn-link btn-gen">Abrir Genially</a>
+      <div class="rec-card" data-tipo="video">
+        <div class="rec-header">
+          <div class="rec-icono ico-video">▶️</div>
+          <span class="rec-tipo-chip chip-video">YouTube</span>
         </div>
-
-        <!-- Tarjeta GeoGebra -->
-        <div class="resource-card card-geo">
-          <div class="card-header">
-            <div class="r-icon">📐</div>
-            <div class="r-title">GeoGebra: Resta en el mar</div>
-          </div>
-          <p class="r-desc">Usa este simulador dinámico de GeoGebra para entender la profundidad y altitud con números enteros en el océano.</p>
-          <a href="https://www.geogebra.org/m/rTGr6bNP" target="_blank" class="btn-link btn-geo">Abrir GeoGebra</a>
+        <div class="rec-titulo">Método de eliminación de signos</div>
+        <div class="rec-desc">Método alternativo para resolver operaciones con enteros anulando positivos con negativos. Perfecto para reforzar la ley de signos de forma visual.</div>
+        <div class="rec-meta">
+          <span class="rec-nivel">📐 Nivel intermedio</span>
+          <span class="rec-nivel">⏱️ ~10 min</span>
         </div>
-
+        <a class="rec-btn btn-video"
+           href="https://www.youtube.com/watch?v=UF5ZzjiGYwU&list=PLDjtbBXUusIyJaSgmTDrNOESYLsLuNOFH&index=4"
+           target="_blank" rel="noopener">▶️ Ver Video 2</a>
       </div>
+
     </div>
-
-
-    <!-- ==============================================
-         3. JUEGOS Y RETOS (Kahoot)
-         ============================================== -->
-    <div class="category-section">
-      <h2 class="category-title"><span class="badge">3</span> Juegos y Retos Kahoot!</h2>
-      <div class="resources-grid">
-
-        <!-- Tarjeta Kahoot -->
-        <div class="resource-card card-kahoot">
-          <div class="card-header">
-            <div class="r-icon">🎮</div>
-            <div class="r-title">Desafío Kahoot! Solo</div>
-          </div>
-          <p class="r-desc">¡Pon a prueba tu agilidad mental! Juega este modo solitario, responde rápido a las preguntas y compite por el mejor puntaje.</p>
-          <a href="https://kahoot.it/solo?quizId=b28622e4-cd9f-417e-a5f7-330d4b1980d2" target="_blank" class="btn-link btn-kahoot">¡Jugar Kahoot!</a>
-        </div>
-
-      </div>
-    </div>
-
-
-    <!-- ==============================================
-         4. MATERIAL DE PRÁCTICA (PDFs y Ejercicios)
-         ============================================== -->
-    <div class="category-section">
-      <h2 class="category-title"><span class="badge">4</span> Cuadernos y Ejercicios</h2>
-      <div class="resources-grid">
-
-        <div class="resource-card card-web">
-          <div class="card-header">
-            <div class="r-icon">📄</div>
-            <div class="r-title">Hojas de Ejercicios (-10 a 10)</div>
-          </div>
-          <p class="r-desc">Descarga o imprime esta hoja de MatesLibres con ejercicios fáciles de adición y sustracción para entrenar en casa.</p>
-          <a href="https://mateslibres.com/enteros/enteros_adicion_y_sustraccion_facil_001.1384308189.pdf" target="_blank" class="btn-link btn-web">Ver PDF de Ejercicios</a>
-        </div>
-
-        <div class="resource-card card-web">
-          <div class="card-header">
-            <div class="r-icon">📘</div>
-            <div class="r-title">Cuaderno: 6to Curso</div>
-          </div>
-          <p class="r-desc">Accede a este fantástico cuaderno en Google Drive lleno de teoría resumida y talleres para niños de educación primaria.</p>
-          <a href="https://drive.google.com/file/d/1S_TaxhQbch3Gu7MGiaGpCkwTM7W27ovB/view" target="_blank" class="btn-link btn-web">Abrir Cuaderno (Drive)</a>
-        </div>
-
-      </div>
-    </div>
-
   </div>
+
+  <!-- ══ INTERACTIVOS ══ -->
+  <div class="bloque">
+    <span class="section-label label-cian">🖥️ Parte 2 · Exploración interactiva</span>
+    <h2>Experimenta y visualiza</h2>
+    <p class="sub">Simuladores y presentaciones dinámicas para aprender haciendo.</p>
+    <div class="recursos-grid">
+
+      <div class="rec-card destacado" data-tipo="interactivo">
+        <div class="rec-header">
+          <div class="rec-icono ico-interactivo">✨</div>
+          <span class="rec-tipo-chip chip-interactivo">Genially</span>
+        </div>
+        <div class="rec-titulo">Aventura interactiva en Genially</div>
+        <div class="rec-desc">Presentación interactiva diseñada para hacer de los números enteros un aprendizaje divertido. Incluye ejemplos animados, preguntas integradas y navegación libre.</div>
+        <div class="rec-meta">
+          <span class="rec-nivel">📐 Todos los niveles</span>
+          <span class="rec-nivel">🌐 En línea</span>
+        </div>
+        <a class="rec-btn btn-interactivo-purp"
+           href="https://view.genially.com/69cd3164a6ac2e9978d2fb33"
+           target="_blank" rel="noopener">✨ Abrir Genially</a>
+      </div>
+
+      <div class="rec-card" data-tipo="interactivo">
+        <div class="rec-header">
+          <div class="rec-icono ico-interactivo">📐</div>
+          <span class="rec-tipo-chip chip-interactivo">GeoGebra</span>
+        </div>
+        <div class="rec-titulo">GeoGebra: Resta en el mar</div>
+        <div class="rec-desc">Simulador dinámico para entender profundidad y altitud con números enteros en el océano. Arrastra puntos en la recta y observa los cambios en tiempo real.</div>
+        <div class="rec-meta">
+          <span class="rec-nivel">📐 Nivel básico–intermedio</span>
+          <span class="rec-nivel">🌐 En línea</span>
+        </div>
+        <a class="rec-btn btn-interactivo-cian"
+           href="https://www.geogebra.org/m/rTGr6bNP"
+           target="_blank" rel="noopener">📐 Abrir GeoGebra</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ KAHOOT ══ -->
+  <div class="bloque">
+    <span class="section-label label-kahoot">🎮 Parte 3 · Juegos y retos</span>
+    <h2>Pon a prueba tu velocidad</h2>
+    <p class="sub">Responde rápido y compite por el mejor puntaje.</p>
+    <div class="recursos-grid">
+
+      <div class="rec-card destacado" data-tipo="juego">
+        <div class="rec-header">
+          <div class="rec-icono ico-juego">🎮</div>
+          <span class="rec-tipo-chip chip-juego">Kahoot!</span>
+        </div>
+        <div class="rec-titulo">Desafío Kahoot! — Modo solitario</div>
+        <div class="rec-desc">¡Pon a prueba tu agilidad mental! Juega en modo solitario, responde rápido las preguntas sobre enteros y compite por el mejor puntaje. ¡Cronometrado y emocionante!</div>
+        <div class="rec-meta">
+          <span class="rec-nivel">📐 Grado 6°–7°</span>
+          <span class="rec-nivel">⚡ Modo rápido</span>
+        </div>
+        <a class="rec-btn btn-juego"
+           href="https://kahoot.it/solo?quizId=b28622e4-cd9f-417e-a5f7-330d4b1980d2"
+           target="_blank" rel="noopener">🎯 ¡Jugar Kahoot!</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ DESCARGABLES ══ -->
+  <div class="bloque">
+    <span class="section-label label-naranja">📄 Parte 4 · Cuadernos y ejercicios</span>
+    <h2>Practica en papel y cuaderno</h2>
+    <p class="sub">Guías y talleres para complementar el trabajo digital con actividades offline.</p>
+    <div class="recursos-grid">
+
+      <div class="rec-card" data-tipo="descargable">
+        <div class="rec-header">
+          <div class="rec-icono ico-descargable">📋</div>
+          <span class="rec-tipo-chip chip-descargable">PDF</span>
+        </div>
+        <div class="rec-titulo">Hojas de ejercicios (−10 a 10)</div>
+        <div class="rec-desc">Descarga o imprime esta hoja de MatesLibres con ejercicios de adición y sustracción de enteros entre −10 y 10. Perfecta para entrenar en casa o como tarea.</div>
+        <div class="rec-meta">
+          <span class="rec-nivel">📐 Nivel básico</span>
+          <span class="rec-nivel">🖨️ Imprimible</span>
+        </div>
+        <a class="rec-btn btn-descargable"
+           href="https://mateslibres.com/enteros/enteros_adicion_y_sustraccion_facil_001.1384308189.pdf"
+           target="_blank" rel="noopener">📥 Ver PDF de ejercicios</a>
+      </div>
+
+      <div class="rec-card destacado" data-tipo="descargable">
+        <div class="rec-header">
+          <div class="rec-icono ico-descargable">📘</div>
+          <span class="rec-tipo-chip chip-descargable">Cuaderno</span>
+        </div>
+        <div class="rec-titulo">Cuaderno digital — 6to curso</div>
+        <div class="rec-desc">Cuaderno en Google Drive con teoría resumida, ejemplos resueltos y talleres completos sobre números enteros. Ideal para repasar antes de la evaluación.</div>
+        <div class="rec-meta">
+          <span class="rec-nivel">📐 Todos los niveles</span>
+          <span class="rec-nivel">☁️ Google Drive</span>
+        </div>
+        <a class="rec-btn btn-descargable"
+           href="https://drive.google.com/file/d/1S_TaxhQbch3Gu7MGiaGpCkwTM7W27ovB/view"
+           target="_blank" rel="noopener">📂 Abrir cuaderno</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CTA FINAL -->
+  <div class="cta-box">
+    <h2>¿Listo para demostrar lo aprendido?</h2>
+    <p>Regresa a practicar o presenta la evaluación final con banco de 60 preguntas aleatorias.</p>
+    <div class="cta-btns">
+      <button class="btn-cta" onclick="navegarA('practica')">🎮 Ir a Práctica</button>
+      <button class="btn-cta" onclick="navegarA('evaluacion')">📋 Ir a Evaluación</button>
+      <button class="btn-cta sec" onclick="navegarA('vida_real')">🌍 Vida Real</button>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
 
 <script>
-    // Lógica de partículas suaves (Diseño)
-    function createParticles() {
-      const container = document.getElementById('particles-container');
-      const symbols = ['-3', '+8', '-5', '0', '+12', '-1', '+4', '-7', '+2', '-10'];
-      const count = 15; // Menos partículas para no saturar
+/* ── PARTÍCULAS HERO ── */
+(function(){
+  const cont = document.getElementById('particulas-hero');
+  const syms = ['-3','+8','-5','0','+12','-1','+4','-7','+2','-10','ℤ','|n|'];
+  for(let i=0;i<12;i++){
+    const el=document.createElement('span');
+    el.className='particula';
+    const size=Math.random()*35+18;
+    el.style.cssText=`left:${Math.random()*100}%;font-size:${size}px;
+      animation-duration:${Math.random()*18+14}s;
+      animation-delay:${Math.random()*10}s;`;
+    el.textContent=syms[Math.floor(Math.random()*syms.length)];
+    cont.appendChild(el);
+  }
+})();
 
-      for (let i = 0; i < count; i++) {
-        const el = document.createElement('span');
-        const size = Math.random() * 40 + 20; // Tamaños variados
-        el.style.cssText = `
-          left: ${Math.random() * 100}%;
-          font-size: ${size}px;
-          animation-duration: ${Math.random() * 20 + 15}s; /* Más lentas */
-          animation-delay: ${Math.random() * 10}s;
-        `;
-        el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-        container.appendChild(el);
-      }
-    }
-    createParticles();
+/* ── FILTROS ── */
+function filtrar(tipo){
+  document.querySelectorAll('.filtro-btn').forEach(b=>{
+    b.classList.toggle('activo', b.dataset.tipo===tipo);
+  });
+  document.querySelectorAll('.rec-card').forEach(card=>{
+    card.classList.toggle('oculto', tipo!=='todos' && card.dataset.tipo!==tipo);
+  });
+}
+
+/* ── NAVEGACIÓN ── */
+function navegarA(id){
+  try{if(window.parent&&typeof window.parent.showPage==='function'){window.parent.showPage(id);return;}}catch(e){}
+  window.parent.postMessage({action:'cambiarPagina',destino:id},'*');
+}
+
+/* ── REGISTRAR VISITA ── */
+(function(){
+  try{
+    const raw=localStorage.getItem('edu_progreso'); if(!raw)return;
+    const p=JSON.parse(raw);
+    if(!p.seccionesVisitadas)p.seccionesVisitadas=[];
+    if(!p.seccionesVisitadas.includes('recursos'))p.seccionesVisitadas.push('recursos');
+    localStorage.setItem('edu_progreso',JSON.stringify(p));
+    window.parent.postMessage({action:'actualizarPuntos'},'*');
+  }catch(e){}
+})();
 </script>
 </body>
 </html>
