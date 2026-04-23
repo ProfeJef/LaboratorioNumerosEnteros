@@ -3,186 +3,225 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Los Números Enteros | Eduquémonos con TICs</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+  <title>Enteros · Misión ℤ | Eduquémonos con TICs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet"/>
   <style>
+    /* ══════════════════════════════════════════
+       PALETA MISIÓN ℤ — Grado 6° & 7°
+       Púrpura · Cian · Amarillo neón · Fondo oscuro
+    ══════════════════════════════════════════ */
     :root {
-      --azul-oscuro:      #12284C;
-      --azul-brillante:   #1A3C6E;
-      --verde-neon:       #2ECC8A;
-      --verde-hover:      #25A870;
-      --naranja-vibrante: #FF9F1C;
-      --amarillo:         #FFD166;
-      --rojo:             #e74c3c;
-      --fondo:            #F4F7F6;
-      --texto:            #2D2D2D;
-      --blanco:           #FFFFFF;
+      --purp:       #6C3CE1;
+      --purp-dark:  #4A21B0;
+      --purp-deep:  #1A0A3C;
+      --cian:       #00D4FF;
+      --cian-dark:  #00A8CC;
+      --amarillo:   #FFE94D;
+      --verde:      #2ECC8A;
+      --rojo:       #FF4D6D;
+      --fondo:      #0F0B1E;
+      --fondo2:     #1A1333;
+      --blanco:     #FFFFFF;
+      --texto:      #E8E0FF;
+      --gris:       #2E2650;
+      --gris2:      #3D3460;
     }
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Open Sans',sans-serif; background:var(--fondo); color:var(--texto); overflow:hidden; }
+    body { font-family:'Space Grotesk',sans-serif; background:var(--fondo); color:var(--texto); overflow:hidden; }
 
-    /* ── MODAL BIENVENIDA ── */
+    /* ESTRELLAS */
+    #stars { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+    #stars span {
+      position:absolute; border-radius:50%; background:rgba(255,255,255,.75);
+      animation:twinkle linear infinite;
+    }
+    @keyframes twinkle { 0%,100%{opacity:.15} 50%{opacity:1} }
+
+    /* ── MODAL ── */
     .modal-overlay {
       position:fixed; inset:0;
-      background:rgba(18,40,76,.88);
-      backdrop-filter:blur(6px);
+      background:rgba(10,6,30,.93);
+      backdrop-filter:blur(8px);
       display:none; align-items:center; justify-content:center;
       z-index:9999; opacity:0; transition:opacity .4s ease;
     }
     .modal-overlay.show { display:flex; opacity:1; }
     .modal-content {
-      background:var(--blanco); padding:2.5rem 2rem 2rem;
-      border-radius:22px; width:92%; max-width:440px;
+      background:linear-gradient(145deg,#1A1333,#2A1F50);
+      border:2px solid var(--purp);
+      padding:2.5rem 2rem 2rem;
+      border-radius:24px; width:92%; max-width:460px;
       text-align:center;
-      box-shadow:0 20px 50px rgba(0,0,0,.25);
-      transform:translateY(30px);
+      box-shadow:0 0 60px rgba(108,60,225,.4), 0 20px 50px rgba(0,0,0,.6);
+      transform:translateY(30px) scale(.96);
       transition:transform .45s cubic-bezier(.175,.885,.32,1.275);
-      border-top:5px solid var(--verde-neon);
+      position:relative; overflow:hidden;
     }
-    .modal-overlay.show .modal-content { transform:translateY(0); }
-    .modal-icon { font-size:3rem; margin-bottom:.6rem; animation:rebote 2s infinite; }
-    @keyframes rebote { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-    .modal-title { font-family:'Nunito',sans-serif; font-weight:900; color:var(--azul-oscuro); font-size:1.5rem; margin-bottom:.4rem; }
-    .modal-text  { color:#555; font-size:.93rem; line-height:1.6; margin-bottom:1rem; }
+    .modal-content::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:3px;
+      background:linear-gradient(90deg,var(--purp),var(--cian),var(--amarillo),var(--purp));
+      background-size:200% 100%; animation:shimmer 3s linear infinite;
+    }
+    @keyframes shimmer { 0%{background-position:200%} 100%{background-position:-200%} }
+    .modal-overlay.show .modal-content { transform:translateY(0) scale(1); }
+
+    .modal-logo { margin-bottom:1rem; display:flex; flex-direction:column; align-items:center; gap:.3rem; }
+    .modal-logo-icon {
+      width:72px; height:72px; border-radius:20px;
+      background:linear-gradient(135deg,var(--purp),var(--cian));
+      display:flex; align-items:center; justify-content:center;
+      font-size:2rem; font-weight:900; color:var(--blanco);
+      font-family:'Nunito',sans-serif;
+      box-shadow:0 8px 24px rgba(108,60,225,.5);
+      animation:floatLogo 3s ease-in-out infinite;
+    }
+    @keyframes floatLogo { 0%,100%{transform:translateY(0) rotate(-2deg)} 50%{transform:translateY(-8px) rotate(2deg)} }
+    .modal-logo-name { font-family:'Nunito',sans-serif; font-weight:900; font-size:1.1rem; color:var(--cian); letter-spacing:1px; }
+    .modal-logo-sub  { font-size:.72rem; color:rgba(255,255,255,.5); text-transform:uppercase; letter-spacing:2px; }
+
+    .modal-title { font-family:'Nunito',sans-serif; font-weight:900; color:var(--blanco); font-size:1.45rem; margin-bottom:.3rem; }
+    .modal-title span { color:var(--amarillo); }
+    .modal-text  { color:rgba(255,255,255,.65); font-size:.9rem; line-height:1.6; margin-bottom:1rem; }
+
     .modal-objetivos {
-      background:rgba(46,204,138,.08); border:1.5px solid rgba(46,204,138,.35);
-      border-radius:12px; padding:.9rem 1.1rem; margin-bottom:1.4rem; text-align:left;
+      background:rgba(108,60,225,.12); border:1px solid rgba(108,60,225,.4);
+      border-radius:14px; padding:.9rem 1.1rem; margin-bottom:1.3rem; text-align:left;
     }
     .modal-objetivos h4 {
-      font-family:'Nunito',sans-serif; font-weight:800; color:var(--azul-brillante);
-      font-size:.82rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:.55rem;
+      font-family:'Nunito',sans-serif; font-weight:800; color:var(--cian);
+      font-size:.78rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:.55rem;
     }
     .modal-objetivos ul { list-style:none; display:flex; flex-direction:column; gap:.4rem; }
-    .modal-objetivos li { font-size:.85rem; color:var(--texto); display:flex; align-items:flex-start; gap:.5rem; }
-    .modal-objetivos li::before { content:"✓"; color:var(--verde-neon); font-weight:900; font-size:.9rem; flex-shrink:0; }
-    .modal-divider { border:none; border-top:1px solid #e8e8e8; margin:.4rem 0 1.2rem; }
+    .modal-objetivos li { font-size:.83rem; color:rgba(255,255,255,.8); display:flex; align-items:flex-start; gap:.5rem; }
+    .modal-objetivos li::before { content:"▸"; color:var(--cian); font-weight:900; flex-shrink:0; }
+
+    .modal-divider { border:none; border-top:1px solid rgba(255,255,255,.08); margin:.4rem 0 1.1rem; }
     .modal-label {
       display:block; font-family:'Nunito',sans-serif; font-weight:700;
-      color:var(--azul-brillante); font-size:.82rem; text-transform:uppercase;
-      letter-spacing:.8px; margin-bottom:.5rem; text-align:left;
+      color:var(--cian); font-size:.78rem; text-transform:uppercase;
+      letter-spacing:1px; margin-bottom:.5rem; text-align:left;
     }
     .modal-input {
-      width:100%; padding:11px 15px; border:2px solid #e0e0e0; border-radius:12px;
-      font-family:'Open Sans',sans-serif; font-size:1rem;
-      outline:none; transition:border-color .3s, box-shadow .3s;
-      text-align:center; margin-bottom:.5rem; color:var(--texto);
+      width:100%; padding:12px 16px;
+      background:rgba(255,255,255,.06);
+      border:2px solid rgba(108,60,225,.5); border-radius:12px;
+      font-family:'Space Grotesk',sans-serif; font-size:1rem;
+      color:var(--blanco); outline:none;
+      transition:border-color .3s, box-shadow .3s, background .3s;
+      text-align:center; margin-bottom:.5rem;
     }
-    .modal-input:focus { border-color:var(--verde-neon); box-shadow:0 0 0 3px rgba(46,204,138,.15); }
+    .modal-input::placeholder { color:rgba(255,255,255,.3); }
+    .modal-input:focus { border-color:var(--cian); background:rgba(0,212,255,.06); box-shadow:0 0 0 3px rgba(0,212,255,.15); }
     .modal-input.error { border-color:var(--rojo); animation:sacudir .3s ease; }
-    @keyframes sacudir { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
-    .modal-hint { font-size:.75rem; color:#999; margin-bottom:1rem; text-align:left; }
+    @keyframes sacudir { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-7px)} 75%{transform:translateX(7px)} }
+    .modal-hint { font-size:.73rem; color:rgba(255,255,255,.4); margin-bottom:1rem; text-align:left; }
     .modal-btn {
-      background:var(--verde-neon); color:var(--azul-oscuro);
-      font-family:'Nunito',sans-serif; font-weight:800; font-size:1.05rem;
-      padding:12px 30px; border:none; border-radius:30px;
-      cursor:pointer; width:100%;
-      transition:transform .2s, box-shadow .2s, background .2s;
+      background:linear-gradient(135deg,var(--purp),var(--cian));
+      color:var(--blanco); font-family:'Nunito',sans-serif; font-weight:900;
+      font-size:1.05rem; padding:13px 30px; border:none; border-radius:30px;
+      cursor:pointer; width:100%; position:relative; overflow:hidden;
+      transition:transform .2s, box-shadow .2s;
+      box-shadow:0 6px 20px rgba(108,60,225,.45);
     }
-    .modal-btn:hover { background:var(--verde-hover); transform:translateY(-2px); box-shadow:0 6px 18px rgba(46,204,138,.4); }
-    /* Spinner envío */
-    .modal-sending { font-size:.82rem; color:var(--azul-brillante); margin-top:.6rem; display:none; }
+    .modal-btn:hover { transform:translateY(-2px); box-shadow:0 10px 28px rgba(0,212,255,.4); }
+    .modal-sending { font-size:.78rem; color:var(--cian); margin-top:.6rem; display:none; }
     .modal-sending.visible { display:block; }
 
     /* ── NAVBAR ── */
     .navbar {
       position:fixed; top:0; left:0; width:100%; z-index:1000;
-      background:linear-gradient(90deg,var(--azul-oscuro) 0%,var(--azul-brillante) 100%);
-      display:flex; align-items:center; justify-content:center; gap:2rem;
-      padding:0 1.5rem; height:66px;
-      box-shadow:0 4px 15px rgba(0,0,0,.25);
-      border-bottom:3px solid var(--verde-neon);
+      background:rgba(15,11,30,.93);
+      backdrop-filter:blur(12px);
+      display:flex; align-items:center; justify-content:center; gap:1.5rem;
+      padding:0 1.5rem; height:64px;
+      border-bottom:1px solid rgba(108,60,225,.35);
+      box-shadow:0 4px 24px rgba(108,60,225,.2);
     }
-    .nav-top { display:flex; align-items:center; gap:1.2rem; flex-shrink:0; }
-    .nav-brand {
-      display:flex; flex-direction:column; justify-content:center;
-      cursor:pointer; text-decoration:none;
-      transition:transform .3s cubic-bezier(.175,.885,.32,1.275);
+    .nav-top { display:flex; align-items:center; gap:1rem; flex-shrink:0; }
+    .nav-brand { display:flex; align-items:center; gap:.7rem; cursor:pointer; text-decoration:none; transition:transform .3s; }
+    .nav-brand:hover { transform:scale(1.05); }
+    .nav-brand-icon {
+      width:40px; height:40px; border-radius:12px;
+      background:linear-gradient(135deg,var(--purp),var(--cian));
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Nunito',sans-serif; font-weight:900; font-size:1.2rem; color:var(--blanco);
+      box-shadow:0 4px 12px rgba(108,60,225,.5); flex-shrink:0;
     }
-    .nav-brand:hover { transform:scale(1.05) rotate(-1deg); }
-    .nav-logo { font-family:'Nunito',sans-serif; font-weight:900; color:var(--blanco); font-size:1.25rem; line-height:1; }
-    .nav-logo span { color:var(--amarillo); }
-    .nav-sub {
-      display:inline-block; background:var(--naranja-vibrante); color:var(--blanco);
-      font-family:'Nunito',sans-serif; font-weight:800; font-size:.62rem;
-      letter-spacing:1px; padding:2px 7px; border-radius:10px; margin-top:3px; text-transform:uppercase;
+    .nav-brand-text { display:flex; flex-direction:column; line-height:1.1; }
+    .nav-brand-name { font-family:'Nunito',sans-serif; font-weight:900; color:var(--blanco); font-size:1.05rem; }
+    .nav-brand-name span { color:var(--cian); }
+    .nav-brand-sub {
+      font-family:'Nunito',sans-serif; font-weight:700; font-size:.6rem;
+      letter-spacing:1.5px; text-transform:uppercase;
+      color:var(--amarillo); background:rgba(255,233,77,.12);
+      border:1px solid rgba(255,233,77,.3);
+      padding:1px 7px; border-radius:8px; margin-top:2px; display:inline-block;
     }
     .nav-progreso {
       display:none; align-items:center; gap:.6rem;
-      background:rgba(255,255,255,.08); border:1.5px solid rgba(255,255,255,.15);
+      background:rgba(108,60,225,.15); border:1px solid rgba(108,60,225,.4);
       border-radius:20px; padding:4px 12px;
     }
-    .nav-progreso-label { font-family:'Nunito',sans-serif; font-weight:700; color:rgba(255,255,255,.7); font-size:.72rem; white-space:nowrap; }
-    .nav-progreso-bar { width:80px; height:6px; background:rgba(255,255,255,.15); border-radius:10px; overflow:hidden; }
-    .nav-progreso-fill { height:100%; background:var(--verde-neon); border-radius:10px; transition:width .5s ease; width:0%; }
+    .nav-progreso-label { font-family:'Nunito',sans-serif; font-weight:700; color:rgba(255,255,255,.6); font-size:.7rem; white-space:nowrap; }
+    .nav-progreso-bar { width:80px; height:5px; background:rgba(255,255,255,.1); border-radius:10px; overflow:hidden; }
+    .nav-progreso-fill { height:100%; background:linear-gradient(90deg,var(--purp),var(--cian)); border-radius:10px; transition:width .5s ease; width:0%; }
     .nav-puntos {
       display:none; align-items:center; gap:5px;
-      background:rgba(255,255,255,.1); border:2px solid var(--verde-neon);
-      color:var(--blanco); font-family:'Nunito',sans-serif; font-weight:800;
+      background:rgba(255,233,77,.1); border:2px solid rgba(255,233,77,.4);
+      color:var(--amarillo); font-family:'Nunito',sans-serif; font-weight:800;
       padding:4px 12px; border-radius:20px; font-size:.85rem;
-      box-shadow:0 0 10px rgba(46,204,138,.3);
-      transition:transform .3s, box-shadow .3s; white-space:nowrap;
+      box-shadow:0 0 12px rgba(255,233,77,.2); transition:transform .3s, box-shadow .3s; white-space:nowrap;
     }
-    .nav-links {
-      display:flex; gap:.5rem; list-style:none;
-      overflow-x:auto; white-space:nowrap; scrollbar-width:none;
-      margin-left:0; padding-left:0; justify-content:center;
-    }
+    .nav-links { display:flex; gap:.4rem; list-style:none; overflow-x:auto; white-space:nowrap; scrollbar-width:none; justify-content:center; }
     .nav-links::-webkit-scrollbar { display:none; }
     .nav-links a {
-      display:flex; align-items:center; gap:.4rem;
+      display:flex; align-items:center; gap:.35rem;
       font-family:'Nunito',sans-serif; font-weight:700;
-      color:var(--blanco); padding:.4rem .9rem; border-radius:22px; font-size:.88rem;
+      color:rgba(255,255,255,.65); padding:.38rem .9rem;
+      border-radius:20px; font-size:.84rem;
       cursor:pointer; text-decoration:none;
-      background:rgba(255,255,255,.08); border:1.5px solid rgba(255,255,255,.1);
-      transition:background .25s, transform .2s, box-shadow .2s; position:relative;
+      background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08);
+      transition:all .22s; position:relative;
     }
-    .nav-links a:hover { background:rgba(255,255,255,.18); transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,.2); }
-    .nav-links a.active {
-      background:var(--verde-neon); color:var(--azul-oscuro); border-color:var(--verde-neon);
-      box-shadow:0 0 14px rgba(46,204,138,.55); transform:translateY(-2px);
-    }
-    .nav-links a .nav-check { font-size:.65rem; opacity:.8; }
-    .nav-icon { font-size:1rem; }
+    .nav-links a:hover { color:var(--blanco); background:rgba(108,60,225,.25); border-color:rgba(108,60,225,.5); transform:translateY(-2px); box-shadow:0 4px 12px rgba(108,60,225,.3); }
+    .nav-links a.active { background:linear-gradient(135deg,var(--purp),var(--cian)); color:var(--blanco); border-color:transparent; box-shadow:0 4px 16px rgba(108,60,225,.5); transform:translateY(-2px); }
+    .nav-links a .nav-check { font-size:.65rem; opacity:.85; }
+    .nav-icon { font-size:.95rem; }
 
     /* ── PÁGINAS / IFRAMES ── */
     .page { display:none; }
-    .page.active { display:block; animation:entradaPage .45s cubic-bezier(.16,1,.3,1); }
-    @keyframes entradaPage { from{opacity:0;transform:translateY(12px) scale(.99)} to{opacity:1;transform:translateY(0) scale(1)} }
-    .iframe-container { position:fixed; top:66px; bottom:44px; left:0; right:0; background:var(--fondo); }
+    .page.active { display:block; animation:entradaPage .4s cubic-bezier(.16,1,.3,1); }
+    @keyframes entradaPage { from{opacity:0;transform:translateY(14px) scale(.99)} to{opacity:1;transform:translateY(0) scale(1)} }
+    .iframe-container { position:fixed; top:64px; bottom:42px; left:0; right:0; background:var(--fondo); }
     .iframe-container iframe { width:100%; height:100%; border:none; display:block; }
 
     /* ── FOOTER ── */
     footer {
       position:fixed; bottom:0; left:0; width:100%; z-index:1000;
-      background:var(--azul-oscuro); height:44px;
-      display:flex; align-items:center; justify-content:space-between;
-      padding:0 max(1.2rem, calc(50vw - 550px));
-      border-top:1px solid rgba(255,255,255,.08);
-      font-family:'Nunito',sans-serif; font-size:.82rem;
+      background:rgba(15,11,30,.96);
+      border-top:1px solid rgba(108,60,225,.3);
+      height:42px; display:flex; align-items:center; justify-content:space-between;
+      padding:0 max(1rem, calc(50vw - 560px));
+      font-family:'Nunito',sans-serif; font-size:.8rem;
     }
-    .footer-saludo { color:rgba(255,255,255,.75); display:flex; align-items:center; gap:.4rem; }
-    .footer-saludo strong { color:var(--verde-neon); }
-    .footer-ruta { color:rgba(255,255,255,.45); font-size:.75rem; display:flex; align-items:center; gap:.5rem; }
-    .footer-ruta span { padding:2px 8px; border-radius:10px; background:rgba(255,255,255,.06); cursor:pointer; transition:color .2s, background .2s; }
-    .footer-ruta span:hover { color:var(--verde-neon); background:rgba(46,204,138,.1); }
-    .footer-ruta span.f-active { color:var(--verde-neon); }
-    .footer-diseno { color:rgba(255,255,255,.7); font-size:.78rem; display:flex; align-items:center; gap:.3rem; margin-left:1rem; border-left:1px solid rgba(255,255,255,.15); padding-left:1rem; }
-    .footer-reset {
-      color:var(--rojo); font-size:.72rem; cursor:pointer;
-      padding:2px 7px; border-radius:8px; font-weight:700;
-      background:none; border:none; font-family:'Nunito',sans-serif;
-      transition:background .2s;
-    }
-    .footer-reset:hover { background:rgba(231,76,60,.12); }
-    .footer-brand { color:var(--verde-neon); font-weight:800; cursor:pointer; text-decoration:none; transition:text-shadow .2s; }
-    .footer-brand:hover { text-shadow:0 0 8px rgba(46,204,138,.6); }
+    .footer-saludo { color:rgba(255,255,255,.6); display:flex; align-items:center; gap:.4rem; }
+    .footer-saludo strong { color:var(--cian); }
+    .footer-ruta { color:rgba(255,255,255,.35); font-size:.73rem; display:flex; align-items:center; gap:.45rem; }
+    .footer-ruta span { padding:2px 8px; border-radius:8px; background:rgba(255,255,255,.04); cursor:pointer; transition:color .2s, background .2s; }
+    .footer-ruta span:hover { color:var(--cian); background:rgba(0,212,255,.08); }
+    .footer-ruta span.f-active { color:var(--cian); background:rgba(0,212,255,.1); }
+    .footer-diseno { color:rgba(255,255,255,.5); font-size:.74rem; display:flex; align-items:center; gap:.3rem; margin-left:.8rem; border-left:1px solid rgba(255,255,255,.1); padding-left:.8rem; }
+    .footer-reset { color:var(--rojo); font-size:.7rem; cursor:pointer; padding:2px 7px; border-radius:8px; font-weight:700; background:none; border:none; font-family:'Nunito',sans-serif; transition:background .2s; }
+    .footer-reset:hover { background:rgba(255,77,109,.12); }
+    .footer-brand { color:var(--purp); font-weight:800; cursor:pointer; text-decoration:none; transition:color .2s; }
+    .footer-brand:hover { color:var(--cian); }
 
     /* ── TOAST ── */
     .toast {
-      position:fixed; bottom:58px; right:16px;
-      background:var(--azul-oscuro); border:2px solid var(--verde-neon);
-      color:var(--blanco); font-family:'Nunito',sans-serif; font-weight:700; font-size:.88rem;
-      padding:9px 18px; border-radius:30px; box-shadow:0 4px 18px rgba(0,0,0,.25);
+      position:fixed; bottom:55px; right:16px;
+      background:var(--fondo2); border:1.5px solid var(--purp);
+      color:var(--blanco); font-family:'Nunito',sans-serif; font-weight:700; font-size:.86rem;
+      padding:9px 18px; border-radius:30px; box-shadow:0 4px 18px rgba(108,60,225,.35);
       opacity:0; transform:translateY(10px); transition:opacity .3s, transform .3s;
       z-index:9998; pointer-events:none;
     }
@@ -190,61 +229,65 @@
 
     /* ── BADGE SHEETS ── */
     .sheets-badge {
-      position:fixed; top:74px; right:12px; z-index:990;
-      background:rgba(18,40,76,.92); border:1.5px solid var(--verde-neon);
-      color:var(--blanco); font-family:'Nunito',sans-serif; font-weight:700; font-size:.72rem;
+      position:fixed; top:72px; right:12px; z-index:990;
+      background:rgba(15,11,30,.96); border:1.5px solid var(--verde);
+      color:var(--blanco); font-family:'Nunito',sans-serif; font-weight:700; font-size:.7rem;
       padding:5px 12px; border-radius:20px;
       display:none; align-items:center; gap:.4rem;
-      box-shadow:0 4px 12px rgba(0,0,0,.2);
-      animation:fadeSlide .4s ease;
+      box-shadow:0 4px 14px rgba(0,0,0,.3);
     }
-    .sheets-badge.visible { display:flex; }
+    .sheets-badge.visible { display:flex; animation:fadeSlide .4s ease; }
     @keyframes fadeSlide { from{opacity:0;transform:translateX(20px)} to{opacity:1;transform:translateX(0)} }
-    .sheets-dot { width:8px; height:8px; border-radius:50%; background:var(--verde-neon); animation:pulse 1.4s infinite; }
+    .sheets-dot { width:7px; height:7px; border-radius:50%; background:var(--verde); animation:pulse 1.4s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
 
     /* ── RESPONSIVE ── */
     @media (max-width:768px) {
-      .navbar { flex-direction:column; height:auto; padding:10px 14px 8px; gap:8px; align-items:stretch; }
+      .navbar { flex-direction:column; height:auto; padding:10px 12px 8px; gap:7px; align-items:stretch; }
       .nav-top { width:100%; justify-content:space-between; }
       .nav-progreso { display:none !important; }
       .nav-links { width:100%; justify-content:flex-start; padding-bottom:3px; -webkit-overflow-scrolling:touch; }
-      .iframe-container { top:112px; }
-      .footer-ruta { display:none; }
-      .footer-diseno { display:none; }
+      .iframe-container { top:110px; }
+      .footer-ruta, .footer-diseno { display:none; }
     }
   </style>
 </head>
 <body>
 
+<!-- ══ ESTRELLAS ══ -->
+<div id="stars" aria-hidden="true"></div>
+
 <!-- ══ MODAL BIENVENIDA ══ -->
 <div class="modal-overlay" id="welcomeModal" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
   <div class="modal-content">
-    <div class="modal-icon" aria-hidden="true">🔢</div>
-    <h2 class="modal-title" id="modalTitulo">¡Bienvenido al módulo!</h2>
-    <p class="modal-text">Vas a explorar el mundo de los <strong>Números Enteros · Grado 6°</strong>.</p>
-
+    <div class="modal-logo">
+      <div class="modal-logo-icon">ℤ</div>
+      <div class="modal-logo-name">Enteros &middot; Misión ℤ</div>
+      <div class="modal-logo-sub">Eduquémonos con TICs &middot; Grado 6° &amp; 7°</div>
+    </div>
+    <h2 class="modal-title" id="modalTitulo">¡Bienvenido, <span>explorador</span>!</h2>
+    <p class="modal-text">Vas a dominar los <strong style="color:var(--cian)">Números Enteros</strong>.
+      Completa las misiones, gana puntos y demuestra lo que sabes. 🚀</p>
     <div class="modal-objetivos" role="region" aria-label="Objetivos de aprendizaje">
-      <h4>Al finalizar podrás:</h4>
+      <h4>🎯 Misiones del módulo</h4>
       <ul>
-        <li>Identificar y clasificar los números enteros en ℤ</li>
+        <li>Identificar y clasificar los enteros en ℤ</li>
         <li>Ubicarlos en la recta numérica y compararlos</li>
-        <li>Sumar y restar enteros usando la ley de signos</li>
-        <li>Aplicarlos en situaciones reales: temperatura, finanzas, altitud</li>
+        <li>Sumar y restar con la ley de signos</li>
+        <li>Aplicarlos en temperaturas, finanzas y altitudes</li>
       </ul>
     </div>
-
     <hr class="modal-divider"/>
-    <label class="modal-label" for="playerName">¿Cómo te llamas o cuál es tu apodo?</label>
+    <label class="modal-label" for="playerName">👾 ¿Cuál es tu nombre, jugador?</label>
     <input type="text" id="playerName" class="modal-input"
            placeholder="Escribe tu nombre aquí..."
            autocomplete="off" maxlength="30"
            aria-required="true" aria-describedby="modalHint"/>
-    <p id="modalHint" class="modal-hint">📋 Tu nombre se registrará para el seguimiento del docente.</p>
+    <p id="modalHint" class="modal-hint">📋 Tu nombre y progreso se registran para el seguimiento del docente.</p>
     <button class="modal-btn" id="modalBtnStart" aria-label="Iniciar módulo">
-      ¡Empezar a aprender! 🚀
+      ⚡ ¡Iniciar Misión ℤ!
     </button>
-    <div class="modal-sending" id="modalSending">📤 Registrando en el sistema...</div>
+    <div class="modal-sending" id="modalSending">📤 Registrando en el sistema del docente...</div>
   </div>
 </div>
 
@@ -253,18 +296,22 @@
   <div class="nav-top">
     <a class="nav-brand" role="button" tabindex="0" aria-label="Ir al inicio"
        onclick="showPage('inicio')" onkeydown="if(event.key==='Enter')showPage('inicio')">
-      <div class="nav-logo">ℤ <span>Enteros</span></div>
-      <div class="nav-sub">Grado 6° | Eduquémonos con TICs</div>
+      <div class="nav-brand-icon">ℤ</div>
+      <div class="nav-brand-text">
+        <span class="nav-brand-name">Enteros <span>&middot; Misión ℤ</span></span>
+        <span class="nav-brand-sub">Grado 6° &amp; 7° &middot; EduTics</span>
+      </div>
     </a>
     <div class="nav-progreso" id="nav-progreso-wrap" aria-label="Progreso del módulo">
       <span class="nav-progreso-label" id="nav-progreso-label">0 de 4</span>
-      <div class="nav-progreso-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="nav-progreso-bar-aria">
+      <div class="nav-progreso-bar" role="progressbar"
+           aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="nav-progreso-bar-aria">
         <div class="nav-progreso-fill" id="nav-progreso-fill"></div>
       </div>
     </div>
     <div id="nav-puntos-globales" class="nav-puntos" aria-live="polite" aria-atomic="true">
-      <span aria-hidden="true">⭐</span>
-      <span id="nav-puntos-numero">0</span> pts
+      <span aria-hidden="true">⚡</span>
+      <span id="nav-puntos-numero">0</span> xp
     </div>
   </div>
 
@@ -310,27 +357,27 @@
 
 <!-- ══ PÁGINAS (iframes) ══ -->
 <main>
-  <div id="page-inicio" class="page active" aria-label="Página de inicio">
+  <div id="page-inicio"        class="page active" aria-label="Inicio">
     <div class="iframe-container">
       <iframe src="./inicio_numeros_enteros.html" title="Inicio – Los Números Enteros" loading="eager"></iframe>
     </div>
   </div>
-  <div id="page-teoria" class="page" aria-label="Teoría">
+  <div id="page-teoria"        class="page" aria-label="Teoría">
     <div class="iframe-container">
       <iframe src="./teoria-2-2.html" title="Teoría – Números Enteros" loading="lazy"></iframe>
     </div>
   </div>
-  <div id="page-practica" class="page" aria-label="Práctica">
+  <div id="page-practica"      class="page" aria-label="Práctica">
     <div class="iframe-container">
       <iframe src="./practica-3.html" title="Práctica – Actividades interactivas" loading="lazy"></iframe>
     </div>
   </div>
-  <div id="page-evaluacion" class="page" aria-label="Evaluación">
+  <div id="page-evaluacion"    class="page" aria-label="Evaluación">
     <div class="iframe-container">
       <iframe src="./evaluacion.html" title="Evaluación – Quiz cronometrado" loading="lazy"></iframe>
     </div>
   </div>
-  <div id="page-recursos" class="page" aria-label="Recursos externos">
+  <div id="page-recursos"      class="page" aria-label="Recursos externos">
     <div class="iframe-container">
       <iframe src="./recursos.html" title="Recursos – Material complementario" loading="lazy"></iframe>
     </div>
@@ -345,17 +392,18 @@
 <!-- ══ FOOTER ══ -->
 <footer id="mainFooter" role="contentinfo">
   <div class="footer-saludo" id="footer-saludo">
-    <span>💻</span>
-    <button class="footer-reset" onclick="resetearPerfil()" title="Cambiar de usuario" aria-label="Cambiar usuario y borrar progreso">✕ Reset</button>
+    <span>🚀</span>
+    <button class="footer-reset" onclick="resetearPerfil()"
+            title="Cambiar de usuario" aria-label="Cambiar usuario y borrar progreso">✕ Reset</button>
   </div>
   <div style="display:flex;align-items:center;">
     <div class="footer-ruta" id="footer-ruta" role="navigation" aria-label="Ruta de aprendizaje">
       <span onclick="showPage('teoria')"     data-page="teoria">🧠 Teoría</span>
-      <span style="color:rgba(255,255,255,.2)">›</span>
+      <span style="color:rgba(255,255,255,.15)">›</span>
       <span onclick="showPage('practica')"   data-page="practica">🎮 Práctica</span>
-      <span style="color:rgba(255,255,255,.2)">›</span>
+      <span style="color:rgba(255,255,255,.15)">›</span>
       <span onclick="showPage('evaluacion')" data-page="evaluacion">🏆 Evaluación</span>
-      <span style="color:rgba(255,255,255,.2)">›</span>
+      <span style="color:rgba(255,255,255,.15)">›</span>
       <span onclick="showPage('recursos')"   data-page="recursos">🎒 Recursos</span>
     </div>
     <div class="footer-diseno">
@@ -368,7 +416,7 @@
   </div>
 </footer>
 
-<!-- Badge registro Sheets -->
+<!-- Badge Sheets -->
 <div class="sheets-badge" id="sheetsBadge">
   <div class="sheets-dot"></div>
   <span id="sheetsBadgeMsg">Registrado ✓</span>
@@ -377,64 +425,60 @@
 <!-- Toast -->
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<!-- ══════════════════════════════════════
-     SCRIPTS
-══════════════════════════════════════ -->
 <script>
-/* ─────────────────────────────────────────────────────────
-   CONFIGURACIÓN GOOGLE SHEETS
-   URL del Apps Script Web App
-───────────────────────────────────────────────────────── */
+/* ─── GOOGLE SHEETS ─────────────────────────────────────── */
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzFLDi-logDRIt2Vy7hltzioTv-qZCofm3YFlDKO78cu8nAvSGuuLfY8WTONl9FNERt/exec';
 
-/**
- * Envía datos al Google Sheet vía fetch (no-cors para evitar bloqueo CORS de Apps Script).
- * tipo: 'registro' | 'evaluacion' | 'progreso'
- */
 function enviarASheets(tipo, datos) {
   const now = new Date();
   const payload = Object.assign({
-    tipo:      tipo,
-    fecha:     now.toLocaleDateString('es-CO'),
-    hora:      now.toLocaleTimeString('es-CO', {hour:'2-digit', minute:'2-digit'}),
-    timestamp: now.toISOString(),
+    tipo,
+    fecha:       now.toLocaleDateString('es-CO'),
+    hora:        now.toLocaleTimeString('es-CO', {hour:'2-digit', minute:'2-digit'}),
+    timestamp:   now.toISOString(),
     dispositivo: /Mobi|Android/i.test(navigator.userAgent) ? 'Móvil' : 'Escritorio'
   }, datos);
-
-  // fetch con no-cors (Apps Script lo acepta; no podemos leer la respuesta pero el dato llega)
   fetch(SHEETS_URL, {
-    method:  'POST',
-    mode:    'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body:    JSON.stringify(payload)
+    method: 'POST', mode: 'no-cors',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(payload)
   }).then(() => {
     mostrarSheetsBadge(
       tipo === 'evaluacion'
-        ? `📊 Nota ${datos.nota_evaluacion}/10 registrada en Sheets`
-        : '📋 Registro guardado en Sheets'
+        ? `📊 Nota ${datos.nota_evaluacion}/10 registrada`
+        : '📋 Registro guardado ✓'
     );
-  }).catch(() => {
-    // Silencioso: no interrumpe la experiencia del estudiante
-    console.warn('[Sheets] No se pudo enviar:', payload);
-  });
+  }).catch(() => console.warn('[Sheets] Sin conexión:', payload));
 }
 
 function mostrarSheetsBadge(msg) {
-  const badge = document.getElementById('sheetsBadge');
+  const b = document.getElementById('sheetsBadge');
   document.getElementById('sheetsBadgeMsg').textContent = msg;
-  badge.classList.add('visible');
-  clearTimeout(badge._t);
-  badge._t = setTimeout(() => badge.classList.remove('visible'), 4000);
+  b.classList.add('visible');
+  clearTimeout(b._t);
+  b._t = setTimeout(() => b.classList.remove('visible'), 4000);
 }
 
-/* ─────────────────────────────────────────────────────────
-   UTILIDADES localStorage
-───────────────────────────────────────────────────────── */
-const SK = { estudiante: 'edu_estudiante', progreso: 'edu_progreso' };
+/* ─── ESTRELLAS DE FONDO ────────────────────────────────── */
+(function() {
+  const c = document.getElementById('stars');
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement('span');
+    const sz = Math.random() * 2.5 + 1;
+    s.style.cssText =
+      `width:${sz}px;height:${sz}px;` +
+      `left:${Math.random()*100}%;top:${Math.random()*100}%;` +
+      `animation-duration:${(Math.random()*4+2).toFixed(1)}s;` +
+      `animation-delay:${(Math.random()*5).toFixed(1)}s;`;
+    c.appendChild(s);
+  }
+})();
 
-function leerLS(k)    { try { return localStorage.getItem(k); }    catch(e) { return null; } }
-function escribirLS(k,v){ try { localStorage.setItem(k,v); return true; } catch(e) { return false; } }
-function borrarLS(k)  { try { localStorage.removeItem(k); }        catch(e) {} }
+/* ─── UTILIDADES localStorage ───────────────────────────── */
+const SK = { estudiante: 'edu_estudiante', progreso: 'edu_progreso' };
+function leerLS(k)       { try { return localStorage.getItem(k); }    catch(e) { return null; } }
+function escribirLS(k,v) { try { localStorage.setItem(k,v); return true; } catch(e) { return false; } }
+function borrarLS(k)     { try { localStorage.removeItem(k); }        catch(e) {} }
 
 function mostrarToast(msg, dur=2800) {
   const t = document.getElementById('toast');
@@ -444,15 +488,13 @@ function mostrarToast(msg, dur=2800) {
   t._timer = setTimeout(() => t.classList.remove('visible'), dur);
 }
 
-/* ─────────────────────────────────────────────────────────
-   MODAL DE BIENVENIDA
-───────────────────────────────────────────────────────── */
+/* ─── MODAL DE BIENVENIDA ───────────────────────────────── */
 function iniciarEstudiante() {
   const nombre = leerLS(SK.estudiante);
   if (!nombre) {
-    const modal = document.getElementById('welcomeModal');
-    modal.style.display = 'flex';
-    requestAnimationFrame(() => modal.classList.add('show'));
+    const m = document.getElementById('welcomeModal');
+    m.style.display = 'flex';
+    requestAnimationFrame(() => m.classList.add('show'));
     setTimeout(() => document.getElementById('playerName').focus(), 450);
   } else {
     actualizarUIEstudiante(nombre);
@@ -463,70 +505,49 @@ document.addEventListener('DOMContentLoaded', () => {
   iniciarEstudiante();
   actualizarPuntosNav();
   actualizarProgresoNav();
-
-  const input = document.getElementById('playerName');
-  input.addEventListener('keydown', e => { if (e.key === 'Enter') guardarNombre(); });
-  document.getElementById('modalBtnStart').addEventListener('click', guardarNombre);
+  document.getElementById('playerName')
+    .addEventListener('keydown', e => { if (e.key === 'Enter') guardarNombre(); });
+  document.getElementById('modalBtnStart')
+    .addEventListener('click', guardarNombre);
 });
 
 function guardarNombre() {
   const input  = document.getElementById('playerName');
   const nombre = input.value.trim();
-
   if (!nombre) {
     input.classList.add('error');
     setTimeout(() => input.classList.remove('error'), 400);
-    input.focus();
-    return;
+    input.focus(); return;
   }
-
-  // Guardar en localStorage
   escribirLS(SK.estudiante, nombre);
   escribirLS(SK.progreso, JSON.stringify({
-    teoriaVista:        false,
-    practicaPuntaje:    0,
-    evaluacionAprobada: false,
-    ultimaNota:         null,
-    seccionesVisitadas: []
+    teoriaVista: false, practicaPuntaje: 0,
+    evaluacionAprobada: false, ultimaNota: null, seccionesVisitadas: []
   }));
-
-  // ── Enviar REGISTRO INICIAL a Google Sheets ──
   document.getElementById('modalSending').classList.add('visible');
   enviarASheets('registro', {
-    nombre:              nombre,
-    puntos_practica:     0,
-    nota_evaluacion:     '',
-    aprobado:            '',
-    secciones_visitadas: '',
-    evento:              'Inicio de módulo'
+    nombre, puntos_practica: 0,
+    nota_evaluacion: '', aprobado: '',
+    secciones_visitadas: '', evento: 'Inicio de módulo'
   });
-
-  // Cerrar modal
-  const modal = document.getElementById('welcomeModal');
-  modal.style.opacity = '0';
+  const m = document.getElementById('welcomeModal');
+  m.style.opacity = '0';
   setTimeout(() => {
-    modal.style.display = 'none';
-    modal.classList.remove('show');
+    m.style.display = 'none'; m.classList.remove('show');
     document.getElementById('modalSending').classList.remove('visible');
   }, 400);
-
   actualizarUIEstudiante(nombre);
-  actualizarPuntosNav();
-  actualizarProgresoNav();
-  mostrarToast(`¡Hola, ${nombre}! Empieza por la Teoría 🧠`);
-
-  // Reload iframe inicio para que recoja el nombre
+  actualizarPuntosNav(); actualizarProgresoNav();
+  mostrarToast(`⚡ ¡Misión iniciada, ${nombre}! Empieza por la Teoría 🧠`);
   const iframeInicio = document.querySelector('#page-inicio iframe');
   if (iframeInicio) iframeInicio.src = iframeInicio.src;
 }
 
 function actualizarUIEstudiante(nombre) {
-  const saludo = document.getElementById('footer-saludo');
-  saludo.innerHTML = `
-    <span>👋 Hola, <strong>${nombre}</strong> · Sigue tu ruta:</span>
-    <button class="footer-reset" onclick="resetearPerfil()"
-            title="Cambiar de usuario" aria-label="Cambiar usuario y borrar progreso">✕ Reset</button>
-  `;
+  document.getElementById('footer-saludo').innerHTML =
+    `<span>🚀 <strong>${nombre}</strong> · Sigue tu ruta:</span>
+     <button class="footer-reset" onclick="resetearPerfil()"
+       title="Cambiar usuario" aria-label="Cambiar usuario y borrar progreso">✕ Reset</button>`;
   document.getElementById('nav-progreso-wrap').style.display  = 'flex';
   document.getElementById('nav-puntos-globales').style.display = 'flex';
 }
@@ -534,84 +555,57 @@ function actualizarUIEstudiante(nombre) {
 function resetearPerfil() {
   const raw    = leerLS(SK.progreso);
   const nombre = leerLS(SK.estudiante) || 'Estudiante';
-  let tieneProgreso = false;
-  try {
-    const p = JSON.parse(raw);
-    tieneProgreso = (p.practicaPuntaje > 0) || (p.seccionesVisitadas && p.seccionesVisitadas.length > 0);
-  } catch(e) {}
-
-  const msg = tieneProgreso
-    ? `⚠️ Tienes ${JSON.parse(raw||'{}').practicaPuntaje||0} puntos y ${JSON.parse(raw||'{}').seccionesVisitadas?.length||0} secciones visitadas.\n\n¿Seguro que quieres borrar TODO el progreso de "${nombre}"?`
-    : `¿Seguro que quieres cambiar de usuario?`;
-
-  if (confirm(msg)) {
-    borrarLS(SK.estudiante);
-    borrarLS(SK.progreso);
-    location.reload();
-  }
+  let pts = 0, secc = 0;
+  try { const p = JSON.parse(raw); pts = p.practicaPuntaje||0; secc = (p.seccionesVisitadas||[]).length; } catch(e) {}
+  const msg = (pts > 0 || secc > 0)
+    ? `⚠️ Tienes ${pts} XP y ${secc} sección(es) visitada(s).\n¿Borrar TODO el progreso de "${nombre}"?`
+    : `¿Cambiar de usuario?`;
+  if (confirm(msg)) { borrarLS(SK.estudiante); borrarLS(SK.progreso); location.reload(); }
 }
 
-/* ─────────────────────────────────────────────────────────
-   PUNTOS EN NAVBAR
-───────────────────────────────────────────────────────── */
+/* ─── PUNTOS NAVBAR ─────────────────────────────────────── */
 function actualizarPuntosNav() {
-  const raw = leerLS(SK.progreso);
-  if (!raw) return;
+  const raw = leerLS(SK.progreso); if (!raw) return;
   try {
-    const p   = JSON.parse(raw);
-    const pts = p.practicaPuntaje || 0;
-    const el  = document.getElementById('nav-puntos-numero');
-    if (el) el.textContent = pts;
+    const p = JSON.parse(raw);
+    const el = document.getElementById('nav-puntos-numero');
+    if (el) el.textContent = p.practicaPuntaje || 0;
     const wrap = document.getElementById('nav-puntos-globales');
     if (wrap) {
-      wrap.style.transform = 'scale(1.15)';
-      wrap.style.boxShadow = '0 0 22px rgba(46,204,138,.8)';
-      setTimeout(() => {
-        wrap.style.transform = 'scale(1)';
-        wrap.style.boxShadow = '0 0 10px rgba(46,204,138,.3)';
-      }, 420);
+      wrap.style.transform = 'scale(1.18)';
+      wrap.style.boxShadow = '0 0 20px rgba(255,233,77,.6)';
+      setTimeout(() => { wrap.style.transform = 'scale(1)'; wrap.style.boxShadow = ''; }, 420);
     }
   } catch(e) {}
 }
 
-/* ─────────────────────────────────────────────────────────
-   BARRA DE PROGRESO DEL MÓDULO
-───────────────────────────────────────────────────────── */
+/* ─── PROGRESO NAVBAR ───────────────────────────────────── */
 const ETAPAS = ['teoria', 'practica', 'evaluacion', 'recursos'];
 
 function actualizarProgresoNav() {
-  const raw = leerLS(SK.progreso);
-  if (!raw) return;
+  const raw = leerLS(SK.progreso); if (!raw) return;
   try {
     const p        = JSON.parse(raw);
     const visitadas = p.seccionesVisitadas || [];
     const hechas   = ETAPAS.filter(e => visitadas.includes(e)).length;
-    const pct      = Math.round((hechas / ETAPAS.length) * 100);
-
-    const fill   = document.getElementById('nav-progreso-fill');
-    const label  = document.getElementById('nav-progreso-label');
-    const barAria = document.getElementById('nav-progreso-bar-aria');
-    if (fill)    fill.style.width = pct + '%';
-    if (label)   label.textContent = `${hechas} de ${ETAPAS.length}`;
-    if (barAria) barAria.setAttribute('aria-valuenow', pct);
-
+    const pct      = Math.round(hechas / ETAPAS.length * 100);
+    const fill  = document.getElementById('nav-progreso-fill');
+    const label = document.getElementById('nav-progreso-label');
+    const bar   = document.getElementById('nav-progreso-bar-aria');
+    if (fill)  fill.style.width = pct + '%';
+    if (label) label.textContent = `${hechas} de ${ETAPAS.length}`;
+    if (bar)   bar.setAttribute('aria-valuenow', pct);
     ETAPAS.forEach(etapa => {
-      const navEl = document.getElementById('nav-' + etapa);
-      if (!navEl) return;
-      const existeCheck = navEl.querySelector('.nav-check');
+      const el = document.getElementById('nav-' + etapa); if (!el) return;
+      const chk = el.querySelector('.nav-check');
       if (visitadas.includes(etapa)) {
-        if (!existeCheck) {
-          const check = document.createElement('span');
-          check.className = 'nav-check';
-          check.setAttribute('aria-hidden', 'true');
-          check.textContent = ' ✓';
-          navEl.appendChild(check);
+        if (!chk) {
+          const c = document.createElement('span');
+          c.className = 'nav-check'; c.setAttribute('aria-hidden','true'); c.textContent = ' ✓';
+          el.appendChild(c);
         }
-      } else if (existeCheck) {
-        existeCheck.remove();
-      }
+      } else if (chk) chk.remove();
     });
-
     document.querySelectorAll('.footer-ruta span[data-page]').forEach(el => {
       el.classList.toggle('f-active', visitadas.includes(el.dataset.page));
     });
@@ -619,8 +613,7 @@ function actualizarProgresoNav() {
 }
 
 function marcarSeccionVisitada(id) {
-  const raw = leerLS(SK.progreso);
-  if (!raw) return;
+  const raw = leerLS(SK.progreso); if (!raw) return;
   try {
     const p = JSON.parse(raw);
     if (!p.seccionesVisitadas) p.seccionesVisitadas = [];
@@ -632,113 +625,61 @@ function marcarSeccionVisitada(id) {
         p.practicaPuntaje = (p.practicaPuntaje || 0) + 5;
         escribirLS(SK.progreso, JSON.stringify(p));
         actualizarPuntosNav();
-        mostrarToast('¡+5 puntos por empezar la Teoría! 🧠');
+        mostrarToast('⚡ +5 XP por explorar la Teoría 🧠');
       }
     }
   } catch(e) {}
 }
 
-/* ─────────────────────────────────────────────────────────
-   ENVÍO DE PROGRESO COMPLETO A SHEETS
-   (se llama cuando hay un hito: nota de evaluación o
-    cuando se completan todas las secciones)
-───────────────────────────────────────────────────────── */
-function sincronizarProgresoSheets(extras) {
-  const nombre  = leerLS(SK.estudiante) || 'Anónimo';
-  const raw     = leerLS(SK.progreso);
-  try {
-    const p = raw ? JSON.parse(raw) : {};
-    enviarASheets('progreso', Object.assign({
-      nombre:              nombre,
-      puntos_practica:     p.practicaPuntaje  || 0,
-      nota_evaluacion:     p.ultimaNota        !== undefined ? p.ultimaNota : '',
-      aprobado:            p.evaluacionAprobada ? 'Sí' : 'No',
-      secciones_visitadas: (p.seccionesVisitadas || []).join(', ')
-    }, extras || {}));
-  } catch(e) {}
-}
-
-/* ─────────────────────────────────────────────────────────
-   NAVEGACIÓN
-───────────────────────────────────────────────────────── */
+/* ─── NAVEGACIÓN ────────────────────────────────────────── */
 let paginaActual = 'inicio';
 
 function showPage(id) {
   if (id === paginaActual) return;
   paginaActual = id;
-
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const pagina = document.getElementById('page-' + id);
   if (pagina) pagina.classList.add('active');
-
   document.querySelectorAll('.nav-links a').forEach(a => {
-    a.classList.remove('active');
-    a.removeAttribute('aria-current');
+    a.classList.remove('active'); a.removeAttribute('aria-current');
   });
   const navEl = document.getElementById('nav-' + id);
   if (navEl) {
-    navEl.classList.add('active');
-    navEl.setAttribute('aria-current', 'page');
+    navEl.classList.add('active'); navEl.setAttribute('aria-current','page');
     navEl.style.transform = 'scale(.9)';
     setTimeout(() => { navEl.style.transform = 'translateY(-2px)'; }, 130);
-    if (window.innerWidth < 768) {
+    if (window.innerWidth < 768)
       navEl.scrollIntoView({ behavior:'smooth', block:'nearest', inline:'center' });
-    }
   }
-
-  // Recarga de iframes en secciones críticas
   if (['evaluacion','practica'].includes(id)) {
     const iframe = document.querySelector('#page-' + id + ' iframe');
-    if (iframe && !iframe.dataset.cargado) {
-      iframe.src = iframe.src;
-      iframe.dataset.cargado = 1;
-    }
+    if (iframe && !iframe.dataset.cargado) { iframe.src = iframe.src; iframe.dataset.cargado = 1; }
   }
-
   marcarSeccionVisitada(id);
-
-  // Actualizar footer ruta
   document.querySelectorAll('.footer-ruta span[data-page]').forEach(el => {
     el.classList.toggle('f-active', el.dataset.page === id);
   });
 }
 
-/* ─────────────────────────────────────────────────────────
-   MENSAJES DESDE IFRAMES
-   Escucha: actualizarPuntos | evaluacionAprobada |
-            seccionCompletada | cambiarPagina
-───────────────────────────────────────────────────────── */
+/* ─── MENSAJES DESDE IFRAMES ────────────────────────────── */
 window.addEventListener('message', e => {
   if (!e.data) return;
   const { action, destino, nota } = e.data;
-
-  if (action === 'cambiarPagina' && destino) {
-    showPage(destino);
-  }
-
-  if (action === 'actualizarPuntos') {
-    actualizarPuntosNav();
-    actualizarProgresoNav();
-  }
-
+  if (action === 'cambiarPagina' && destino) showPage(destino);
+  if (action === 'actualizarPuntos') { actualizarPuntosNav(); actualizarProgresoNav(); }
   if (action === 'evaluacionAprobada' || action === 'evaluaciónAprobada') {
-    actualizarPuntosNav();
-    actualizarProgresoNav();
-
-    // ── Enviar NOTA DE EVALUACIÓN a Google Sheets ──
+    actualizarPuntosNav(); actualizarProgresoNav();
     const nombre = leerLS(SK.estudiante) || 'Anónimo';
     const raw    = leerLS(SK.progreso);
     try {
       const p = raw ? JSON.parse(raw) : {};
-      // Guardar la nota en localStorage
-      p.ultimaNota         = nota !== undefined ? nota : (p.ultimaNota || '');
+      p.ultimaNota         = nota !== undefined ? nota : (p.ultimaNota || 0);
       p.evaluacionAprobada = true;
       if (!p.seccionesVisitadas) p.seccionesVisitadas = [];
       if (!p.seccionesVisitadas.includes('evaluacion')) p.seccionesVisitadas.push('evaluacion');
       escribirLS(SK.progreso, JSON.stringify(p));
-
       enviarASheets('evaluacion', {
-        nombre:              nombre,
+        nombre,
         nota_evaluacion:     p.ultimaNota,
         aprobado:            p.ultimaNota >= 6 ? 'Sí' : 'No',
         puntos_practica:     p.practicaPuntaje || 0,
@@ -746,16 +687,11 @@ window.addEventListener('message', e => {
         evento:              'Evaluación completada'
       });
     } catch(e2) {}
-
-    mostrarToast('🏆 Evaluación completada · datos enviados al docente');
+    mostrarToast('🏆 ¡Evaluación completada! Datos enviados al docente');
   }
-
-  if (action === 'seccionCompletada' && destino) {
-    marcarSeccionVisitada(destino);
-  }
+  if (action === 'seccionCompletada' && destino) marcarSeccionVisitada(destino);
 });
 
-// Exponer showPage globalmente para iframes
 window.showPage = showPage;
 </script>
 </body>
