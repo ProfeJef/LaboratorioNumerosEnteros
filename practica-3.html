@@ -14,7 +14,6 @@
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
     html{scroll-behavior:smooth;}
     body{font-family:'Space Grotesk',sans-serif;background:var(--fondo);color:var(--texto);overflow-x:hidden;}
-    /* HERO */
     .hero{background:radial-gradient(ellipse 70% 60% at 15% 50%,rgba(108,60,225,.22) 0%,transparent 60%),
       radial-gradient(ellipse 55% 50% at 85% 50%,rgba(0,212,255,.12) 0%,transparent 55%),
       linear-gradient(170deg,#070412 0%,#0E0924 50%,#060A18 100%);
@@ -36,14 +35,12 @@
       -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
     .hero p{color:rgba(255,255,255,.6);font-size:.97rem;max-width:540px;margin:0 auto 1.4rem;
       line-height:1.75;position:relative;z-index:2;}
-    /* PUNTOS BADGE */
     .pts-band{background:rgba(108,60,225,.08);border-top:1px solid rgba(108,60,225,.2);
       border-bottom:1px solid rgba(108,60,225,.2);padding:.9rem 2rem;
       display:flex;justify-content:center;align-items:center;gap:2rem;flex-wrap:wrap;}
     .pts-item{display:flex;align-items:center;gap:.5rem;font-family:'Nunito',sans-serif;
       font-weight:700;font-size:.85rem;color:rgba(255,255,255,.7);}
     .pts-icon{font-size:1.1rem;}
-    /* CONTENEDOR GENERAL */
     .wrap{max-width:900px;margin:0 auto;padding:3rem 1.5rem;}
     .section-label{font-family:'Nunito',sans-serif;font-weight:900;font-size:.72rem;
       text-transform:uppercase;letter-spacing:2px;display:inline-flex;align-items:center;
@@ -51,7 +48,6 @@
     .label-purp{background:rgba(108,60,225,.15);color:var(--purp2);border:1px solid rgba(108,60,225,.3);}
     .label-cian{background:rgba(0,212,255,.1);color:var(--cian);border:1px solid rgba(0,212,255,.25);}
     .label-amarillo{background:rgba(255,233,77,.1);color:var(--amarillo);border:1px solid rgba(255,233,77,.25);}
-    /* QUIZ DE CONCEPTOS */
     .quiz-bloque{margin-bottom:3rem;}
     .quiz-bloque h2{font-family:'Nunito',sans-serif;font-weight:900;
       font-size:clamp(1.3rem,3vw,1.8rem);color:var(--blanco);margin-bottom:.4rem;}
@@ -87,11 +83,9 @@
       border-color:var(--verde);color:var(--verde);}
     .feedback-quiz.err{display:block;background:rgba(231,76,60,.1);
       border-color:var(--rojo);color:var(--rojo);}
-    /* TABLA DE OPERACIONES */
     .tabla-ops{width:100%;border-collapse:collapse;margin-bottom:1rem;font-size:.9rem;}
     .tabla-ops thead tr{background:linear-gradient(135deg,rgba(108,60,225,.5),rgba(0,212,255,.3));}
-    .tabla-ops th{padding:.7rem 1rem;text-align:left;font-family:'Nunito',sans-serif;
-      font-weight:900;color:var(--blanco);}
+    .tabla-ops th{padding:.7rem 1rem;text-align:left;font-family:'Nunito',sans-serif;font-weight:900;color:var(--blanco);}
     .tabla-ops th:first-child{border-radius:10px 0 0 0;}
     .tabla-ops th:last-child{border-radius:0 10px 0 0;}
     .tabla-ops td{padding:.65rem 1rem;border-bottom:1px solid rgba(255,255,255,.06);
@@ -111,7 +105,6 @@
       padding:.4rem .9rem;border-radius:20px;border:none;cursor:pointer;transition:all .2s;}
     .check-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(108,60,225,.4);}
     .estado-cell{font-size:1.2rem;min-width:32px;text-align:center;}
-    /* PROBLEMAS CONTEXTUALIZADOS */
     .problema-card{background:rgba(255,255,255,.03);border:1px solid rgba(108,60,225,.2);
       border-radius:20px;padding:1.7rem;margin-bottom:1.5rem;transition:all .2s;}
     .problema-card:hover{border-color:rgba(0,212,255,.35);}
@@ -120,20 +113,14 @@
       min-width:46px;height:46px;border-radius:14px;font-family:'Nunito',sans-serif;
       font-weight:900;font-size:1.1rem;color:#fff;flex-shrink:0;
       background:linear-gradient(135deg,var(--purp),var(--cian));}
-    .prob-titulo{font-family:'Nunito',sans-serif;font-weight:800;color:var(--blanco);
-      font-size:1rem;margin-bottom:.2rem;}
+    .prob-titulo{font-family:'Nunito',sans-serif;font-weight:800;color:var(--blanco);font-size:1rem;margin-bottom:.2rem;}
     .prob-subtitulo{font-size:.8rem;color:var(--gris);}
     .prob-enunciado{font-size:.93rem;color:rgba(255,255,255,.8);line-height:1.8;
       margin-bottom:1.2rem;background:rgba(255,255,255,.03);
       border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:1rem 1.2rem;}
     .prob-enunciado strong{color:var(--cian);}
-    .prob-dato{display:inline-flex;align-items:center;gap:.4rem;
-      background:rgba(108,60,225,.15);border:1px solid rgba(108,60,225,.3);
-      color:var(--purp2);font-family:'Nunito',sans-serif;font-weight:700;font-size:.82rem;
-      padding:.25rem .8rem;border-radius:20px;margin:.15rem;}
     .prob-respuesta{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:1rem;}
-    .prob-label{font-family:'Nunito',sans-serif;font-weight:700;font-size:.87rem;
-      color:rgba(255,255,255,.6);}
+    .prob-label{font-family:'Nunito',sans-serif;font-weight:700;font-size:.87rem;color:rgba(255,255,255,.6);}
     .prob-input{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.15);
       border-radius:10px;padding:.55rem .9rem;color:var(--blanco);
       font-family:'Nunito',sans-serif;font-weight:700;font-size:1rem;
@@ -157,15 +144,10 @@
       color:#0A0618;font-family:'Nunito',sans-serif;font-weight:900;font-size:.7rem;flex-shrink:0;margin-top:2px;}
     .feedback-prob{display:none;margin-top:.8rem;padding:.75rem 1rem;border-radius:10px;
       font-family:'Nunito',sans-serif;font-weight:700;font-size:.87rem;line-height:1.5;}
-    .feedback-prob.ok{display:block;background:rgba(46,204,138,.1);
-      border:1px solid var(--verde);color:var(--verde);}
-    .feedback-prob.err{display:block;background:rgba(231,76,60,.1);
-      border:1px solid var(--rojo);color:var(--rojo);}
-    /* ACTIVIDAD ORDENAR */
-    .ordenar-wrap{background:rgba(255,255,255,.03);border:1px solid rgba(108,60,225,.2);
-      border-radius:18px;padding:1.6rem;}
-    .ordenar-wrap h3{font-family:'Nunito',sans-serif;font-weight:900;color:var(--blanco);
-      font-size:1.05rem;margin-bottom:.4rem;}
+    .feedback-prob.ok{display:block;background:rgba(46,204,138,.1);border:1px solid var(--verde);color:var(--verde);}
+    .feedback-prob.err{display:block;background:rgba(231,76,60,.1);border:1px solid var(--rojo);color:var(--rojo);}
+    .ordenar-wrap{background:rgba(255,255,255,.03);border:1px solid rgba(108,60,225,.2);border-radius:18px;padding:1.6rem;}
+    .ordenar-wrap h3{font-family:'Nunito',sans-serif;font-weight:900;color:var(--blanco);font-size:1.05rem;margin-bottom:.4rem;}
     .ordenar-wrap p{color:var(--gris);font-size:.87rem;margin-bottom:1.2rem;}
     .chips-pool{display:flex;flex-wrap:wrap;gap:.6rem;min-height:56px;
       background:rgba(255,255,255,.03);border:1.5px dashed rgba(255,255,255,.12);
@@ -185,7 +167,6 @@
     .chip-zero:hover{background:rgba(46,204,138,.25);}
     .chip-pos{background:rgba(0,212,255,.12);color:var(--cian);border-color:rgba(0,212,255,.35);}
     .chip-pos:hover{background:rgba(0,212,255,.22);box-shadow:0 4px 14px rgba(0,212,255,.15);}
-    .chip.selected{ring:3px solid var(--amarillo);outline:2.5px solid var(--amarillo);transform:translateY(-3px);}
     .btn-verificar-orden{background:linear-gradient(135deg,var(--purp),var(--cian));
       color:#fff;font-family:'Nunito',sans-serif;font-weight:900;font-size:.9rem;
       padding:.7rem 1.8rem;border-radius:30px;border:none;cursor:pointer;
@@ -199,12 +180,10 @@
       font-family:'Nunito',sans-serif;font-weight:700;font-size:.9rem;line-height:1.6;}
     .feedback-orden.ok{display:block;background:rgba(46,204,138,.1);border:1px solid var(--verde);color:var(--verde);}
     .feedback-orden.err{display:block;background:rgba(231,76,60,.1);border:1px solid var(--rojo);color:var(--rojo);}
-    /* CTA FINAL */
     .cta-final{background:radial-gradient(ellipse 60% 80% at 30% 50%,rgba(108,60,225,.2) 0%,transparent 60%),
       radial-gradient(ellipse 50% 70% at 70% 50%,rgba(0,212,255,.15) 0%,transparent 55%),var(--fondo3);
       padding:4rem 1.5rem;text-align:center;border-top:1px solid rgba(108,60,225,.2);margin-top:1rem;}
-    .cta-final h2{font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(1.4rem,4vw,2rem);
-      color:var(--blanco);margin-bottom:.5rem;}
+    .cta-final h2{font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(1.4rem,4vw,2rem);color:var(--blanco);margin-bottom:.5rem;}
     .cta-final h2 span{color:var(--cian);}
     .cta-final p{color:rgba(255,255,255,.6);font-size:.95rem;margin-bottom:1.8rem;}
     .btn-cta{display:inline-flex;align-items:center;gap:.5rem;
@@ -213,7 +192,6 @@
       padding:.9rem 2.2rem;border-radius:30px;border:none;cursor:pointer;
       text-decoration:none;transition:all .2s;box-shadow:0 8px 26px rgba(108,60,225,.45);}
     .btn-cta:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,212,255,.4);}
-    /* MARCADOR */
     .marcador{display:inline-flex;align-items:center;gap:.5rem;
       background:rgba(108,60,225,.15);border:1.5px solid rgba(108,60,225,.4);
       color:var(--purp2);font-family:'Nunito',sans-serif;font-weight:900;
@@ -241,14 +219,13 @@
 
 <div class="wrap">
 
-  <!-- BLOQUE 1: QUIZ CONCEPTUAL -->
+  <!-- BLOQUE 1 -->
   <div class="quiz-bloque">
     <span class="section-label label-purp">🧠 Bloque 1 · Quiz de conceptos</span>
     <h2>¿Qué tanto recuerdas?</h2>
     <p>Selecciona la respuesta correcta. Recibirás retroalimentación inmediata.</p>
     <div class="marcador">🏆 Correctas bloque 1: <span id="marcador-num">0</span> / 5</div>
 
-    <!-- P1 -->
     <div class="pregunta-card" id="qc-1">
       <div class="p-enunciado"><span class="num">1</span>¿Cuál de estas afirmaciones es correcta sobre los números enteros?</div>
       <div class="opciones">
@@ -260,7 +237,6 @@
       <div class="feedback-quiz" id="fb-qc-1"></div>
     </div>
 
-    <!-- P2 -->
     <div class="pregunta-card" id="qc-2">
       <div class="p-enunciado"><span class="num">2</span>¿Cuánto es (+8) + (−5)?</div>
       <div class="opciones">
@@ -272,7 +248,6 @@
       <div class="feedback-quiz" id="fb-qc-2"></div>
     </div>
 
-    <!-- P3 -->
     <div class="pregunta-card" id="qc-3">
       <div class="p-enunciado"><span class="num">3</span>Al aplicar la ley de signos, el resultado de (−6) + (−4) es:</div>
       <div class="opciones">
@@ -284,7 +259,6 @@
       <div class="feedback-quiz" id="fb-qc-3"></div>
     </div>
 
-    <!-- P4 -->
     <div class="pregunta-card" id="qc-4">
       <div class="p-enunciado"><span class="num">4</span>¿Cuánto es (+5) − (−3)?</div>
       <div class="opciones">
@@ -296,7 +270,6 @@
       <div class="feedback-quiz" id="fb-qc-4"></div>
     </div>
 
-    <!-- P5 -->
     <div class="pregunta-card" id="qc-5">
       <div class="p-enunciado"><span class="num">5</span>Entre dos negativos, ¿cuál es mayor?</div>
       <div class="opciones">
@@ -309,7 +282,7 @@
     </div>
   </div>
 
-  <!-- BLOQUE 2: TABLA DE OPERACIONES -->
+  <!-- BLOQUE 2 -->
   <div class="quiz-bloque">
     <span class="section-label label-cian">🔢 Bloque 2 · Calcula y verifica</span>
     <h2>Operaciones directas</h2>
@@ -325,20 +298,17 @@
             <th>Estado</th>
           </tr>
         </thead>
-        <tbody id="tabla-cuerpo">
-          <!-- Filas generadas por JS -->
-        </tbody>
+        <tbody id="tabla-cuerpo"></tbody>
       </table>
     </div>
   </div>
 
-  <!-- BLOQUE 3: PROBLEMAS CON CONTEXTO -->
+  <!-- BLOQUE 3 -->
   <div class="quiz-bloque">
     <span class="section-label label-amarillo">🌍 Bloque 3 · Problemas reales</span>
     <h2>Enteros en la vida cotidiana</h2>
     <p>Lee cada situación, escribe el resultado y usa la pista si la necesitas.</p>
 
-    <!-- PROBLEMA 1 -->
     <div class="problema-card" id="prob-1">
       <div class="prob-header">
         <div class="prob-num">1</div>
@@ -364,7 +334,6 @@
       <div class="feedback-prob" id="fb-prob-1"></div>
     </div>
 
-    <!-- PROBLEMA 2 -->
     <div class="problema-card" id="prob-2">
       <div class="prob-header">
         <div class="prob-num">2</div>
@@ -385,12 +354,11 @@
         <div class="pista-paso"><span class="pista-num">1</span>Saldo inicial: <strong>−15.000</strong></div>
         <div class="pista-paso"><span class="pista-num">2</span>Ingreso: <strong>+40.000</strong></div>
         <div class="pista-paso"><span class="pista-num">3</span>Operación: (−15000) + (+40000)</div>
-        <div class="pista-paso"><span class="pista-num">4</span>Signos distintos → 40000 − 15000 = 25000. El <strong>mayor valor absoluto</strong> (+40000) pone el signo positivo → <strong>+$25.000</strong> ✅</div>
+        <div class="pista-paso"><span class="pista-num">4</span>Signos distintos → 40000 − 15000 = 25000 → <strong>+$25.000</strong> ✅</div>
       </div>
       <div class="feedback-prob" id="fb-prob-2"></div>
     </div>
 
-    <!-- PROBLEMA 3 — CORREGIDO según auditoría -->
     <div class="problema-card" id="prob-3">
       <div class="prob-header">
         <div class="prob-num">3</div>
@@ -411,16 +379,15 @@
       <div class="pista-box" id="pista-3">
         <div class="pista-paso"><span class="pista-num">1</span>A = <strong>+850 m</strong>, B = <strong>−120 m</strong></div>
         <div class="pista-paso"><span class="pista-num">2</span>Operación: A − B = (+850) − (−120)</div>
-        <div class="pista-paso"><span class="pista-num">3</span><strong>Regla clave:</strong> restar un negativo equivale a sumar su opuesto positivo:<br>(+850) − (−120) = (+850) + (+120)</div>
-        <div class="pista-paso"><span class="pista-num">4</span>Mismo signo (ambos positivos) → suma: 850 + 120 = <strong>970 m</strong> ✅</div>
+        <div class="pista-paso"><span class="pista-num">3</span><strong>Regla clave:</strong> restar un negativo = sumar su positivo: (+850) + (+120)</div>
+        <div class="pista-paso"><span class="pista-num">4</span>850 + 120 = <strong>970 m</strong> ✅</div>
         <div style="margin-top:.6rem;padding:.5rem .8rem;background:rgba(231,76,60,.1);border-radius:8px;font-size:.8rem;color:rgba(255,255,255,.6);">
-          ⚠️ <strong>Cuidado:</strong> NO es 850 − 120 = 730. Al restar −120, debes cambiar el signo: se convierte en +120.
+          ⚠️ <strong>Cuidado:</strong> NO es 850 − 120 = 730. Al restar −120 debes cambiar el signo.
         </div>
       </div>
       <div class="feedback-prob" id="fb-prob-3"></div>
     </div>
 
-    <!-- PROBLEMA 4 -->
     <div class="problema-card" id="prob-4">
       <div class="prob-header">
         <div class="prob-num">4</div>
@@ -446,7 +413,7 @@
     </div>
   </div>
 
-  <!-- BLOQUE 4: ORDENAR ENTEROS -->
+  <!-- BLOQUE 4 -->
   <div class="quiz-bloque">
     <span class="section-label label-purp">🎮 Bloque 4 · Ordenar de menor a mayor</span>
     <h2>¡Organiza los enteros!</h2>
@@ -467,106 +434,146 @@
 
 </div>
 
-<!-- CTA FINAL -->
 <div class="cta-final">
   <h2>¡Práctica <span>completada</span>! 🏆</h2>
   <p>Excelente trabajo. Ahora explora los enteros en situaciones de la vida real.</p>
-  <button class="btn-cta" onclick="navegarA('vida_real')">🌍 Ir a Vida Real →</button>
+  <button class="btn-cta" onclick="navegarA('vida-real')">🌍 Ir a Vida Real →</button>
 </div>
 
 <script>
-/* ── UTILIDADES ──────────────────── */
+/* ════════════════════════════════════════
+   UTILIDADES
+════════════════════════════════════════ */
 function leerLS(k){try{return localStorage.getItem(k);}catch(e){return null;}}
 function escribirLS(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+
 function navegarA(id){
-  try{if(window.parent&&typeof window.parent.showPage==='function'){window.parent.showPage(id);return;}}catch(e){}
-  window.parent.postMessage({action:'cambiarPagina',destino:id},'*');
+  try{
+    if(window.parent && typeof window.parent.showPage==='function'){
+      window.parent.showPage(id); return;
+    }
+  }catch(e){}
+  window.parent.postMessage({action:'cambiarPagina', destino:id},'*');
 }
 
-/* ── PUNTOS ──────────────────────── */
-let puntosGanados=0;
-function actualizarPuntos(){
-  const el=document.getElementById('pts-live');
-  const raw=leerLS('edu_progreso');
-  if(raw){try{const p=JSON.parse(raw);if(el)el.textContent=(p.practicaPuntaje||0)+' pts';}catch(e){}}
-}
-function sumarPuntos(n){
-  const raw=leerLS('edu_progreso');if(!raw)return;
+/* ════════════════════════════════════════
+   PUNTOS — núcleo central
+   Cada vez que sumarPuntos() se llama:
+   1. Actualiza localStorage
+   2. Envía postMessage al index (quien a su
+      vez llama enviarASheets con los datos
+      actualizados)
+════════════════════════════════════════ */
+function actualizarPuntosUI(){
+  const el  = document.getElementById('pts-live');
+  const raw = leerLS('edu_progreso');
+  if(!raw || !el) return;
   try{
-    const p=JSON.parse(raw);
-    p.practicaPuntaje=(p.practicaPuntaje||0)+n;
-    if(!p.seccionesVisitadas)p.seccionesVisitadas=[];
-    if(!p.seccionesVisitadas.includes('practica'))p.seccionesVisitadas.push('practica');
-    escribirLS('edu_progreso',JSON.stringify(p));
-    window.parent.postMessage({action:'actualizarPuntos'},'*');
-    actualizarPuntos();
+    const p = JSON.parse(raw);
+    el.textContent = (p.practicaPuntaje || 0) + ' xp';
   }catch(e){}
 }
-actualizarPuntos();
 
-/* ── QUIZ CONCEPTUAL ─────────────── */
-const respuestasCorrectas={1:'b',2:'c',3:'b',4:'c',5:'b'};
-const feedbackOk={
+function sumarPuntos(n){
+  const raw = leerLS('edu_progreso');
+  if(!raw) return;
+  try{
+    const p = JSON.parse(raw);
+    p.practicaPuntaje = (p.practicaPuntaje || 0) + n;
+
+    // Marcar sección práctica como visitada
+    if(!p.seccionesVisitadas) p.seccionesVisitadas = [];
+    if(!p.seccionesVisitadas.includes('practica'))
+      p.seccionesVisitadas.push('practica');
+
+    escribirLS('edu_progreso', JSON.stringify(p));
+
+    // ── Notificar al index con los puntos actuales ──
+    // El index escucha 'actualizarPuntos' y llama enviarASheets('practica',...)
+    window.parent.postMessage({
+      action:  'actualizarPuntos',
+      puntos:  p.practicaPuntaje,          // ← valor actualizado
+      secciones: (p.seccionesVisitadas||[]).join(', ')
+    }, '*');
+
+    actualizarPuntosUI();
+  }catch(e){}
+}
+
+// Inicializar UI al cargar
+actualizarPuntosUI();
+
+/* ════════════════════════════════════════
+   BLOQUE 1 — QUIZ CONCEPTUAL
+════════════════════════════════════════ */
+const respuestasCorrectas = {1:'b', 2:'c', 3:'b', 4:'c', 5:'b'};
+const feedbackOk = {
   1:'✅ ¡Correcto! ℕ ⊂ ℤ significa que los naturales están contenidos en los enteros.',
-  2:'✅ ¡Exacto! Signos distintos: resta 8−5=3. El mayor valor absoluto (+8) pone el signo positivo → +3.',
+  2:'✅ ¡Exacto! Signos distintos: 8−5=3. El mayor valor absoluto (+8) pone el signo positivo → +3.',
   3:'✅ ¡Bien! Mismo signo negativo: 6+4=10, resultado negativo → −10.',
   4:'✅ ¡Perfecto! (5)−(−3) = (5)+(+3) = +8. Restar negativo suma.',
-  5:'✅ ¡Correcto! Entre negativos, es mayor el más cercano al cero (menor valor absoluto). Ejemplo: −3 > −7.',
+  5:'✅ ¡Correcto! Entre negativos es mayor el más cercano al cero. Ejemplo: −3 > −7.',
 };
-const feedbackErr={
-  1:'❌ Incorrecto. Los enteros incluyen negativos, cero y positivos. Y ℕ ⊂ ℤ: todo natural es un entero.',
-  2:'❌ Incorrecto. Signos distintos: resta los valores absolutos (8−5=3) y el número con mayor valor absoluto (+8) impone el signo positivo → +3.',
-  3:'❌ Incorrecto. Mismo signo negativo: suma los valores absolutos (6+4=10) y conserva el signo negativo → −10.',
-  4:'❌ Incorrecto. Recuerda: a − (−b) = a + b. Entonces (+5)−(−3) = (+5)+(+3) = +8.',
-  5:'❌ Incorrecto. Entre negativos, el mayor es el que está más cerca del cero, es decir, el de menor valor absoluto.',
+const feedbackErr = {
+  1:'❌ Incorrecto. Los enteros incluyen negativos, cero y positivos. ℕ ⊂ ℤ: todo natural es un entero.',
+  2:'❌ Incorrecto. Signos distintos: resta los valores absolutos (8−5=3) y el mayor (+8) impone signo positivo → +3.',
+  3:'❌ Incorrecto. Mismo signo negativo: suma valores absolutos (6+4=10) y conserva el signo → −10.',
+  4:'❌ Incorrecto. a − (−b) = a + b. Entonces (+5)−(−3) = (+5)+(+3) = +8.',
+  5:'❌ Incorrecto. Entre negativos, el mayor es el más cerca del cero (menor valor absoluto).',
 };
-let correctasBloque1=0;
-const respondidas=new Set();
+let correctasBloque1 = 0;
+const respondidas = new Set();
 
-function responderQuiz(n,op){
-  if(respondidas.has(n))return;
+function responderQuiz(n, op){
+  if(respondidas.has(n)) return;
   respondidas.add(n);
-  const card=document.getElementById('qc-'+n);
-  const fb=document.getElementById('fb-qc-'+n);
-  const btns=card.querySelectorAll('.opcion-btn');
-  btns.forEach(b=>b.disabled=true);
-  const correcto=(op===respuestasCorrectas[n]);
-  btns.forEach(b=>{
-    if(b.dataset.op===respuestasCorrectas[n])b.classList.add('correcta-opt');
-    else if(b.dataset.op===op&&!correcto)b.classList.add('incorrecta-opt');
+  const card = document.getElementById('qc-'+n);
+  const fb   = document.getElementById('fb-qc-'+n);
+  const btns = card.querySelectorAll('.opcion-btn');
+  btns.forEach(b => b.disabled = true);
+  const correcto = (op === respuestasCorrectas[n]);
+  btns.forEach(b => {
+    if(b.dataset.op === respuestasCorrectas[n]) b.classList.add('correcta-opt');
+    else if(b.dataset.op === op && !correcto)   b.classList.add('incorrecta-opt');
   });
   if(correcto){
     card.classList.add('correcta');
-    fb.textContent=feedbackOk[n];fb.className='feedback-quiz ok';
+    fb.textContent  = feedbackOk[n];
+    fb.className    = 'feedback-quiz ok';
     correctasBloque1++;
-    document.getElementById('marcador-num').textContent=correctasBloque1;
-    document.getElementById('marcador-num').classList.add('pop');
-    setTimeout(()=>document.getElementById('marcador-num').classList.remove('pop'),350);
-    sumarPuntos(5);
-  }else{
+    const mn = document.getElementById('marcador-num');
+    mn.textContent  = correctasBloque1;
+    mn.classList.add('pop');
+    setTimeout(() => mn.classList.remove('pop'), 350);
+    sumarPuntos(5);   // +5 xp por respuesta correcta
+  } else {
     card.classList.add('incorrecta');
-    fb.textContent=feedbackErr[n];fb.className='feedback-quiz err';
+    fb.textContent = feedbackErr[n];
+    fb.className   = 'feedback-quiz err';
   }
 }
 
-/* ── TABLA OPERACIONES ───────────── */
-const filasDatos=[
-  {expr:'(+7) + (+4)',regla:'Mismo signo (+) → suma',resp:11},
-  {expr:'(−7) + (−4)',regla:'Mismo signo (−) → suma',resp:-11},
-  {expr:'(+9) + (−6)',regla:'Signos distintos → el mayor valor absoluto pone el signo',resp:3},
-  {expr:'(−9) + (+6)',regla:'Signos distintos → el mayor valor absoluto pone el signo',resp:-3},
-  {expr:'(+4) − (−5)',regla:'Resta negativo = suma positivo: (+4)+(+5)',resp:9},
-  {expr:'(−3) − (+8)',regla:'(−3)+(−8): mismo signo negativo',resp:-11},
-  {expr:'(−2) − (−7)',regla:'(−2)+(+7): signos distintos',resp:5},
-  {expr:'(+6) + (−6)',regla:'Opuestos → se anulan',resp:0},
+/* ════════════════════════════════════════
+   BLOQUE 2 — TABLA DE OPERACIONES
+════════════════════════════════════════ */
+const filasDatos = [
+  {expr:'(+7) + (+4)',  regla:'Mismo signo (+) → suma',                                          resp:11},
+  {expr:'(−7) + (−4)',  regla:'Mismo signo (−) → suma',                                          resp:-11},
+  {expr:'(+9) + (−6)',  regla:'Signos distintos → el mayor valor absoluto pone el signo',         resp:3},
+  {expr:'(−9) + (+6)',  regla:'Signos distintos → el mayor valor absoluto pone el signo',         resp:-3},
+  {expr:'(+4) − (−5)',  regla:'Resta negativo = suma positivo: (+4)+(+5)',                        resp:9},
+  {expr:'(−3) − (+8)',  regla:'(−3)+(−8): mismo signo negativo',                                 resp:-11},
+  {expr:'(−2) − (−7)',  regla:'(−2)+(+7): signos distintos',                                     resp:5},
+  {expr:'(+6) + (−6)',  regla:'Opuestos → se anulan',                                            resp:0},
 ];
-const estadoTabla=new Array(filasDatos.length).fill(null);
+const estadoTabla = new Array(filasDatos.length).fill(null);
+
 function renderTabla(){
-  const tbody=document.getElementById('tabla-cuerpo');
-  tbody.innerHTML='';
-  filasDatos.forEach((f,i)=>{
-    const tr=document.createElement('tr');
-    tr.innerHTML=`
+  const tbody = document.getElementById('tabla-cuerpo');
+  tbody.innerHTML = '';
+  filasDatos.forEach((f,i) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
       <td class="expr-cell">${f.expr}</td>
       <td style="font-size:.8rem;color:var(--gris);line-height:1.5;">${f.regla}</td>
       <td><input type="number" class="resp-input" id="tinp-${i}" placeholder="?" aria-label="Resultado de ${f.expr}"/></td>
@@ -575,101 +582,137 @@ function renderTabla(){
     tbody.appendChild(tr);
   });
 }
+
 function verificarFila(i){
-  const inp=document.getElementById('tinp-'+i);
-  const est=document.getElementById('test-'+i);
-  const val=parseInt(inp.value);
-  if(isNaN(val)){inp.style.borderColor='var(--amarillo)';return;}
-  if(val===filasDatos[i].resp){
-    inp.className='resp-input ok';est.textContent='✅';
-    if(estadoTabla[i]===null){estadoTabla[i]=true;sumarPuntos(3);}
-  }else{
-    inp.className='resp-input err';est.textContent='❌';
-    estadoTabla[i]=false;
+  const inp = document.getElementById('tinp-'+i);
+  const est = document.getElementById('test-'+i);
+  const val = parseInt(inp.value);
+  if(isNaN(val)){ inp.style.borderColor = 'var(--amarillo)'; return; }
+  if(val === filasDatos[i].resp){
+    inp.className = 'resp-input ok';
+    est.textContent = '✅';
+    if(estadoTabla[i] === null){
+      estadoTabla[i] = true;
+      sumarPuntos(3);   // +3 xp por fila correcta
+    }
+  } else {
+    inp.className   = 'resp-input err';
+    est.textContent = '❌';
+    estadoTabla[i]  = false;
   }
 }
 renderTabla();
 
-/* ── PROBLEMAS ───────────────────── */
+/* ════════════════════════════════════════
+   BLOQUE 3 — PROBLEMAS CONTEXTUALIZADOS
+════════════════════════════════════════ */
 function togglePista(n){
-  const box=document.getElementById('pista-'+n);
-  box.classList.toggle('visible');
+  document.getElementById('pista-'+n).classList.toggle('visible');
 }
-const probRespondidos=new Set();
-function verificarProblema(n,correcto){
-  const inp=document.getElementById('prob-inp-'+n);
-  const fb=document.getElementById('fb-prob-'+n);
-  const val=parseFloat(inp.value);
-  if(isNaN(val)){inp.style.borderColor='var(--amarillo)';return;}
-  if(val===correcto){
-    inp.className='prob-input ok';
-    fb.textContent='✅ ¡Correcto! El resultado es '+correcto+'.';
-    fb.className='feedback-prob ok';
-    if(!probRespondidos.has(n)){probRespondidos.add(n);sumarPuntos(8);}
-  }else{
-    inp.className='prob-input err';
-    fb.textContent='❌ No es correcto. Revisa la pista paso a paso. Recuerda aplicar correctamente la ley de signos.';
-    fb.className='feedback-prob err';
+
+const probRespondidos = new Set();
+
+function verificarProblema(n, correcto){
+  const inp = document.getElementById('prob-inp-'+n);
+  const fb  = document.getElementById('fb-prob-'+n);
+  const val = parseFloat(inp.value);
+  if(isNaN(val)){ inp.style.borderColor = 'var(--amarillo)'; return; }
+  if(val === correcto){
+    inp.className  = 'prob-input ok';
+    fb.textContent = '✅ ¡Correcto! El resultado es ' + correcto + '.';
+    fb.className   = 'feedback-prob ok';
+    if(!probRespondidos.has(n)){
+      probRespondidos.add(n);
+      sumarPuntos(8);   // +8 xp por problema correcto
+    }
+  } else {
+    inp.className  = 'prob-input err';
+    fb.textContent = '❌ No es correcto. Revisa la pista paso a paso y aplica la ley de signos.';
+    fb.className   = 'feedback-prob err';
   }
 }
 
-/* ── ORDENAR ENTEROS ─────────────── */
-const numOrdenar=[-8,-3,0,2,-1,5,-5,7];
-const ordenCorrecto=[...numOrdenar].sort((a,b)=>a-b);
-let poolActual=[...numOrdenar];
-let zonaActual=[];
-let selectedChip=null;
+/* ════════════════════════════════════════
+   BLOQUE 4 — ORDENAR ENTEROS
+════════════════════════════════════════ */
+const numOrdenar    = [-8, -3, 0, 2, -1, 5, -5, 7];
+const ordenCorrecto = [...numOrdenar].sort((a,b) => a - b);
+let poolActual  = [...numOrdenar];
+let zonaActual  = [];
+let ordenYaGano = false;   // evita doble puntuación
 
-function chipClass(n){return n<0?'chip chip-neg':n===0?'chip chip-zero':'chip chip-pos';}
+function chipClass(n){
+  return n < 0 ? 'chip chip-neg' : n === 0 ? 'chip chip-zero' : 'chip chip-pos';
+}
+
 function renderChips(){
-  const pool=document.getElementById('pool-chips');
-  const zona=document.getElementById('zona-chips');
-  pool.innerHTML='';zona.innerHTML='';
-  poolActual.forEach((n,i)=>{
-    const btn=document.createElement('button');
-    btn.className=chipClass(n);
-    btn.textContent=(n>0?'+':'')+n;
+  const pool = document.getElementById('pool-chips');
+  const zona = document.getElementById('zona-chips');
+  pool.innerHTML = ''; zona.innerHTML = '';
+  poolActual.forEach((n,i) => {
+    const btn = document.createElement('button');
+    btn.className   = chipClass(n);
+    btn.textContent = (n > 0 ? '+' : '') + n;
     btn.setAttribute('role','listitem');
-    btn.setAttribute('aria-label','Número '+(n>0?'+'+n:n)+', haz clic para moverlo al área de ordenamiento');
-    btn.onclick=()=>moverAZona(n,i);
+    btn.setAttribute('aria-label','Número '+(n>0?'+'+n:n)+', haz clic para moverlo');
+    btn.onclick = () => moverAZona(n, i);
     pool.appendChild(btn);
   });
-  zonaActual.forEach((n,i)=>{
-    const btn=document.createElement('button');
-    btn.className=chipClass(n);
-    btn.textContent=(n>0?'+':'')+n;
+  zonaActual.forEach((n,i) => {
+    const btn = document.createElement('button');
+    btn.className   = chipClass(n);
+    btn.textContent = (n > 0 ? '+' : '') + n;
     btn.setAttribute('role','listitem');
-    btn.setAttribute('aria-label','Número '+(n>0?'+'+n:n)+' en posición '+(i+1)+', haz clic para devolverlo al panel');
-    btn.onclick=()=>devolverAPool(n,i);
+    btn.setAttribute('aria-label','Número '+(n>0?'+'+n:n)+' en posición '+(i+1)+', haz clic para devolver');
+    btn.onclick = () => devolverAPool(n, i);
     zona.appendChild(btn);
   });
-  document.getElementById('fb-orden').className='feedback-orden';
+  document.getElementById('fb-orden').className = 'feedback-orden';
 }
-function moverAZona(n,idx){
-  poolActual.splice(idx,1);zonaActual.push(n);renderChips();
+
+function moverAZona(n, idx){
+  poolActual.splice(idx, 1);
+  zonaActual.push(n);
+  renderChips();
 }
-function devolverAPool(n,idx){
-  zonaActual.splice(idx,1);poolActual.push(n);renderChips();
+
+function devolverAPool(n, idx){
+  zonaActual.splice(idx, 1);
+  poolActual.push(n);
+  renderChips();
 }
+
 function verificarOrden(){
-  const fb=document.getElementById('fb-orden');
-  if(zonaActual.length<numOrdenar.length){
-    fb.textContent='⚠️ Mueve todos los números al área de ordenamiento primero.';
-    fb.className='feedback-orden err';return;
+  const fb = document.getElementById('fb-orden');
+  if(zonaActual.length < numOrdenar.length){
+    fb.textContent = '⚠️ Mueve todos los números al área de ordenamiento primero.';
+    fb.className   = 'feedback-orden err';
+    return;
   }
-  const correcto=zonaActual.every((v,i)=>v===ordenCorrecto[i]);
+  const correcto = zonaActual.every((v,i) => v === ordenCorrecto[i]);
   if(correcto){
-    fb.innerHTML='✅ ¡Perfecto! Orden correcto: '+ordenCorrecto.map(n=>`<strong style="color:${n<0?'var(--rojo)':n===0?'var(--verde)':'var(--cian)'}">${n>0?'+'+n:n}</strong>`).join(' < ');
-    fb.className='feedback-orden ok';sumarPuntos(10);
-  }else{
-    fb.innerHTML='❌ No es el orden correcto. Recuerda: los más negativos van primero (más a la izquierda en la recta numérica). Inténtalo de nuevo.';
-    fb.className='feedback-orden err';
+    fb.innerHTML = '✅ ¡Perfecto! Orden correcto: ' +
+      ordenCorrecto.map(n =>
+        `<strong style="color:${n<0?'var(--rojo)':n===0?'var(--verde)':'var(--cian)'}">${n>0?'+'+n:n}</strong>`
+      ).join(' < ');
+    fb.className = 'feedback-orden ok';
+    if(!ordenYaGano){
+      ordenYaGano = true;
+      sumarPuntos(10);   // +10 xp por ordenar correctamente
+    }
+  } else {
+    fb.innerHTML = '❌ No es el orden correcto. Recuerda: los más negativos van primero. Inténtalo de nuevo.';
+    fb.className = 'feedback-orden err';
   }
 }
+
 function resetOrden(){
-  poolActual=[...numOrdenar];zonaActual=[];renderChips();
-  document.getElementById('fb-orden').className='feedback-orden';
+  poolActual  = [...numOrdenar];
+  zonaActual  = [];
+  renderChips();
+  document.getElementById('fb-orden').className = 'feedback-orden';
 }
+
 renderChips();
 </script>
 </body>
