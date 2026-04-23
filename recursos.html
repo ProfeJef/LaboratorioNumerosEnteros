@@ -369,7 +369,7 @@
     <div class="cta-btns">
       <button class="btn-cta" onclick="navegarA('practica')">🎮 Ir a Práctica</button>
       <button class="btn-cta" onclick="navegarA('evaluacion')">📋 Ir a Evaluación</button>
-      <button class="btn-cta sec" onclick="navegarA('vida_real')">🌍 Vida Real</button>
+      <button class="btn-cta" onclick="irAVidaReal()">🌍 Ir a Vida Real →</button>
     </div>
   </div>
 
@@ -406,6 +406,10 @@ function filtrar(tipo){
 function navegarA(id){
   try{if(window.parent&&typeof window.parent.showPage==='function'){window.parent.showPage(id);return;}}catch(e){}
   window.parent.postMessage({action:'cambiarPagina',destino:id},'*');
+}
+
+function irAVidaReal(){
+  window.open('https://profejef.github.io/LaboratorioNumerosEnteros/vida_real.html','_blank');
 }
 
 /* ── REGISTRAR VISITA ── */
