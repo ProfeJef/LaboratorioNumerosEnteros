@@ -3,645 +3,1050 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Evaluación - Los Números Enteros</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+  <title>Evaluación – Los Números Enteros | Misión ℤ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --azul:    #1A3C6E;
-      --verde:   #2ECC8A;
-      --naranja: #F4A127;
-      --fondo:   #F9F9F6;
-      --texto:   #2D2D2D;
-      --blanco:  #FFFFFF;
-      --gris:    #f0f2f5;
-      --rojo:    #E74C3C;
+    :root{
+      --purp:#6C3CE1;--purp2:#9B6DFF;--cian:#00D4FF;--amarillo:#FFE94D;
+      --verde:#2ECC8A;--rojo:#e74c3c;--naranja:#F39C12;
+      --fondo:#0A0618;--fondo3:#100C24;
+      --blanco:#FFF;--texto:#E8E0FF;--gris:rgba(255,255,255,.55);
     }
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body { font-family:'Open Sans',sans-serif; background:var(--fondo); color:var(--texto); padding:1.5rem; padding-bottom:5rem; }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Space Grotesk',sans-serif;background:var(--fondo);color:var(--texto);overflow-x:hidden;}
 
-    /* BIENVENIDA */
-    #welcome-area { max-width:1050px; margin:2rem auto; animation:fadeIn .8s ease; }
-    .welcome-card {
-      background:linear-gradient(135deg,#0d2448,#1A3C6E);
-      border-radius:24px; padding:3rem;
-      display:grid; grid-template-columns:1.2fr 1fr; gap:3rem; align-items:center;
-      box-shadow:0 20px 40px rgba(0,0,0,.25); border-bottom:6px solid var(--verde);
-      position:relative; overflow:hidden;
-    }
-    .welcome-card::before {
-      content:''; position:absolute; inset:0;
-      background-image:radial-gradient(rgba(255,255,255,.07) 2px,transparent 2px);
-      background-size:28px 28px; pointer-events:none;
-    }
-    .welcome-text { position:relative; z-index:2; }
-    .welcome-tag {
-      display:inline-block; background:rgba(244,161,39,.2); color:var(--naranja);
-      font-family:'Nunito',sans-serif; font-weight:900; padding:.4rem 1rem;
-      border-radius:20px; font-size:.85rem; letter-spacing:1px; text-transform:uppercase;
-      margin-bottom:1rem; border:1px solid rgba(244,161,39,.4);
-    }
-    .welcome-text h1 {
-      font-family:'Nunito',sans-serif; font-weight:900;
-      font-size:clamp(2rem,4vw,2.8rem); color:var(--blanco);
-      line-height:1.15; margin-bottom:1rem;
-    }
-    .welcome-text h1 span { color:var(--naranja); }
-    .welcome-text p { font-size:1rem; color:rgba(255,255,255,.82); line-height:1.65; margin-bottom:1.4rem; }
+    #timer-bar{position:sticky;top:0;z-index:999;
+      background:linear-gradient(90deg,rgba(10,6,24,.97),rgba(16,12,36,.97));
+      backdrop-filter:blur(12px);border-bottom:1px solid rgba(108,60,225,.3);
+      padding:.6rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;}
+    .timer-left{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;}
+    .timer-badge{display:flex;align-items:center;gap:.4rem;font-family:'Nunito',sans-serif;font-weight:900;font-size:1rem;color:var(--blanco);}
+    #cronometro{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.2rem;color:var(--amarillo);letter-spacing:1px;min-width:65px;display:inline-block;}
+    #cronometro.urgente{color:var(--rojo);animation:parpadeo .7s infinite;}
+    @keyframes parpadeo{0%,100%{opacity:1}50%{opacity:.3}}
+    .eval-badge{background:rgba(231,76,60,.15);border:1.5px solid rgba(231,76,60,.5);color:var(--rojo);
+      font-family:'Nunito',sans-serif;font-weight:800;font-size:.72rem;letter-spacing:1.5px;
+      text-transform:uppercase;padding:.3rem 1rem;border-radius:20px;}
+    #prog-bar-mini{width:130px;height:6px;background:rgba(255,255,255,.1);border-radius:10px;overflow:hidden;}
+    #prog-fill-mini{height:100%;background:linear-gradient(90deg,var(--purp),var(--cian));width:0%;transition:width .4s;border-radius:10px;}
+    .prog-mini{display:flex;align-items:center;gap:.6rem;}
+    .prog-mini span{font-family:'Nunito',sans-serif;font-size:.8rem;color:var(--gris);}
 
-    .stats-row { display:flex; gap:.8rem; flex-wrap:wrap; margin-bottom:1.5rem; }
-    .stat-pill {
-      background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18);
-      border-radius:20px; padding:.35rem .9rem;
-      font-family:'Nunito',sans-serif; font-weight:700; font-size:.82rem;
-      color:rgba(255,255,255,.85);
-    }
-    .pts-acum {
-      display:inline-flex; align-items:center; gap:.5rem;
-      background:rgba(46,204,138,.15); border:1px solid rgba(46,204,138,.3);
-      border-radius:20px; padding:.4rem 1rem; font-family:'Nunito',sans-serif;
-      font-weight:700; color:var(--verde); font-size:.9rem; margin-bottom:1.2rem;
-    }
-    .motivational-quote {
-      background:rgba(255,255,255,.08); border-left:4px solid var(--verde);
-      padding:.9rem 1.2rem; border-radius:0 12px 12px 0;
-      font-style:italic; color:rgba(255,255,255,.88); margin-bottom:1.6rem; font-size:.9rem; line-height:1.6;
-    }
-    .name-input-container { margin-bottom:1.5rem; }
-    .name-input-container label {
-      display:block; color:var(--blanco); font-family:'Nunito',sans-serif;
-      font-weight:700; margin-bottom:.5rem; font-size:.88rem;
-      text-transform:uppercase; letter-spacing:1px;
-    }
-    .name-input {
-      width:100%; max-width:340px; padding:.85rem 1.4rem;
-      border-radius:30px; border:2px solid rgba(255,255,255,.25);
-      background:rgba(0,0,0,.25); color:var(--blanco);
-      font-family:'Nunito',sans-serif; font-size:1.05rem; font-weight:700; outline:none; transition:all .3s;
-    }
-    .name-input::placeholder { color:rgba(255,255,255,.45); font-weight:400; }
-    .name-input:focus { border-color:var(--verde); background:rgba(0,0,0,.4); box-shadow:0 0 14px rgba(46,204,138,.4); }
-    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }
-    .shake { animation:shake .4s; border-color:var(--rojo)!important; background:rgba(231,76,60,.2)!important; }
-    .welcome-img { position:relative; z-index:2; text-align:center; }
-    .welcome-img img {
-      width:100%; max-width:400px; border-radius:20px; transform:rotate(2deg);
-      box-shadow:0 15px 35px rgba(0,0,0,.4); border:4px solid var(--verde);
-      transition:transform .4s cubic-bezier(.175,.885,.32,1.275);
-    }
-    .welcome-img img:hover { transform:rotate(-1deg) scale(1.04); }
+    .hero{background:
+      radial-gradient(ellipse 60% 80% at 10% 50%,rgba(231,76,60,.12) 0%,transparent 55%),
+      radial-gradient(ellipse 60% 70% at 90% 50%,rgba(108,60,225,.2) 0%,transparent 55%),
+      linear-gradient(160deg,#070412 0%,#0E0924 55%,#060A18 100%);
+      padding:3rem 2rem 2.5rem;text-align:center;position:relative;overflow:hidden;}
+    .hero-grid{position:absolute;inset:0;pointer-events:none;
+      background-image:linear-gradient(rgba(108,60,225,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(108,60,225,.04) 1px,transparent 1px);
+      background-size:55px 55px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 100%);}
+    .hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(231,76,60,.12);
+      border:1.5px solid rgba(231,76,60,.4);color:var(--rojo);font-family:'Nunito',sans-serif;
+      font-weight:800;font-size:.74rem;letter-spacing:2.5px;text-transform:uppercase;
+      padding:.35rem 1.1rem;border-radius:30px;margin-bottom:1.2rem;position:relative;z-index:2;}
+    .hero h1{font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(1.8rem,4.5vw,3rem);
+      color:var(--blanco);position:relative;z-index:2;line-height:1.15;margin-bottom:.6rem;}
+    .hero h1 span{background:linear-gradient(135deg,var(--rojo),var(--purp2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hero p{color:rgba(255,255,255,.6);font-size:.96rem;max-width:580px;margin:0 auto 1.5rem;line-height:1.75;position:relative;z-index:2;}
+    .hero-info{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;position:relative;z-index:2;}
+    .hi{display:flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+      border-radius:20px;padding:.35rem 1rem;font-family:'Nunito',sans-serif;font-weight:700;font-size:.8rem;color:rgba(255,255,255,.7);}
 
-    /* MISION */
-    #mission-area { display:none; animation:slideUpFade .6s ease forwards; padding-top:1rem; }
-    .eval-header {
-      background:var(--azul); color:var(--blanco); border-radius:14px;
-      padding:.75rem 1.5rem; margin:0 auto 2rem; max-width:920px;
-      box-shadow:0 4px 14px rgba(0,0,0,.15);
-      display:flex; justify-content:space-between; align-items:center;
-      flex-wrap:wrap; gap:.8rem; position:sticky; top:0; z-index:100;
-      border-bottom:3px solid var(--naranja);
-    }
-    .eval-title h2 { font-family:'Nunito',sans-serif; font-weight:900; font-size:1.1rem; display:flex; align-items:center; gap:.5rem; margin:0; }
-    .eval-title p  { font-size:.78rem; color:rgba(255,255,255,.65); margin-top:.1rem; }
-    .eval-progress { display:flex; align-items:center; gap:.8rem; }
-    .progress-track { width:120px; height:8px; background:rgba(255,255,255,.15); border-radius:10px; overflow:hidden; }
-    .progress-fill  { height:100%; background:var(--verde); width:0%; transition:width .4s; border-radius:10px; }
-    .progress-label { font-family:'Nunito',sans-serif; font-weight:700; font-size:.85rem; color:rgba(255,255,255,.8); white-space:nowrap; }
-    .score-display {
-      background:rgba(255,255,255,.1); border:2px solid rgba(46,204,138,.4);
-      padding:.3rem .9rem; border-radius:10px; display:flex; align-items:center; gap:.6rem;
-    }
-    .score-display h3 { font-family:'Nunito',sans-serif; font-size:.7rem; text-transform:uppercase; letter-spacing:1px; color:var(--verde); margin:0; }
-    .score-display .points { font-size:1.2rem; font-weight:900; font-family:'Nunito',sans-serif; }
+    .instrucciones{background:rgba(255,233,77,.05);border:1px solid rgba(255,233,77,.2);
+      border-left:4px solid var(--amarillo);border-radius:0 14px 14px 0;
+      max-width:860px;margin:2rem auto 0;padding:1.2rem 1.5rem;}
+    .inst-titulo{font-family:'Nunito',sans-serif;font-weight:900;color:var(--amarillo);font-size:.85rem;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.7rem;}
+    .inst-lista{list-style:none;display:flex;flex-direction:column;gap:.4rem;}
+    .inst-lista li{font-size:.87rem;color:rgba(255,255,255,.75);display:flex;gap:.6rem;line-height:1.5;}
+    .inst-lista li::before{content:'→';color:var(--amarillo);font-weight:900;flex-shrink:0;}
 
-    #quiz-container { max-width:920px; margin:0 auto; }
+    .wrap{max-width:860px;margin:0 auto;padding:2.5rem 1.5rem 4rem;}
 
-    .category-header { display:flex; align-items:center; gap:1rem; margin:2.5rem 0 1.2rem; }
-    .category-icon { width:42px; height:42px; border-radius:12px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:1.3rem; }
-    .cat-conceptos   { background:rgba(26,60,110,.12); }
-    .cat-operaciónes { background:rgba(46,204,138,.15); }
-    .cat-problemás   { background:rgba(244,161,39,.15); }
-    .category-info h2 { font-family:'Nunito',sans-serif; font-weight:800; color:var(--azul); font-size:1.2rem; margin-bottom:.15rem; }
-    .category-info p  { font-size:.8rem; color:#888; }
+    .puntaje-wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem;margin-bottom:2.5rem;}
+    .puntaje-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:.9rem 1.3rem;text-align:center;flex:1 1 100px;}
+    .puntaje-card .p-num{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.8rem;color:var(--amarillo);}
+    .puntaje-card .p-label{font-size:.75rem;color:var(--gris);font-family:'Nunito',sans-serif;}
 
-    .question-block {
-      background:var(--blanco); border-radius:14px; padding:1.6rem 1.8rem;
-      margin-bottom:1.4rem; box-shadow:0 3px 12px rgba(0,0,0,.06);
-      border-left:5px solid var(--azul); transition:border-color .3s;
-    }
-    .question-block.answered { border-left-color:var(--verde); }
-    .q-badge {
-      display:inline-flex; align-items:center; justify-content:center;
-      width:28px; height:28px; border-radius:8px;
-      background:var(--naranja); color:var(--blanco);
-      font-family:'Nunito',sans-serif; font-weight:900; font-size:.85rem;
-      margin-right:.5rem; flex-shrink:0; vertical-align:middle;
-    }
-    .q-text { font-family:'Nunito',sans-serif; font-weight:700; font-size:1rem; color:var(--azul); margin-bottom:1.2rem; line-height:1.6; }
-    .q-context {
-      background:var(--gris); border-left:3px solid var(--naranja);
-      border-radius:0 10px 10px 0; padding:.75rem 1rem;
-      font-size:.9rem; line-height:1.65; color:#555; margin-bottom:1rem;
-    }
+    .section-label{font-family:'Nunito',sans-serif;font-weight:900;font-size:.72rem;text-transform:uppercase;
+      letter-spacing:2px;display:inline-flex;align-items:center;gap:.4rem;padding:.3rem 1rem;border-radius:20px;margin-bottom:1rem;}
+    .label-rojo{background:rgba(231,76,60,.12);color:var(--rojo);border:1px solid rgba(231,76,60,.3);}
+    .label-cian{background:rgba(0,212,255,.1);color:var(--cian);border:1px solid rgba(0,212,255,.25);}
+    .label-naranja{background:rgba(243,156,18,.1);color:var(--naranja);border:1px solid rgba(243,156,18,.25);}
 
-    .options { display:flex; flex-direction:column; gap:.6rem; }
-    .opt-btn {
-      display:flex; align-items:center; gap:.9rem;
-      background:var(--gris); border:2px solid transparent; border-radius:10px;
-      padding:.65rem 1.1rem; font-family:'Open Sans',sans-serif;
-      font-size:.9rem; font-weight:600; color:#444; cursor:pointer; text-align:left;
-      transition:background .18s, border-color .18s, transform .15s;
-    }
-    .opt-btn:hover:not(:disabled) { background:#e2e8f0; border-color:var(--azul); transform:translateX(4px); }
-    .opt-letter {
-      width:30px; height:30px; border-radius:50%;
-      background:rgba(26,60,110,.1); color:var(--azul);
-      display:flex; align-items:center; justify-content:center;
-      font-family:'Nunito',sans-serif; font-weight:900; font-size:.82rem;
-      flex-shrink:0; transition:background .2s, color .2s;
-    }
-    .opt-btn.selected               { background:rgba(26,60,110,.08); border-color:var(--azul); color:var(--azul); }
-    .opt-btn.selected .opt-letter   { background:var(--azul); color:var(--blanco); }
-    .opt-btn.correct                { background:rgba(46,204,138,.12)!important; border-color:var(--verde)!important; color:#1a7a4e!important; }
-    .opt-btn.correct .opt-letter    { background:var(--verde)!important; color:var(--blanco)!important; }
-    .opt-btn.incorrect              { background:rgba(231,76,60,.12)!important; border-color:var(--rojo)!important; color:#c0392b!important; }
-    .opt-btn.incorrect .opt-letter  { background:var(--rojo)!important; color:var(--blanco)!important; }
-    .opt-btn:disabled               { cursor:not-allowed; opacity:.85; }
+    .bloque-eval{margin-bottom:3rem;}
+    .bloque-eval h2{font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(1.1rem,2.5vw,1.5rem);color:var(--blanco);margin-bottom:.3rem;}
+    .bloque-eval .sub{color:var(--gris);font-size:.88rem;margin-bottom:1.4rem;}
 
-    .feedback { margin-top:.9rem; padding:.8rem 1.1rem; border-radius:10px; font-size:.88rem; line-height:1.55; display:none; animation:fadeIn .3s ease; font-family:'Nunito',sans-serif; }
-    .feedback.show    { display:block; }
-    .feedback.success { background:rgba(46,204,138,.12); color:#1a7a4e; border-left:4px solid var(--verde); }
-    .feedback.error   { background:rgba(231,76,60,.12);  color:#c0392b; border-left:4px solid var(--rojo); }
-    .step-box { background:rgba(255,255,255,.7); border-radius:8px; padding:.6rem .9rem; margin-top:.6rem; font-family:'Nunito',sans-serif; font-size:.85rem; color:#555; }
+    .pregunta{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.5rem 1.6rem;margin-bottom:1.2rem;transition:all .2s;}
+    .pregunta.resp-ok{border-color:var(--verde);background:rgba(46,204,138,.04);}
+    .pregunta.resp-err{border-color:var(--rojo);background:rgba(231,76,60,.04);}
 
-    .alert-strip {
-      display:none; background:rgba(231,76,60,.1); border:1.5px solid var(--rojo);
-      border-radius:10px; padding:.65rem 1.1rem; margin:0 auto 1.5rem;
-      font-family:'Nunito',sans-serif; font-weight:700; font-size:.9rem; color:var(--rojo);
-      max-width:920px;
-    }
-    .alert-strip.show { display:flex; align-items:center; gap:.5rem; }
+    .ctx{background:rgba(108,60,225,.06);border:1px solid rgba(108,60,225,.2);border-radius:10px;
+      padding:.9rem 1.1rem;margin-bottom:1rem;font-size:.88rem;color:rgba(255,255,255,.8);line-height:1.8;}
+    .ctx strong{color:var(--cian);}
+    .dato{display:inline-flex;align-items:center;gap:.3rem;background:rgba(0,212,255,.1);
+      border:1px solid rgba(0,212,255,.2);color:var(--cian);font-family:'Nunito',sans-serif;
+      font-weight:800;font-size:.8rem;padding:.18rem .7rem;border-radius:20px;margin:.1rem;}
 
-    .btn-main {
-      background:var(--verde); color:var(--azul); border:none; padding:1rem 2.5rem; border-radius:30px;
-      font-family:'Nunito',sans-serif; font-weight:900; font-size:1.05rem; cursor:pointer;
-      box-shadow:0 6px 18px rgba(46,204,138,.4); transition:transform .2s, box-shadow .2s;
-      display:inline-flex; align-items:center; gap:.6rem;
-    }
-    .btn-main:hover { transform:translateY(-3px); box-shadow:0 8px 22px rgba(46,204,138,.6); }
-    .btn-start { background:var(--naranja); color:var(--blanco); font-size:1.1rem; padding:1.1rem 2.3rem; box-shadow:0 6px 18px rgba(244,161,39,.4); margin-top:.5rem; }
-    .btn-start:hover { box-shadow:0 8px 22px rgba(244,161,39,.6); }
-    .action-bar { text-align:center; margin-top:2.5rem; display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; }
-    .btn-secondary {
-      background:var(--azul); color:var(--blanco); border:none; padding:.85rem 2rem; border-radius:30px;
-      font-family:'Nunito',sans-serif; font-weight:900; font-size:.95rem; cursor:pointer; display:none; transition:opacity .2s;
-    }
-    .btn-secondary:hover { opacity:.85; }
+    .preg-enun{font-family:'Nunito',sans-serif;font-weight:700;font-size:.97rem;color:rgba(255,255,255,.92);
+      margin-bottom:1rem;line-height:1.65;display:flex;align-items:flex-start;gap:.7rem;}
+    .preg-num{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;
+      border-radius:9px;font-size:.82rem;font-weight:900;background:linear-gradient(135deg,var(--purp),var(--cian));
+      color:#fff;flex-shrink:0;margin-top:1px;}
 
-    /* MODAL */
-    .modal-overlay {
-      position:fixed; inset:0; background:rgba(13,36,72,.88);
-      display:flex; justify-content:center; align-items:center;
-      z-index:2000; opacity:0; pointer-events:none; transition:opacity .3s; backdrop-filter:blur(6px);
-    }
-    .modal-overlay.active { opacity:1; pointer-events:auto; }
-    .modal-content {
-      background:var(--blanco); padding:2.5rem 2.2rem; border-radius:24px; text-align:center;
-      max-width:460px; width:90%; transform:translateY(30px) scale(.95);
-      transition:all .4s cubic-bezier(.175,.885,.32,1.275);
-      box-shadow:0 20px 50px rgba(0,0,0,.35); border-top:6px solid var(--verde);
-    }
-    .modal-overlay.active .modal-content { transform:translateY(0) scale(1); }
-    .modal-icon  { font-size:4rem; margin-bottom:.8rem; animation:bounce 2s infinite; display:block; }
-    .modal-title { font-family:'Nunito',sans-serif; font-weight:900; color:var(--azul); font-size:1.7rem; margin-bottom:.4rem; }
-    .modal-score { font-size:3.2rem; font-weight:900; color:var(--naranja); margin:.4rem 0 1rem; font-family:'Nunito',sans-serif; }
-    .modal-bar { width:100%; height:10px; background:var(--gris); border-radius:10px; overflow:hidden; margin-bottom:1.2rem; }
-    .modal-bar-fill { height:100%; border-radius:10px; transition:width 1s ease; width:0%; }
-    .modal-breakdown { display:flex; gap:.6rem; justify-content:center; margin-bottom:1.2rem; flex-wrap:wrap; }
-    .breakdown-pill { font-family:'Nunito',sans-serif; font-weight:700; font-size:.8rem; padding:.3rem .9rem; border-radius:20px; display:flex; align-items:center; gap:.35rem; }
-    .bp-c { background:rgba(26,60,110,.1);  color:var(--azul); }
-    .bp-o { background:rgba(46,204,138,.15); color:#1a7a4e; }
-    .bp-p { background:rgba(244,161,39,.15); color:#b87000; }
-    .modal-text { color:#555; margin-bottom:1.5rem; line-height:1.6; font-size:.95rem; }
-    .btn-modal-rei { width:100%; padding:.75rem; border-radius:30px; border:2px solid var(--azul); background:transparent; color:var(--azul); font-family:'Nunito',sans-serif; font-weight:800; font-size:.95rem; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:.5rem; transition:background .2s, color .2s; margin-top:.6rem; }
-    .btn-modal-rei:hover { background:var(--azul); color:var(--blanco); }
+    .opciones{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;}
+    @media(max-width:480px){.opciones{grid-template-columns:1fr;}}
+    .opt-btn{background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.1);border-radius:12px;
+      padding:.72rem 1rem;color:rgba(255,255,255,.8);font-family:'Nunito',sans-serif;font-weight:700;
+      font-size:.87rem;cursor:pointer;text-align:left;transition:all .2s;display:flex;align-items:center;gap:.6rem;}
+    .opt-btn:hover:not(:disabled){background:rgba(108,60,225,.15);border-color:var(--purp2);}
+    .opt-btn.sel-ok{background:rgba(46,204,138,.14);border-color:var(--verde);color:var(--verde);}
+    .opt-btn.sel-err{background:rgba(231,76,60,.1);border-color:var(--rojo);color:var(--rojo);}
+    .opt-btn.mostrar-ok{background:rgba(46,204,138,.07);border-color:rgba(46,204,138,.35);color:rgba(46,204,138,.75);}
+    .opt-btn:disabled{cursor:default;}
+    .opt-l{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;
+      border-radius:6px;font-size:.74rem;font-weight:900;background:rgba(255,255,255,.08);flex-shrink:0;}
 
-    @keyframes fadeIn      { from{opacity:0} to{opacity:1} }
-    @keyframes slideUpFade { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
-    @keyframes bounce      { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .resp-row{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-top:.6rem;}
+    .resp-label{font-family:'Nunito',sans-serif;font-weight:700;font-size:.87rem;color:var(--gris);}
+    .resp-inp{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.15);border-radius:10px;
+      padding:.55rem .9rem;color:var(--blanco);font-family:'Nunito',sans-serif;font-weight:700;font-size:1rem;
+      width:120px;text-align:center;outline:none;transition:border-color .2s;}
+    .resp-inp:focus{border-color:var(--cian);}
+    .resp-inp.ok{border-color:var(--verde);background:rgba(46,204,138,.12);color:var(--verde);}
+    .resp-inp.err{border-color:var(--rojo);background:rgba(231,76,60,.1);color:var(--rojo);}
+    .resp-inp:disabled{cursor:default;}
+    .check-btn{background:linear-gradient(135deg,var(--purp),var(--cian));color:#fff;font-family:'Nunito',sans-serif;
+      font-weight:900;font-size:.82rem;padding:.48rem 1.1rem;border-radius:20px;border:none;cursor:pointer;transition:all .2s;}
+    .check-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 4px 12px rgba(108,60,225,.4);}
+    .check-btn:disabled{opacity:.5;cursor:default;}
 
-    @media(max-width:768px){
-      .welcome-card { grid-template-columns:1fr; padding:1.8rem; text-align:center; gap:1.5rem; }
-      .welcome-img  { order:-1; }
-      .stats-row    { justify-content:center; }
-      .eval-header  { padding:.6rem 1rem; }
-      .eval-title p, .progress-track { display:none; }
-      .name-input   { max-width:100%; }
-      body          { padding:1rem; }
-    }
+    .btn-pista{background:transparent;border:1.5px solid rgba(255,233,77,.35);color:var(--amarillo);
+      font-family:'Nunito',sans-serif;font-weight:700;font-size:.78rem;padding:.38rem .9rem;
+      border-radius:20px;cursor:pointer;transition:all .2s;}
+    .btn-pista:hover{background:rgba(255,233,77,.1);}
+    .pista-box{display:none;margin-top:.8rem;background:rgba(255,233,77,.05);border:1px solid rgba(255,233,77,.2);
+      border-left:4px solid var(--amarillo);border-radius:0 10px 10px 0;padding:.9rem 1.1rem;
+      font-size:.84rem;color:rgba(255,255,255,.78);line-height:1.75;}
+    .pista-box.vis{display:block;animation:fadeIn .3s ease;}
+    .pista-box strong{color:var(--amarillo);}
+
+    .vf-btns{display:flex;gap:.7rem;margin-top:.6rem;}
+    .vf-btn{font-family:'Nunito',sans-serif;font-weight:900;font-size:.88rem;padding:.6rem 1.6rem;
+      border-radius:20px;border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);
+      color:rgba(255,255,255,.7);cursor:pointer;transition:all .2s;}
+    .vf-btn:hover:not(:disabled){transform:translateY(-2px);}
+    .vf-btn.sel-ok{background:rgba(46,204,138,.15);border-color:var(--verde);color:var(--verde);}
+    .vf-btn.sel-err{background:rgba(231,76,60,.1);border-color:var(--rojo);color:var(--rojo);}
+    .vf-btn.mostrar-ok{background:rgba(46,204,138,.08);border-color:rgba(46,204,138,.4);color:rgba(46,204,138,.65);}
+    .vf-btn:disabled{cursor:default;}
+
+    .preg-fb{display:none;margin-top:.9rem;padding:.75rem 1rem;border-radius:10px;
+      font-family:'Nunito',sans-serif;font-weight:700;font-size:.84rem;line-height:1.6;}
+    .preg-fb.ok{display:block;background:rgba(46,204,138,.08);border:1px solid rgba(46,204,138,.4);color:var(--verde);}
+    .preg-fb.err{display:block;background:rgba(231,76,60,.08);border:1px solid rgba(231,76,60,.35);color:var(--rojo);}
+
+    .enviar-wrap{text-align:center;margin:2.5rem 0;}
+    .btn-enviar{display:inline-flex;align-items:center;gap:.6rem;background:linear-gradient(135deg,var(--rojo),#c0392b);
+      color:#fff;font-family:'Nunito',sans-serif;font-weight:900;font-size:1.1rem;padding:1rem 2.8rem;
+      border-radius:30px;border:none;cursor:pointer;box-shadow:0 8px 28px rgba(231,76,60,.45);transition:all .2s;}
+    .btn-enviar:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(231,76,60,.5);}
+    .btn-enviar:disabled{opacity:.5;cursor:default;}
+
+    #resultado-final{display:none;}
+    .resultado-box{background:radial-gradient(ellipse 60% 70% at 30% 50%,rgba(108,60,225,.2) 0%,transparent 55%),
+      radial-gradient(ellipse 50% 60% at 70% 50%,rgba(0,212,255,.15) 0%,transparent 50%),var(--fondo3);
+      border:1px solid rgba(108,60,225,.3);border-radius:24px;padding:2.5rem 2rem;text-align:center;margin:2rem 0;}
+    .res-emoji{font-size:4rem;display:block;margin-bottom:.5rem;}
+    .res-nota{font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(2.5rem,8vw,5rem);margin:.3rem 0;}
+    .res-nivel{font-family:'Nunito',sans-serif;font-weight:800;color:var(--purp2);font-size:1.1rem;margin-bottom:.3rem;}
+    .res-msg{font-size:1rem;color:rgba(255,255,255,.7);margin-bottom:1rem;}
+    .res-desglose{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin:1.2rem 0;}
+    .res-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;
+      padding:.8rem 1.3rem;font-family:'Nunito',sans-serif;font-weight:700;font-size:.85rem;color:rgba(255,255,255,.75);}
+    .res-item span{display:block;font-size:1.5rem;font-weight:900;color:var(--amarillo);}
+    .barras-wrap{max-width:500px;margin:1.2rem auto 0;display:flex;flex-direction:column;gap:.6rem;}
+    .barra-item{display:flex;align-items:center;gap:.7rem;}
+    .barra-label{font-family:'Nunito',sans-serif;font-weight:700;font-size:.78rem;color:rgba(255,255,255,.6);width:140px;text-align:right;flex-shrink:0;}
+    .barra-outer{flex:1;height:10px;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden;}
+    .barra-inner{height:100%;border-radius:10px;transition:width 1.2s ease;}
+    .barra-val{font-family:'Nunito',sans-serif;font-weight:800;font-size:.78rem;color:var(--amarillo);width:45px;text-align:left;flex-shrink:0;}
+    .btn-cta{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,var(--purp),var(--cian));
+      color:#fff;font-family:'Nunito',sans-serif;font-weight:900;font-size:.95rem;padding:.8rem 2rem;
+      border-radius:30px;border:none;cursor:pointer;transition:all .2s;box-shadow:0 8px 26px rgba(108,60,225,.4);margin:.4rem;}
+    .btn-cta:hover{transform:translateY(-2px);}
+    .btn-cta.sec{background:rgba(255,255,255,.07);box-shadow:none;border:1.5px solid rgba(255,255,255,.2);}
+
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
   </style>
 </head>
 <body>
 
-<!-- BIENVENIDA -->
-<div id="welcome-area">
-  <div class="welcome-card">
-    <div class="welcome-text">
-      <div class="welcome-tag">&#127919; Misión Final &ndash; Números Enteros</div>
-      <h1>El Gran Desafio<br>de los <span>Enteros</span></h1>
-      <p>Has entrenado en la teoría y la práctica. Ahora es tu turno de brillar. En esta misión pondras a prueba todo lo que aprendiste sobre &#8484;.</p>
-      <div class="stats-row" id="statsRow">
-        <div class="stat-pill">&#128203; 10 preguntas</div>
-        <div class="stat-pill">&#128260; Aleatorias</div>
-        <div class="stat-pill">&#11088; 6/10 para aprobar</div>
-        <div class="stat-pill">&#127942; Puntos extra</div>
-      </div>
-      <div class="motivational-quote">
-        "Las matemáticas no son un deporte de espectadores. Atrevete a jugar y conquista la recta numérica!" &#128640;
-      </div>
-      <div class="name-input-container" id="nameContainer">
-        <label for="player-name">&#191;Cuál es tu nombre, jugador?</label>
-        <input type="text" id="player-name" class="name-input"
-          placeholder="Escribe tu nombre o alias..." maxlength="22"
-          autocomplete="off" onkeydown="if(event.key==='Enter') startMission()"/>
-      </div>
-      <button class="btn-main btn-start" onclick="startMission()">&#127918; &#161;Aceptar la Misión!</button>
-    </div>
-    <div class="welcome-img">
-      <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=600&q=80"
-           alt="Estudiante en evaluación de matemáticas"
-           onerror="this.src='https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=600&q=80'"/>
+<div id="timer-bar" role="banner">
+  <div class="timer-left">
+    <div class="eval-badge">📋 Evaluación Final</div>
+    <div class="timer-badge">⏱️ <span id="cronometro">60:00</span></div>
+    <div class="timer-badge" style="font-size:.82rem;color:var(--gris);">Pts: <strong id="pts-bar" style="color:var(--amarillo)">0</strong></div>
+  </div>
+  <div class="prog-mini">
+    <span id="prog-texto">0 / 12</span>
+    <div id="prog-bar-mini" role="progressbar" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0">
+      <div id="prog-fill-mini"></div>
     </div>
   </div>
 </div>
 
-<!-- EVALUACION -->
-<div id="mission-area">
-  <div class="eval-header">
-    <div class="eval-title">
-      <h2>&#9876;&#65039; Misión de <span id="display-player-name" style="color:var(--naranja);"></span></h2>
-      <p>Seleccióna tu respuesta y al final pulsa "Calificar".</p>
-    </div>
-    <div class="eval-progress">
-      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-      <span class="progress-label" id="progressLabel">0 / 10</span>
-    </div>
-    <div class="score-display">
-      <h3>Puntaje</h3>
-      <div class="points" id="top-score">&ndash; / 10</div>
-    </div>
-  </div>
-
-  <div class="alert-strip" id="alertStrip">
-    &#9888;&#65039; <span id="alertMsg">Aún tienes preguntas sin responder.</span>
-  </div>
-
-  <div id="quiz-container"></div>
-
-  <div class="action-bar">
-    <button class="btn-main" id="btn-calificar">&#127942; Calificar Misión</button>
-    <button class="btn-secondary" id="btn-reintentar" onclick="location.reload()">&#8635; Nueva Misión</button>
+<div class="hero">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-tag">🎯 Evaluación Final – Los Números Enteros</div>
+  <h1>Demuestra lo que <span>aprendiste</span></h1>
+  <p>12 situaciones de la vida real, seleccionadas aleatoriamente de un banco de 60 preguntas. ¡Cada intento es diferente!</p>
+  <div class="hero-info">
+    <div class="hi">📝 12 preguntas</div>
+    <div class="hi">⏱️ 60 minutos</div>
+    <div class="hi">⭐ 100 puntos</div>
+    <div class="hi">🎲 Aleatorio</div>
+    <div class="hi">🇨🇴 Contexto colombiano</div>
   </div>
 </div>
 
-<!-- MODAL -->
-<div class="modal-overlay" id="result-modal">
-  <div class="modal-content">
-    <span class="modal-icon" id="m-icon">&#127942;</span>
-    <h2 class="modal-title" id="m-title">&#161;Misión Completada!</h2>
-    <div class="modal-score" id="m-score">10/10</div>
-    <div class="modal-bar"><div class="modal-bar-fill" id="m-bar-fill"></div></div>
-    <div class="modal-breakdown" id="m-breakdown"></div>
-    <p class="modal-text" id="m-text"></p>
-    <button class="btn-main" style="width:100%;justify-content:center;margin-bottom:.6rem;"
-      onclick="document.getElementById('result-modal').classList.remove('active')">
-      &#128269; Ver Correcciónes
-    </button>
-    <button class="btn-modal-rei" onclick="location.reload()">&#8635; Generar Nueva Misión</button>
+<div class="instrucciones">
+  <div class="inst-titulo">📋 Instrucciones</div>
+  <ul class="inst-lista">
+    <li>Lee con calma el contexto antes de responder.</li>
+    <li>En selección múltiple, haz clic en la opción correcta.</li>
+    <li>En problemas abiertos, escribe el número y presiona <strong>✔ Verificar</strong>.</li>
+    <li>En verdadero/falso, haz clic directamente.</li>
+    <li>La 💡 pista está disponible en problemas abiertos y no resta puntos.</li>
+    <li>Al terminar, presiona <strong>Enviar evaluación</strong>. ¡Cada intento trae preguntas nuevas!</li>
+  </ul>
+</div>
+
+<div class="wrap">
+  <div class="puntaje-wrap" role="status" aria-live="polite" style="margin-top:2rem;">
+    <div class="puntaje-card"><div class="p-num" id="pts-corr">0</div><div class="p-label">✅ Correctas</div></div>
+    <div class="puntaje-card"><div class="p-num" id="pts-err" style="color:var(--rojo)">0</div><div class="p-label">❌ Incorrectas</div></div>
+    <div class="puntaje-card"><div class="p-num" id="pts-pend" style="color:var(--gris)">12</div><div class="p-label">⏳ Pendientes</div></div>
+    <div class="puntaje-card"><div class="p-num" id="pts-total">0</div><div class="p-label">⭐ Puntos</div></div>
+  </div>
+
+  <div id="zona-preguntas"></div>
+
+  <div class="enviar-wrap">
+    <button class="btn-enviar" id="btn-enviar" onclick="enviarEvaluacion()">📤 Enviar evaluación</button>
+    <p style="margin-top:.7rem;font-size:.8rem;color:var(--gris);">Las preguntas sin responder cuentan como incorrectas.</p>
+  </div>
+
+  <div id="resultado-final" role="alert" aria-live="assertive">
+    <div class="resultado-box">
+      <span class="res-emoji" id="res-emoji">🎉</span>
+      <div class="res-nota" id="res-nota">—</div>
+      <div class="res-nivel" id="res-nivel"></div>
+      <div class="res-msg" id="res-msg"></div>
+      <div class="res-desglose">
+        <div class="res-item"><span id="rd-corr">—</span>✅ Correctas</div>
+        <div class="res-item"><span id="rd-err">—</span>❌ Incorrectas</div>
+        <div class="res-item"><span id="rd-pts">—</span>⭐ Puntos</div>
+        <div class="res-item"><span id="rd-tiempo">—</span>⏱️ Tiempo</div>
+      </div>
+      <div class="barras-wrap" id="barras-wrap"></div>
+      <div style="margin-top:1.5rem;">
+        <button class="btn-cta" onclick="navegarA('vida_real')">🌍 Explorar Vida Real →</button>
+        <button class="btn-cta sec" onclick="reiniciar()">↺ Nuevo intento</button>
+      </div>
+    </div>
   </div>
 </div>
 
 <script>
-// ── LOCALSTORAGE ──
-function leerLS(k){try{return localStorage.getItem(k);}catch(e){return null;}}
-function escribirLS(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+/* ════════════════════════════════════════════
+   BANCO DE PREGUNTAS — 20 por tipo = 60 total
+════════════════════════════════════════════ */
 
-const raw = leerLS('edu_progreso');
-const prog = raw ? JSON.parse(raw) : {prácticaPuntaje:0};
-const nombreGuardado = leerLS('edu_estudiante') || '';
-
-// Badge puntos acumulados
-(function(){
-  if(prog.prácticaPuntaje > 0){
-    const b = document.createElement('div');
-    b.className = 'pts-acum';
-    b.innerHTML = '&#11088; Puntos acumulados: <strong>' + prog.prácticaPuntaje + '</strong>';
-    document.getElementById('statsRow').insertAdjacentElement('beforebegin', b);
-  }
-  if(nombreGuardado){
-    document.getElementById('player-name').value = nombreGuardado;
-    document.getElementById('nameContainer').innerHTML =
-      '<p style="color:rgba(255,255,255,.9);font-family:Nunito,sans-serif;font-weight:700;font-size:1rem;margin-bottom:.5rem;">' +
-      'Hola de nuevo, <span style="color:var(--naranja);">' + nombreGuardado + '</span>! &#128075;</p>';
-  }
-})();
-
-// ── BANCOS DE PREGUNTAS ──
-var bankC = [
-  {q:"¿Cuál representa correctamente el conjunto Z de los números enteros?",
-   opts:[{t:"… , -3, -2, -1, 0, +1, +2, +3, …",c:true},{t:"Solo los números positivos y el cero",c:false},{t:"Los naturales y las fracciónes",c:false},{t:"Solo los números negativos",c:false}],
-   feed:"Los enteros (Z) incluyen todos los negativos, el cero y todos los positivos.",
-   paso:"Z = {…, -3, -2, -1, 0, +1, +2, +3, …}"},
-  {q:"El valor absoluto de un número entero siempre es:",
-   opts:[{t:"Positivo o cero",c:true},{t:"Negativo",c:false},{t:"El mismo número con signo contrario",c:false},{t:"Siempre cero",c:false}],
-   feed:"El valor absoluto mide la distancia al cero y siempre es >= 0. Ejemplo: |-5| = 5.",
-   paso:"Regla: |n| >= 0 siempre."},
-  {q:"En la recta numérica, ¿qué afirmación es VERDADERA?",
-   opts:[{t:"El número más a la derecha siempre es mayor",c:true},{t:"-10 es mayor que -2",c:false},{t:"El cero es menor que cuálquier negativo",c:false},{t:"Los negativos crecen hacia la izquierda",c:false}],
-   feed:"En la recta el valor crece de izquierda a derecha. Por eso -2 > -10.",
-   paso:"Izquierda = menor  /  Derecha = mayor"},
-  {q:"¿Cuál es el opuesto (simétrico) del número -15?",
-   opts:[{t:"+15",c:true},{t:"-15",c:false},{t:"0",c:false},{t:"-1",c:false}],
-   feed:"El opuesto cambia el signo: opuesto de -15 es +15.",
-   paso:"Opuesto de -15 = +15"},
-  {q:"Entre dos números enteros negativos, ¿cuál es el mayor?",
-   opts:[{t:"El que tiene menor valor absoluto (más cerca del cero)",c:true},{t:"El que tiene mayor valor absoluto (más lejos del cero)",c:false},{t:"Siempre son iguales",c:false},{t:"No se pueden comparar",c:false}],
-   feed:"Entre negativos: más cerca del cero = mayor. Ejemplo: -2 > -8.",
-   paso:"-2 esta más a la derecha que -8 en la recta → -2 > -8"}
+/* ── TIPO 1: SELECCIÓN MÚLTIPLE (20) ── */
+const BANCO_SM = [
+  {
+    ctx:'🌡️ <strong>Bogotá, madrugada</strong><br>A las 5 a.m. la temperatura era <span class="dato">−2°C</span>. Al mediodía subió <span class="dato">+9°C</span>.',
+    enun:'¿Cuál era la temperatura al mediodía?',
+    ops:['−11°C','+7°C','−7°C','+11°C'], corr:1,
+    fb_ok:'✅ (−2)+(+9): signos distintos → 9−2=7; el mayor valor absoluto (+9) da signo positivo → +7°C.',
+    fb_err:'❌ (−2)+(+9): signos distintos → resta 9−2=7; el mayor valor absoluto (+9) da signo positivo → +7°C.'
+  },
+  {
+    ctx:'🛒 <strong>Tienda del barrio</strong><br>La mamá de Valentina debe <span class="dato">−$8.000</span>. Hoy pagó <span class="dato">$5.000</span>.',
+    enun:'¿Cuánto sigue debiendo?',
+    ops:['−$13.000','+$3.000','−$3.000','$0'], corr:2,
+    fb_ok:'✅ (−8.000)+(+5.000)=−3.000. Sigue debiendo $3.000.',
+    fb_err:'❌ (−8.000)+(+5.000): signos distintos → 8.000−5.000=3.000; el mayor abs (−8.000) da negativo → −$3.000.'
+  },
+  {
+    ctx:'🏬 <strong>Centro comercial El Cacique – Bucaramanga</strong><br>El ascensor está en el <span class="dato">piso −2</span>. Sube <span class="dato">6 pisos</span>.',
+    enun:'¿En qué piso queda?',
+    ops:['Piso 8','Piso −8','Piso 4','Piso −4'], corr:2,
+    fb_ok:'✅ (−2)+(+6)=+4 → piso 4.',
+    fb_err:'❌ (−2)+(+6): signos distintos → 6−2=4; el mayor abs (+6) da positivo → piso 4.'
+  },
+  {
+    ctx:'⚽ <strong>Torneo escolar</strong><br>Diferencia de goles en tres partidos: <span class="dato">+5</span>, <span class="dato">+3</span> y <span class="dato">−4</span>.',
+    enun:'¿Cuál es la diferencia de goles total?',
+    ops:['+12','+4','−2','+2'], corr:1,
+    fb_ok:'✅ (+5)+(+3)+(−4)=+8−4=+4.',
+    fb_err:'❌ (+5)+(+3)=+8; (+8)+(−4)=+4.'
+  },
+  {
+    ctx:'🏔️ <strong>Geografía colombiana</strong><br>El Nevado del Ruiz está a <span class="dato">+5.321 m</span>. Una plataforma de pesca en el Pacífico está a <span class="dato">−80 m</span>.',
+    enun:'¿Cuál es la diferencia de altura entre ambos puntos?',
+    ops:['5.241 m','5.401 m','5.321 m','5.000 m'], corr:1,
+    fb_ok:'✅ (+5.321)−(−80)=(+5.321)+(+80)=5.401 m.',
+    fb_err:'❌ (+5321)−(−80)=5321+80=5.401 m. Restar negativo es sumar positivo.'
+  },
+  {
+    ctx:'🎮 <strong>Juego en el celular</strong><br>Sebastián tenía <span class="dato">+120 pts</span>. Perdió <span class="dato">85 pts</span> y luego ganó <span class="dato">40 pts</span>.',
+    enun:'¿Cuántos puntos tiene al final?',
+    ops:['+75','+245','−75','+35'], corr:0,
+    fb_ok:'✅ 120−85=35; 35+40=+75 puntos.',
+    fb_err:'❌ 120−85=35; 35+40=75. Resultado: +75.'
+  },
+  {
+    ctx:'🌎 <strong>Temperaturas mínimas</strong><br>Bogotá: <span class="dato">−1°C</span> · Medellín: <span class="dato">+14°C</span> · Pasto: <span class="dato">−3°C</span> · Cali: <span class="dato">+18°C</span>.',
+    enun:'¿Orden correcto de mayor a menor temperatura?',
+    ops:['Cali, Medellín, Bogotá, Pasto','Pasto, Bogotá, Medellín, Cali','Cali, Bogotá, Medellín, Pasto','Medellín, Cali, Pasto, Bogotá'], corr:0,
+    fb_ok:'✅ De mayor a menor: +18 > +14 > −1 > −3 → Cali, Medellín, Bogotá, Pasto.',
+    fb_err:'❌ De mayor a menor: +18 > +14 > −1 > −3 → Cali, Medellín, Bogotá, Pasto.'
+  },
+  {
+    ctx:'📏 <strong>Recta numérica</strong><br>Punto A en <span class="dato">−6</span>. Punto B en <span class="dato">+4</span>.',
+    enun:'¿Cuántas unidades hay entre A y B?',
+    ops:['2 unidades','−10 unidades','10 unidades','24 unidades'], corr:2,
+    fb_ok:'✅ |(+4)−(−6)|=|+10|=10 unidades.',
+    fb_err:'❌ Distancia = |(+4)−(−6)| = |+10| = 10 unidades.'
+  },
+  {
+    ctx:'🏦 <strong>Cuenta bancaria</strong><br>Diego tiene <span class="dato">−$15.000</span> en su cuenta (debe). Recibe un pago de <span class="dato">+$40.000</span>.',
+    enun:'¿Cuánto tiene ahora en su cuenta?',
+    ops:['+$55.000','+$25.000','−$25.000','+$15.000'], corr:1,
+    fb_ok:'✅ (−15.000)+(+40.000)=+25.000.',
+    fb_err:'❌ (−15.000)+(+40.000): 40.000−15.000=25.000; el mayor abs (+40.000) da positivo → +$25.000.'
+  },
+  {
+    ctx:'🚡 <strong>Teleférico de Manizales</strong><br>La estación base está a <span class="dato">+2.150 m</span> de altitud. El teleférico sube <span class="dato">+320 m</span>.',
+    enun:'¿A qué altitud llega la cabina?',
+    ops:['+1.830 m','+2.470 m','+2.150 m','+320 m'], corr:1,
+    fb_ok:'✅ 2.150+320=2.470 m.',
+    fb_err:'❌ 2.150+320=2.470 m de altitud.'
+  },
+  {
+    ctx:'🎯 <strong>Concurso de preguntas</strong><br>Por respuesta correcta: <span class="dato">+10 pts</span>. Por incorrecta: <span class="dato">−4 pts</span>. Laura acertó 5 y falló 3.',
+    enun:'¿Cuántos puntos tiene Laura?',
+    ops:['+38','+50','+62','+30'], corr:0,
+    fb_ok:'✅ (5×10)+(3×−4)=50−12=+38 pts.',
+    fb_err:'❌ (5×10)+(3×−4)=50−12=38 puntos.'
+  },
+  {
+    ctx:'🌊 <strong>Buceo en el Pacífico colombiano</strong><br>Un buzo está a <span class="dato">−12 m</span>. Sube <span class="dato">5 m</span>.',
+    enun:'¿A qué profundidad queda el buzo?',
+    ops:['−17 m','+7 m','−7 m','+17 m'], corr:2,
+    fb_ok:'✅ (−12)+(+5)=−7 m. Sigue bajo el agua.',
+    fb_err:'❌ (−12)+(+5): signos distintos → 12−5=7; el mayor abs (−12) da negativo → −7 m.'
+  },
+  {
+    ctx:'📊 <strong>Temperatura de congeladores</strong><br>Congelador A: <span class="dato">−18°C</span>. Congelador B: <span class="dato">−5°C</span>.',
+    enun:'¿Cuál de las siguientes afirmaciones es correcta?',
+    ops:['A es más frío que B','B es más frío que A','Tienen la misma temperatura','No se puede comparar'], corr:0,
+    fb_ok:'✅ −18 < −5, por eso el congelador A está más a la izquierda en la recta → es más frío.',
+    fb_err:'❌ −18 < −5 en la recta numérica → el congelador A está más a la izquierda = es más frío.'
+  },
+  {
+    ctx:'🚗 <strong>Altitud en la vía Bogotá–Villeta</strong><br>Se parte de <span class="dato">+2.600 m</span> y se desciende <span class="dato">1.800 m</span>.',
+    enun:'¿A qué altitud se llega?',
+    ops:['+4.400 m','+800 m','−800 m','+1.800 m'], corr:1,
+    fb_ok:'✅ 2.600−1.800=+800 m.',
+    fb_err:'❌ 2.600−1.800=800 m de altitud.'
+  },
+  {
+    ctx:'🧾 <strong>Feria escolar</strong><br>El stand ganó <span class="dato">+$60.000</span> y gastó <span class="dato">−$38.000</span>.',
+    enun:'¿Cuál es la ganancia neta?',
+    ops:['+$98.000','+$22.000','−$22.000','+$38.000'], corr:1,
+    fb_ok:'✅ (+60.000)+(−38.000)=+22.000.',
+    fb_err:'❌ (+60.000)+(−38.000): 60.000−38.000=22.000 → ganancia neta +$22.000.'
+  },
+  {
+    ctx:'📉 <strong>Calificaciones</strong><br>Nota base = 3.0. Primer bimestre: <span class="dato">+0.5</span>. Segundo bimestre: <span class="dato">−1.2</span>.',
+    enun:'¿Cuánto tiene el estudiante respecto a la nota base?',
+    ops:['−0.7','+0.7','−1.7','+1.7'], corr:0,
+    fb_ok:'✅ (+0.5)+(−1.2)=−0.7 respecto a la nota base.',
+    fb_err:'❌ (+0.5)+(−1.2): signos distintos → 1.2−0.5=0.7; el mayor abs (−1.2) da negativo → −0.7.'
+  },
+  {
+    ctx:'🏊 <strong>Piscina olímpica</strong><br>Un nadador está en la superficie (<span class="dato">0 m</span>). La piscina tiene <span class="dato">3 m</span> de profundidad. Llega al fondo y vuelve a la superficie.',
+    enun:'¿Cuántos metros recorrió en total (ida y vuelta)?',
+    ops:['3 m','6 m','−6 m','0 m'], corr:1,
+    fb_ok:'✅ Baja 3 m y sube 3 m → |−3|+|+3|=6 m recorridos.',
+    fb_err:'❌ Bajó 3 m y subió 3 m → distancia total = 6 m.'
+  },
+  {
+    ctx:'🎒 <strong>Intercambio escolar</strong><br>Juliana tenía <span class="dato">+12</span> puntos canje. Prestó <span class="dato">5</span> y recibió <span class="dato">3</span>.',
+    enun:'¿Cuántos puntos canje tiene ahora?',
+    ops:['+10','+20','+4','+14'], corr:0,
+    fb_ok:'✅ 12−5+3=10 puntos canje.',
+    fb_err:'❌ 12−5=7; 7+3=10 puntos canje.'
+  },
+  {
+    ctx:'🌡️ <strong>Nevado de Santa Isabel</strong><br>Temperatura en la base: <span class="dato">+4°C</span>. En la cima: <span class="dato">−6°C</span>.',
+    enun:'¿Cuánto disminuye la temperatura de la base a la cima?',
+    ops:['2°C','10°C','−10°C','6°C'], corr:1,
+    fb_ok:'✅ (+4)−(−6)=(+4)+(+6)=10°C de disminución.',
+    fb_err:'❌ (+4)−(−6)=(+4)+(+6)=10. La temperatura disminuye 10°C.'
+  },
+  {
+    ctx:'🏟️ <strong>Estadio de fútbol</strong><br>El marcador es <span class="dato">2−5</span>. La diferencia de goles del equipo local es <span class="dato">2−5=−3</span>.',
+    enun:'Si en el tiempo extra meten 2 goles más, ¿cuál queda la diferencia?',
+    ops:['−5','−1','+1','−3'], corr:1,
+    fb_ok:'✅ (−3)+(+2)=−1. Aún van perdiendo por un gol.',
+    fb_err:'❌ (−3)+(+2): signos distintos → 3−2=1; el mayor abs (−3) da negativo → −1.'
+  },
 ];
 
-var bankO = [
-  {q:"Resuelve: (-8) - 4 =",
-   opts:[{t:"-12",c:true},{t:"-4",c:false},{t:"12",c:false},{t:"4",c:false}],
-   feed:"Mismo signo negativo: se suman valores y conserva el signo.",
-   paso:"(-8) + (-4) = -12"},
-  {q:"Calcula: -15 + 7 =",
-   opts:[{t:"-8",c:true},{t:"8",c:false},{t:"-22",c:false},{t:"22",c:false}],
-   feed:"Signos distintos: se restan y gana el signo del mayor valor absoluto (-).",
-   paso:"15 - 7 = 8 → gana el negativo → -8"},
-  {q:"Efectúa: (+5) - (-12) =",
-   opts:[{t:"17",c:true},{t:"-17",c:false},{t:"-7",c:false},{t:"7",c:false}],
-   feed:"Restar un negativo = sumar su opuesto. 5 + 12 = 17.",
-   paso:"5 - (-12) = 5 + 12 = 17"},
-  {q:"¿Cuánto es 3 - 10?",
-   opts:[{t:"-7",c:true},{t:"7",c:false},{t:"-13",c:false},{t:"13",c:false}],
-   feed:"Signos distintos, se restan y gana el negativo (10 > 3).",
-   paso:"10 - 3 = 7 → gana el negativo → -7"},
-  {q:"Calcula: |-6| + |-4| =",
-   opts:[{t:"10",c:true},{t:"-10",c:false},{t:"2",c:false},{t:"-2",c:false}],
-   feed:"El valor absoluto convierte en positivos: 6 + 4 = 10.",
-   paso:"|−6| = 6  ·  |−4| = 4 → 6 + 4 = 10"},
-  {q:"Operación combinada: -2 + 9 - 4 =",
-   opts:[{t:"3",c:true},{t:"11",c:false},{t:"-7",c:false},{t:"15",c:false}],
-   feed:"De izquierda a derecha: -2 + 9 = 7; luego 7 - 4 = 3.",
-   paso:"-2 + 9 = 7 → 7 - 4 = 3"},
-  {q:"¿Qué número sumado a -5 da como resultado 2?",
-   opts:[{t:"7",c:true},{t:"-7",c:false},{t:"-3",c:false},{t:"3",c:false}],
-   feed:"n + (-5) = 2 → n = 2 + 5 = 7.",
-   paso:"n = 2 - (-5) = 2 + 5 = 7"},
-  {q:"Efectúa: 0 - (-8) =",
-   opts:[{t:"8",c:true},{t:"-8",c:false},{t:"0",c:false},{t:"-16",c:false}],
-   feed:"Restar -8 = sumar +8. 0 + 8 = 8.",
-   paso:"0 - (-8) = 0 + 8 = 8"}
+/* ── TIPO 2: PROBLEMAS ABIERTOS (20) ── */
+const BANCO_AB = [
+  {
+    ctx:'🏦 <strong>El ahorro de Camilo</strong><br>Camilo debía <span class="dato">−$12.000</span>. Su abuela le regaló <span class="dato">+$30.000</span>.',
+    enun:'¿Cuánto dinero tiene ahora Camilo?',
+    unidad:'pesos',
+    corr:18000,
+    pista:'(−12.000)+(+30.000): signos distintos → 30.000−12.000=18.000. El mayor abs (+30.000) da <strong>positivo</strong> → +$18.000.',
+    fb_ok:'✅ (−12.000)+(+30.000)=+$18.000.',
+    fb_err:'❌ (−12.000)+(+30.000): 30.000−12.000=18.000; mayor abs (+30.000) → positivo: +$18.000.'
+  },
+  {
+    ctx:'🌡️ <strong>Madrugada en Ipiales</strong><br>Temperatura: <span class="dato">+2°C</span>. Durante la noche bajó <span class="dato">7°C</span>.',
+    enun:'¿Cuál fue la temperatura final?',
+    unidad:'°C',
+    corr:-5,
+    pista:'(+2)+(−7): signos distintos → 7−2=5. El mayor abs es −7 → resultado <strong>negativo</strong>: −5°C.',
+    fb_ok:'✅ (+2)+(−7)=−5°C.',
+    fb_err:'❌ (+2)+(−7): 7−2=5; mayor abs es −7 → −5°C.'
+  },
+  {
+    ctx:'🏊 <strong>Piscina de Piedecuesta</strong><br>Plataforma a <span class="dato">+3 m</span>. Fondo a <span class="dato">−4 m</span>.',
+    enun:'¿Cuántos metros recorre el nadador desde la plataforma al fondo?',
+    unidad:'metros',
+    corr:7,
+    pista:'(+3)−(−4)=(+3)+(+4)=7 m. <strong>Restar negativo = sumar positivo.</strong>',
+    fb_ok:'✅ (+3)−(−4)=7 metros.',
+    fb_err:'❌ (+3)−(−4)=(+3)+(+4)=7 metros. Restar negativo es sumar positivo.'
+  },
+  {
+    ctx:'📉 <strong>Calificaciones de Luisa</strong><br>1er bimestre: <span class="dato">+3</span>. 2do: <span class="dato">−5</span>. 3er: <span class="dato">+2</span>.',
+    enun:'¿Cuántos puntos tiene respecto a la nota base al terminar los tres bimestres?',
+    unidad:'puntos',
+    corr:0,
+    pista:'(+3)+(−5)=−2; (−2)+(+2)=<strong>0</strong>. Los opuestos se anulan.',
+    fb_ok:'✅ (+3)+(−5)+(+2)=0.',
+    fb_err:'❌ Paso a paso: (+3)+(−5)=−2; (−2)+(+2)=0.'
+  },
+  {
+    ctx:'⚽ <strong>Los Cóndores</strong><br>Diferencia de goles: <span class="dato">−3</span>. Último partido: metieron <span class="dato">5</span> y recibieron <span class="dato">2</span>.',
+    enun:'¿Cuál es la nueva diferencia de goles?',
+    unidad:'goles',
+    corr:0,
+    pista:'Diferencia del partido: 5−2=+3. Luego (−3)+(+3)=<strong>0</strong>.',
+    fb_ok:'✅ (−3)+(+3)=0.',
+    fb_err:'❌ Partido: +5−2=+3. Luego (−3)+(+3)=0.'
+  },
+  {
+    ctx:'🚗 <strong>La Calera → Villeta</strong><br>Sale de <span class="dato">+2.700 m</span>. Llega a <span class="dato">+800 m</span>.',
+    enun:'¿Cuántos metros desciende el bus?',
+    unidad:'metros',
+    corr:1900,
+    pista:'Descenso = altitud inicial − altitud final = 2.700−800=<strong>1.900 m</strong>.',
+    fb_ok:'✅ 2.700−800=1.900 metros de descenso.',
+    fb_err:'❌ 2.700−800=1.900 metros de descenso.'
+  },
+  {
+    ctx:'🧾 <strong>Stand de la feria</strong><br>Vendió y ganó <span class="dato">+$45.000</span>. Gastó en materiales <span class="dato">−$18.000</span> y en transporte <span class="dato">−$7.000</span>.',
+    enun:'¿Cuánto ganó neto el stand?',
+    unidad:'pesos',
+    corr:20000,
+    pista:'45.000−18.000=27.000; 27.000−7.000=<strong>$20.000</strong>.',
+    fb_ok:'✅ +$45.000−$18.000−$7.000=+$20.000.',
+    fb_err:'❌ 45.000−18.000=27.000; 27.000−7.000=20.000.'
+  },
+  {
+    ctx:'🌊 <strong>Buceo recreativo en el Pacífico</strong><br>El buzo sube de <span class="dato">−15 m</span> a <span class="dato">−6 m</span>.',
+    enun:'¿Cuántos metros subió?',
+    unidad:'metros',
+    corr:9,
+    pista:'Distancia = (−6)−(−15)=(−6)+(+15)=<strong>9 m</strong>.',
+    fb_ok:'✅ (−6)−(−15)=9 metros subidos.',
+    fb_err:'❌ (−6)−(−15)=(−6)+(+15)=9 metros.'
+  },
+  {
+    ctx:'🎯 <strong>Concurso de matemáticas</strong><br>Andrés: <span class="dato">+10 pts</span> por correcta, <span class="dato">−3 pts</span> por incorrecta. Acertó 6 y falló 4.',
+    enun:'¿Cuántos puntos tiene Andrés?',
+    unidad:'puntos',
+    corr:48,
+    pista:'(6×10)+(4×−3)=60−12=<strong>48</strong> puntos.',
+    fb_ok:'✅ 60−12=48 puntos.',
+    fb_err:'❌ (6×10)=60; (4×3)=12; 60−12=48.'
+  },
+  {
+    ctx:'💳 <strong>Cuenta de ahorros</strong><br>Saldo: <span class="dato">−$20.000</span>. Consigna <span class="dato">$50.000</span>.',
+    enun:'¿Cuál es el nuevo saldo?',
+    unidad:'pesos',
+    corr:30000,
+    pista:'(−20.000)+(+50.000): 50.000−20.000=<strong>$30.000</strong> positivo.',
+    fb_ok:'✅ (−20.000)+(+50.000)=+$30.000.',
+    fb_err:'❌ (−20.000)+(+50.000)=+30.000.'
+  },
+  {
+    ctx:'🌡️ <strong>Variación térmica en Bogotá</strong><br>Mínima del día: <span class="dato">−1°C</span>. Máxima: <span class="dato">+17°C</span>.',
+    enun:'¿Cuál es la variación total de temperatura en el día?',
+    unidad:'°C',
+    corr:18,
+    pista:'(+17)−(−1)=(+17)+(+1)=<strong>18°C</strong> de variación.',
+    fb_ok:'✅ (+17)−(−1)=18°C de variación.',
+    fb_err:'❌ (+17)−(−1)=(+17)+(+1)=18°C.'
+  },
+  {
+    ctx:'🏔️ <strong>Senderismo en el Cocuy</strong><br>Campamento a <span class="dato">+3.800 m</span>. Laguna a <span class="dato">+4.200 m</span>.',
+    enun:'¿Cuántos metros sube el excursionista?',
+    unidad:'metros',
+    corr:400,
+    pista:'4.200−3.800=<strong>400 m</strong> de ascenso.',
+    fb_ok:'✅ 4.200−3.800=400 metros de ascenso.',
+    fb_err:'❌ 4.200−3.800=400 metros.'
+  },
+  {
+    ctx:'🎒 <strong>Puntos en la tienda escolar</strong><br>Juan tenía <span class="dato">+8 pts</span>. Gastó <span class="dato">12 pts</span> en un borrador.',
+    enun:'¿Cuántos puntos le quedan a Juan?',
+    unidad:'puntos',
+    corr:-4,
+    pista:'(+8)+(−12): 12−8=4; mayor abs es −12 → resultado <strong>negativo</strong>: −4 puntos.',
+    fb_ok:'✅ (+8)+(−12)=−4 puntos.',
+    fb_err:'❌ (+8)+(−12)=−4. Gasta más de lo que tiene.'
+  },
+  {
+    ctx:'⚽ <strong>Marcador partido</strong><br>El equipo A lleva <span class="dato">−2</span> de diferencia de goles. Mete <span class="dato">3 goles</span> más sin recibir ninguno.',
+    enun:'¿Cuál es la nueva diferencia de goles?',
+    unidad:'goles',
+    corr:1,
+    pista:'(−2)+(+3): signos distintos → 3−2=1; mayor abs es +3 → resultado <strong>positivo</strong>: +1.',
+    fb_ok:'✅ (−2)+(+3)=+1. ¡Ganando por un gol!',
+    fb_err:'❌ (−2)+(+3)=+1.'
+  },
+  {
+    ctx:'🌊 <strong>Marejada en el Caribe</strong><br>Ola más alta: <span class="dato">+4 m</span>. Valle entre olas: <span class="dato">−2 m</span>.',
+    enun:'¿Cuál es la diferencia entre la cresta y el valle?',
+    unidad:'metros',
+    corr:6,
+    pista:'(+4)−(−2)=(+4)+(+2)=<strong>6 m</strong>.',
+    fb_ok:'✅ (+4)−(−2)=6 metros.',
+    fb_err:'❌ (+4)−(−2)=(+4)+(+2)=6 metros.'
+  },
+  {
+    ctx:'📱 <strong>Batería del celular</strong><br>Carga actual: <span class="dato">−40%</span> respecto al nivel óptimo. Se carga <span class="dato">+65%</span>.',
+    enun:'¿Cuánto está respecto al nivel óptimo ahora?',
+    unidad:'%',
+    corr:25,
+    pista:'(−40)+(+65): 65−40=25; mayor abs es +65 → resultado <strong>positivo</strong>: +25%.',
+    fb_ok:'✅ (−40)+(+65)=+25%.',
+    fb_err:'❌ (−40)+(+65)=+25%.'
+  },
+  {
+    ctx:'🏫 <strong>Olimpiada de matemáticas</strong><br>Correcto: <span class="dato">+5 pts</span>. Incorrecto: <span class="dato">−2 pts</span>. Sin responder: <span class="dato">0</span>. Camila: 8 correctas, 3 incorrectas, 2 sin responder.',
+    enun:'¿Cuántos puntos tiene Camila?',
+    unidad:'puntos',
+    corr:34,
+    pista:'(8×5)+(3×−2)+(2×0)=40−6=<strong>34 pts</strong>.',
+    fb_ok:'✅ 8×5=40; 3×2=6; 40−6=34 pts.',
+    fb_err:'❌ (8×5)=40; (3×2)=6; 40−6=34.'
+  },
+  {
+    ctx:'🌡️ <strong>Cadena de frío – vacunas</strong><br>Las vacunas deben guardarse entre <span class="dato">−4°C</span> y <span class="dato">+8°C</span>.',
+    enun:'¿Cuántos grados separan el límite inferior del superior?',
+    unidad:'°C',
+    corr:12,
+    pista:'(+8)−(−4)=(+8)+(+4)=<strong>12°C</strong>.',
+    fb_ok:'✅ (+8)−(−4)=12°C de rango.',
+    fb_err:'❌ (+8)−(−4)=(+8)+(+4)=12°C.'
+  },
+  {
+    ctx:'🚢 <strong>Puerto de Cartagena</strong><br>La quilla del barco está a <span class="dato">−9 m</span>. El puente de mando está a <span class="dato">+12 m</span>.',
+    enun:'¿Qué altura tiene el barco desde la quilla hasta el puente?',
+    unidad:'metros',
+    corr:21,
+    pista:'(+12)−(−9)=(+12)+(+9)=<strong>21 m</strong>.',
+    fb_ok:'✅ (+12)−(−9)=21 metros de altura total.',
+    fb_err:'❌ (+12)−(−9)=(+12)+(+9)=21 metros.'
+  },
+  {
+    ctx:'🏦 <strong>Deuda y pago</strong><br>Sofía debe <span class="dato">−$35.000</span>. Paga <span class="dato">$20.000</span> y luego recibe <span class="dato">$10.000</span> de regalo.',
+    enun:'¿Cuánto debe o tiene Sofía al final?',
+    unidad:'pesos',
+    corr:-5000,
+    pista:'(−35.000)+(+20.000)=−15.000; (−15.000)+(+10.000)=<strong>−$5.000</strong>. Sigue debiendo.',
+    fb_ok:'✅ (−35.000)+(+20.000)+(+10.000)=−$5.000.',
+    fb_err:'❌ −35+20=−15; −15+10=−5 → −$5.000 sigue debiendo.'
+  },
 ];
 
-var bankP = [
-  {ctx:"La temperatura en la madrugada era de +2 C. Al mediodía subió 15 C.",
-   q:"¿Cuál es la temperatura al mediodía?",
-   opts:[{t:"17 C",c:true},{t:"-13 C",c:false},{t:"13 C",c:false},{t:"-17 C",c:false}],
-   feed:"Subir temperatura = sumar. +2 + 15 = 17 C.",
-   paso:"(+2) + (+15) = +17 C"},
-  {ctx:"Un buzo está a -30 m bajo el nivel del mar. Desciende 15 m mas.",
-   q:"¿A que profundidad se encuentra ahora?",
-   opts:[{t:"-45 m",c:true},{t:"-15 m",c:false},{t:"15 m",c:false},{t:"45 m",c:false}],
-   feed:"Descender = restar. -30 - 15 = -45 m.",
-   paso:"(-30) + (-15) = -45 m"},
-  {ctx:"Sofia tiene un saldo de -$25.000 en su cuenta. Hace un abono de $10.000.",
-   q:"¿Cuál es su saldo actual?",
-   opts:[{t:"-$15.000",c:true},{t:"$15.000",c:false},{t:"-$35.000",c:false},{t:"$35.000",c:false}],
-   feed:"Abonar = sumar positivo. -25.000 + 10.000 = -15.000.",
-   paso:"-25.000 + 10.000 = -15.000"},
-  {ctx:"Un ascensor esta en el sótano 3 (piso -3). Sube 8 pisos.",
-   q:"¿En que piso se detiene?",
-   opts:[{t:"Piso 5",c:true},{t:"Piso 11",c:false},{t:"Piso 4",c:false},{t:"Sótano 11",c:false}],
-   feed:"-3 + 8 = +5. Gana el positivo: piso 5.",
-   paso:"(-3) + (+8) = +5 → piso 5"},
-  {ctx:"Carlos avanza 4 casíllas, retrocede 6 y luego avanza 5 casíllas mas.",
-   q:"¿A cuántas casíllas del inicio quedó?",
-   opts:[{t:"3 casíllas",c:true},{t:"5 casíllas",c:false},{t:"15 casíllas",c:false},{t:"1 casílla",c:false}],
-   feed:"+4 - 6 + 5 = -2 + 5 = 3 casíllas.",
-   paso:"+4 - 6 = -2 → -2 + 5 = +3"},
-  {ctx:"La cima de una montaña está a +4.000 m y el fondo de un lago a -1.500 m.",
-   q:"¿Cuántos metros hay de diferencia entre los dos puntos?",
-   opts:[{t:"5.500 m",c:true},{t:"2.500 m",c:false},{t:"-2.500 m",c:false},{t:"3.500 m",c:false}],
-   feed:"4.000 - (-1.500) = 4.000 + 1.500 = 5.500 m.",
-   paso:"4.000 - (-1.500) = 4.000 + 1.500 = 5.500 m"},
-  {ctx:"Una cámara de frio está a -4 C. Baja 2 C cada hora.",
-   q:"¿Qué temperatura tendrá al cabo de 3 horas?",
-   opts:[{t:"-10 C",c:true},{t:"-6 C",c:false},{t:"-2 C",c:false},{t:"0 C",c:false}],
-   feed:"Baja 2x3 = 6 grados. -4 - 6 = -10 C.",
-   paso:"-4 + 3x(-2) = -4 - 6 = -10 C"},
-  {ctx:"Pitágoras nació en el año -570 (570 a.C.) y murió en el año -495 (495 a.C.).",
-   q:"¿Cuántos años vivio?",
-   opts:[{t:"75 años",c:true},{t:"1065 años",c:false},{t:"85 años",c:false},{t:"65 años",c:false}],
-   feed:"Muerte - Nacimiento: -495 - (-570) = -495 + 570 = 75 años.",
-   paso:"-495 - (-570) = -495 + 570 = 75"}
+/* ── TIPO 3: VERDADERO / FALSO (20) ── */
+const BANCO_VF = [
+  {
+    ctx:'🏦 <strong>Banco</strong><br>Daniela dice: "Si debo $5.000 y pago $3.000, mi saldo queda en −$8.000."',
+    enun:'¿Daniela tiene razón?',
+    corr:false,
+    fb_ok:'✅ FALSO. (−5.000)+(+3.000)=−2.000, no −8.000.',
+    fb_err:'❌ Es FALSO. (−5.000)+(+3.000)=−2.000. Daniela sumó en lugar de restar el pago.'
+  },
+  {
+    ctx:'🌡️ <strong>Termómetro</strong><br>Tomás afirma: "−10°C está más a la izquierda que −3°C, por lo tanto −10 es menor que −3."',
+    enun:'¿Tomás tiene razón?',
+    corr:true,
+    fb_ok:'✅ VERDADERO. En la recta numérica, más a la izquierda = menor. −10 < −3.',
+    fb_err:'❌ Es VERDADERO. −10 está más a la izquierda en la recta, por lo tanto −10 < −3.'
+  },
+  {
+    ctx:'🏢 <strong>Ascensor</strong><br>El ascensor parte del piso −1 y sube 1 piso. Sara dice que queda en el piso 0.',
+    enun:'¿Sara tiene razón?',
+    corr:true,
+    fb_ok:'✅ VERDADERO. (−1)+(+1)=0 → piso 0 (planta baja).',
+    fb_err:'❌ Es VERDADERO. (−1)+(+1)=0 → planta baja.'
+  },
+  {
+    ctx:'⚽ <strong>Fútbol</strong><br>Pedro dice: "Un equipo con diferencia de goles −7 está mejor clasificado que uno con −2."',
+    enun:'¿Pedro tiene razón?',
+    corr:false,
+    fb_ok:'✅ FALSO. −2 > −7, entonces el equipo con −2 está mejor clasificado.',
+    fb_err:'❌ Es FALSO. En la recta, −2 > −7. El equipo con −2 está mejor.'
+  },
+  {
+    ctx:'🧮 <strong>Operación</strong><br>Juliana resolvió: (+6)−(−4)=+2.',
+    enun:'¿Juliana resolvió correctamente?',
+    corr:false,
+    fb_ok:'✅ FALSO. (+6)−(−4)=(+6)+(+4)=+10, no +2.',
+    fb_err:'❌ Es FALSO. (+6)−(−4)=(+6)+(+4)=+10.'
+  },
+  {
+    ctx:'📐 <strong>Valor absoluto</strong><br>Laura afirma: "El valor absoluto de cualquier entero siempre es mayor o igual a cero."',
+    enun:'¿Laura tiene razón?',
+    corr:true,
+    fb_ok:'✅ VERDADERO. El valor absoluto es una distancia, siempre ≥ 0.',
+    fb_err:'❌ Es VERDADERO. El valor absoluto siempre es ≥ 0 por definición.'
+  },
+  {
+    ctx:'📏 <strong>Orden en la recta</strong><br>Carlos dice: "Todo entero negativo es menor que cualquier entero positivo."',
+    enun:'¿Carlos tiene razón?',
+    corr:true,
+    fb_ok:'✅ VERDADERO. Todos los negativos están a la izquierda del cero y todos los positivos a la derecha.',
+    fb_err:'❌ Es VERDADERO. Todo negativo < 0 < cualquier positivo.'
+  },
+  {
+    ctx:'🌡️ <strong>Temperatura</strong><br>Ana dice: "La diferencia entre +5°C y −3°C es de 2°C."',
+    enun:'¿Ana tiene razón?',
+    corr:false,
+    fb_ok:'✅ FALSO. (+5)−(−3)=(+5)+(+3)=8°C de diferencia.',
+    fb_err:'❌ Es FALSO. (+5)−(−3)=8°C, no 2°C.'
+  },
+  {
+    ctx:'🏊 <strong>Recta numérica y distancia</strong><br>Beto dice: "La distancia entre −4 y +4 en la recta numérica es 0."',
+    enun:'¿Beto tiene razón?',
+    corr:false,
+    fb_ok:'✅ FALSO. |(+4)−(−4)|=|8|=8 unidades de distancia.',
+    fb_err:'❌ Es FALSO. La distancia es |(+4)−(−4)|=8, no 0.'
+  },
+  {
+    ctx:'🧾 <strong>Suma de opuestos</strong><br>Pilar dice: "(−15)+(+15)=0".',
+    enun:'¿Pilar tiene razón?',
+    corr:true,
+    fb_ok:'✅ VERDADERO. Todo número sumado con su opuesto da 0.',
+    fb_err:'❌ Es VERDADERO. (−15)+(+15)=0. Los opuestos se anulan.'
+  },
+  {
+    ctx:'🔢 <strong>Subconjuntos</strong><br>Mario afirma: "El conjunto ℕ de naturales está contenido en ℤ (ℕ ⊂ ℤ)."',
+    enun:'¿Mario tiene razón?',
+    corr:true,
+    fb_ok:'✅ VERDADERO. Todo número natural (1, 2, 3…) también es un entero.',
+    fb_err:'❌ Es VERDADERO. ℕ ⊂ ℤ: los naturales son un subconjunto de los enteros.'
+  },
+  {
+    ctx:'📊 <strong>Comparación</strong><br>Rosa dice: "|−8| > |+3|".',
+    enun:'¿Rosa tiene razón?',
+    corr:true,
+    fb_ok:'✅ VERDADERO. |−8|=8 y |+3|=3. Como 8>3, la afirmación es correcta.',
+    fb_err:'❌ Es VERDADERO. |−8|=8 > |+3|=3.'
+  },
+  {
+    ctx:'🚡 <strong>Altitudes</strong><br>Felipe dice: "Si estoy a −3 m y subo 3 m, llego al nivel 0 (superficie)."',
+    enun:'¿Felipe tiene razón?',
+    corr:true,
+    fb_ok:'✅ VERDADERO. (−3)+(+3)=0. Llega exactamente a la superficie.',
+    fb_err:'❌ Es VERDADERO. (−3)+(+3)=0.'
+  },
+  {
+    ctx:'💰 <strong>Finanzas familiares</strong><br>Sandra dice: "Tener −$10.000 es mejor que tener −$5.000 porque −10.000 tiene más dígitos."',
+    enun:'¿Sandra tiene razón?',
+    corr:false,
+    fb_ok:'✅ FALSO. −$10.000 < −$5.000. Tener más dígitos negativos no significa más dinero.',
+    fb_err:'❌ Es FALSO. −10.000 < −5.000. Más deuda no es mejor.'
+  },
+  {
+    ctx:'🌊 <strong>Buceo</strong><br>El buzo A está a −8 m y el buzo B a −3 m. Nicolás dice: "El buzo A está más cerca de la superficie."',
+    enun:'¿Nicolás tiene razón?',
+    corr:false,
+    fb_ok:'✅ FALSO. −3 m está más cerca de 0 (superficie) que −8 m.',
+    fb_err:'❌ Es FALSO. −3 > −8, entonces B está más cerca de la superficie.'
+  },
+  {
+    ctx:'➕ <strong>Ley de signos</strong><br>Tomás afirma: "Al restar un número negativo, el resultado siempre aumenta."',
+    enun:'¿Tomás tiene razón?',
+    corr:true,
+    fb_ok:'✅ VERDADERO. a−(−b)=a+b. Restar un negativo es sumar su positivo → el resultado aumenta.',
+    fb_err:'❌ Es VERDADERO. a−(−b)=a+b, siempre aumenta.'
+  },
+  {
+    ctx:'📐 <strong>Opuestos</strong><br>Diana dice: "El opuesto de 0 es 0."',
+    enun:'¿Diana tiene razón?',
+    corr:true,
+    fb_ok:'✅ VERDADERO. El opuesto de 0 es 0, porque 0+(0)=0.',
+    fb_err:'❌ Es VERDADERO. El opuesto de 0 es 0.'
+  },
+  {
+    ctx:'🌡️ <strong>Comparación de temperaturas</strong><br>Luis dice: "Si la temperatura de ayer fue −2°C y hoy es −5°C, hoy hace más frío."',
+    enun:'¿Luis tiene razón?',
+    corr:true,
+    fb_ok:'✅ VERDADERO. −5 < −2, por lo tanto hoy hace más frío.',
+    fb_err:'❌ Es VERDADERO. −5 < −2 → más frío.'
+  },
+  {
+    ctx:'🔢 <strong>Valor absoluto y opuesto</strong><br>Paula dice: "|−7| = −7".',
+    enun:'¿Paula tiene razón?',
+    corr:false,
+    fb_ok:'✅ FALSO. |−7|=+7. El valor absoluto siempre es positivo o cero.',
+    fb_err:'❌ Es FALSO. |−7|=7, nunca negativo.'
+  },
+  {
+    ctx:'🏟️ <strong>Clasificación</strong><br>El equipo tiene diferencia de goles −1. Recibe 2 goles más (sin meter ninguno). Marta dice: "Ahora tiene diferencia −3."',
+    enun:'¿Marta tiene razón?',
+    corr:true,
+    fb_ok:'✅ VERDADERO. (−1)+(−2)=−3. Recibir goles empeora la diferencia.',
+    fb_err:'❌ Es VERDADERO. (−1)+(−2)=−3.'
+  },
 ];
 
-// ── VARIABLES GLOBALES ──
-var userAnswers = {}, quizDone = false, playerName = nombreGuardado;
-var catScores = {c:0, o:0, p:0};
-var catTotals = {c:0, o:0, p:0};
-var qCat = {};
-
-// ── SHUFFLE ──
-function shuffle(arr){
-  var a = arr.slice();
-  for(var i=a.length-1;i>0;i--){
-    var j=Math.floor(Math.random()*(i+1));
-    var tmp=a[i]; a[i]=a[j]; a[j]=tmp;
-  }
+/* ════════════════════════════════════
+   SELECCIÓN ALEATORIA — 4 de cada tipo
+════════════════════════════════════ */
+function mezclar(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
   return a;
 }
+function elegir(arr,n){return mezclar(arr).slice(0,n);}
 
-// ── GENERAR QUIZ ──
-window.addEventListener('DOMContentLoaded', function(){
-  var container = document.getElementById('quiz-container');
-  var qC = shuffle(bankC).slice(0,2);
-  var qO = shuffle(bankO).slice(0,4);
-  var qP = shuffle(bankP).slice(0,4);
-  var sections = [
-    {id:'c', icon:'&#129504;', css:'cat-conceptos',   label:'Fase 1 &middot; Conceptos Basícos',  sub:'Definición, recta numérica y valor absoluto', items:qC},
-    {id:'o', icon:'&#128290;', css:'cat-operaciónes', label:'Fase 2 &middot; Operaciónes',         sub:'Suma y resta de enteros con ley de signos',    items:qO},
-    {id:'p', icon:'&#127758;', css:'cat-problemas',   label:'Fase 3 &middot; Problemás Reales',    sub:'Situaciónes cotidianas modeladas con Z',        items:qP}
+const selSM=elegir(BANCO_SM,4);
+const selAB=elegir(BANCO_AB,4);
+const selVF=elegir(BANCO_VF,4);
+
+/* ════════════════════════════════════
+   RENDER DINÁMICO
+════════════════════════════════════ */
+function renderSM(q, idx, numGlobal) {
+  return `
+  <div class="pregunta" id="p-sm${idx}">
+    <div class="ctx">${q.ctx}</div>
+    <div class="preg-enun"><span class="preg-num">${numGlobal}</span>${q.enun}</div>
+    <div class="opciones">
+      ${q.ops.map((op,i)=>`
+      <button class="opt-btn" onclick="respSM(${idx},${i})" data-o="${i}">
+        <span class="opt-l">${['A','B','C','D'][i]}</span>${op}
+      </button>`).join('')}
+    </div>
+    <div class="preg-fb" id="fb-sm${idx}"></div>
+  </div>`;
+}
+
+function renderAB(q, idx, numGlobal) {
+  return `
+  <div class="pregunta" id="p-ab${idx}">
+    <div class="ctx">${q.ctx}</div>
+    <div class="preg-enun"><span class="preg-num">${numGlobal}</span>${q.enun}</div>
+    <div class="resp-row">
+      <span class="resp-label">Respuesta:</span>
+      <input type="number" class="resp-inp" id="ab${idx}" aria-label="respuesta abierta ${numGlobal}"/>
+      ${q.unidad ? `<span class="resp-label">${q.unidad}</span>` : ''}
+      <button class="check-btn" onclick="respAB(${idx})">✔ Verificar</button>
+      <button class="btn-pista" onclick="togglePista('pab${idx}')">💡 Pista</button>
+    </div>
+    <div class="pista-box" id="pab${idx}">${q.pista}</div>
+    <div class="preg-fb" id="fb-ab${idx}"></div>
+  </div>`;
+}
+
+function renderVF(q, idx, numGlobal) {
+  return `
+  <div class="pregunta" id="p-vf${idx}">
+    <div class="ctx">${q.ctx}</div>
+    <div class="preg-enun"><span class="preg-num">${numGlobal}</span>${q.enun}</div>
+    <div class="vf-btns">
+      <button class="vf-btn" onclick="respVF(${idx},true)">✔ Verdadero</button>
+      <button class="vf-btn" onclick="respVF(${idx},false)">✘ Falso</button>
+    </div>
+    <div class="preg-fb" id="fb-vf${idx}"></div>
+  </div>`;
+}
+
+/* ════════════════════════════════════
+   INYECTAR HTML EN EL DOM
+════════════════════════════════════ */
+(function construirEvaluacion() {
+  let html = '';
+  const PTS_SM = 9, PTS_AB = 9, PTS_VF = 8; // ~100 pts total (4×9 + 4×9 + 4×8 = 104 → ajustado abajo)
+
+  // PARTE 1
+  html += `
+  <div class="bloque-eval">
+    <span class="section-label label-rojo">🌍 Parte 1 · Selección múltiple</span>
+    <h2>Lee la situación y elige</h2>
+    <p class="sub">4 preguntas · 8 puntos cada una · 32 pts</p>`;
+  selSM.forEach((q, i) => { html += renderSM(q, i, i + 1); });
+  html += `</div>`;
+
+  // PARTE 2
+  html += `
+  <div class="bloque-eval">
+    <span class="section-label label-cian">✏️ Parte 2 · Resuelve el problema</span>
+    <h2>Escribe tu respuesta</h2>
+    <p class="sub">4 preguntas · 9 puntos cada una · 36 pts</p>`;
+  selAB.forEach((q, i) => { html += renderAB(q, i, i + 5); });
+  html += `</div>`;
+
+  // PARTE 3
+  html += `
+  <div class="bloque-eval">
+    <span class="section-label label-naranja">✅ Parte 3 · Verdadero o Falso</span>
+    <h2>¿Tiene sentido matemático?</h2>
+    <p class="sub">4 preguntas · 8 puntos cada una · 32 pts</p>`;
+  selVF.forEach((q, i) => { html += renderVF(q, i, i + 9); });
+  html += `</div>`;
+
+  document.getElementById('zona-preguntas').innerHTML = html;
+})();
+
+/* ════════════════════════════════════
+   ESTADO GLOBAL
+════════════════════════════════════ */
+const TOTAL = 12;
+const PTS_SM = 8, PTS_AB = 9, PTS_VF = 8;
+let correctas = 0, incorrectas = 0, puntos = 0;
+const respondidas = new Set();
+const secciones = { sm: 0, ab: 0, vf: 0 };
+
+/* ════════════════════════════════════
+   UTILS
+════════════════════════════════════ */
+function leerLS(k) { try { return localStorage.getItem(k); } catch(e) { return null; } }
+function escribirLS(k, v) { try { localStorage.setItem(k, v); } catch(e) {} }
+function navegarA(id) {
+  try { if (window.parent && typeof window.parent.showPage === 'function') { window.parent.showPage(id); return; } } catch(e) {}
+  window.parent.postMessage({ action: 'cambiarPagina', destino: id }, '*');
+}
+function togglePista(id) { document.getElementById(id).classList.toggle('vis'); }
+
+function actualizarMarcador() {
+  document.getElementById('pts-corr').textContent = correctas;
+  document.getElementById('pts-err').textContent = incorrectas;
+  document.getElementById('pts-pend').textContent = TOTAL - respondidas.size;
+  document.getElementById('pts-total').textContent = puntos;
+  document.getElementById('pts-bar').textContent = puntos;
+  const pct = (respondidas.size / TOTAL) * 100;
+  document.getElementById('prog-fill-mini').style.width = pct + '%';
+  document.getElementById('prog-texto').textContent = respondidas.size + ' / ' + TOTAL;
+  document.getElementById('prog-bar-mini').setAttribute('aria-valuenow', respondidas.size);
+  sincLS();
+}
+
+function sincLS() {
+  const raw = leerLS('edu_progreso'); if (!raw) return;
+  try {
+    const p = JSON.parse(raw);
+    p.evaluacionPuntaje = puntos; p.evaluacionCorrectas = correctas;
+    if (!p.seccionesVisitadas) p.seccionesVisitadas = [];
+    if (!p.seccionesVisitadas.includes('evaluacion')) p.seccionesVisitadas.push('evaluacion');
+    escribirLS('edu_progreso', JSON.stringify(p));
+    window.parent.postMessage({ action: 'actualizarPuntos' }, '*');
+  } catch(e) {}
+}
+
+/* ════════════════════════════════════
+   CRONÓMETRO 60 MIN
+════════════════════════════════════ */
+let tiempoTotal = 60 * 60, tiempoRestante = 60 * 60, timerInt = null, timerActivo = true;
+function fmt(s) {
+  const m = Math.floor(s / 60), sg = s % 60;
+  return String(m).padStart(2,'0') + ':' + String(sg).padStart(2,'0');
+}
+timerInt = setInterval(() => {
+  if (!timerActivo) return;
+  tiempoRestante--;
+  const el = document.getElementById('cronometro');
+  el.textContent = fmt(tiempoRestante);
+  if (tiempoRestante <= 120) el.classList.add('urgente');
+  if (tiempoRestante <= 0) { clearInterval(timerInt); timerActivo = false; enviarEvaluacion(); }
+}, 1000);
+
+/* ════════════════════════════════════
+   RESPUESTAS — SELECCIÓN MÚLTIPLE
+════════════════════════════════════ */
+function respSM(idx, op) {
+  if (respondidas.has('sm' + idx)) return;
+  respondidas.add('sm' + idx);
+  const q = selSM[idx];
+  const card = document.getElementById('p-sm' + idx);
+  const fb = document.getElementById('fb-sm' + idx);
+  const btns = card.querySelectorAll('.opt-btn');
+  btns.forEach(b => b.disabled = true);
+  const corr = (op === q.corr);
+  btns.forEach(b => {
+    const o = parseInt(b.dataset.o);
+    if (o === q.corr) b.classList.add(corr && o === op ? 'sel-ok' : 'mostrar-ok');
+    else if (o === op && !corr) b.classList.add('sel-err');
+  });
+  if (corr) {
+    card.classList.add('resp-ok'); fb.textContent = q.fb_ok; fb.className = 'preg-fb ok';
+    correctas++; puntos += PTS_SM; secciones.sm++;
+  } else {
+    card.classList.add('resp-err'); fb.textContent = q.fb_err; fb.className = 'preg-fb err';
+    incorrectas++;
+  }
+  actualizarMarcador();
+}
+
+/* ════════════════════════════════════
+   RESPUESTAS — PROBLEMAS ABIERTOS
+════════════════════════════════════ */
+const abRespondidas = new Set();
+function respAB(idx) {
+  if (abRespondidas.has(idx)) return;
+  const q = selAB[idx];
+  const inp = document.getElementById('ab' + idx);
+  const fb = document.getElementById('fb-ab' + idx);
+  const card = document.getElementById('p-ab' + idx);
+  const val = parseFloat(inp.value);
+  if (isNaN(val)) { inp.style.borderColor = 'var(--amarillo)'; return; }
+  abRespondidas.add(idx);
+  respondidas.add('ab' + idx);
+  inp.disabled = true;
+  const btn = inp.parentElement.querySelector('.check-btn');
+  if (btn) btn.disabled = true;
+  if (val === q.corr) {
+    inp.className = 'resp-inp ok'; card.classList.add('resp-ok');
+    fb.textContent = q.fb_ok; fb.className = 'preg-fb ok';
+    correctas++; puntos += PTS_AB; secciones.ab++;
+  } else {
+    inp.className = 'resp-inp err'; card.classList.add('resp-err');
+    fb.textContent = q.fb_err; fb.className = 'preg-fb err';
+    incorrectas++;
+  }
+  actualizarMarcador();
+}
+
+/* ════════════════════════════════════
+   RESPUESTAS — VERDADERO / FALSO
+════════════════════════════════════ */
+const vfRespondidas = new Set();
+function respVF(idx, opcion) {
+  if (vfRespondidas.has(idx)) return;
+  vfRespondidas.add(idx);
+  respondidas.add('vf' + idx);
+  const q = selVF[idx];
+  const card = document.getElementById('p-vf' + idx);
+  const fb = document.getElementById('fb-vf' + idx);
+  const btns = card.querySelectorAll('.vf-btn');
+  btns.forEach(b => b.disabled = true);
+  const esCorr = (opcion === q.corr);
+  btns.forEach(b => {
+    const esVerd = b.textContent.includes('Verdadero');
+    const esCorrBtn = (q.corr === true && esVerd) || (q.corr === false && !esVerd);
+    const esPulsado = (opcion === true && esVerd) || (opcion === false && !esVerd);
+    if (esCorrBtn) b.classList.add(esCorr && esPulsado ? 'sel-ok' : 'mostrar-ok');
+    else if (esPulsado && !esCorr) b.classList.add('sel-err');
+  });
+  if (esCorr) {
+    card.classList.add('resp-ok'); fb.textContent = q.fb_ok; fb.className = 'preg-fb ok';
+    correctas++; puntos += PTS_VF; secciones.vf++;
+  } else {
+    card.classList.add('resp-err'); fb.textContent = q.fb_err; fb.className = 'preg-fb err';
+    incorrectas++;
+  }
+  actualizarMarcador();
+}
+
+/* ════════════════════════════════════
+   ENVIAR EVALUACIÓN
+════════════════════════════════════ */
+function enviarEvaluacion() {
+  clearInterval(timerInt); timerActivo = false;
+  document.getElementById('btn-enviar').disabled = true;
+  const seg = tiempoTotal - tiempoRestante;
+  const mm = Math.floor(seg / 60), ss = seg % 60;
+  const tStr = mm + 'm ' + ss + 's';
+  const pct = Math.round((correctas / TOTAL) * 100);
+
+  const niveles = [
+    { u:90, e:'🏆', c:'var(--amarillo)', n:'¡Maestro de los Enteros! 🥇', m:'Rendimiento sobresaliente. Dominas los enteros como un experto.' },
+    { u:70, e:'🎉', c:'var(--verde)',    n:'¡Muy bien! Nivel Avanzado 🌟', m:'Excelente trabajo. Repasa los ítems fallidos y serás perfecto.' },
+    { u:50, e:'💪', c:'var(--cian)',     n:'Nivel Intermedio 📈',           m:'Vas por buen camino. Refuerza la ley de signos en la sección Teoría.' },
+    { u:0,  e:'📚', c:'var(--naranja)', n:'Sigue practicando 📖',           m:'Regresa a Teoría y Práctica antes de volver a intentar.' },
   ];
-  var letters = ['A','B','C','D'];
-  var qIdx = 1;
-  var html = '';
-  sections.forEach(function(sec){
-    html += '<div class="category-header">' +
-      '<div class="category-icon ' + sec.css + '">' + sec.icon + '</div>' +
-      '<div class="category-info"><h2>' + sec.label + '</h2><p>' + sec.sub + '</p></div>' +
-      '</div>';
-    sec.items.forEach(function(item){
-      catTotals[sec.id]++;
-      qCat[qIdx] = sec.id;
-      var shuffOpts = shuffle(item.opts);
-      var corrLetter = String.fromCharCode(97 + shuffOpts.findIndex(function(o){return o.c;}));
-      item._corr = corrLetter;
-      var optsHTML = shuffOpts.map(function(o,i){
-        return '<button class="opt-btn" data-val="' + String.fromCharCode(97+i) + '">' +
-          '<span class="opt-letter">' + letters[i] + '</span><span>' + o.t + '</span></button>';
-      }).join('');
-      var ctxHTML = item.ctx ? '<div class="q-context">' + item.ctx + '</div>' : '';
-      html += '<div class="question-block" id="qb' + qIdx + '" data-q="' + qIdx + '" ' +
-        'data-ans="' + corrLetter + '" ' +
-        'data-feed="' + encodeURIComponent(item.feed) + '" ' +
-        'data-paso="' + encodeURIComponent(item.paso||'') + '">' +
-        '<p class="q-text"><span class="q-badge">' + qIdx + '</span> ' + item.q + '</p>' +
-        ctxHTML +
-        '<div class="options">' + optsHTML + '</div>' +
-        '<div class="feedback" id="feed-' + qIdx + '"></div>' +
-        '</div>';
-      qIdx++;
-    });
+  const d = niveles.find(x => pct >= x.u) || niveles[niveles.length - 1];
+
+  document.getElementById('res-emoji').textContent = d.e;
+  document.getElementById('res-nota').textContent = pct + '%';
+  document.getElementById('res-nota').style.color = d.c;
+  document.getElementById('res-nivel').textContent = d.n;
+  document.getElementById('res-msg').textContent = d.m;
+  document.getElementById('rd-corr').textContent = correctas + '/' + TOTAL;
+  document.getElementById('rd-err').textContent = incorrectas;
+  document.getElementById('rd-pts').textContent = puntos;
+  document.getElementById('rd-tiempo').textContent = tStr;
+
+  const bw = document.getElementById('barras-wrap'); bw.innerHTML = '';
+  [
+    { label: 'Selección múltiple', v: secciones.sm, max: 4, c: 'var(--purp2)' },
+    { label: 'Problemas abiertos', v: secciones.ab, max: 4, c: 'var(--cian)'  },
+    { label: 'Verdadero/Falso',    v: secciones.vf, max: 4, c: 'var(--naranja)' },
+  ].forEach(b => {
+    const p = b.max > 0 ? (b.v / b.max) * 100 : 0;
+    bw.innerHTML += `<div class="barra-item">
+      <div class="barra-label">${b.label}</div>
+      <div class="barra-outer"><div class="barra-inner" style="width:${p}%;background:${b.c}"></div></div>
+      <div class="barra-val">${b.v}/${b.max}</div>
+    </div>`;
   });
-  container.innerHTML = html;
-  attachEvents();
-  if(!playerName) setTimeout(function(){var inp=document.getElementById('player-name'); if(inp) inp.focus();},500);
-});
 
-// ── INICIO DE MISION ──
-function startMission(){
-  var inp = document.getElementById('player-name');
-  if(inp) playerName = inp.value.trim();
-  if(!playerName){
-    if(inp){inp.classList.add('shake'); setTimeout(function(){inp.classList.remove('shake');},400); inp.focus();}
-    return;
-  }
-  escribirLS('edu_estudiante', playerName);
-  document.getElementById('display-player-name').textContent = playerName;
-  document.getElementById('welcome-area').style.display = 'none';
-  document.getElementById('mission-area').style.display = 'block';
-  window.scrollTo({top:0,behavior:'smooth'});
+  const rf = document.getElementById('resultado-final');
+  rf.style.display = 'block'; rf.style.animation = 'fadeIn .6s ease';
+  rf.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  const raw = leerLS('edu_progreso');
+  if (raw) { try {
+    const p = JSON.parse(raw);
+    p.evaluacionFinalPuntaje = puntos; p.evaluacionFinalCorrectas = correctas;
+    p.evaluacionFinalPct = pct; p.evaluacionCompletada = true;
+    if (!p.seccionesVisitadas) p.seccionesVisitadas = [];
+    if (!p.seccionesVisitadas.includes('evaluacion')) p.seccionesVisitadas.push('evaluacion');
+    escribirLS('edu_progreso', JSON.stringify(p));
+    window.parent.postMessage({ action: 'evaluacionCompletada', puntaje: puntos, pct }, '*');
+  } catch(e) {} }
 }
 
-// ── EVENTOS ──
-function attachEvents(){
-  document.querySelectorAll('.question-block').forEach(function(block){
-    var qNum = block.dataset.q;
-    block.querySelectorAll('.opt-btn').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        if(quizDone) return;
-        block.querySelectorAll('.opt-btn').forEach(function(b){b.classList.remove('selected');});
-        btn.classList.add('selected');
-        block.classList.add('answered');
-        userAnswers[qNum] = btn.dataset.val;
-        updateProgress();
-      });
-    });
-  });
-  document.getElementById('btn-calificar').addEventListener('click', evaluateQuiz);
-}
-
-function updateProgress(){
-  var n = Object.keys(userAnswers).length;
-  document.getElementById('progressFill').style.width = (n/10*100) + '%';
-  document.getElementById('progressLabel').textContent = n + ' / 10';
-  if(n === 10){
-    var btn = document.getElementById('btn-calificar');
-    btn.style.background = 'var(--naranja)';
-    btn.style.color = '#fff';
-    btn.innerHTML = '&#128640; &#161;Calificar Misión!';
-  }
-}
-
-// ── CALIFICAR ──
-function evaluateQuiz(){
-  var n = Object.keys(userAnswers).length;
-  if(n < 10){
-    var strip = document.getElementById('alertStrip');
-    document.getElementById('alertMsg').textContent = 'Aún te faltan ' + (10-n) + ' pregunta' + (10-n>1?'s':'') + ' sin responder.';
-    strip.classList.add('show');
-    for(var q=1;q<=10;q++){
-      if(!userAnswers[q]){
-        var el = document.getElementById('qb'+q);
-        if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
-        break;
-      }
-    }
-    return;
-  }
-  document.getElementById('alertStrip').classList.remove('show');
-  quizDone = true;
-  var score = 0;
-  document.querySelectorAll('.question-block').forEach(function(block){
-    var qNum = block.dataset.q;
-    var corr = block.dataset.ans;
-    var user = userAnswers[qNum];
-    var cat  = qCat[qNum];
-    var feedEl = document.getElementById('feed-' + qNum);
-    var feedText = decodeURIComponent(block.dataset.feed);
-    var pasoText = decodeURIComponent(block.dataset.paso);
-    var pasoHTML = pasoText ? '<div class="step-box">&#128208; Paso a paso: <strong>' + pasoText + '</strong></div>' : '';
-    block.querySelectorAll('.opt-btn').forEach(function(b){
-      b.disabled = true;
-      if(b.dataset.val === corr) b.classList.add('correct');
-    });
-    var selBtn = block.querySelector('.opt-btn[data-val="' + user + '"]');
-    if(user === corr){
-      score++; catScores[cat]++;
-      block.style.borderLeftColor = 'var(--verde)';
-      feedEl.innerHTML = '<strong>&#9989; &#161;Correcto!</strong> ' + feedText + pasoHTML;
-      feedEl.classList.add('success','show');
-    } else {
-      if(selBtn) selBtn.classList.add('incorrect');
-      block.style.borderLeftColor = 'var(--rojo)';
-      feedEl.innerHTML = '<strong>&#10060; Casí lo logras.</strong> ' + feedText + pasoHTML;
-      feedEl.classList.add('error','show');
-    }
-  });
-  document.getElementById('top-score').textContent = score + ' / 10';
-  document.getElementById('progressFill').style.width = '100%';
-  document.getElementById('btn-calificar').style.display = 'none';
-  document.getElementById('btn-reintentar').style.display = 'inline-block';
-  if(score >= 6){
-    prog.evaluaciónAprobada = true;
-    if(!prog.seccionesVisitadas) prog.seccionesVisitadas = [];
-    if(prog.seccionesVisitadas.indexOf('evaluación') === -1) prog.seccionesVisitadas.push('evaluación');
-    prog.prácticaPuntaje = (prog.prácticaPuntaje||0) + score*20;
-    prog.últimaNota = score;
-    escribirLS('edu_progreso', JSON.stringify(prog));
-    window.parent.postMessage({action:'evaluaciónAprobada', nota:score},'*');
-    window.parent.postMessage({action:'actualizarPuntos'},'*');
-  }
-  showModal(score);
-}
-
-// ── MODAL ──
-function showModal(score){
-  var pct = score/10*100;
-  var bar = document.getElementById('m-bar-fill');
-  bar.style.background = pct>=80 ? 'var(--verde)' : pct>=60 ? 'var(--naranja)' : 'var(--rojo)';
-  setTimeout(function(){bar.style.width = pct + '%';}, 300);
-  document.getElementById('m-breakdown').innerHTML =
-    '<div class="breakdown-pill bp-c">&#129504; Conceptos: ' + catScores.c + '/' + catTotals.c + '</div>' +
-    '<div class="breakdown-pill bp-o">&#128290; Operaciónes: ' + catScores.o + '/' + catTotals.o + '</div>' +
-    '<div class="breakdown-pill bp-p">&#127758; Problemas: ' + catScores.p + '/' + catTotals.p + '</div>';
-  document.getElementById('m-score').textContent = score + '/10';
-  var n = playerName;
-  var configs = [
-    {min:10, icon:'&#128081;', title:'&#161;Nivel Legendario, '+n+'!', text:'Cero errores. Eres un Maestro de los Enteros. +' + score*20 + ' puntos guardados.'},
-    {min:8,  icon:'&#127942;', title:'&#161;Sobresaliente, '+n+'!',    text:'Excelente desempeño. Revisa las correcciónes para llegar a la perfección. +' + score*20 + ' puntos.'},
-    {min:6,  icon:'&#9989;',   title:'Misión Aprobada',                 text:'Lo lograste, '+n+'. Repasa los errores y estarás listo para cuálquier evaluación. +' + score*20 + ' puntos.'},
-    {min:0,  icon:'&#128170;', title:'&#161;Sigue Entrenando!',          text:'Esta vez la misión te supero, '+n+'. Todo maestro aprende de sus errores. Repasa la Teoría y vuelve más fuerte. (Necesitas >= 6/10).'}
-  ];
-  var r = configs.find(function(x){return score >= x.min;});
-  document.getElementById('m-icon').innerHTML  = r.icon;
-  document.getElementById('m-title').innerHTML = r.title;
-  document.getElementById('m-text').textContent = r.text;
-  document.getElementById('result-modal').classList.add('active');
-}
+/* ════════════════════════════════════
+   REINICIAR
+════════════════════════════════════ */
+function reiniciar() { location.reload(); }
 </script>
 </body>
 </html>
