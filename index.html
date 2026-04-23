@@ -410,7 +410,7 @@
 
 <script>
 /* ════════════════════════════════════════════
-   GOOGLE SHEETS
+   GOOGLE SHEETS — URL fija del Apps Script
 ════════════════════════════════════════════ */
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzFLDi-logDRIt2Vy7hltzioTv-qZCofm3YFlDKO78cu8nAvSGuuLfY8WTONl9FNERt/exec';
 
@@ -419,21 +419,20 @@ function enviarASheets(tipo, datos) {
   const payload = Object.assign({
     tipo,
     fecha:       now.toLocaleDateString('es-CO'),
-    hora:        now.toLocaleTimeString('es-CO', {hour:'2-digit', minute:'2-digit'}),
+    hora:        now.toLocaleTimeString('es-CO', { hour:'2-digit', minute:'2-digit' }),
     timestamp:   now.toISOString(),
     dispositivo: /Mobi|Android/i.test(navigator.userAgent) ? 'Móvil' : 'Escritorio'
   }, datos);
+
   return fetch(SHEETS_URL, {
     method:  'POST',
     mode:    'no-cors',
-    headers: {'Content-Type': 'application/json'},
+    headers: { 'Content-Type': 'application/json' },
     body:    JSON.stringify(payload)
   }).then(() => {
     let msg = '📋 Registro guardado ✓';
-    if (tipo === 'evaluacion')
-      msg = `📊 Nota ${datos.nota_evaluacion}/10 registrada`;
-    else if (tipo === 'practica')
-      msg = `⚡ ${datos.puntos_practica} XP guardados ✓`;
+    if (tipo === 'evaluacion') msg = `📊 Nota ${datos.nota_evaluacion}/10 registrada`;
+    else if (tipo === 'practica') msg = `⚡ ${datos.puntos_practica} XP guardados ✓`;
     mostrarSheetsBadge(msg);
   }).catch(() => console.warn('[Sheets] Sin conexión:', payload));
 }
@@ -449,10 +448,10 @@ function mostrarSheetsBadge(msg) {
 /* ════════════════════════════════════════════
    ESTRELLAS
 ════════════════════════════════════════════ */
-(function() {
+(function () {
   const c = document.getElementById('stars');
   for (let i = 0; i < 80; i++) {
-    const s = document.createElement('span');
+    const s  = document.createElement('span');
     const sz = Math.random() * 2.5 + 1;
     s.style.cssText =
       `width:${sz}px;height:${sz}px;` +
@@ -467,9 +466,9 @@ function mostrarSheetsBadge(msg) {
    STORAGE
 ════════════════════════════════════════════ */
 const SK = { estudiante: 'edu_estudiante', progreso: 'edu_progreso' };
-function leerLS(k)       { try { return localStorage.getItem(k); }    catch(e) { return null; } }
+function leerLS(k)       { try { return localStorage.getItem(k); }         catch(e) { return null; } }
 function escribirLS(k,v) { try { localStorage.setItem(k,v); return true; } catch(e) { return false; } }
-function borrarLS(k)     { try { localStorage.removeItem(k); }        catch(e) {} }
+function borrarLS(k)     { try { localStorage.removeItem(k); }             catch(e) {} }
 
 function mostrarToast(msg, dur=2800) {
   const t = document.getElementById('toast');
@@ -480,7 +479,7 @@ function mostrarToast(msg, dur=2800) {
 }
 
 /* ════════════════════════════════════════════
-   MODAL
+   MODAL DE BIENVENIDA
 ════════════════════════════════════════════ */
 function iniciarEstudiante() {
   const nombre = leerLS(SK.estudiante);
@@ -525,7 +524,6 @@ function guardarNombre() {
 
   document.getElementById('modalSending').classList.add('visible');
 
-  // ── Registro inicial en Sheets ──
   enviarASheets('registro', {
     nombre,
     puntos_practica:     0,
@@ -555,7 +553,7 @@ function actualizarUIEstudiante(nombre) {
     `<span>🚀 <strong>${nombre}</strong> · Sigue tu ruta:</span>
      <button class="footer-reset" onclick="resetearPerfil()"
        title="Cambiar usuario" aria-label="Cambiar usuario y borrar progreso">✕ Reset</button>`;
-  document.getElementById('nav-progreso-wrap').style.display  = 'flex';
+  document.getElementById('nav-progreso-wrap').style.display   = 'flex';
   document.getElementById('nav-puntos-globales').style.display = 'flex';
 }
 
@@ -602,11 +600,11 @@ function actualizarProgresoNav() {
     const visitadas = p.seccionesVisitadas || [];
     const hechas    = ETAPAS.filter(e => visitadas.includes(e)).length;
     const pct       = Math.round(hechas / ETAPAS.length * 100);
-    const fill  = document.getElementById('nav-progreso-fill');
-    const label = document.getElementById('nav-progreso-label');
-    const bar   = document.getElementById('nav-progreso-bar-aria');
-    if (fill)  fill.style.width   = pct + '%';
-    if (label) label.textContent  = `${hechas} de ${ETAPAS.length}`;
+    const fill      = document.getElementById('nav-progreso-fill');
+    const label     = document.getElementById('nav-progreso-label');
+    const bar       = document.getElementById('nav-progreso-bar-aria');
+    if (fill)  fill.style.width  = pct + '%';
+    if (label) label.textContent = `${hechas} de ${ETAPAS.length}`;
     if (bar)   bar.setAttribute('aria-valuenow', pct);
     ETAPAS.forEach(etapa => {
       const el  = document.getElementById('nav-' + etapa);
@@ -687,80 +685,109 @@ function showPage(id) {
 
 /* ════════════════════════════════════════════
    MENSAJES DESDE IFRAMES
+   Escucha: actualizarPuntos | evaluacionCompletada
+            evaluacionAprobada | cambiarPagina
 ════════════════════════════════════════════ */
 window.addEventListener('message', e => {
   if (!e.data) return;
-  const { action, destino, nota, puntos } = e.data;
+  const d = e.data;
+  const { action, destino } = d;
 
-  // Navegación cruzada
+  // ── Navegación cruzada ──
   if (action === 'cambiarPagina' && destino) {
     showPage(destino);
+    return;
   }
 
-  // ── Actualización de puntos desde Práctica ──
+  // ── Sección completada desde iframe ──
+  if (action === 'seccionCompletada' && destino) {
+    marcarSeccionVisitada(destino);
+    return;
+  }
+
+  // ── Puntos desde Práctica (practica-3.html → sumarPuntos) ──
   if (action === 'actualizarPuntos') {
-    actualizarPuntosNav();
-    actualizarProgresoNav();
-    // Enviar puntos actualizados a Sheets
-    try {
-      const nombre = leerLS(SK.estudiante) || 'Anónimo';
-      const p      = JSON.parse(leerLS(SK.progreso) || '{}');
-      // Si llega el valor de puntos en el mensaje, actualizarlo primero
-      if (puntos !== undefined) {
-        p.practicaPuntaje = puntos;
-        escribirLS(SK.progreso, JSON.stringify(p));
-        actualizarPuntosNav();
-      }
-      enviarASheets('practica', {
-        nombre,
-        puntos_practica:     p.practicaPuntaje || 0,
-        nota_evaluacion:     p.notaEvaluacion  || '',
-        aprobado:            p.evaluacionAprobada ? 'Sí' : '',
-        secciones_visitadas: (p.seccionesVisitadas || []).join(', '),
-        evento:              'Actualización de puntos práctica'
-      });
-    } catch(err) {}
-  }
-
-  // ── Evaluación completada ──
-  if (action === 'evaluacionAprobada' || action === 'evaluaciónAprobada') {
     const nombre = leerLS(SK.estudiante) || 'Anónimo';
     try {
       const p = JSON.parse(leerLS(SK.progreso) || '{}');
 
-      // Guardar nota — acepta tanto e.data.nota como e.data.nota_evaluacion
-      const notaFinal = nota !== undefined
-        ? nota
-        : (e.data.nota_evaluacion !== undefined ? e.data.nota_evaluacion : (p.ultimaNota || 0));
+      // Si el iframe envía el valor actualizado de puntos, lo guardamos
+      if (d.puntos !== undefined) {
+        p.practicaPuntaje = d.puntos;
+        escribirLS(SK.progreso, JSON.stringify(p));
+      }
+      // Si viene lista de secciones visitadas del iframe, la fusionamos
+      if (d.seccionesVisitadas) {
+        const arr = typeof d.seccionesVisitadas === 'string'
+          ? d.seccionesVisitadas.split(',').map(s => s.trim()).filter(Boolean)
+          : d.seccionesVisitadas;
+        arr.forEach(s => {
+          if (!p.seccionesVisitadas) p.seccionesVisitadas = [];
+          if (!p.seccionesVisitadas.includes(s)) p.seccionesVisitadas.push(s);
+        });
+        escribirLS(SK.progreso, JSON.stringify(p));
+      }
+
+      actualizarPuntosNav();
+      actualizarProgresoNav();
+
+      // Enviar a Sheets con todos los datos del estudiante
+      enviarASheets('practica', {
+        nombre,
+        puntos_practica:     p.practicaPuntaje     || 0,
+        nota_evaluacion:     p.notaEvaluacion      || '',
+        aprobado:            p.evaluacionAprobada   ? 'Sí' : '',
+        secciones_visitadas: (p.seccionesVisitadas || []).join(', '),
+        evento:              `+${d.puntos !== undefined ? d.puntos : ''} XP práctica`
+      });
+    } catch(err) { console.warn('[index] actualizarPuntos:', err); }
+    return;
+  }
+
+  // ── Evaluación completada (evaluacion.html → enviarEvaluacion) ──
+  // Acepta: 'evaluacionAprobada', 'evaluaciónAprobada' y 'evaluacionCompletada'
+  if (
+    action === 'evaluacionAprobada'   ||
+    action === 'evaluaciónAprobada'   ||
+    action === 'evaluacionCompletada'
+  ) {
+    const nombre = leerLS(SK.estudiante) || 'Anónimo';
+    try {
+      const p = JSON.parse(leerLS(SK.progreso) || '{}');
+
+      // Nota: acepta d.nota, d.nota_evaluacion o d.pct
+      const notaFinal = d.nota           !== undefined ? d.nota
+                      : d.nota_evaluacion !== undefined ? d.nota_evaluacion
+                      : d.pct            !== undefined ? (d.pct / 10).toFixed(1)
+                      : (p.ultimaNota || 0);
 
       p.ultimaNota         = notaFinal;
       p.notaEvaluacion     = notaFinal;
       p.evaluacionAprobada = true;
       if (!p.seccionesVisitadas) p.seccionesVisitadas = [];
-      if (!p.seccionesVisitadas.includes('evaluacion'))
-        p.seccionesVisitadas.push('evaluacion');
+      if (!p.seccionesVisitadas.includes('evaluacion')) p.seccionesVisitadas.push('evaluacion');
+      // Si llegan puntos de práctica actualizados, guardarlos también
+      if (d.puntos !== undefined) p.practicaPuntaje = d.puntos;
       escribirLS(SK.progreso, JSON.stringify(p));
 
       actualizarPuntosNav();
       actualizarProgresoNav();
 
-      // ── Enviar a Sheets ──
+      // Enviar a Sheets con nota, correctas, pct y todo el perfil
       enviarASheets('evaluacion', {
         nombre,
         nota_evaluacion:     notaFinal,
-        aprobado:            notaFinal >= 6 ? 'Sí' : 'No',
-        puntos_practica:     p.practicaPuntaje || 0,
-        secciones_visitadas: (p.seccionesVisitadas || []).join(', '),
+        correctas:           d.correctas            || '',
+        pct:                 d.pct                  || '',
+        aprobado:            Number(notaFinal) >= 6  ? 'Sí' : 'No',
+        puntos_practica:     p.practicaPuntaje       || 0,
+        secciones_visitadas: (p.seccionesVisitadas   || []).join(', '),
         evento:              'Evaluación completada'
       });
 
-    } catch(err) {}
+    } catch(err) { console.warn('[index] evaluacion:', err); }
     mostrarToast('🏆 ¡Evaluación completada! Resultado enviado al docente');
-  }
-
-  // Sección completada desde iframe
-  if (action === 'seccionCompletada' && destino) {
-    marcarSeccionVisitada(destino);
+    return;
   }
 });
 
