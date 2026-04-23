@@ -935,16 +935,6 @@ function respSM(idx, op) {
   actualizarMarcador();
 }
 
-  if (corr) {
-    card.classList.add('resp-ok'); fb.textContent = q.fb_ok; fb.className = 'preg-fb ok';
-    correctas++; puntos += PTS_SM; secciones.sm++;
-  } else {
-    card.classList.add('resp-err'); fb.textContent = q.fb_err; fb.className = 'preg-fb err';
-    incorrectas++;
-  }
-  actualizarMarcador();
-}
-
 /* ════════════════════════════════════
    RESPUESTAS — PROBLEMAS ABIERTOS
 ════════════════════════════════════ */
