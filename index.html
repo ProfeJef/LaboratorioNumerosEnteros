@@ -6,10 +6,6 @@
   <title>Enteros · Misión ℤ | Eduquémonos con TICs</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet"/>
   <style>
-    /* ══════════════════════════════════════════
-       PALETA MISIÓN ℤ — Grado 6° & 7°
-       Púrpura · Cian · Amarillo neón · Fondo oscuro
-    ══════════════════════════════════════════ */
     :root {
       --purp:       #6C3CE1;
       --purp-dark:  #4A21B0;
@@ -29,7 +25,6 @@
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:'Space Grotesk',sans-serif; background:var(--fondo); color:var(--texto); overflow:hidden; }
 
-    /* ESTRELLAS */
     #stars { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
     #stars span {
       position:absolute; border-radius:50%; background:rgba(255,255,255,.75);
@@ -37,7 +32,6 @@
     }
     @keyframes twinkle { 0%,100%{opacity:.15} 50%{opacity:1} }
 
-    /* ── MODAL ── */
     .modal-overlay {
       position:fixed; inset:0;
       background:rgba(10,6,30,.93);
@@ -127,7 +121,6 @@
     .modal-sending { font-size:.78rem; color:var(--cian); margin-top:.6rem; display:none; }
     .modal-sending.visible { display:block; }
 
-    /* ── NAVBAR ── */
     .navbar {
       position:fixed; top:0; left:0; width:100%; z-index:1000;
       background:rgba(15,11,30,.93);
@@ -188,14 +181,12 @@
     .nav-links a .nav-check { font-size:.65rem; opacity:.85; }
     .nav-icon { font-size:.95rem; }
 
-    /* ── PÁGINAS / IFRAMES ── */
     .page { display:none; }
     .page.active { display:block; animation:entradaPage .4s cubic-bezier(.16,1,.3,1); }
     @keyframes entradaPage { from{opacity:0;transform:translateY(14px) scale(.99)} to{opacity:1;transform:translateY(0) scale(1)} }
     .iframe-container { position:fixed; top:64px; bottom:42px; left:0; right:0; background:var(--fondo); }
     .iframe-container iframe { width:100%; height:100%; border:none; display:block; }
 
-    /* ── FOOTER ── */
     footer {
       position:fixed; bottom:0; left:0; width:100%; z-index:1000;
       background:rgba(15,11,30,.96);
@@ -216,7 +207,6 @@
     .footer-brand { color:var(--purp); font-weight:800; cursor:pointer; text-decoration:none; transition:color .2s; }
     .footer-brand:hover { color:var(--cian); }
 
-    /* ── TOAST ── */
     .toast {
       position:fixed; bottom:55px; right:16px;
       background:var(--fondo2); border:1.5px solid var(--purp);
@@ -227,7 +217,6 @@
     }
     .toast.visible { opacity:1; transform:translateY(0); }
 
-    /* ── BADGE SHEETS ── */
     .sheets-badge {
       position:fixed; top:72px; right:12px; z-index:990;
       background:rgba(15,11,30,.96); border:1.5px solid var(--verde);
@@ -241,7 +230,6 @@
     .sheets-dot { width:7px; height:7px; border-radius:50%; background:var(--verde); animation:pulse 1.4s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
 
-    /* ── RESPONSIVE ── */
     @media (max-width:768px) {
       .navbar { flex-direction:column; height:auto; padding:10px 12px 8px; gap:7px; align-items:stretch; }
       .nav-top { width:100%; justify-content:space-between; }
@@ -254,10 +242,9 @@
 </head>
 <body>
 
-<!-- ══ ESTRELLAS ══ -->
 <div id="stars" aria-hidden="true"></div>
 
-<!-- ══ MODAL BIENVENIDA ══ -->
+<!-- MODAL -->
 <div class="modal-overlay" id="welcomeModal" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
   <div class="modal-content">
     <div class="modal-logo">
@@ -291,7 +278,7 @@
   </div>
 </div>
 
-<!-- ══ NAVBAR ══ -->
+<!-- NAVBAR -->
 <nav class="navbar" role="navigation" aria-label="Navegación principal del módulo">
   <div class="nav-top">
     <a class="nav-brand" role="button" tabindex="0" aria-label="Ir al inicio"
@@ -314,7 +301,6 @@
       <span id="nav-puntos-numero">0</span> xp
     </div>
   </div>
-
   <ul class="nav-links" role="list">
     <li role="listitem">
       <a id="nav-inicio" role="button" tabindex="0" class="active" aria-current="page"
@@ -355,29 +341,29 @@
   </ul>
 </nav>
 
-<!-- ══ PÁGINAS (iframes) ══ -->
+<!-- PÁGINAS -->
 <main>
-  <div id="page-inicio"        class="page active" aria-label="Inicio">
+  <div id="page-inicio" class="page active" aria-label="Inicio">
     <div class="iframe-container">
       <iframe src="./inicio_numeros_enteros.html" title="Inicio – Los Números Enteros" loading="eager"></iframe>
     </div>
   </div>
-  <div id="page-teoria"        class="page" aria-label="Teoría">
+  <div id="page-teoria" class="page" aria-label="Teoría">
     <div class="iframe-container">
       <iframe src="./teoria-2-2.html" title="Teoría – Números Enteros" loading="lazy"></iframe>
     </div>
   </div>
-  <div id="page-practica"      class="page" aria-label="Práctica">
+  <div id="page-practica" class="page" aria-label="Práctica">
     <div class="iframe-container">
       <iframe src="./practica-3.html" title="Práctica – Actividades interactivas" loading="lazy"></iframe>
     </div>
   </div>
-  <div id="page-evaluacion"    class="page" aria-label="Evaluación">
+  <div id="page-evaluacion" class="page" aria-label="Evaluación">
     <div class="iframe-container">
       <iframe src="./evaluacion.html" title="Evaluación – Quiz cronometrado" loading="lazy"></iframe>
     </div>
   </div>
-  <div id="page-recursos"      class="page" aria-label="Recursos externos">
+  <div id="page-recursos" class="page" aria-label="Recursos externos">
     <div class="iframe-container">
       <iframe src="./recursos.html" title="Recursos – Material complementario" loading="lazy"></iframe>
     </div>
@@ -389,7 +375,7 @@
   </div>
 </main>
 
-<!-- ══ FOOTER ══ -->
+<!-- FOOTER -->
 <footer id="mainFooter" role="contentinfo">
   <div class="footer-saludo" id="footer-saludo">
     <span>🚀</span>
@@ -416,17 +402,16 @@
   </div>
 </footer>
 
-<!-- Badge Sheets -->
 <div class="sheets-badge" id="sheetsBadge">
   <div class="sheets-dot"></div>
   <span id="sheetsBadgeMsg">Registrado ✓</span>
 </div>
-
-<!-- Toast -->
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-/* ─── GOOGLE SHEETS ─────────────────────────────────────── */
+/* ════════════════════════════════════════════
+   GOOGLE SHEETS
+════════════════════════════════════════════ */
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzFLDi-logDRIt2Vy7hltzioTv-qZCofm3YFlDKO78cu8nAvSGuuLfY8WTONl9FNERt/exec';
 
 function enviarASheets(tipo, datos) {
@@ -438,16 +423,18 @@ function enviarASheets(tipo, datos) {
     timestamp:   now.toISOString(),
     dispositivo: /Mobi|Android/i.test(navigator.userAgent) ? 'Móvil' : 'Escritorio'
   }, datos);
-  fetch(SHEETS_URL, {
-    method: 'POST', mode: 'no-cors',
+  return fetch(SHEETS_URL, {
+    method:  'POST',
+    mode:    'no-cors',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(payload)
+    body:    JSON.stringify(payload)
   }).then(() => {
-    mostrarSheetsBadge(
-      tipo === 'evaluacion'
-        ? `📊 Nota ${datos.nota_evaluacion}/10 registrada`
-        : '📋 Registro guardado ✓'
-    );
+    let msg = '📋 Registro guardado ✓';
+    if (tipo === 'evaluacion')
+      msg = `📊 Nota ${datos.nota_evaluacion}/10 registrada`;
+    else if (tipo === 'practica')
+      msg = `⚡ ${datos.puntos_practica} XP guardados ✓`;
+    mostrarSheetsBadge(msg);
   }).catch(() => console.warn('[Sheets] Sin conexión:', payload));
 }
 
@@ -459,7 +446,9 @@ function mostrarSheetsBadge(msg) {
   b._t = setTimeout(() => b.classList.remove('visible'), 4000);
 }
 
-/* ─── ESTRELLAS DE FONDO ────────────────────────────────── */
+/* ════════════════════════════════════════════
+   ESTRELLAS
+════════════════════════════════════════════ */
 (function() {
   const c = document.getElementById('stars');
   for (let i = 0; i < 80; i++) {
@@ -474,7 +463,9 @@ function mostrarSheetsBadge(msg) {
   }
 })();
 
-/* ─── UTILIDADES localStorage ───────────────────────────── */
+/* ════════════════════════════════════════════
+   STORAGE
+════════════════════════════════════════════ */
 const SK = { estudiante: 'edu_estudiante', progreso: 'edu_progreso' };
 function leerLS(k)       { try { return localStorage.getItem(k); }    catch(e) { return null; } }
 function escribirLS(k,v) { try { localStorage.setItem(k,v); return true; } catch(e) { return false; } }
@@ -488,7 +479,9 @@ function mostrarToast(msg, dur=2800) {
   t._timer = setTimeout(() => t.classList.remove('visible'), dur);
 }
 
-/* ─── MODAL DE BIENVENIDA ───────────────────────────────── */
+/* ════════════════════════════════════════════
+   MODAL
+════════════════════════════════════════════ */
 function iniciarEstudiante() {
   const nombre = leerLS(SK.estudiante);
   if (!nombre) {
@@ -517,28 +510,42 @@ function guardarNombre() {
   if (!nombre) {
     input.classList.add('error');
     setTimeout(() => input.classList.remove('error'), 400);
-    input.focus(); return;
+    input.focus();
+    return;
   }
   escribirLS(SK.estudiante, nombre);
   escribirLS(SK.progreso, JSON.stringify({
-    teoriaVista: false, practicaPuntaje: 0,
-    evaluacionAprobada: false, ultimaNota: null, seccionesVisitadas: []
+    teoriaVista:        false,
+    practicaPuntaje:    0,
+    evaluacionAprobada: false,
+    ultimaNota:         null,
+    notaEvaluacion:     '',
+    seccionesVisitadas: []
   }));
+
   document.getElementById('modalSending').classList.add('visible');
+
+  // ── Registro inicial en Sheets ──
   enviarASheets('registro', {
-    nombre, puntos_practica: 0,
-    nota_evaluacion: '', aprobado: '',
-    secciones_visitadas: '', evento: 'Inicio de módulo'
+    nombre,
+    puntos_practica:     0,
+    nota_evaluacion:     '',
+    aprobado:            '',
+    secciones_visitadas: '',
+    evento:              'Inicio de módulo'
+  }).finally(() => {
+    document.getElementById('modalSending').classList.remove('visible');
   });
+
   const m = document.getElementById('welcomeModal');
   m.style.opacity = '0';
-  setTimeout(() => {
-    m.style.display = 'none'; m.classList.remove('show');
-    document.getElementById('modalSending').classList.remove('visible');
-  }, 400);
+  setTimeout(() => { m.style.display = 'none'; m.classList.remove('show'); }, 400);
+
   actualizarUIEstudiante(nombre);
-  actualizarPuntosNav(); actualizarProgresoNav();
+  actualizarPuntosNav();
+  actualizarProgresoNav();
   mostrarToast(`⚡ ¡Misión iniciada, ${nombre}! Empieza por la Teoría 🧠`);
+
   const iframeInicio = document.querySelector('#page-inicio iframe');
   if (iframeInicio) iframeInicio.src = iframeInicio.src;
 }
@@ -563,11 +570,14 @@ function resetearPerfil() {
   if (confirm(msg)) { borrarLS(SK.estudiante); borrarLS(SK.progreso); location.reload(); }
 }
 
-/* ─── PUNTOS NAVBAR ─────────────────────────────────────── */
+/* ════════════════════════════════════════════
+   PUNTOS NAVBAR
+════════════════════════════════════════════ */
 function actualizarPuntosNav() {
-  const raw = leerLS(SK.progreso); if (!raw) return;
+  const raw = leerLS(SK.progreso);
+  if (!raw) return;
   try {
-    const p = JSON.parse(raw);
+    const p  = JSON.parse(raw);
     const el = document.getElementById('nav-puntos-numero');
     if (el) el.textContent = p.practicaPuntaje || 0;
     const wrap = document.getElementById('nav-puntos-globales');
@@ -579,29 +589,35 @@ function actualizarPuntosNav() {
   } catch(e) {}
 }
 
-/* ─── PROGRESO NAVBAR ───────────────────────────────────── */
+/* ════════════════════════════════════════════
+   PROGRESO NAVBAR
+════════════════════════════════════════════ */
 const ETAPAS = ['teoria', 'practica', 'evaluacion', 'recursos'];
 
 function actualizarProgresoNav() {
-  const raw = leerLS(SK.progreso); if (!raw) return;
+  const raw = leerLS(SK.progreso);
+  if (!raw) return;
   try {
-    const p        = JSON.parse(raw);
+    const p         = JSON.parse(raw);
     const visitadas = p.seccionesVisitadas || [];
-    const hechas   = ETAPAS.filter(e => visitadas.includes(e)).length;
-    const pct      = Math.round(hechas / ETAPAS.length * 100);
+    const hechas    = ETAPAS.filter(e => visitadas.includes(e)).length;
+    const pct       = Math.round(hechas / ETAPAS.length * 100);
     const fill  = document.getElementById('nav-progreso-fill');
     const label = document.getElementById('nav-progreso-label');
     const bar   = document.getElementById('nav-progreso-bar-aria');
-    if (fill)  fill.style.width = pct + '%';
-    if (label) label.textContent = `${hechas} de ${ETAPAS.length}`;
+    if (fill)  fill.style.width   = pct + '%';
+    if (label) label.textContent  = `${hechas} de ${ETAPAS.length}`;
     if (bar)   bar.setAttribute('aria-valuenow', pct);
     ETAPAS.forEach(etapa => {
-      const el = document.getElementById('nav-' + etapa); if (!el) return;
+      const el  = document.getElementById('nav-' + etapa);
+      if (!el) return;
       const chk = el.querySelector('.nav-check');
       if (visitadas.includes(etapa)) {
         if (!chk) {
           const c = document.createElement('span');
-          c.className = 'nav-check'; c.setAttribute('aria-hidden','true'); c.textContent = ' ✓';
+          c.className = 'nav-check';
+          c.setAttribute('aria-hidden', 'true');
+          c.textContent = ' ✓';
           el.appendChild(c);
         }
       } else if (chk) chk.remove();
@@ -613,7 +629,8 @@ function actualizarProgresoNav() {
 }
 
 function marcarSeccionVisitada(id) {
-  const raw = leerLS(SK.progreso); if (!raw) return;
+  const raw = leerLS(SK.progreso);
+  if (!raw) return;
   try {
     const p = JSON.parse(raw);
     if (!p.seccionesVisitadas) p.seccionesVisitadas = [];
@@ -631,7 +648,9 @@ function marcarSeccionVisitada(id) {
   } catch(e) {}
 }
 
-/* ─── NAVEGACIÓN ────────────────────────────────────────── */
+/* ════════════════════════════════════════════
+   NAVEGACIÓN
+════════════════════════════════════════════ */
 let paginaActual = 'inicio';
 
 function showPage(id) {
@@ -641,19 +660,24 @@ function showPage(id) {
   const pagina = document.getElementById('page-' + id);
   if (pagina) pagina.classList.add('active');
   document.querySelectorAll('.nav-links a').forEach(a => {
-    a.classList.remove('active'); a.removeAttribute('aria-current');
+    a.classList.remove('active');
+    a.removeAttribute('aria-current');
   });
   const navEl = document.getElementById('nav-' + id);
   if (navEl) {
-    navEl.classList.add('active'); navEl.setAttribute('aria-current','page');
+    navEl.classList.add('active');
+    navEl.setAttribute('aria-current', 'page');
     navEl.style.transform = 'scale(.9)';
     setTimeout(() => { navEl.style.transform = 'translateY(-2px)'; }, 130);
     if (window.innerWidth < 768)
       navEl.scrollIntoView({ behavior:'smooth', block:'nearest', inline:'center' });
   }
-  if (['evaluacion','practica'].includes(id)) {
+  if (['evaluacion', 'practica'].includes(id)) {
     const iframe = document.querySelector('#page-' + id + ' iframe');
-    if (iframe && !iframe.dataset.cargado) { iframe.src = iframe.src; iframe.dataset.cargado = 1; }
+    if (iframe && !iframe.dataset.cargado) {
+      iframe.src = iframe.src;
+      iframe.dataset.cargado = 1;
+    }
   }
   marcarSeccionVisitada(id);
   document.querySelectorAll('.footer-ruta span[data-page]').forEach(el => {
@@ -661,35 +685,83 @@ function showPage(id) {
   });
 }
 
-/* ─── MENSAJES DESDE IFRAMES ────────────────────────────── */
+/* ════════════════════════════════════════════
+   MENSAJES DESDE IFRAMES
+════════════════════════════════════════════ */
 window.addEventListener('message', e => {
   if (!e.data) return;
-  const { action, destino, nota } = e.data;
-  if (action === 'cambiarPagina' && destino) showPage(destino);
-  if (action === 'actualizarPuntos') { actualizarPuntosNav(); actualizarProgresoNav(); }
-  if (action === 'evaluacionAprobada' || action === 'evaluaciónAprobada') {
-    actualizarPuntosNav(); actualizarProgresoNav();
-    const nombre = leerLS(SK.estudiante) || 'Anónimo';
-    const raw    = leerLS(SK.progreso);
+  const { action, destino, nota, puntos } = e.data;
+
+  // Navegación cruzada
+  if (action === 'cambiarPagina' && destino) {
+    showPage(destino);
+  }
+
+  // ── Actualización de puntos desde Práctica ──
+  if (action === 'actualizarPuntos') {
+    actualizarPuntosNav();
+    actualizarProgresoNav();
+    // Enviar puntos actualizados a Sheets
     try {
-      const p = raw ? JSON.parse(raw) : {};
-      p.ultimaNota         = nota !== undefined ? nota : (p.ultimaNota || 0);
+      const nombre = leerLS(SK.estudiante) || 'Anónimo';
+      const p      = JSON.parse(leerLS(SK.progreso) || '{}');
+      // Si llega el valor de puntos en el mensaje, actualizarlo primero
+      if (puntos !== undefined) {
+        p.practicaPuntaje = puntos;
+        escribirLS(SK.progreso, JSON.stringify(p));
+        actualizarPuntosNav();
+      }
+      enviarASheets('practica', {
+        nombre,
+        puntos_practica:     p.practicaPuntaje || 0,
+        nota_evaluacion:     p.notaEvaluacion  || '',
+        aprobado:            p.evaluacionAprobada ? 'Sí' : '',
+        secciones_visitadas: (p.seccionesVisitadas || []).join(', '),
+        evento:              'Actualización de puntos práctica'
+      });
+    } catch(err) {}
+  }
+
+  // ── Evaluación completada ──
+  if (action === 'evaluacionAprobada' || action === 'evaluaciónAprobada') {
+    const nombre = leerLS(SK.estudiante) || 'Anónimo';
+    try {
+      const p = JSON.parse(leerLS(SK.progreso) || '{}');
+
+      // Guardar nota — acepta tanto e.data.nota como e.data.nota_evaluacion
+      const notaFinal = nota !== undefined
+        ? nota
+        : (e.data.nota_evaluacion !== undefined ? e.data.nota_evaluacion : (p.ultimaNota || 0));
+
+      p.ultimaNota         = notaFinal;
+      p.notaEvaluacion     = notaFinal;
       p.evaluacionAprobada = true;
       if (!p.seccionesVisitadas) p.seccionesVisitadas = [];
-      if (!p.seccionesVisitadas.includes('evaluacion')) p.seccionesVisitadas.push('evaluacion');
+      if (!p.seccionesVisitadas.includes('evaluacion'))
+        p.seccionesVisitadas.push('evaluacion');
       escribirLS(SK.progreso, JSON.stringify(p));
+
+      actualizarPuntosNav();
+      actualizarProgresoNav();
+
+      // ── Enviar a Sheets ──
       enviarASheets('evaluacion', {
         nombre,
-        nota_evaluacion:     p.ultimaNota,
-        aprobado:            p.ultimaNota >= 6 ? 'Sí' : 'No',
+        nota_evaluacion:     notaFinal,
+        aprobado:            notaFinal >= 6 ? 'Sí' : 'No',
         puntos_practica:     p.practicaPuntaje || 0,
         secciones_visitadas: (p.seccionesVisitadas || []).join(', '),
         evento:              'Evaluación completada'
       });
-    } catch(e2) {}
-    mostrarToast('🏆 ¡Evaluación completada! Datos enviados al docente');
+
+    } catch(err) {}
+    mostrarToast('🏆 ¡Evaluación completada! Resultado enviado al docente');
   }
-  if (action === 'seccionCompletada' && destino) marcarSeccionVisitada(destino);
+
+  // Sección completada desde iframe
+  if (action === 'seccionCompletada' && destino) {
+    marcarSeccionVisitada(destino);
+  }
 });
 
 window.showPage = showPage;
