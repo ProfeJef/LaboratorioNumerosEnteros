@@ -10,7 +10,6 @@
       --purp:     #6C3CE1;
       --purp2:    #9B6DFF;
       --cian:     #00D4FF;
-      --cian2:    #00FFEA;
       --amarillo: #FFE94D;
       --verde:    #2ECC8A;
       --rojo:     #FF4D6D;
@@ -21,440 +20,300 @@
       --texto:    #E8E0FF;
       --gris:     rgba(255,255,255,.55);
     }
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body { font-family:'Space Grotesk',sans-serif; background:var(--fondo); color:var(--texto); overflow-x:hidden; }
-
-    /* ── BARRA PROGRESO LECTURA ── */
-    #read-progress {
-      position:fixed; top:0; left:0; height:3px; z-index:9999;
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Space Grotesk',sans-serif;background:var(--fondo);color:var(--texto);overflow-x:hidden;}
+    #read-progress{position:fixed;top:0;left:0;height:3px;z-index:9999;
       background:linear-gradient(90deg,var(--purp),var(--cian),var(--amarillo));
-      width:0%; transition:width .12s linear;
-      box-shadow:0 0 8px rgba(0,212,255,.5);
-    }
-
-    /* ── HEADER HERO ── */
-    .teoria-hero {
-      background:
-        radial-gradient(ellipse 70% 60% at 15% 50%, rgba(108,60,225,.22) 0%, transparent 60%),
-        radial-gradient(ellipse 55% 50% at 85% 50%, rgba(0,212,255,.12) 0%, transparent 55%),
+      width:0%;transition:width .12s linear;box-shadow:0 0 8px rgba(0,212,255,.5);}
+    .teoria-hero{
+      background:radial-gradient(ellipse 70% 60% at 15% 50%,rgba(108,60,225,.22) 0%,transparent 60%),
+        radial-gradient(ellipse 55% 50% at 85% 50%,rgba(0,212,255,.12) 0%,transparent 55%),
         linear-gradient(170deg,#070412 0%,#0E0924 50%,#060A18 100%);
-      padding:4rem 2rem 3rem;
-      text-align:center; position:relative; overflow:hidden;
-    }
-    .teoria-hero-grid {
-      position:absolute; inset:0; pointer-events:none;
-      background-image:
-        linear-gradient(rgba(108,60,225,.05) 1px,transparent 1px),
+      padding:4rem 2rem 2.5rem;text-align:center;position:relative;overflow:hidden;}
+    .hero-grid{position:absolute;inset:0;pointer-events:none;
+      background-image:linear-gradient(rgba(108,60,225,.05) 1px,transparent 1px),
         linear-gradient(90deg,rgba(108,60,225,.05) 1px,transparent 1px);
       background-size:55px 55px;
-      mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 100%);
-    }
-    .hero-tag {
-      display:inline-flex; align-items:center; gap:.5rem;
-      background:rgba(108,60,225,.15); border:1.5px solid rgba(108,60,225,.4);
-      color:var(--purp2); font-family:'Nunito',sans-serif; font-weight:800;
-      font-size:.74rem; letter-spacing:2.5px; text-transform:uppercase;
-      padding:.35rem 1.1rem; border-radius:30px; margin-bottom:1.2rem;
-      position:relative; z-index:2;
-    }
-    .teoria-hero h1 {
-      font-family:'Nunito',sans-serif; font-weight:900;
-      font-size:clamp(2rem,5vw,3.5rem); color:var(--blanco);
-      position:relative; z-index:2; line-height:1.1; margin-bottom:.6rem;
-    }
-    .teoria-hero h1 span {
-      background:linear-gradient(135deg,var(--purp2),var(--cian));
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-    }
-    .teoria-hero p {
-      color:rgba(255,255,255,.6); font-size:.97rem; max-width:560px;
-      margin:0 auto 1.8rem; line-height:1.75; position:relative; z-index:2;
-    }
-
-    /* ── ÍNDICE TOC ── */
-    .toc {
-      background:rgba(255,255,255,.03); border:1px solid rgba(108,60,225,.25);
-      border-left:4px solid var(--cian);
-      border-radius:14px; padding:1.2rem 1.5rem;
-      max-width:720px; margin:0 auto 1rem;
-      position:relative; z-index:2;
-    }
-    .toc h4 {
-      font-family:'Nunito',sans-serif; font-weight:900; font-size:.78rem;
-      text-transform:uppercase; letter-spacing:2px; color:var(--cian); margin-bottom:.8rem;
-    }
-    .toc ol { list-style:none; display:flex; flex-wrap:wrap; gap:.45rem; }
-    .toc ol li a {
-      display:flex; align-items:center; gap:.35rem;
-      background:rgba(108,60,225,.12); border:1px solid rgba(108,60,225,.25);
-      border-radius:20px; padding:.28rem .9rem;
-      font-size:.8rem; font-family:'Nunito',sans-serif; font-weight:700;
-      color:rgba(255,255,255,.7); text-decoration:none;
-      transition:all .2s;
-    }
-    .toc ol li a:hover { background:rgba(0,212,255,.15); border-color:var(--cian); color:var(--cian); transform:translateY(-2px); }
-
-    /* ── OBJETIVOS BAND ── */
-    .objetivos-band {
-      background:rgba(108,60,225,.08);
-      border-top:1px solid rgba(108,60,225,.2);
-      border-bottom:1px solid rgba(108,60,225,.2);
-      padding:1.8rem 2rem;
-    }
-    .objetivos-inner { max-width:960px; margin:0 auto; display:flex; flex-wrap:wrap; gap:.9rem; align-items:flex-start; }
-    .obj-titulo {
-      font-family:'Nunito',sans-serif; font-weight:900; color:var(--cian);
-      font-size:.8rem; text-transform:uppercase; letter-spacing:1.5px; width:100%; margin-bottom:.1rem;
-    }
-    .obj-item {
-      display:flex; align-items:flex-start; gap:.5rem;
-      background:rgba(255,255,255,.04); border:1px solid rgba(0,212,255,.2);
-      border-radius:12px; padding:.65rem 1rem;
-      font-size:.84rem; color:rgba(255,255,255,.85); line-height:1.5; flex:1 1 200px;
-      transition:border-color .2s, background .2s;
-    }
-    .obj-item:hover { border-color:rgba(0,212,255,.5); background:rgba(0,212,255,.06); }
-    .obj-icon { font-size:1.05rem; flex-shrink:0; }
-
-    /* ── UTILIDADES ── */
-    .section-wrap { max-width:1100px; margin:0 auto; padding:4rem 1.5rem; }
-    .section-label {
-      display:inline-block; font-family:'Nunito',sans-serif; font-weight:800;
-      font-size:.7rem; letter-spacing:3px; text-transform:uppercase;
-      color:var(--purp2); margin-bottom:.4rem;
-      border-bottom:2px solid var(--purp); padding-bottom:2px;
-    }
-    .section-title {
-      font-family:'Nunito',sans-serif; font-weight:900;
-      font-size:clamp(1.5rem,3.5vw,2rem); color:var(--blanco); margin-bottom:.4rem;
-    }
-    .section-sub { color:var(--gris); font-size:.94rem; margin-bottom:1.8rem; max-width:680px; line-height:1.75; }
-    .tag {
-      display:inline-flex; align-items:center; gap:.4rem;
-      font-family:'Nunito',sans-serif; font-weight:800;
-      font-size:.7rem; letter-spacing:1px; text-transform:uppercase;
-      padding:.28rem .9rem; border-radius:20px; margin-bottom:.9rem;
-    }
-    .tag-purp   { background:rgba(108,60,225,.15); color:var(--purp2); border:1px solid rgba(108,60,225,.3); }
-    .tag-cian   { background:rgba(0,212,255,.1);   color:var(--cian);  border:1px solid rgba(0,212,255,.25); }
-    .tag-amarillo { background:rgba(255,233,77,.1); color:var(--amarillo); border:1px solid rgba(255,233,77,.25); }
-
-    /* ── SECCIÓN 1 – ¿QUÉ SON? ── */
-    #que-son { background:var(--fondo2); }
-    .que-son-inner { display:grid; grid-template-columns:1.2fr 1fr; gap:3rem; align-items:start; }
-    @media(max-width:800px){ .que-son-inner { grid-template-columns:1fr; } }
-
-    .def-box {
-      background:rgba(108,60,225,.08); border-left:4px solid var(--cian);
-      border:1px solid rgba(0,212,255,.2); border-left:4px solid var(--cian);
-      border-radius:12px; padding:1.4rem 1.6rem; margin:1.2rem 0;
-      font-size:.95rem; line-height:1.85; color:rgba(255,255,255,.85);
-    }
-    .def-box strong { color:var(--cian); font-family:'Nunito',sans-serif; }
-    .def-formula {
-      display:block; text-align:center; margin:.7rem 0;
-      font-family:'Nunito',sans-serif; font-size:clamp(1rem,2.5vw,1.2rem); font-weight:900;
-      background:rgba(108,60,225,.2); border:1px solid rgba(108,60,225,.4);
-      color:var(--amarillo); padding:.6rem 1rem; border-radius:10px; letter-spacing:1px;
-    }
-
-    /* Tabla ℕ vs ℤ */
-    .vs-table { width:100%; border-collapse:collapse; margin:1.4rem 0; font-size:.88rem; }
-    .vs-table th {
-      background:linear-gradient(135deg,var(--purp),rgba(108,60,225,.7));
-      color:var(--blanco); font-family:'Nunito',sans-serif; font-weight:800;
-      padding:.7rem 1rem; text-align:left;
-    }
-    .vs-table th:first-child { border-radius:10px 0 0 0; }
-    .vs-table th:last-child  { border-radius:0 10px 0 0; }
-    .vs-table td { padding:.6rem 1rem; border-bottom:1px solid rgba(255,255,255,.06); color:rgba(255,255,255,.75); }
-    .vs-table tr:last-child td { border-bottom:none; }
-    .vs-table tr:nth-child(even) td { background:rgba(255,255,255,.03); }
-    .hl-verde   { color:var(--verde);    font-weight:700; }
-    .hl-naranja { color:var(--amarillo); font-weight:700; }
-
-    /* Ejemplos cotidianos */
-    .ejemplos-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.2rem; }
-    @media(max-width:480px){ .ejemplos-grid { grid-template-columns:1fr; } }
-    .ejemplo-card {
-      background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08);
-      border-top:3px solid var(--amarillo);
-      border-radius:14px; padding:1rem 1.2rem;
-      display:flex; align-items:flex-start; gap:.8rem;
-      transition:transform .2s, box-shadow .2s, border-color .2s;
-      opacity:0; transform:translateY(20px);
-    }
-    .ejemplo-card.visible { animation:riseUp .5s ease forwards; }
-    .ejemplo-card:hover { transform:translateY(-5px); box-shadow:0 10px 28px rgba(255,233,77,.1); border-color:rgba(255,233,77,.35); }
-    .ej-icon { font-size:1.9rem; flex-shrink:0; }
-    .ej-content h4 { font-family:'Nunito',sans-serif; font-weight:800; color:var(--blanco); font-size:.9rem; margin-bottom:.3rem; }
-    .ej-content p  { font-size:.82rem; color:var(--gris); line-height:1.5; }
-    .ej-value { font-weight:800; color:var(--amarillo); }
-
-    /* Infografía lateral */
-    .infografia {
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(108,60,225,.3);
-      border-radius:20px; padding:1.8rem;
-      position:sticky; top:20px;
-      box-shadow:0 12px 40px rgba(108,60,225,.2);
-    }
-    .infografia h3 {
-      font-family:'Nunito',sans-serif; font-weight:900; font-size:1rem;
-      color:var(--cian); text-align:center; text-transform:uppercase;
-      letter-spacing:1px; margin-bottom:1.3rem;
-    }
-    .info-row {
-      display:flex; align-items:center; gap:.9rem;
-      padding:.85rem 1rem; border-radius:12px; margin-bottom:.8rem;
-      background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.06);
-      transition:all .25s; cursor:default;
-    }
-    .info-row:hover { background:rgba(108,60,225,.15); transform:translateX(4px); border-color:rgba(108,60,225,.4); }
-    .info-circle {
-      width:46px; height:46px; border-radius:12px; flex-shrink:0;
-      display:flex; align-items:center; justify-content:center;
-      font-family:'Nunito',sans-serif; font-weight:900; font-size:1.3rem;
-    }
-    .ic-neg  { background:linear-gradient(135deg,#FF4D6D,#c0392b); color:#fff; }
-    .ic-zero { background:linear-gradient(135deg,var(--verde),#27ae60); color:#fff; }
-    .ic-pos  { background:linear-gradient(135deg,var(--cian),var(--purp)); color:#fff; }
-    .info-text h4 { font-family:'Nunito',sans-serif; font-weight:800; font-size:.9rem; color:var(--blanco); margin-bottom:.2rem; }
-    .info-text p  { font-size:.8rem; color:rgba(255,255,255,.6); line-height:1.45; }
-    .dato-clave {
-      margin-top:1.2rem; background:rgba(0,212,255,.06);
-      border-left:4px solid var(--cian); border-radius:0 12px 12px 0; padding:1rem 1.1rem;
-    }
-    .btn-explorar {
-      display:block; margin-top:1.6rem; text-align:center;
-      background:linear-gradient(135deg,var(--purp),var(--cian));
-      color:var(--blanco); font-family:'Nunito',sans-serif; font-weight:900;
-      font-size:.95rem; padding:.85rem 1.5rem; border-radius:30px; text-decoration:none;
-      transition:all .2s; box-shadow:0 6px 20px rgba(108,60,225,.35);
-    }
-    .btn-explorar:hover { transform:translateY(-3px); box-shadow:0 10px 28px rgba(0,212,255,.35); }
-
-    /* ── SECCIÓN 2 – ORDEN ── */
-    #orden { background:var(--fondo3); }
-    .reglas-orden { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
-    .regla-orden-card {
-      background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08);
-      border-top:3px solid var(--purp2);
-      border-radius:14px; padding:1.3rem 1.4rem;
-      font-size:.88rem; line-height:1.65; color:rgba(255,255,255,.8);
-      transition:transform .2s, border-color .2s, box-shadow .2s;
-    }
-    .regla-orden-card:hover { transform:translateY(-5px); border-color:rgba(155,109,255,.5); box-shadow:0 10px 28px rgba(108,60,225,.15); }
-    .r-titulo { font-family:'Nunito',sans-serif; font-weight:800; color:var(--purp2); font-size:.92rem; margin-bottom:.5rem; display:flex; align-items:center; gap:.4rem; }
-    .r-ej {
-      background:rgba(108,60,225,.15); border:1px solid rgba(108,60,225,.3);
-      border-radius:8px; padding:.4rem .8rem;
-      font-family:'Nunito',sans-serif; font-weight:700; font-size:.85rem;
-      color:var(--amarillo); margin-top:.6rem; display:inline-block;
-    }
-
-    /* ── SECCIÓN 3 – RECTA ── */
-    #recta { background:var(--fondo2); }
-    .canvas-wrap {
-      background:rgba(255,255,255,.03); border:1px solid rgba(108,60,225,.25);
-      border-radius:16px; padding:1.5rem 1rem;
-      margin-bottom:1rem; overflow-x:auto;
-    }
-    #rectaCanvas { display:block; min-width:800px; height:auto; margin:0 auto; cursor:pointer; }
-    .puntos-info { display:flex; flex-wrap:wrap; gap:.75rem; justify-content:center; margin-bottom:1.5rem; }
-    .punto-badge {
-      display:flex; align-items:center; gap:.5rem;
-      background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1);
-      border-radius:10px; padding:.5rem 1rem;
-      font-size:.83rem; font-family:'Nunito',sans-serif; font-weight:700; color:rgba(255,255,255,.75);
-    }
-    .dot { width:12px; height:12px; border-radius:50%; flex-shrink:0; }
-    .dot-neg  { background:var(--rojo); }
-    .dot-zero { background:var(--verde); }
-    .dot-pos  { background:var(--cian); }
-
-    .recta-info-panel {
-      background:rgba(108,60,225,.15); border:1px solid rgba(108,60,225,.4);
-      border-left:4px solid var(--cian);
-      color:var(--blanco); border-radius:12px; padding:1rem 1.4rem;
-      font-family:'Nunito',sans-serif; font-size:.93rem; line-height:1.7;
-      margin-bottom:1.4rem; display:none; animation:fadeIn .3s ease;
-    }
-    .recta-info-panel strong { color:var(--cian); }
-    .recta-info-panel .rip-valor {
-      font-size:2rem; font-weight:900; display:block; margin:.3rem 0; color:var(--amarillo);
-    }
-
-    .geogebra-wrap {
-      background:rgba(255,255,255,.03); border:1px solid rgba(108,60,225,.25);
-      border-radius:16px; overflow:hidden; margin-top:2rem;
-    }
-    .gg-header {
-      background:linear-gradient(135deg,rgba(108,60,225,.4),rgba(0,212,255,.2));
-      padding:.75rem 1.5rem; display:flex; align-items:center; gap:.6rem;
-    }
-    .gg-header span { font-family:'Nunito',sans-serif; font-weight:700; color:var(--blanco); font-size:.88rem; }
-    .gg-dot { width:9px; height:9px; border-radius:50%; background:var(--verde); animation:pulseDot 1.4s infinite; }
-    @keyframes pulseDot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.5)} }
-    .geogebra-wrap iframe { width:100%; height:350px; border:none; display:block; }
-
-    /* ── SECCIÓN 4 – VALOR ABSOLUTO ── */
-    #valor-abs { background:var(--fondo3); }
-    .va-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:1rem; margin-top:1.5rem; }
-    .va-card {
-      background:rgba(255,255,255,.04); border:1px solid rgba(108,60,225,.25);
-      border-radius:14px; padding:1.3rem; text-align:center;
-      transition:transform .2s, border-color .2s, box-shadow .2s;
-    }
-    .va-card:hover { transform:translateY(-5px); border-color:rgba(0,212,255,.5); box-shadow:0 10px 28px rgba(0,212,255,.12); }
-    .va-card .va-expr   { font-family:'Nunito',sans-serif; font-size:1.25rem; font-weight:900; color:var(--gris); }
-    .va-card .va-arrow  { font-size:1.5rem; color:var(--purp2); margin:.3rem 0; display:block; }
-    .va-card .va-result { font-family:'Nunito',sans-serif; font-size:2rem; font-weight:900; color:var(--cian); }
-    .va-card .va-hint   { font-size:.76rem; color:rgba(255,255,255,.45); margin-top:.3rem; }
-
-    /* ── SECCIÓN 5 – OPERACIONES ── */
-    #operaciones { background:var(--fondo2); }
-    .tabs { display:flex; gap:.7rem; margin-bottom:2rem; flex-wrap:wrap; }
-    .tab-btn {
-      font-family:'Nunito',sans-serif; font-weight:800; font-size:.92rem;
-      padding:.72rem 1.6rem; border-radius:30px;
-      border:1.5px solid rgba(108,60,225,.5); background:transparent; color:rgba(255,255,255,.7);
-      cursor:pointer; transition:all .22s;
-    }
-    .tab-btn.active, .tab-btn:hover {
-      background:linear-gradient(135deg,var(--purp),var(--cian));
-      color:var(--blanco); border-color:transparent;
-      transform:translateY(-2px); box-shadow:0 6px 18px rgba(108,60,225,.4);
-    }
-    .tab-panel { display:none; }
-    .tab-panel.active { display:block; animation:fadeIn .35s ease; }
-
-    .regla-box {
-      background:rgba(108,60,225,.08); border:1px solid rgba(108,60,225,.25);
-      border-left:5px solid var(--verde);
-      border-radius:12px; padding:1.5rem; margin-bottom:2rem;
-      font-size:.94rem; line-height:1.75; color:rgba(255,255,255,.85);
-    }
-    .regla-box .rb-titulo {
-      font-family:'Nunito',sans-serif; font-weight:900; color:var(--verde);
-      font-size:1rem; display:flex; align-items:center; gap:.5rem; margin-bottom:1rem;
-    }
-    .regla-steps { list-style:none; display:flex; flex-direction:column; gap:1rem; }
-    .regla-steps li {
-      display:flex; flex-direction:column; gap:.4rem;
-      border-left:3px solid rgba(255,233,77,.4); padding-left:1rem;
-    }
-    .regla-steps li strong { color:var(--amarillo); font-family:'Nunito',sans-serif; }
-    .regla-ej-box {
-      background:rgba(255,255,255,.04); border:1px dashed rgba(255,255,255,.15);
-      border-radius:8px; padding:.6rem 1rem;
-      font-family:'Nunito',sans-serif; font-weight:700; font-size:.86rem; color:rgba(255,255,255,.8);
-    }
-
-    .ejemplos-ops { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:1rem; margin-bottom:2rem; }
-    .op-card {
-      background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08);
-      border-top:3px solid var(--verde);
-      border-radius:14px; padding:1.4rem 1rem; text-align:center;
-      font-family:'Nunito',sans-serif; transition:transform .2s, box-shadow .2s;
-    }
-    .op-card:hover { transform:translateY(-4px); box-shadow:0 10px 24px rgba(46,204,138,.15); }
-    .op-card .op-expr   { font-size:1.1rem; font-weight:900; color:rgba(255,255,255,.75); margin-bottom:.45rem; }
-    .op-card .op-result { font-size:1.9rem; font-weight:900; }
-    .op-card .op-hint   { font-size:.78rem; color:var(--gris); margin-top:.4rem; line-height:1.4; }
-    .pos-result  { color:var(--cian); }
-    .neg-result  { color:var(--rojo); }
-    .zero-result { color:var(--verde); }
-
-    .video-section {
-      margin-top:2rem; background:rgba(255,255,255,.03);
-      border:1px solid rgba(108,60,225,.2); padding:1.5rem; border-radius:16px;
-    }
-    .video-section h3 { font-family:'Nunito',sans-serif; font-weight:900; font-size:1.05rem; color:var(--cian); margin-bottom:1rem; }
-    .video-wrap { position:relative; width:100%; padding-bottom:56.25%; border-radius:12px; overflow:hidden; }
-    .video-wrap iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
-
-    /* Acordeón ejercicios */
-    .ejercicios { margin-top:2rem; }
-    .ejercicios h3 { font-family:'Nunito',sans-serif; font-weight:900; color:var(--blanco); font-size:1.05rem; margin-bottom:1rem; }
-    .ej-item {
-      background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08);
-      border-left:4px solid var(--amarillo);
-      border-radius:12px; padding:1.1rem 1.4rem; margin-bottom:.9rem; cursor:pointer;
-      transition:all .2s;
-    }
-    .ej-item:hover { background:rgba(255,233,77,.05); border-color:rgba(255,233,77,.4); }
-    .ej-question {
-      font-family:'Nunito',sans-serif; font-weight:700; font-size:.95rem;
-      color:rgba(255,255,255,.85); display:flex; justify-content:space-between;
-      align-items:center; gap:.8rem;
-    }
-    .ej-toggle { font-size:1.4rem; color:var(--amarillo); transition:transform .3s; line-height:1; flex-shrink:0; }
-    .ej-item.open .ej-toggle { transform:rotate(45deg); }
-    .ej-answer {
-      display:none; margin-top:.9rem; padding-top:.9rem;
+      mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 100%);}
+    .hero-tag{display:inline-flex;align-items:center;gap:.5rem;
+      background:rgba(108,60,225,.15);border:1.5px solid rgba(108,60,225,.4);
+      color:var(--purp2);font-family:'Nunito',sans-serif;font-weight:800;
+      font-size:.74rem;letter-spacing:2.5px;text-transform:uppercase;
+      padding:.35rem 1.1rem;border-radius:30px;margin-bottom:1.2rem;position:relative;z-index:2;}
+    .teoria-hero h1{font-family:'Nunito',sans-serif;font-weight:900;
+      font-size:clamp(2rem,5vw,3.5rem);color:var(--blanco);
+      position:relative;z-index:2;line-height:1.1;margin-bottom:.6rem;}
+    .teoria-hero h1 span{background:linear-gradient(135deg,var(--purp2),var(--cian));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .teoria-hero p{color:rgba(255,255,255,.6);font-size:.97rem;max-width:560px;
+      margin:0 auto 1.8rem;line-height:1.75;position:relative;z-index:2;}
+    .toc{background:rgba(255,255,255,.03);border:1px solid rgba(108,60,225,.25);
+      border-left:4px solid var(--cian);border-radius:14px;padding:1.2rem 1.5rem;
+      max-width:720px;margin:0 auto 1rem;position:relative;z-index:2;}
+    .toc h4{font-family:'Nunito',sans-serif;font-weight:900;font-size:.78rem;
+      text-transform:uppercase;letter-spacing:2px;color:var(--cian);margin-bottom:.8rem;}
+    .toc ol{list-style:none;display:flex;flex-wrap:wrap;gap:.45rem;}
+    .toc ol li a{display:flex;align-items:center;gap:.35rem;
+      background:rgba(108,60,225,.12);border:1px solid rgba(108,60,225,.25);
+      border-radius:20px;padding:.28rem .9rem;font-size:.8rem;
+      font-family:'Nunito',sans-serif;font-weight:700;color:rgba(255,255,255,.7);
+      text-decoration:none;transition:all .2s;}
+    .toc ol li a:hover{background:rgba(0,212,255,.15);border-color:var(--cian);
+      color:var(--cian);transform:translateY(-2px);}
+    .objetivos-band{background:rgba(108,60,225,.08);
+      border-top:1px solid rgba(108,60,225,.2);border-bottom:1px solid rgba(108,60,225,.2);
+      padding:1.8rem 2rem;}
+    .objetivos-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;gap:.9rem;align-items:flex-start;}
+    .obj-titulo{font-family:'Nunito',sans-serif;font-weight:900;color:var(--cian);
+      font-size:.8rem;text-transform:uppercase;letter-spacing:1.5px;width:100%;margin-bottom:.1rem;}
+    .obj-item{display:flex;align-items:flex-start;gap:.5rem;
+      background:rgba(255,255,255,.04);border:1px solid rgba(0,212,255,.2);
+      border-radius:12px;padding:.65rem 1rem;font-size:.84rem;
+      color:rgba(255,255,255,.85);line-height:1.5;flex:1 1 190px;transition:all .2s;}
+    .obj-item:hover{border-color:rgba(0,212,255,.5);background:rgba(0,212,255,.06);}
+    .obj-icon{font-size:1.05rem;flex-shrink:0;}
+    .section-wrap{max-width:1100px;margin:0 auto;padding:4rem 1.5rem;}
+    .tag{display:inline-flex;align-items:center;gap:.4rem;font-family:'Nunito',sans-serif;
+      font-weight:800;font-size:.7rem;letter-spacing:1px;text-transform:uppercase;
+      padding:.28rem .9rem;border-radius:20px;margin-bottom:.9rem;}
+    .tag-purp{background:rgba(108,60,225,.15);color:var(--purp2);border:1px solid rgba(108,60,225,.3);}
+    .tag-cian{background:rgba(0,212,255,.1);color:var(--cian);border:1px solid rgba(0,212,255,.25);}
+    .tag-amarillo{background:rgba(255,233,77,.1);color:var(--amarillo);border:1px solid rgba(255,233,77,.25);}
+    .section-title{font-family:'Nunito',sans-serif;font-weight:900;
+      font-size:clamp(1.5rem,3.5vw,2rem);color:var(--blanco);margin-bottom:.4rem;}
+    .section-sub{color:var(--gris);font-size:.94rem;margin-bottom:1.8rem;max-width:680px;line-height:1.75;}
+    .def-box{background:rgba(108,60,225,.08);border:1px solid rgba(0,212,255,.2);
+      border-left:4px solid var(--cian);border-radius:12px;padding:1.4rem 1.6rem;
+      margin:1.2rem 0;font-size:.95rem;line-height:1.85;color:rgba(255,255,255,.85);}
+    .def-box strong{color:var(--cian);font-family:'Nunito',sans-serif;}
+    .def-formula{display:block;text-align:center;margin:.7rem 0;
+      font-family:'Nunito',sans-serif;font-size:clamp(1rem,2.5vw,1.2rem);font-weight:900;
+      background:rgba(108,60,225,.2);border:1px solid rgba(108,60,225,.4);
+      color:var(--amarillo);padding:.6rem 1rem;border-radius:10px;letter-spacing:1px;}
+    #que-son{background:var(--fondo2);}
+    .vs-table{width:100%;border-collapse:collapse;margin:1.4rem 0;font-size:.88rem;}
+    .vs-table th{background:linear-gradient(135deg,var(--purp),rgba(108,60,225,.7));
+      color:var(--blanco);font-family:'Nunito',sans-serif;font-weight:800;padding:.7rem 1rem;text-align:left;}
+    .vs-table th:first-child{border-radius:10px 0 0 0;}
+    .vs-table th:last-child{border-radius:0 10px 0 0;}
+    .vs-table td{padding:.6rem 1rem;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.75);}
+    .vs-table tr:last-child td{border-bottom:none;}
+    .vs-table tr:nth-child(even) td{background:rgba(255,255,255,.03);}
+    .hl-verde{color:var(--verde);font-weight:700;}
+    .hl-naranja{color:var(--amarillo);font-weight:700;}
+    .tipos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0;}
+    @media(max-width:600px){.tipos-grid{grid-template-columns:1fr;}}
+    .tipo-card{border-radius:16px;padding:1.5rem 1.2rem;text-align:center;transition:transform .25s,box-shadow .25s;}
+    .tipo-card:hover{transform:translateY(-6px);}
+    .tipo-card.neg{background:rgba(255,77,109,.08);border:1.5px solid rgba(255,77,109,.3);}
+    .tipo-card.zero{background:rgba(46,204,138,.08);border:1.5px solid rgba(46,204,138,.3);}
+    .tipo-card.pos{background:rgba(0,212,255,.08);border:1.5px solid rgba(0,212,255,.3);}
+    .tipo-card:hover.neg{box-shadow:0 10px 28px rgba(255,77,109,.2);}
+    .tipo-card:hover.zero{box-shadow:0 10px 28px rgba(46,204,138,.2);}
+    .tipo-card:hover.pos{box-shadow:0 10px 28px rgba(0,212,255,.2);}
+    .tipo-icon{width:56px;height:56px;border-radius:16px;margin:0 auto .9rem;
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Nunito',sans-serif;font-weight:900;font-size:1.5rem;}
+    .tipo-card.neg .tipo-icon{background:linear-gradient(135deg,#FF4D6D,#c0392b);color:#fff;}
+    .tipo-card.zero .tipo-icon{background:linear-gradient(135deg,var(--verde),#27ae60);color:#fff;}
+    .tipo-card.pos .tipo-icon{background:linear-gradient(135deg,var(--cian),var(--purp));color:#fff;}
+    .tipo-card h4{font-family:'Nunito',sans-serif;font-weight:900;font-size:1rem;color:var(--blanco);margin-bottom:.4rem;}
+    .tipo-card p{font-size:.82rem;color:var(--gris);line-height:1.55;}
+    .tipo-ejemplos{display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-top:.7rem;}
+    .tipo-pill{font-family:'Nunito',sans-serif;font-weight:800;font-size:.8rem;padding:.2rem .7rem;border-radius:20px;}
+    .neg .tipo-pill{background:rgba(255,77,109,.2);color:#FF4D6D;}
+    .zero .tipo-pill{background:rgba(46,204,138,.2);color:var(--verde);}
+    .pos .tipo-pill{background:rgba(0,212,255,.2);color:var(--cian);}
+    .vida-real-titulo{font-family:'Nunito',sans-serif;font-weight:900;color:var(--blanco);
+      font-size:1.05rem;margin:2rem 0 1rem;display:flex;align-items:center;gap:.5rem;}
+    .vida-real-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;}
+    .vr-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;overflow:hidden;cursor:pointer;
+      transition:transform .25s,border-color .25s,box-shadow .25s;
+      opacity:0;transform:translateY(24px);}
+    .vr-card.visible{animation:riseUp .5s ease forwards;}
+    .vr-card:hover{transform:translateY(-6px);}
+    .vr-card.active{border-color:rgba(0,212,255,.5);box-shadow:0 14px 36px rgba(0,212,255,.15);}
+    .vr-header{padding:1.2rem 1.2rem .8rem;display:flex;align-items:center;gap:.8rem;}
+    .vr-emoji{font-size:2.2rem;flex-shrink:0;}
+    .vr-title{font-family:'Nunito',sans-serif;font-weight:800;color:var(--blanco);font-size:.95rem;}
+    .vr-subtitle{font-size:.75rem;color:var(--gris);}
+    .vr-slider-wrap{padding:0 1.2rem 1rem;}
+    .vr-slider{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:10px;outline:none;cursor:pointer;
+      background:linear-gradient(90deg,var(--rojo) 0%,var(--verde) 50%,var(--cian) 100%);}
+    .vr-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;
+      border-radius:50%;cursor:pointer;background:var(--amarillo);border:2px solid var(--blanco);
+      box-shadow:0 0 10px rgba(255,233,77,.5);}
+    .vr-display{display:flex;justify-content:space-between;align-items:center;
+      padding:.7rem 1.2rem;background:rgba(0,0,0,.2);border-top:1px solid rgba(255,255,255,.06);}
+    .vr-valor{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.5rem;}
+    .vr-etiqueta{font-size:.78rem;color:var(--gris);text-align:right;line-height:1.4;}
+    .dato-clave{margin-top:1.4rem;background:rgba(0,212,255,.06);
+      border-left:4px solid var(--cian);border-radius:0 12px 12px 0;padding:1rem 1.1rem;}
+    #orden{background:var(--fondo3);}
+    .reglas-orden{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;}
+    .regla-orden-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+      border-top:3px solid var(--purp2);border-radius:14px;padding:1.3rem 1.4rem;
+      font-size:.88rem;line-height:1.65;color:rgba(255,255,255,.8);transition:all .25s;}
+    .regla-orden-card:hover{transform:translateY(-5px);border-color:rgba(155,109,255,.5);
+      box-shadow:0 10px 28px rgba(108,60,225,.15);}
+    .r-titulo{font-family:'Nunito',sans-serif;font-weight:800;color:var(--purp2);
+      font-size:.92rem;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem;}
+    .r-ej{background:rgba(108,60,225,.15);border:1px solid rgba(108,60,225,.3);
+      border-radius:8px;padding:.4rem .8rem;font-family:'Nunito',sans-serif;
+      font-weight:700;font-size:.85rem;color:var(--amarillo);margin-top:.6rem;display:inline-block;}
+    #recta{background:var(--fondo2);}
+    .canvas-wrap{background:rgba(255,255,255,.03);border:1px solid rgba(108,60,225,.25);
+      border-radius:16px;padding:1.5rem 1rem;margin-bottom:1rem;overflow-x:auto;}
+    #rectaCanvas{display:block;min-width:800px;height:auto;margin:0 auto;cursor:pointer;}
+    .puntos-info{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin-bottom:1.5rem;}
+    .punto-badge{display:flex;align-items:center;gap:.5rem;
+      background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+      border-radius:10px;padding:.5rem 1rem;
+      font-size:.83rem;font-family:'Nunito',sans-serif;font-weight:700;color:rgba(255,255,255,.75);}
+    .dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+    .dot-neg{background:var(--rojo);}
+    .dot-zero{background:var(--verde);}
+    .dot-pos{background:var(--cian);}
+    .recta-info-panel{background:rgba(108,60,225,.15);border:1px solid rgba(108,60,225,.4);
+      border-left:4px solid var(--cian);color:var(--blanco);border-radius:12px;
+      padding:1rem 1.4rem;font-family:'Nunito',sans-serif;font-size:.93rem;line-height:1.7;
+      margin-bottom:1.4rem;display:none;animation:fadeIn .3s ease;}
+    .recta-info-panel strong{color:var(--cian);}
+    .rip-valor{font-size:2rem;font-weight:900;display:block;margin:.3rem 0;color:var(--amarillo);}
+    .geogebra-wrap{background:rgba(255,255,255,.03);border:1px solid rgba(108,60,225,.25);
+      border-radius:16px;overflow:hidden;margin-top:2rem;}
+    .gg-header{background:linear-gradient(135deg,rgba(108,60,225,.4),rgba(0,212,255,.2));
+      padding:.75rem 1.5rem;display:flex;align-items:center;gap:.6rem;}
+    .gg-header span{font-family:'Nunito',sans-serif;font-weight:700;color:var(--blanco);font-size:.88rem;}
+    .gg-dot{width:9px;height:9px;border-radius:50%;background:var(--verde);animation:pulseDot 1.4s infinite;}
+    @keyframes pulseDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+    .gg-body{display:flex;justify-content:center;align-items:center;padding:1rem;background:rgba(0,0,0,.2);}
+    .gg-body iframe{width:100%;max-width:700px;height:350px;border:none;display:block;border-radius:10px;}
+    #valor-abs{background:var(--fondo3);}
+    .va-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-top:1.5rem;}
+    .va-card{background:rgba(255,255,255,.04);border:1px solid rgba(108,60,225,.25);
+      border-radius:14px;padding:1.3rem;text-align:center;transition:all .2s;}
+    .va-card:hover{transform:translateY(-5px);border-color:rgba(0,212,255,.5);
+      box-shadow:0 10px 28px rgba(0,212,255,.12);}
+    .va-expr{font-family:'Nunito',sans-serif;font-size:1.25rem;font-weight:900;color:var(--gris);}
+    .va-arrow{font-size:1.5rem;color:var(--purp2);margin:.3rem 0;display:block;}
+    .va-result{font-family:'Nunito',sans-serif;font-size:2rem;font-weight:900;color:var(--cian);}
+    .va-hint{font-size:.76rem;color:rgba(255,255,255,.45);margin-top:.3rem;}
+    #operaciones{background:var(--fondo2);}
+    .tabs{display:flex;gap:.7rem;margin-bottom:2rem;flex-wrap:wrap;}
+    .tab-btn{font-family:'Nunito',sans-serif;font-weight:800;font-size:.92rem;
+      padding:.72rem 1.6rem;border-radius:30px;
+      border:1.5px solid rgba(108,60,225,.5);background:transparent;color:rgba(255,255,255,.7);
+      cursor:pointer;transition:all .22s;}
+    .tab-btn.active,.tab-btn:hover{background:linear-gradient(135deg,var(--purp),var(--cian));
+      color:var(--blanco);border-color:transparent;
+      transform:translateY(-2px);box-shadow:0 6px 18px rgba(108,60,225,.4);}
+    .tab-panel{display:none;}
+    .tab-panel.active{display:block;animation:fadeIn .35s ease;}
+    .ops-layout{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;margin-bottom:2rem;}
+    @media(max-width:700px){.ops-layout{grid-template-columns:1fr;}}
+    .regla-box{background:rgba(108,60,225,.08);border:1px solid rgba(108,60,225,.25);
+      border-left:5px solid var(--verde);border-radius:12px;padding:1.5rem;
+      font-size:.94rem;line-height:1.75;color:rgba(255,255,255,.85);}
+    .regla-box .rb-titulo{font-family:'Nunito',sans-serif;font-weight:900;color:var(--verde);
+      font-size:1rem;display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;}
+    .regla-steps{list-style:none;display:flex;flex-direction:column;gap:1rem;}
+    .regla-steps li{display:flex;flex-direction:column;gap:.4rem;
+      border-left:3px solid rgba(255,233,77,.4);padding-left:1rem;}
+    .regla-steps li strong{color:var(--amarillo);font-family:'Nunito',sans-serif;}
+    .regla-ej-box{background:rgba(255,255,255,.04);border:1px dashed rgba(255,255,255,.15);
+      border-radius:8px;padding:.6rem 1rem;font-family:'Nunito',sans-serif;
+      font-weight:700;font-size:.86rem;color:rgba(255,255,255,.8);}
+    .ejemplos-ops{display:flex;flex-direction:column;gap:.8rem;}
+    .op-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+      border-radius:12px;padding:1rem 1.2rem;
+      display:flex;align-items:center;justify-content:space-between;gap:1rem;
+      font-family:'Nunito',sans-serif;transition:all .2s;}
+    .op-card:hover{background:rgba(255,255,255,.06);transform:translateX(5px);}
+    .op-expr{font-size:1rem;font-weight:700;color:rgba(255,255,255,.8);}
+    .op-result{font-size:1.6rem;font-weight:900;flex-shrink:0;}
+    .op-hint{font-size:.74rem;color:var(--gris);line-height:1.4;}
+    .pos-result{color:var(--cian);}
+    .neg-result{color:var(--rojo);}
+    .zero-result{color:var(--verde);}
+    .video-section{margin-top:2rem;background:rgba(255,255,255,.03);
+      border:1px solid rgba(108,60,225,.2);padding:1.5rem;border-radius:16px;}
+    .video-section h3{font-family:'Nunito',sans-serif;font-weight:900;
+      font-size:1.05rem;color:var(--cian);margin-bottom:1rem;}
+    .video-wrap{position:relative;width:100%;padding-bottom:56.25%;border-radius:12px;overflow:hidden;}
+    .video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
+    .calc-section{margin-top:2rem;background:rgba(108,60,225,.06);
+      border:1px solid rgba(108,60,225,.3);border-radius:16px;padding:1.5rem;}
+    .calc-section h3{font-family:'Nunito',sans-serif;font-weight:900;color:var(--amarillo);
+      font-size:1rem;margin-bottom:1.2rem;display:flex;align-items:center;gap:.5rem;}
+    .calc-row{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:1rem;}
+    .calc-input{background:rgba(255,255,255,.06);border:1.5px solid rgba(108,60,225,.4);
+      border-radius:10px;padding:.6rem .9rem;color:var(--blanco);
+      font-family:'Nunito',sans-serif;font-weight:700;font-size:1.1rem;
+      width:90px;text-align:center;outline:none;transition:border-color .2s;}
+    .calc-input:focus{border-color:var(--cian);}
+    .calc-op{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.4rem;
+      color:var(--purp2);padding:0 .2rem;}
+    .calc-btn{background:linear-gradient(135deg,var(--purp),var(--cian));color:var(--blanco);
+      font-family:'Nunito',sans-serif;font-weight:900;font-size:.95rem;
+      padding:.65rem 1.6rem;border-radius:30px;border:none;cursor:pointer;
+      transition:all .2s;box-shadow:0 4px 14px rgba(108,60,225,.35);}
+    .calc-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,212,255,.4);}
+    .calc-resultado{font-family:'Nunito',sans-serif;font-weight:900;font-size:2rem;
+      color:var(--amarillo);min-width:80px;text-align:center;}
+    .calc-explicacion{font-size:.84rem;color:rgba(255,255,255,.65);line-height:1.6;
+      padding:.7rem 1rem;background:rgba(255,255,255,.03);
+      border-radius:10px;border:1px solid rgba(255,255,255,.07);margin-top:.5rem;}
+    .ejercicios{margin-top:2rem;}
+    .ejercicios h3{font-family:'Nunito',sans-serif;font-weight:900;color:var(--blanco);font-size:1.05rem;margin-bottom:1rem;}
+    .ej-item{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+      border-left:4px solid var(--amarillo);border-radius:12px;
+      padding:1.1rem 1.4rem;margin-bottom:.9rem;cursor:pointer;transition:all .2s;}
+    .ej-item:hover{background:rgba(255,233,77,.05);border-color:rgba(255,233,77,.4);}
+    .ej-question{font-family:'Nunito',sans-serif;font-weight:700;font-size:.95rem;
+      color:rgba(255,255,255,.85);display:flex;justify-content:space-between;align-items:center;gap:.8rem;}
+    .ej-toggle{font-size:1.4rem;color:var(--amarillo);transition:transform .3s;line-height:1;flex-shrink:0;}
+    .ej-item.open .ej-toggle{transform:rotate(45deg);}
+    .ej-answer{display:none;margin-top:.9rem;padding-top:.9rem;
       border-top:1px solid rgba(255,255,255,.08);
-      font-size:.91rem; color:rgba(255,255,255,.7); line-height:1.75;
-    }
-    .ej-item.open .ej-answer { display:block; animation:fadeIn .3s ease; }
-    .ans-highlight {
-      display:inline-block; margin-top:.4rem;
+      font-size:.91rem;color:rgba(255,255,255,.7);line-height:1.75;}
+    .ej-item.open .ej-answer{display:block;animation:fadeIn .3s ease;}
+    .ans-highlight{display:inline-block;margin-top:.4rem;
       background:linear-gradient(135deg,var(--purp),var(--cian));
-      color:var(--blanco); font-family:'Nunito',sans-serif; font-weight:700;
-      padding:.28rem .9rem; border-radius:8px; font-size:.95rem;
-    }
-
-    /* ── CTA FINAL ── */
-    .cta-final {
-      background:
-        radial-gradient(ellipse 60% 80% at 30% 50%, rgba(108,60,225,.2) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 70% at 70% 50%, rgba(0,212,255,.15) 0%, transparent 55%),
-        var(--fondo3);
-      padding:4rem 1.5rem; text-align:center;
-      border-top:1px solid rgba(108,60,225,.2);
-    }
-    .cta-final h2 {
-      font-family:'Nunito',sans-serif; font-weight:900;
-      font-size:clamp(1.4rem,4vw,2rem); color:var(--blanco); margin-bottom:.5rem;
-    }
-    .cta-final h2 span { color:var(--cian); }
-    .cta-final p { color:rgba(255,255,255,.6); font-size:.95rem; margin-bottom:1.8rem; }
-    .cta-final .btn-cta {
-      display:inline-flex; align-items:center; gap:.5rem;
+      color:var(--blanco);font-family:'Nunito',sans-serif;font-weight:700;
+      padding:.28rem .9rem;border-radius:8px;font-size:.95rem;}
+    .cta-final{background:radial-gradient(ellipse 60% 80% at 30% 50%,rgba(108,60,225,.2) 0%,transparent 60%),
+      radial-gradient(ellipse 50% 70% at 70% 50%,rgba(0,212,255,.15) 0%,transparent 55%),
+      var(--fondo3);padding:4rem 1.5rem;text-align:center;
+      border-top:1px solid rgba(108,60,225,.2);}
+    .cta-final h2{font-family:'Nunito',sans-serif;font-weight:900;
+      font-size:clamp(1.4rem,4vw,2rem);color:var(--blanco);margin-bottom:.5rem;}
+    .cta-final h2 span{color:var(--cian);}
+    .cta-final p{color:rgba(255,255,255,.6);font-size:.95rem;margin-bottom:1.8rem;}
+    .btn-cta{display:inline-flex;align-items:center;gap:.5rem;
       background:linear-gradient(135deg,var(--purp),var(--cian));
-      color:var(--blanco); font-family:'Nunito',sans-serif; font-weight:900;
-      font-size:1rem; padding:.9rem 2.2rem; border-radius:30px; border:none; cursor:pointer;
-      text-decoration:none; transition:all .2s; box-shadow:0 8px 26px rgba(108,60,225,.45);
-    }
-    .cta-final .btn-cta:hover { transform:translateY(-3px); box-shadow:0 14px 34px rgba(0,212,255,.4); }
-
-    /* ── ANIMACIONES ── */
-    @keyframes riseUp  { to { opacity:1; transform:translateY(0); } }
-    @keyframes fadeIn  { from { opacity:0; } to { opacity:1; } }
-
-    /* ── RESPONSIVE ── */
-    @media(max-width:600px){
-      .tabs { gap:.4rem; }
-      .tab-btn { padding:.6rem 1.1rem; font-size:.82rem; }
-    }
+      color:var(--blanco);font-family:'Nunito',sans-serif;font-weight:900;
+      font-size:1rem;padding:.9rem 2.2rem;border-radius:30px;border:none;cursor:pointer;
+      text-decoration:none;transition:all .2s;box-shadow:0 8px 26px rgba(108,60,225,.45);}
+    .btn-cta:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,212,255,.4);}
+    @keyframes riseUp{to{opacity:1;transform:translateY(0);}}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    @media(max-width:600px){.tabs{gap:.4rem;}.tab-btn{padding:.6rem 1rem;font-size:.82rem;}}
   </style>
 </head>
 <body>
 
-<!-- Barra progreso lectura -->
 <div id="read-progress" role="progressbar" aria-label="Progreso de lectura"></div>
 
-<!-- ══ HERO ══ -->
 <div class="teoria-hero">
-  <div class="teoria-hero-grid" aria-hidden="true"></div>
-  <div class="hero-tag">📖 Módulo 1 &middot; Teoría Completa</div>
-  <h1>Los <span>Números Enteros</span> ℤ</h1>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-tag">📖 Módulo 1 · Teoría Completa</div>
+  <h1>Los <span>Números Enteros ℤ</span></h1>
   <p>Concepto, orden, recta numérica, valor absoluto y operaciones con la ley de signos.</p>
-
-  <!-- Índice TOC -->
   <nav class="toc" aria-label="Índice de contenidos">
-    <h4>📋 Contenidos de esta sección</h4>
+    <h4>📋 Ir directo a…</h4>
     <ol>
       <li><a href="#que-son">🔢 ¿Qué son?</a></li>
       <li><a href="#orden">📊 Orden</a></li>
@@ -465,160 +324,136 @@
   </nav>
 </div>
 
-<!-- ══ OBJETIVOS ══ -->
 <div class="objetivos-band">
   <div class="objetivos-inner">
-    <div class="obj-titulo">🎯 Objetivos de aprendizaje</div>
-    <div class="obj-item"><span class="obj-icon">🔢</span>Identificar y clasificar los números enteros del conjunto ℤ</div>
-    <div class="obj-item"><span class="obj-icon">📏</span>Ubicarlos y compararlos en la recta numérica</div>
-    <div class="obj-item"><span class="obj-icon">⚡</span>Calcular el valor absoluto y el opuesto de un entero</div>
-    <div class="obj-item"><span class="obj-icon">➕</span>Sumar y restar enteros aplicando la ley de signos</div>
+    <div class="obj-titulo">🎯 Al terminar esta sección podrás:</div>
+    <div class="obj-item"><span class="obj-icon">1️⃣</span>Definir el conjunto ℤ y distinguirlo de ℕ</div>
+    <div class="obj-item"><span class="obj-icon">2️⃣</span>Ordenar y comparar enteros en la recta numérica</div>
+    <div class="obj-item"><span class="obj-icon">3️⃣</span>Calcular el valor absoluto y el opuesto</div>
+    <div class="obj-item"><span class="obj-icon">4️⃣</span>Sumar y restar aplicando la ley de signos</div>
+    <div class="obj-item"><span class="obj-icon">5️⃣</span>Usar los enteros en situaciones cotidianas</div>
   </div>
 </div>
 
-<!-- ══ SECCIÓN 1 – ¿QUÉ SON? ══ -->
 <section id="que-son">
   <div class="section-wrap">
-    <div class="que-son-inner">
-      <div>
-        <span class="tag tag-purp">📖 Concepto Base</span>
-        <h2 class="section-title">¿Qué son los Números Enteros?</h2>
-        <p class="section-sub">Los números naturales no alcanzan para describir la realidad: necesitamos representar deudas, temperaturas bajo cero y descensos. Ahí nacen los <strong style="color:var(--cian)">enteros</strong>.</p>
-
-        <div class="def-box">
-          Los <strong>números enteros (ℤ)</strong> forman el conjunto infinito que incluye negativos, cero y positivos:
-          <span class="def-formula">ℤ = { …, −3, −2, −1, 0, +1, +2, +3, … }</span>
-          La letra <strong>ℤ</strong> viene del alemán <em>Zahlen</em> (números).
-        </div>
-
-        <table class="vs-table" role="table" aria-label="Comparación ℕ vs ℤ">
-          <thead><tr><th>Conjunto ℕ (naturales)</th><th>Conjunto ℤ (enteros)</th></tr></thead>
-          <tbody>
-            <tr><td>1, 2, 3, 4 …</td><td class="hl-verde">… −2, −1, 0, +1, +2 …</td></tr>
-            <tr><td>Solo positivos y cero</td><td class="hl-verde">Positivos, negativos y cero</td></tr>
-            <tr><td class="hl-naranja">No puedo restar 3 − 7</td><td class="hl-verde">3 − 7 = −4 ✓</td></tr>
-            <tr><td class="hl-naranja">No puedo representar deudas</td><td class="hl-verde">Deuda $5.000 = −5000 ✓</td></tr>
-          </tbody>
-        </table>
-
-        <h3 style="font-family:'Nunito',sans-serif;font-weight:900;color:var(--blanco);font-size:1rem;margin:1.8rem 0 .8rem;">🌍 Situaciones de la vida real</h3>
-        <div class="ejemplos-grid">
-          <div class="ejemplo-card" data-delay="0">
-            <div class="ej-icon">🌡️</div>
-            <div class="ej-content"><h4>Temperatura</h4><p>Calor: <span class="ej-value">+30°C</span><br>Helada: <span class="ej-value">−5°C</span></p></div>
-          </div>
-          <div class="ejemplo-card" data-delay="100">
-            <div class="ej-icon">🌊</div>
-            <div class="ej-content"><h4>Altitud</h4><p>Montaña: <span class="ej-value">+2.500 m</span><br>Submarino: <span class="ej-value">−300 m</span></p></div>
-          </div>
-          <div class="ejemplo-card" data-delay="200">
-            <div class="ej-icon">💰</div>
-            <div class="ej-content"><h4>Finanzas</h4><p>Ahorros: <span class="ej-value">+$50.000</span><br>Deuda: <span class="ej-value">−$15.000</span></p></div>
-          </div>
-          <div class="ejemplo-card" data-delay="300">
-            <div class="ej-icon">🏢</div>
-            <div class="ej-content"><h4>Edificio</h4><p>Piso 4: <span class="ej-value">+4</span><br>Sótano 2: <span class="ej-value">−2</span></p></div>
-          </div>
+    <span class="tag tag-purp">📖 Concepto Base</span>
+    <h2 class="section-title">¿Qué son los Números Enteros?</h2>
+    <p class="section-sub">Los números naturales no alcanzan para describir la realidad: necesitamos representar deudas, temperaturas bajo cero y descensos. Ahí nacen los <strong style="color:var(--cian)">enteros</strong>.</p>
+    <div class="def-box">
+      Los <strong>números enteros (ℤ)</strong> forman el conjunto infinito de negativos, cero y positivos:
+      <span class="def-formula">ℤ = { …, −3, −2, −1, 0, +1, +2, +3, … }</span>
+      La letra <strong>ℤ</strong> viene del alemán <em>Zahlen</em> (números).
+    </div>
+    <div class="tipos-grid">
+      <div class="tipo-card neg">
+        <div class="tipo-icon">−</div>
+        <h4>Negativos</h4>
+        <p>Menores que cero. Indican pérdidas, bajadas, izquierda.</p>
+        <div class="tipo-ejemplos">
+          <span class="tipo-pill">−1</span><span class="tipo-pill">−7</span><span class="tipo-pill">−100</span>
         </div>
       </div>
-
-      <!-- Infografía lateral -->
-      <div>
-        <div class="infografia" role="complementary" aria-label="Tipos de enteros">
-          <h3>⚡ Tipos de Enteros</h3>
-          <div class="info-row">
-            <div class="info-circle ic-pos">+</div>
-            <div class="info-text"><h4>Positivos</h4><p>Mayores que cero. (+1, +2, +3 …). Indican ganancias, subidas, derecha.</p></div>
-          </div>
-          <div class="info-row">
-            <div class="info-circle ic-zero">0</div>
-            <div class="info-text"><h4>El Cero</h4><p>Punto neutro. Separa positivos de negativos. No es ni uno ni otro.</p></div>
-          </div>
-          <div class="info-row">
-            <div class="info-circle ic-neg">−</div>
-            <div class="info-text"><h4>Negativos</h4><p>Menores que cero. (−1, −2, −3 …). Indican pérdidas, bajadas, izquierda.</p></div>
-          </div>
-          <div class="dato-clave">
-            <p style="font-size:.76rem;color:var(--cian);font-family:'Nunito',sans-serif;font-weight:900;margin-bottom:.3rem;">🔑 DATO CLAVE: ℕ ⊂ ℤ</p>
-            <p style="font-size:.83rem;color:rgba(255,255,255,.8);line-height:1.6;">Los naturales están <em>contenidos</em> en los enteros. Todo natural es entero, pero no todo entero es natural.</p>
-          </div>
-          <a href="#operaciones" class="btn-explorar">Ir a Operaciones ↓</a>
+      <div class="tipo-card zero">
+        <div class="tipo-icon">0</div>
+        <h4>El Cero</h4>
+        <p>Punto neutro. Separa positivos de negativos.</p>
+        <div class="tipo-ejemplos"><span class="tipo-pill">0</span></div>
+      </div>
+      <div class="tipo-card pos">
+        <div class="tipo-icon">+</div>
+        <h4>Positivos</h4>
+        <p>Mayores que cero. Indican ganancias, subidas, derecha.</p>
+        <div class="tipo-ejemplos">
+          <span class="tipo-pill">+1</span><span class="tipo-pill">+7</span><span class="tipo-pill">+100</span>
         </div>
+      </div>
+    </div>
+    <table class="vs-table" role="table">
+      <thead><tr><th>Conjunto ℕ (naturales)</th><th>Conjunto ℤ (enteros)</th></tr></thead>
+      <tbody>
+        <tr><td>1, 2, 3, 4 …</td><td class="hl-verde">… −2, −1, 0, +1, +2 …</td></tr>
+        <tr><td>Solo positivos y cero</td><td class="hl-verde">Positivos, negativos y cero</td></tr>
+        <tr><td class="hl-naranja">No puedo restar 3 − 7</td><td class="hl-verde">3 − 7 = −4 ✓</td></tr>
+        <tr><td class="hl-naranja">No puedo representar deudas</td><td class="hl-verde">Deuda $5.000 = −5000 ✓</td></tr>
+      </tbody>
+    </table>
+    <div class="dato-clave">
+      <p style="font-size:.76rem;color:var(--cian);font-family:'Nunito',sans-serif;font-weight:900;margin-bottom:.3rem;">🔑 DATO CLAVE: ℕ ⊂ ℤ</p>
+      <p style="font-size:.83rem;color:rgba(255,255,255,.8);line-height:1.6;">Los naturales están <em>contenidos</em> en los enteros. Todo natural es entero, pero no todo entero es natural.</p>
+    </div>
+    <p class="vida-real-titulo">🌍 Explora los enteros en la vida real — <span style="color:var(--gris);font-weight:600;font-size:.85rem;">mueve cada deslizador</span></p>
+    <div class="vida-real-grid">
+      <div class="vr-card" data-delay="0" id="vr-temperatura">
+        <div class="vr-header"><div class="vr-emoji">🌡️</div><div><div class="vr-title">Temperatura</div><div class="vr-subtitle">Bogotá en diferentes épocas</div></div></div>
+        <div class="vr-slider-wrap"><input type="range" class="vr-slider" min="-20" max="40" value="15" oninput="actualizarVR('temperatura',this.value)" aria-label="Temperatura"/></div>
+        <div class="vr-display"><span class="vr-valor" id="vr-val-temperatura" style="color:var(--cian)">+15°C</span><span class="vr-etiqueta" id="vr-lab-temperatura">Temperatura agradable</span></div>
+      </div>
+      <div class="vr-card" data-delay="120" id="vr-altitud">
+        <div class="vr-header"><div class="vr-emoji">🏔️</div><div><div class="vr-title">Altitud</div><div class="vr-subtitle">Sobre o bajo el nivel del mar</div></div></div>
+        <div class="vr-slider-wrap"><input type="range" class="vr-slider" min="-500" max="5000" value="2600" oninput="actualizarVR('altitud',this.value)" aria-label="Altitud"/></div>
+        <div class="vr-display"><span class="vr-valor" id="vr-val-altitud" style="color:var(--cian)">+2600 m</span><span class="vr-etiqueta" id="vr-lab-altitud">Ciudad en las montañas</span></div>
+      </div>
+      <div class="vr-card" data-delay="240" id="vr-dinero">
+        <div class="vr-header"><div class="vr-emoji">💰</div><div><div class="vr-title">Finanzas</div><div class="vr-subtitle">Saldo en tu cuenta bancaria</div></div></div>
+        <div class="vr-slider-wrap"><input type="range" class="vr-slider" min="-50000" max="100000" value="30000" oninput="actualizarVR('dinero',this.value)" aria-label="Saldo"/></div>
+        <div class="vr-display"><span class="vr-valor" id="vr-val-dinero" style="color:var(--cian)">+$30k</span><span class="vr-etiqueta" id="vr-lab-dinero">Tienes ahorros</span></div>
+      </div>
+      <div class="vr-card" data-delay="360" id="vr-edificio">
+        <div class="vr-header"><div class="vr-emoji">🏢</div><div><div class="vr-title">Edificio</div><div class="vr-subtitle">Pisos sobre y bajo tierra</div></div></div>
+        <div class="vr-slider-wrap"><input type="range" class="vr-slider" min="-3" max="20" value="5" oninput="actualizarVR('edificio',this.value)" aria-label="Piso"/></div>
+        <div class="vr-display"><span class="vr-valor" id="vr-val-edificio" style="color:var(--cian)">+5</span><span class="vr-etiqueta" id="vr-lab-edificio">Piso 5 — sobre tierra</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ SECCIÓN 2 – ORDEN ══ -->
 <section id="orden">
   <div class="section-wrap">
     <span class="tag tag-cian">📊 Comparación</span>
     <h2 class="section-title">Orden y Comparación</h2>
     <p class="section-sub">En la recta numérica, <strong style="color:var(--cian)">a la derecha siempre es mayor</strong>. Estas cuatro reglas te permiten comparar cualquier par de enteros.</p>
     <div class="reglas-orden">
-      <div class="regla-orden-card">
-        <div class="r-titulo">📌 Regla 1</div>
-        <p>Todo <strong>negativo es menor que cero</strong>, y todo <strong>positivo es mayor que cero</strong>.</p>
-        <span class="r-ej">−7 &lt; 0 &nbsp;|&nbsp; 5 &gt; 0</span>
-      </div>
-      <div class="regla-orden-card">
-        <div class="r-titulo">📌 Regla 2</div>
-        <p>Un <strong>positivo siempre es mayor</strong> que cualquier negativo, sin importar cuál.</p>
-        <span class="r-ej">+1 &gt; −100</span>
-      </div>
-      <div class="regla-orden-card">
-        <div class="r-titulo">📌 Regla 3</div>
-        <p>Entre dos <strong>negativos</strong>, es mayor el más cercano al cero (menor valor absoluto).</p>
-        <span class="r-ej">−3 &gt; −7 &nbsp;|&nbsp; |−3| &lt; |−7|</span>
-      </div>
-      <div class="regla-orden-card">
-        <div class="r-titulo">📌 Regla 4</div>
-        <p>Entre dos <strong>positivos</strong>, es mayor el de mayor valor absoluto.</p>
-        <span class="r-ej">+10 &gt; +3 &nbsp;|&nbsp; |10| &gt; |3|</span>
-      </div>
+      <div class="regla-orden-card"><div class="r-titulo">📌 Regla 1</div><p>Todo <strong>negativo es menor que cero</strong> y todo <strong>positivo es mayor que cero</strong>.</p><span class="r-ej">−7 &lt; 0 &nbsp;|&nbsp; 5 &gt; 0</span></div>
+      <div class="regla-orden-card"><div class="r-titulo">📌 Regla 2</div><p>Un <strong>positivo siempre es mayor</strong> que cualquier negativo sin excepción.</p><span class="r-ej">+1 &gt; −100</span></div>
+      <div class="regla-orden-card"><div class="r-titulo">📌 Regla 3</div><p>Entre dos <strong>negativos</strong>, es mayor el más cercano al cero.</p><span class="r-ej">−3 &gt; −7 &nbsp;|&nbsp; |−3| &lt; |−7|</span></div>
+      <div class="regla-orden-card"><div class="r-titulo">📌 Regla 4</div><p>Entre dos <strong>positivos</strong>, es mayor el de mayor valor absoluto.</p><span class="r-ej">+10 &gt; +3 &nbsp;|&nbsp; |10| &gt; |3|</span></div>
     </div>
   </div>
 </section>
 
-<!-- ══ SECCIÓN 3 – RECTA ══ -->
 <section id="recta">
   <div class="section-wrap">
     <span class="tag tag-purp">📏 Herramienta Visual</span>
     <h2 class="section-title">La Recta Numérica</h2>
-    <p class="section-sub">Haz clic en cualquier punto para ver su información. En celular, desliza de lado a lado.</p>
-
+    <p class="section-sub">Haz clic en cualquier punto para ver su información completa.</p>
     <div class="recta-info-panel" id="riptPanel" role="status" aria-live="polite"></div>
-
     <div class="canvas-wrap">
       <canvas id="rectaCanvas" width="900" height="120" role="img" aria-label="Recta numérica interactiva del −8 al +8"></canvas>
     </div>
-
     <div class="puntos-info">
-      <div class="punto-badge"><div class="dot dot-neg"></div> Negativos (izquierda)</div>
-      <div class="punto-badge"><div class="dot dot-zero"></div> Cero (centro)</div>
-      <div class="punto-badge"><div class="dot dot-pos"></div> Positivos (derecha)</div>
+      <div class="punto-badge"><div class="dot dot-neg"></div>Negativos (izquierda)</div>
+      <div class="punto-badge"><div class="dot dot-zero"></div>Cero (centro)</div>
+      <div class="punto-badge"><div class="dot dot-pos"></div>Positivos (derecha)</div>
     </div>
-
     <div class="geogebra-wrap">
-      <div class="gg-header">
-        <div class="gg-dot"></div>
-        <span>🧮 Explora con GeoGebra: ubica puntos en la recta numérica</span>
+      <div class="gg-header"><div class="gg-dot"></div><span>🧮 Explora con GeoGebra: ubica puntos en la recta numérica</span></div>
+      <div class="gg-body">
+        <iframe scrolling="no" title="Recta numérica GeoGebra"
+          src="https://www.geogebra.org/material/iframe/id/apdscjnm/width/700/height/350/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false"
+          allowfullscreen loading="lazy"></iframe>
       </div>
-      <iframe scrolling="no" title="Recta numérica GeoGebra"
-        src="https://www.geogebra.org/material/iframe/id/apdscjnm/width/700/height/350/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false"
-        allowfullscreen loading="lazy"></iframe>
     </div>
   </div>
 </section>
 
-<!-- ══ SECCIÓN 4 – VALOR ABSOLUTO ══ -->
 <section id="valor-abs">
   <div class="section-wrap">
     <span class="tag tag-amarillo">⚡ Concepto Clave</span>
     <h2 class="section-title">Valor Absoluto</h2>
-    <p class="section-sub">Es la <strong style="color:var(--cian)">distancia de un número al cero</strong> en la recta numérica, sin importar la dirección. Siempre es ≥ 0.</p>
+    <p class="section-sub">Es la <strong style="color:var(--cian)">distancia de un número al cero</strong> en la recta numérica. Siempre es ≥ 0.</p>
     <div class="def-box">
-      Se escribe con barras verticales: <strong>|n|</strong>. Si el número es positivo o cero, queda igual. Si es negativo, se quita el signo.<br>
+      Se escribe con barras verticales: <strong>|n|</strong>. Si positivo o cero, queda igual; si negativo, se quita el signo.<br>
       <span class="def-formula">|+7| = 7 &nbsp;&nbsp;&nbsp; |−7| = 7 &nbsp;&nbsp;&nbsp; |0| = 0</span>
     </div>
     <div class="va-grid">
@@ -630,111 +465,120 @@
   </div>
 </section>
 
-<!-- ══ SECCIÓN 5 – OPERACIONES ══ -->
 <section id="operaciones">
   <div class="section-wrap">
     <span class="tag tag-cian">➕ Operaciones</span>
     <h2 class="section-title">Operaciones con Enteros</h2>
     <p class="section-sub">La <strong style="color:var(--cian)">ley de signos</strong> rige todas las sumas y restas. Selecciona una operación:</p>
-
-    <div class="tabs" role="tablist" aria-label="Operaciones con enteros">
-      <button class="tab-btn active" data-tab="suma"  role="tab" aria-selected="true"  aria-controls="tab-suma">➕ Suma</button>
-      <button class="tab-btn"        data-tab="resta" role="tab" aria-selected="false" aria-controls="tab-resta">➖ Resta</button>
+    <div class="tabs" role="tablist">
+      <button class="tab-btn active" data-tab="suma" role="tab" aria-selected="true">➕ Suma</button>
+      <button class="tab-btn" data-tab="resta" role="tab" aria-selected="false">➖ Resta</button>
     </div>
 
-    <!-- TAB SUMA -->
     <div id="tab-suma" class="tab-panel active" role="tabpanel">
-      <div class="regla-box">
-        <div class="rb-titulo">📐 Ley de signos para la SUMA</div>
-        <ul class="regla-steps">
-          <li>
-            <strong>Mismo signo:</strong> se suman los valores absolutos y se conserva el signo.
-            <div class="regla-ej-box">(+4) + (+3) = +7 &nbsp;|&nbsp; (−4) + (−3) = −7</div>
-          </li>
-          <li>
-            <strong>Signos distintos:</strong> se restan los valores absolutos y se toma el signo del mayor.
-            <div class="regla-ej-box">(+7) + (−3) = +4 &nbsp;|&nbsp; (−7) + (+3) = −4</div>
-          </li>
-        </ul>
+      <div class="ops-layout">
+        <div class="regla-box">
+          <div class="rb-titulo">📐 Ley de signos – SUMA</div>
+          <ul class="regla-steps">
+            <li><strong>Mismo signo:</strong> suma los valores absolutos y conserva el signo.
+              <div class="regla-ej-box">(+4)+(+3) = +7 &nbsp;|&nbsp; (−4)+(−3) = −7</div></li>
+            <li><strong>Signos distintos:</strong> resta los valores absolutos; toma el signo del mayor.
+              <div class="regla-ej-box">(+7)+(−3) = +4 &nbsp;|&nbsp; (−7)+(+3) = −4</div></li>
+          </ul>
+        </div>
+        <div class="ejemplos-ops">
+          <div class="op-card"><div><div class="op-expr">(+5) + (+3)</div><div class="op-hint">Mismo signo → suma</div></div><div class="op-result pos-result">+8</div></div>
+          <div class="op-card"><div><div class="op-expr">(−5) + (−3)</div><div class="op-hint">Mismo signo → suma</div></div><div class="op-result neg-result">−8</div></div>
+          <div class="op-card"><div><div class="op-expr">(+8) + (−5)</div><div class="op-hint">Mayor es positivo</div></div><div class="op-result pos-result">+3</div></div>
+          <div class="op-card"><div><div class="op-expr">(−8) + (+5)</div><div class="op-hint">Mayor es negativo</div></div><div class="op-result neg-result">−3</div></div>
+          <div class="op-card"><div><div class="op-expr">(+6) + (−6)</div><div class="op-hint">Opuestos → cero</div></div><div class="op-result zero-result">0</div></div>
+        </div>
       </div>
-      <div class="ejemplos-ops">
-        <div class="op-card"><div class="op-expr">(+5) + (+3)</div><div class="op-result pos-result">+8</div><div class="op-hint">Mismo signo → suma</div></div>
-        <div class="op-card"><div class="op-expr">(−5) + (−3)</div><div class="op-result neg-result">−8</div><div class="op-hint">Mismo signo → suma</div></div>
-        <div class="op-card"><div class="op-expr">(+8) + (−5)</div><div class="op-result pos-result">+3</div><div class="op-hint">Mayor es positivo</div></div>
-        <div class="op-card"><div class="op-expr">(−8) + (+5)</div><div class="op-result neg-result">−3</div><div class="op-hint">Mayor es negativo</div></div>
-        <div class="op-card"><div class="op-expr">(+6) + (−6)</div><div class="op-result zero-result">0</div><div class="op-hint">Opuestos → cero</div></div>
+      <div class="calc-section">
+        <h3>🧮 Calculadora interactiva – Suma</h3>
+        <div class="calc-row">
+          <input type="number" class="calc-input" id="suma-a" value="-3" aria-label="Primer número"/>
+          <span class="calc-op">+</span>
+          <input type="number" class="calc-input" id="suma-b" value="7" aria-label="Segundo número"/>
+          <span class="calc-op">=</span>
+          <span class="calc-resultado" id="suma-res">+4</span>
+          <button class="calc-btn" onclick="calcular('suma')">Calcular</button>
+        </div>
+        <div class="calc-explicacion" id="suma-exp">Ingresa dos números y presiona Calcular.</div>
       </div>
       <div class="video-section">
-        <h3>🎬 Video explicativo – Suma de enteros</h3>
+        <h3>🎬 Video: Suma de números enteros</h3>
         <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/6YBxmCFiwiU" title="Suma de números enteros" allowfullscreen loading="lazy"></iframe>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/EfsMlucTGXM?si=Ap0Bzq6ui_RnmWmO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
       </div>
       <div class="ejercicios">
         <h3>🧩 Practica: ¿cuánto da?</h3>
-        <div class="ej-item" data-answer="<span class='ans-highlight'>+3</span><br>Signos distintos → 8−5=3; el mayor (+8) pone el signo.">
-          <div class="ej-question">(+8) + (−5) = ?<span class="ej-toggle">+</span></div>
-          <div class="ej-answer"></div>
+        <div class="ej-item" data-answer="<span class='ans-highlight'>+3</span><br>Signos distintos → 8−5=3; el mayor (+8) pone el signo positivo.">
+          <div class="ej-question">(+8) + (−5) = ?<span class="ej-toggle">+</span></div><div class="ej-answer"></div>
         </div>
         <div class="ej-item" data-answer="<span class='ans-highlight'>−9</span><br>Mismo signo negativo → suma: 4+5=9; resultado negativo.">
-          <div class="ej-question">(−4) + (−5) = ?<span class="ej-toggle">+</span></div>
-          <div class="ej-answer"></div>
+          <div class="ej-question">(−4) + (−5) = ?<span class="ej-toggle">+</span></div><div class="ej-answer"></div>
         </div>
-        <div class="ej-item" data-answer="<span class='ans-highlight'>0</span><br>Opuestos se anulan: +12 y −12 suman 0.">
-          <div class="ej-question">(+12) + (−12) = ?<span class="ej-toggle">+</span></div>
-          <div class="ej-answer"></div>
+        <div class="ej-item" data-answer="<span class='ans-highlight'>0</span><br>Opuestos se anulan: +12 y −12 suman exactamente 0.">
+          <div class="ej-question">(+12) + (−12) = ?<span class="ej-toggle">+</span></div><div class="ej-answer"></div>
         </div>
       </div>
     </div>
 
-    <!-- TAB RESTA -->
     <div id="tab-resta" class="tab-panel" role="tabpanel">
-      <div class="regla-box">
-        <div class="rb-titulo">📐 Regla de la RESTA</div>
-        <ul class="regla-steps">
-          <li>
-            <strong>Paso 1:</strong> convierte la resta en suma cambiando el signo del segundo número.
-            <div class="regla-ej-box">a − b = a + (−b)</div>
-          </li>
-          <li>
-            <strong>Paso 2:</strong> aplica la ley de signos de la suma.
-            <div class="regla-ej-box">(+5) − (−3) = (+5) + (+3) = +8</div>
-          </li>
-        </ul>
+      <div class="ops-layout">
+        <div class="regla-box">
+          <div class="rb-titulo">📐 Regla de la RESTA</div>
+          <ul class="regla-steps">
+            <li><strong>Paso 1:</strong> convierte la resta en suma cambiando el signo del segundo número.
+              <div class="regla-ej-box">a − b = a + (−b)</div></li>
+            <li><strong>Paso 2:</strong> aplica la ley de signos de la suma.
+              <div class="regla-ej-box">(+5)−(−3) = (+5)+(+3) = +8</div></li>
+          </ul>
+        </div>
+        <div class="ejemplos-ops">
+          <div class="op-card"><div><div class="op-expr">(+7) − (+4)</div><div class="op-hint">7+(−4)=3</div></div><div class="op-result pos-result">+3</div></div>
+          <div class="op-card"><div><div class="op-expr">(+3) − (+8)</div><div class="op-hint">3+(−8)=−5</div></div><div class="op-result neg-result">−5</div></div>
+          <div class="op-card"><div><div class="op-expr">(−3) − (−5)</div><div class="op-hint">(−3)+(+5)=+2</div></div><div class="op-result pos-result">+2</div></div>
+          <div class="op-card"><div><div class="op-expr">(+5) − (−3)</div><div class="op-hint">(+5)+(+3)=+8</div></div><div class="op-result pos-result">+8</div></div>
+          <div class="op-card"><div><div class="op-expr">(−2) − (+4)</div><div class="op-hint">(−2)+(−4)=−6</div></div><div class="op-result neg-result">−6</div></div>
+        </div>
       </div>
-      <div class="ejemplos-ops">
-        <div class="op-card"><div class="op-expr">(+7) − (+4)</div><div class="op-result pos-result">+3</div><div class="op-hint">7+(−4)=3</div></div>
-        <div class="op-card"><div class="op-expr">(+3) − (+8)</div><div class="op-result neg-result">−5</div><div class="op-hint">3+(−8)=−5</div></div>
-        <div class="op-card"><div class="op-expr">(−3) − (−5)</div><div class="op-result pos-result">+2</div><div class="op-hint">(−3)+(+5)=2</div></div>
-        <div class="op-card"><div class="op-expr">(+5) − (−3)</div><div class="op-result pos-result">+8</div><div class="op-hint">(+5)+(+3)=8</div></div>
-        <div class="op-card"><div class="op-expr">(−2) − (+4)</div><div class="op-result neg-result">−6</div><div class="op-hint">(−2)+(−4)=−6</div></div>
+      <div class="calc-section">
+        <h3>🧮 Calculadora interactiva – Resta</h3>
+        <div class="calc-row">
+          <input type="number" class="calc-input" id="resta-a" value="5" aria-label="Primer número"/>
+          <span class="calc-op">−</span>
+          <input type="number" class="calc-input" id="resta-b" value="-3" aria-label="Segundo número"/>
+          <span class="calc-op">=</span>
+          <span class="calc-resultado" id="resta-res">+8</span>
+          <button class="calc-btn" onclick="calcular('resta')">Calcular</button>
+        </div>
+        <div class="calc-explicacion" id="resta-exp">Ingresa dos números y presiona Calcular.</div>
       </div>
       <div class="video-section">
-        <h3>🎬 Video explicativo – Resta de enteros</h3>
+        <h3>🎬 Video: Resta de números enteros</h3>
         <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/ypNIGJ1M0gY" title="Resta de números enteros" allowfullscreen loading="lazy"></iframe>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/EfsMlucTGXM?si=CcuLIs9smUDOBFPW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
       </div>
       <div class="ejercicios">
         <h3>🧩 Practica: ¿cuánto da?</h3>
         <div class="ej-item" data-answer="<span class='ans-highlight'>+8</span><br>(+5)−(−3) = (+5)+(+3) = 8. Restar negativo suma.">
-          <div class="ej-question">(+5) − (−3) = ?<span class="ej-toggle">+</span></div>
-          <div class="ej-answer"></div>
+          <div class="ej-question">(+5) − (−3) = ?<span class="ej-toggle">+</span></div><div class="ej-answer"></div>
         </div>
-        <div class="ej-item" data-answer="<span class='ans-highlight'>+2</span><br>(−3)−(−5) = (−3)+(+5) = 2. Dos negativos se convierten en suma.">
-          <div class="ej-question">(−3) − (−5) = ?<span class="ej-toggle">+</span></div>
-          <div class="ej-answer"></div>
+        <div class="ej-item" data-answer="<span class='ans-highlight'>+2</span><br>(−3)−(−5) = (−3)+(+5) = 2.">
+          <div class="ej-question">(−3) − (−5) = ?<span class="ej-toggle">+</span></div><div class="ej-answer"></div>
         </div>
-        <div class="ej-item" data-answer="<span class='ans-highlight'>−9</span><br>(−4)−(+5) = (−4)+(−5) = −9. Sumar dos negativos.">
-          <div class="ej-question">(−4) − (+5) = ?<span class="ej-toggle">+</span></div>
-          <div class="ej-answer"></div>
+        <div class="ej-item" data-answer="<span class='ans-highlight'>−9</span><br>(−4)−(+5) = (−4)+(−5) = −9.">
+          <div class="ej-question">(−4) − (+5) = ?<span class="ej-toggle">+</span></div><div class="ej-answer"></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ CTA FINAL ══ -->
 <div class="cta-final">
   <h2>¡Teoría <span>completada</span>! 🏆</h2>
   <p>Ya conoces los fundamentos. Ahora pon a prueba lo aprendido en la Práctica.</p>
@@ -742,188 +586,192 @@
 </div>
 
 <script>
-  /* ── UTILIDADES ─────────────────────────────────── */
-  function leerLS(k)     { try { return localStorage.getItem(k);    } catch(e) { return null; } }
-  function escribirLS(k,v){ try { localStorage.setItem(k,v);        } catch(e) {} }
-
-  /* ── NAVEGACIÓN SEGURA ──────────────────────────── */
-  function navegarA(id) {
-    try {
-      if (window.parent && typeof window.parent.showPage === 'function') {
-        window.parent.showPage(id); return;
-      }
-    } catch(e) {}
-    window.parent.postMessage({ action: 'cambiarPagina', destino: id }, '*');
-  }
-
-  /* ── SISTEMA DE PROGRESO ────────────────────────── */
-  let interacciones = 0;
-  const umbral = 4;
-  let teoriaCompletada = false;
-
-  function registrarInteraccion(tipo) {
-    if (teoriaCompletada) return;
-    interacciones++;
-    if (interacciones >= umbral) {
-      teoriaCompletada = true;
-      guardarTeoriaVista();
+function leerLS(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+function escribirLS(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+function navegarA(id){
+  try{if(window.parent&&typeof window.parent.showPage==='function'){window.parent.showPage(id);return;}}catch(e){}
+  window.parent.postMessage({action:'cambiarPagina',destino:id},'*');
+}
+let interacciones=0;const umbral=4;let teoriaCompletada=false;
+function registrarInteraccion(){
+  if(teoriaCompletada)return;interacciones++;
+  if(interacciones>=umbral){teoriaCompletada=true;guardarTeoriaVista();}
+}
+function guardarTeoriaVista(){
+  const raw=leerLS('edu_progreso');if(!raw)return;
+  try{
+    const p=JSON.parse(raw);
+    if(!p.teoriaVista){
+      p.teoriaVista=true;
+      if(!p.seccionesVisitadas)p.seccionesVisitadas=[];
+      if(!p.seccionesVisitadas.includes('teoria'))p.seccionesVisitadas.push('teoria');
+      p.practicaPuntaje=(p.practicaPuntaje||0)+10;
+      escribirLS('edu_progreso',JSON.stringify(p));
+      window.parent.postMessage({action:'actualizarPuntos'},'*');
+      window.parent.postMessage({action:'seccionCompletada',destino:'teoria'},'*');
     }
+  }catch(e){}
+}
+window.addEventListener('scroll',()=>{
+  const el=document.getElementById('read-progress');if(!el)return;
+  const total=document.body.scrollHeight-window.innerHeight;
+  const pct=total>0?(window.scrollY/total)*100:0;
+  el.style.width=pct+'%';
+  if(pct>80)registrarInteraccion();
+},{passive:true});
+function actualizarVR(tipo,val){
+  val=parseInt(val);
+  const v=document.getElementById('vr-val-'+tipo);
+  const l=document.getElementById('vr-lab-'+tipo);
+  const card=document.getElementById('vr-'+tipo);
+  let txt='',label='',color='';
+  if(tipo==='temperatura'){
+    txt=(val>=0?'+':'')+val+'°C';
+    if(val>30){label='🔥 Calor extremo';color='#FF4D6D';}
+    else if(val>20){label='☀️ Temperatura cálida';color='#FFE94D';}
+    else if(val>10){label='🌤️ Temperatura agradable';color='#00D4FF';}
+    else if(val>0){label='🧥 Fresco, abrígate';color='#9B6DFF';}
+    else if(val===0){label='🧊 Punto de congelación';color='#2ECC8A';}
+    else{label='❄️ Temperatura bajo cero';color='#9B6DFF';}
+  }else if(tipo==='altitud'){
+    txt=(val>=0?'+':'')+val+' m';
+    color=val<0?'#FF4D6D':val===0?'#2ECC8A':'#00D4FF';
+    if(val>4000)label='🏔️ Alta montaña';
+    else if(val>1000)label='⛰️ Zona montañosa';
+    else if(val>0)label='🌄 Sobre el nivel del mar';
+    else if(val===0)label='🌊 Nivel del mar';
+    else label='🤿 Bajo el nivel del mar';
+  }else if(tipo==='dinero'){
+    const abs=Math.abs(val);
+    txt=abs>=1000?(val>=0?'+$':'-$')+Math.round(abs/1000)+'k':(val>=0?'+$':'-$')+abs;
+    if(val>50000){label='💎 Excelentes ahorros';color='#2ECC8A';}
+    else if(val>0){label='✅ Saldo positivo';color='#00D4FF';}
+    else if(val===0){label='⚖️ Sin saldo';color='#FFE94D';}
+    else{label='⚠️ Estás en deuda';color='#FF4D6D';}
+  }else if(tipo==='edificio'){
+    txt=(val>=0?'+':'')+val;
+    if(val>10){label='🏙️ Piso alto — gran vista';color='#00D4FF';}
+    else if(val>0){label='🏢 Piso '+val+' — sobre tierra';color='#9B6DFF';}
+    else if(val===0){label='🚪 Planta baja';color='#2ECC8A';}
+    else{label='🅿️ Sótano '+(val*-1)+' — bajo tierra';color='#FF4D6D';}
   }
-
-  function guardarTeoriaVista() {
-    const rawProg = leerLS('edu_progreso');
-    if (!rawProg) return;
-    try {
-      const p = JSON.parse(rawProg);
-      if (!p.teoriaVista) {
-        p.teoriaVista = true;
-        if (!p.seccionesVisitadas) p.seccionesVisitadas = [];
-        if (!p.seccionesVisitadas.includes('teoria')) p.seccionesVisitadas.push('teoria');
-        p.practicaPuntaje = (p.practicaPuntaje || 0) + 10;
-        escribirLS('edu_progreso', JSON.stringify(p));
-        window.parent.postMessage({ action: 'actualizarPuntos' }, '*');
-        window.parent.postMessage({ action: 'seccionCompletada', destino: 'teoria' }, '*');
-      }
-    } catch(e) {}
+  if(v){v.textContent=txt;v.style.color=color;}
+  if(l){l.textContent=label;}
+  if(card){card.classList.add('active');clearTimeout(card._t);card._t=setTimeout(()=>card.classList.remove('active'),1200);}
+  registrarInteraccion();
+}
+(function(){
+  const canvas=document.getElementById('rectaCanvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const W=canvas.width,H=canvas.height,cx=W/2,cy=H/2-8,step=52;
+  const nums=[-8,-7,-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8];
+  let selected=null;
+  const colorOf=n=>n<0?'#FF4D6D':n===0?'#2ECC8A':'#00D4FF';
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const lg=ctx.createLinearGradient(12,cy,W-12,cy);
+    lg.addColorStop(0,'rgba(255,77,109,0)');lg.addColorStop(.3,'rgba(255,77,109,.6)');
+    lg.addColorStop(.5,'rgba(46,204,138,.8)');lg.addColorStop(.7,'rgba(0,212,255,.6)');
+    lg.addColorStop(1,'rgba(0,212,255,0)');
+    ctx.strokeStyle=lg;ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(12,cy);ctx.lineTo(W-12,cy);ctx.stroke();
+    [[15,1],[W-15,-1]].forEach(([x,d])=>{
+      ctx.beginPath();ctx.moveTo(x-(d*10),cy-5);ctx.lineTo(x,cy);ctx.lineTo(x-(d*10),cy+5);
+      ctx.strokeStyle='rgba(255,255,255,.3)';ctx.lineWidth=2;ctx.stroke();
+    });
+    nums.forEach(n=>{
+      const x=cx+n*step,isSel=selected===n,c=colorOf(n);
+      ctx.strokeStyle=c;ctx.lineWidth=isSel?2.5:1.5;
+      ctx.beginPath();ctx.moveTo(x,cy-8);ctx.lineTo(x,cy+8);ctx.stroke();
+      if(isSel){ctx.shadowColor=c;ctx.shadowBlur=14;}
+      ctx.beginPath();ctx.arc(x,cy,isSel?14:8,0,Math.PI*2);
+      ctx.fillStyle=isSel?c:'rgba(255,255,255,.06)';
+      ctx.strokeStyle=c;ctx.lineWidth=isSel?0:1.5;
+      ctx.fill();if(!isSel)ctx.stroke();ctx.shadowBlur=0;
+      ctx.font=(isSel?'bold 13px':'11px')+' Space Grotesk,sans-serif';
+      ctx.fillStyle=isSel?'#0A0618':n===0?'#2ECC8A':'rgba(255,255,255,.6)';
+      ctx.textAlign='center';
+      if(isSel)ctx.fillText(n>0?'+'+n:n,x,cy+5);
+      else ctx.fillText(n>0?'+'+n:n,x,cy+27);
+    });
   }
-
-  /* ── BARRA PROGRESO LECTURA ─────────────────────── */
-  window.addEventListener('scroll', () => {
-    const el = document.getElementById('read-progress');
-    if (!el) return;
-    const total = document.body.scrollHeight - window.innerHeight;
-    const pct   = total > 0 ? (window.scrollY / total) * 100 : 0;
-    el.style.width = pct + '%';
-    if (pct > 80) registrarInteraccion('scroll');
-  }, { passive: true });
-
-  /* ── RECTA NUMÉRICA INTERACTIVA ─────────────────── */
-  (function() {
-    const canvas = document.getElementById('rectaCanvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const W = canvas.width, H = canvas.height;
-    const cx = W/2, cy = H/2 - 8, step = 52;
-    const nums = [-8,-7,-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8];
-    let selected = null;
-
-    const colorOf = n => n < 0 ? '#FF4D6D' : n === 0 ? '#2ECC8A' : '#00D4FF';
-
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-      // Fondo sutil
-      const bg = ctx.createLinearGradient(0,0,W,0);
-      bg.addColorStop(0, 'rgba(108,60,225,0)');
-      bg.addColorStop(.5,'rgba(108,60,225,.05)');
-      bg.addColorStop(1, 'rgba(0,212,255,0)');
-      ctx.fillStyle = bg; ctx.fillRect(0, cy-22, W, 44);
-
-      // Línea gradiente
-      const lg = ctx.createLinearGradient(12, cy, W-12, cy);
-      lg.addColorStop(0,  'rgba(255,77,109,0)');
-      lg.addColorStop(.3, 'rgba(255,77,109,.6)');
-      lg.addColorStop(.5, 'rgba(46,204,138,.8)');
-      lg.addColorStop(.7, 'rgba(0,212,255,.6)');
-      lg.addColorStop(1,  'rgba(0,212,255,0)');
-      ctx.strokeStyle = lg; ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.moveTo(12, cy); ctx.lineTo(W-12, cy); ctx.stroke();
-
-      // Flechas
-      [[15,1],[W-15,-1]].forEach(([x,d]) => {
-        ctx.beginPath();
-        ctx.moveTo(x-(d*10),cy-5); ctx.lineTo(x,cy); ctx.lineTo(x-(d*10),cy+5);
-        ctx.strokeStyle = 'rgba(255,255,255,.3)'; ctx.lineWidth = 2; ctx.stroke();
-      });
-
-      // Puntos
-      nums.forEach(n => {
-        const x = cx + n*step, isSel = selected===n, c = colorOf(n);
-        // Marca vertical
-        ctx.strokeStyle = c; ctx.lineWidth = isSel ? 2.5 : 1.5;
-        ctx.beginPath(); ctx.moveTo(x,cy-8); ctx.lineTo(x,cy+8); ctx.stroke();
-        // Círculo
-        if (isSel) { ctx.shadowColor = c; ctx.shadowBlur = 14; }
-        ctx.beginPath(); ctx.arc(x, cy, isSel ? 14 : 8, 0, Math.PI*2);
-        ctx.fillStyle   = isSel ? c : 'rgba(255,255,255,.06)';
-        ctx.strokeStyle = c; ctx.lineWidth = isSel ? 0 : 1.5;
-        ctx.fill(); if (!isSel) ctx.stroke();
-        ctx.shadowBlur = 0;
-        // Etiqueta
-        ctx.font = (isSel ? 'bold 13px' : '11px') + ' Space Grotesk,sans-serif';
-        ctx.fillStyle = isSel ? '#0A0618' : (n===0 ? '#2ECC8A' : 'rgba(255,255,255,.6)');
-        ctx.textAlign = 'center';
-        if (isSel) ctx.fillText(n>0?'+'+n:n, x, cy+5);
-        else       ctx.fillText(n>0?'+'+n:n, x, cy+27);
-      });
+  canvas.addEventListener('click',e=>{
+    const rect=canvas.getBoundingClientRect();
+    const mx=(e.clientX-rect.left)*(W/rect.width),my=(e.clientY-rect.top)*(H/rect.height);
+    let hit=null;
+    nums.forEach(n=>{const x=cx+n*step;if(Math.hypot(mx-x,my-cy)<20)hit=n;});
+    if(hit!==null){
+      selected=hit;
+      const abs=Math.abs(hit),tipo=hit>0?'Positivo':hit<0?'Negativo':'Cero (neutro)';
+      const opp=hit===0?'0':hit>0?'-'+hit:'+'+abs;
+      const panel=document.getElementById('riptPanel');
+      panel.style.display='block';
+      panel.innerHTML=`<span class="rip-valor">${hit>0?'+'+hit:hit}</span>
+        <strong>Tipo:</strong> ${tipo} &nbsp;|&nbsp;
+        <strong>Valor absoluto:</strong> |${hit>0?'+'+hit:hit}| = ${abs} &nbsp;|&nbsp;
+        <strong>Opuesto:</strong> ${opp}`;
+      draw();registrarInteraccion();
     }
-
-    canvas.addEventListener('click', e => {
-      const rect = canvas.getBoundingClientRect();
-      const sx = W/rect.width, sy = H/rect.height;
-      const mx = (e.clientX-rect.left)*sx, my = (e.clientY-rect.top)*sy;
-      let hit = null;
-      nums.forEach(n => { const x = cx+n*step; if(Math.hypot(mx-x,my-cy)<20) hit=n; });
-      if (hit !== null) {
-        selected = hit;
-        const abs  = Math.abs(hit);
-        const tipo = hit > 0 ? 'Positivo' : hit < 0 ? 'Negativo' : 'Cero (neutro)';
-        const opp  = hit === 0 ? '0' : (hit > 0 ? '-'+hit : '+'+abs);
-        const panel = document.getElementById('riptPanel');
-        panel.style.display = 'block';
-        panel.innerHTML =
-          `<span class="rip-valor">${hit>0?'+'+hit:hit}</span>
-           <strong>Tipo:</strong> ${tipo} &nbsp;|&nbsp;
-           <strong>Valor absoluto:</strong> |${hit>0?'+'+hit:hit}| = ${abs} &nbsp;|&nbsp;
-           <strong>Opuesto:</strong> ${opp}`;
-        draw();
-        registrarInteraccion('recta');
+  });
+  draw();
+})();
+function calcular(op){
+  const a=parseInt(document.getElementById(op+'-a').value)||0;
+  const b=parseInt(document.getElementById(op+'-b').value)||0;
+  const res=op==='suma'?a+b:a-b;
+  const resEl=document.getElementById(op+'-res');
+  const expEl=document.getElementById(op+'-exp');
+  resEl.textContent=(res>=0?'+':'')+res;
+  resEl.style.color=res>0?'#00D4FF':res<0?'#FF4D6D':'#2ECC8A';
+  let exp='';
+  if(op==='suma'){
+    if((a>=0&&b>=0)||(a<0&&b<0)){
+      exp=`Mismo signo → sumamos: ${Math.abs(a)}+${Math.abs(b)}=${Math.abs(res)}. Signo ${res>=0?'positivo':'negativo'} → <strong style="color:var(--amarillo)">${resEl.textContent}</strong>`;
+    }else{
+      const mayor=Math.abs(a)>=Math.abs(b)?a:b;
+      exp=`Signos distintos → restamos: ${Math.max(Math.abs(a),Math.abs(b))}−${Math.min(Math.abs(a),Math.abs(b))}=${Math.abs(res)}. Mayor (${mayor>=0?'+'+mayor:mayor}) da el signo → <strong style="color:var(--amarillo)">${resEl.textContent}</strong>`;
+    }
+  }else{
+    const nb=-b;
+    exp=`Convertimos: (${a>=0?'+'+a:a})−(${b>=0?'+'+b:b}) = (${a>=0?'+'+a:a})+(${nb>=0?'+'+nb:nb}) = <strong style="color:var(--amarillo)">${resEl.textContent}</strong>`;
+  }
+  expEl.innerHTML=exp;registrarInteraccion();
+}
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-selected','false');});
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');btn.setAttribute('aria-selected','true');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+    registrarInteraccion();
+  });
+});
+document.querySelectorAll('.ej-item').forEach(item=>{
+  item.addEventListener('click',()=>{
+    const wasOpen=item.classList.contains('open');
+    document.querySelectorAll('.ej-item').forEach(i=>{
+      i.classList.remove('open');const a=i.querySelector('.ej-answer');if(a)a.style.display='none';
+    });
+    if(!wasOpen){
+      item.classList.add('open');
+      const ans=item.querySelector('.ej-answer');
+      ans.innerHTML=item.dataset.answer;ans.style.display='block';
+      registrarInteraccion();
+    }
+  });
+});
+(function(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const d=parseInt(e.target.dataset.delay||0);
+        setTimeout(()=>e.target.classList.add('visible'),d);obs.unobserve(e.target);
       }
     });
-    draw();
-  })();
-
-  /* ── TABS ───────────────────────────────────────── */
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-      btn.classList.add('active'); btn.setAttribute('aria-selected','true');
-      document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
-      registrarInteraccion('tab');
-    });
-  });
-
-  /* ── ACORDEÓN EJERCICIOS ────────────────────────── */
-  document.querySelectorAll('.ej-item').forEach(item => {
-    item.addEventListener('click', () => {
-      const wasOpen = item.classList.contains('open');
-      document.querySelectorAll('.ej-item').forEach(i => {
-        i.classList.remove('open');
-        const a = i.querySelector('.ej-answer'); if(a) a.style.display='none';
-      });
-      if (!wasOpen) {
-        item.classList.add('open');
-        const ans = item.querySelector('.ej-answer');
-        ans.innerHTML = item.dataset.answer;
-        ans.style.display = 'block';
-        registrarInteraccion('ejercicio');
-      }
-    });
-  });
-
-  /* ── SCROLL OBSERVER TARJETAS ───────────────────── */
-  (function() {
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          const d = parseInt(e.target.dataset.delay||0);
-          setTimeout(()=>e.target.classList.add('visible'), d);
-          obs.unobserve(e.target);
-        }
-      });
-    }, { threshold: .1 });
-    document.querySelectorAll('.ejemplo-card').forEach(c => obs.observe(c));
-  })();
+  },{threshold:.1});
+  document.querySelectorAll('.vr-card').forEach(c=>obs.observe(c));
+})();
+calcular('suma');calcular('resta');
 </script>
 </body>
 </html>
