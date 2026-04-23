@@ -491,10 +491,11 @@ function sumarPuntos(n){
     // ── Notificar al index con los puntos actuales ──
     // El index escucha 'actualizarPuntos' y llama enviarASheets('practica',...)
     window.parent.postMessage({
-      action:  'actualizarPuntos',
-      puntos:  p.practicaPuntaje,          // ← valor actualizado
-      secciones: (p.seccionesVisitadas||[]).join(', ')
-    }, '*');
+  action: 'actualizarPuntos',
+  seccion: 'practica',
+  puntos: p.practicaPuntaje,
+  seccionesVisitadas: (p.seccionesVisitadas || []).join(', ')
+}, '*');
 
     actualizarPuntosUI();
   }catch(e){}
