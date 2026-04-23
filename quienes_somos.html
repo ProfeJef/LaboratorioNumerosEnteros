@@ -1,354 +1,367 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Quiénes Somos | Eduquémonos con TICs</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
-
+  <title>¿Quiénes somos? | Misión ℤ – Eduquémonos con TICs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --azul:    #1A3C6E;
-      --verde:   #2ECC8A;
-      --naranja: #F4A127;
-      --fondo:   #F9F9F6;
-      --texto:   #2D2D2D;
-      --blanco:  #FFFFFF;
+    :root{
+      --purp:#6C3CE1;--purp2:#9B6DFF;--cian:#00D4FF;--amarillo:#FFE94D;
+      --verde:#2ECC8A;--rojo:#e74c3c;--naranja:#F39C12;
+      --fondo:#0A0618;--fondo2:#0D0920;--fondo3:#100C24;
+      --blanco:#FFF;--texto:#E8E0FF;--gris:rgba(255,255,255,.55);
     }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Space Grotesk',sans-serif;background:var(--fondo);
+      color:var(--texto);overflow-x:hidden;padding-bottom:5rem;}
 
-    * { margin:0; padding:0; box-sizing:border-box; }
+    /* ── PARTÍCULAS ── */
+    .particula{position:fixed;font-family:'Nunito',sans-serif;font-weight:900;
+      color:rgba(155,109,255,.06);pointer-events:none;
+      animation:floatP linear infinite;z-index:0;}
+    @keyframes floatP{
+      0%{transform:translateY(100vh) scale(.8) rotate(0deg);opacity:0;}
+      10%{opacity:1;}90%{opacity:1;}
+      100%{transform:translateY(-10vh) scale(1.2) rotate(20deg);opacity:0;}}
 
-    body { 
-      font-family:'Open Sans',sans-serif; 
-      background:var(--fondo); 
-      color:var(--texto); 
-      padding-bottom: 4rem;
-    }
+    /* ── HERO ── */
+    .hero{
+      background:
+        radial-gradient(ellipse 55% 70% at 10% 50%,rgba(108,60,225,.18) 0%,transparent 55%),
+        radial-gradient(ellipse 55% 65% at 90% 50%,rgba(0,212,255,.12) 0%,transparent 55%),
+        linear-gradient(160deg,#070412 0%,#0E0924 55%,#060A18 100%);
+      padding:4rem 2rem 3rem;text-align:center;position:relative;overflow:hidden;z-index:1;}
+    .hero-grid{position:absolute;inset:0;pointer-events:none;
+      background-image:linear-gradient(rgba(108,60,225,.04) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(108,60,225,.04) 1px,transparent 1px);
+      background-size:55px 55px;
+      mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 100%);}
+    .hero-tag{display:inline-flex;align-items:center;gap:.5rem;
+      background:rgba(108,60,225,.15);border:1.5px solid rgba(108,60,225,.4);
+      color:var(--purp2);font-family:'Nunito',sans-serif;font-weight:800;
+      font-size:.74rem;letter-spacing:2.5px;text-transform:uppercase;
+      padding:.35rem 1.1rem;border-radius:30px;margin-bottom:1.2rem;position:relative;z-index:2;}
+    .hero h1{font-family:'Nunito',sans-serif;font-weight:900;
+      font-size:clamp(2rem,5vw,3.2rem);color:var(--blanco);
+      position:relative;z-index:2;line-height:1.15;margin-bottom:.7rem;}
+    .hero h1 span{background:linear-gradient(135deg,var(--purp2),var(--cian));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hero p{color:rgba(255,255,255,.62);font-size:1rem;max-width:600px;
+      margin:0 auto 2rem;line-height:1.8;position:relative;z-index:2;}
+    .hero-badges{display:flex;justify-content:center;gap:.9rem;flex-wrap:wrap;position:relative;z-index:2;}
+    .hb{display:flex;align-items:center;gap:.4rem;
+      background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+      border-radius:20px;padding:.35rem 1rem;
+      font-family:'Nunito',sans-serif;font-weight:700;font-size:.8rem;color:rgba(255,255,255,.72);}
 
-    /* HEADER GAMIFICADO */
-    .hero-section {
-      background: linear-gradient(135deg, #12284C 0%, #1A3C6E 100%);
-      padding: 4rem 2rem;
-      text-align: center;
-      color: var(--blanco);
-      position: relative;
-      overflow: hidden;
-      border-bottom: 6px solid var(--verde);
-    }
+    /* ── WRAP ── */
+    .wrap{max-width:900px;margin:0 auto;padding:2.5rem 1.5rem 4rem;position:relative;z-index:2;}
 
-    .hero-section::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background-image: radial-gradient(rgba(255,255,255,0.1) 2px, transparent 2px);
-      background-size: 30px 30px; opacity: 0.5; pointer-events: none;
-    }
+    /* ── FOTO DEL EQUIPO ── */
+    .foto-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);
+      border-radius:22px;padding:1rem;margin-bottom:3rem;overflow:hidden;
+      box-shadow:0 20px 50px rgba(0,0,0,.4);
+      transition:transform .3s,box-shadow .3s;}
+    .foto-card:hover{transform:translateY(-4px);box-shadow:0 28px 60px rgba(108,60,225,.2);}
+    .foto-card img{width:100%;height:auto;border-radius:14px;display:block;}
+    .foto-caption{text-align:center;font-family:'Nunito',sans-serif;font-weight:700;
+      font-size:.82rem;color:var(--gris);margin-top:.8rem;padding-bottom:.3rem;}
 
-    .hero-title {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 900;
-      font-size: clamp(2.5rem, 5vw, 3.5rem);
-      margin-bottom: 1rem;
-      position: relative;
-      z-index: 2;
-      text-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
+    /* ── SECTION LABEL ── */
+    .section-label{font-family:'Nunito',sans-serif;font-weight:900;font-size:.72rem;
+      text-transform:uppercase;letter-spacing:2px;display:inline-flex;align-items:center;
+      gap:.4rem;padding:.3rem 1rem;border-radius:20px;margin-bottom:1rem;}
+    .label-purp{background:rgba(108,60,225,.15);color:var(--purp2);border:1px solid rgba(108,60,225,.3);}
+    .label-amarillo{background:rgba(255,233,77,.1);color:var(--amarillo);border:1px solid rgba(255,233,77,.25);}
+    .label-verde{background:rgba(46,204,138,.1);color:var(--verde);border:1px solid rgba(46,204,138,.25);}
+    .label-cian{background:rgba(0,212,255,.1);color:var(--cian);border:1px solid rgba(0,212,255,.25);}
 
-    .hero-title span { color: var(--naranja); }
+    /* ── AUTORES ── */
+    .autores-box{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);
+      border-radius:22px;padding:2.2rem 2rem;margin-bottom:3rem;}
+    .autores-titulo{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.3rem;
+      color:var(--blanco);margin-bottom:1.5rem;text-align:center;}
+    .names-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;}
+    .name-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+      border-left:4px solid var(--naranja);border-radius:14px;
+      padding:1.1rem 1.2rem;display:flex;align-items:center;gap:.9rem;
+      cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
+    .name-card:hover{background:rgba(243,156,18,.07);border-color:rgba(243,156,18,.5);
+      transform:translateX(4px);}
+    .name-card:nth-child(2){border-left-color:var(--purp2);}
+    .name-card:nth-child(2):hover{background:rgba(155,109,255,.07);border-color:rgba(155,109,255,.5);}
+    .name-card:nth-child(3){border-left-color:var(--cian);}
+    .name-card:nth-child(3):hover{background:rgba(0,212,255,.06);border-color:rgba(0,212,255,.4);}
+    .name-card:nth-child(4){border-left-color:var(--verde);}
+    .name-card:nth-child(4):hover{background:rgba(46,204,138,.06);border-color:rgba(46,204,138,.4);}
+    .name-icon{width:44px;height:44px;border-radius:12px;
+      display:flex;align-items:center;justify-content:center;font-size:1.25rem;
+      flex-shrink:0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);}
+    .name-text{font-family:'Nunito',sans-serif;font-weight:800;font-size:.96rem;
+      color:var(--blanco);line-height:1.3;}
+    .name-rol{font-size:.75rem;color:var(--gris);margin-top:.15rem;}
 
-    .hero-subtitle {
-      font-size: 1.2rem;
-      color: rgba(255,255,255,0.85);
-      position: relative;
-      z-index: 2;
-      max-width: 600px;
-      margin: 0 auto;
-    }
+    /* ── MISIÓN / VISIÓN ── */
+    .mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-bottom:3rem;}
+    @media(max-width:580px){.mv-grid{grid-template-columns:1fr;}}
+    .mv-card{border-radius:18px;padding:1.6rem 1.4rem;}
+    .mv-card.mision{background:linear-gradient(135deg,rgba(108,60,225,.15),rgba(108,60,225,.05));
+      border:1px solid rgba(108,60,225,.3);}
+    .mv-card.vision{background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(0,212,255,.03));
+      border:1px solid rgba(0,212,255,.22);}
+    .mv-card.valores{background:linear-gradient(135deg,rgba(255,233,77,.08),rgba(255,233,77,.02));
+      border:1px solid rgba(255,233,77,.22);grid-column:1/-1;}
+    @media(max-width:580px){.mv-card.valores{grid-column:auto;}}
+    .mv-icon{font-size:2rem;margin-bottom:.6rem;display:block;}
+    .mv-titulo{font-family:'Nunito',sans-serif;font-weight:900;font-size:1rem;
+      color:var(--blanco);margin-bottom:.5rem;}
+    .mv-texto{font-size:.85rem;color:rgba(255,255,255,.7);line-height:1.8;}
+    .valores-lista{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem;}
+    .valor-chip{display:inline-flex;align-items:center;gap:.35rem;
+      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+      border-radius:20px;padding:.3rem .9rem;
+      font-family:'Nunito',sans-serif;font-weight:700;font-size:.78rem;color:rgba(255,255,255,.75);}
 
-    /* CONTENEDOR PRINCIPAL */
-    .container {
-      max-width: 900px;
-      margin: -2rem auto 0 auto; /* Para que suba un poco sobre el hero */
-      padding: 0 1.5rem;
-      position: relative;
-      z-index: 5;
-    }
+    /* ── LÍNEA DE TIEMPO ── */
+    .timeline{position:relative;padding-left:2rem;margin-bottom:3rem;}
+    .timeline::before{content:'';position:absolute;left:.5rem;top:0;bottom:0;
+      width:2px;background:linear-gradient(to bottom,var(--purp),var(--cian),transparent);}
+    .tl-item{position:relative;margin-bottom:1.6rem;}
+    .tl-dot{position:absolute;left:-1.65rem;top:.3rem;width:12px;height:12px;
+      border-radius:50%;background:linear-gradient(135deg,var(--purp),var(--cian));
+      border:2px solid var(--fondo);}
+    .tl-anio{font-family:'Nunito',sans-serif;font-weight:900;font-size:.78rem;
+      color:var(--cian);letter-spacing:1px;margin-bottom:.15rem;}
+    .tl-titulo{font-family:'Nunito',sans-serif;font-weight:800;font-size:.93rem;
+      color:var(--blanco);margin-bottom:.2rem;}
+    .tl-desc{font-size:.83rem;color:rgba(255,255,255,.62);line-height:1.65;}
 
-    /* FOTO DE EQUIPO */
-    .team-photo-card {
-      background: var(--blanco);
-      border-radius: 20px;
-      padding: 1rem;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-      margin-bottom: 3rem;
-      transform: translateY(0);
-      transition: transform 0.3s;
-    }
-    .team-photo-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    }
-    .team-photo {
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-      display: block;
-    }
+    /* ── QUOTE ── */
+    .quote-box{background:linear-gradient(135deg,rgba(46,204,138,.08),rgba(108,60,225,.08));
+      border:2px dashed rgba(46,204,138,.3);border-radius:22px;
+      padding:3rem 2rem;text-align:center;position:relative;margin-bottom:3rem;
+      opacity:0;transform:translateY(40px);
+      transition:all .8s cubic-bezier(.175,.885,.32,1.275);}
+    .quote-box.vis{opacity:1;transform:translateY(0);}
+    .quote-icon-wrap{position:absolute;top:-20px;left:50%;transform:translateX(-50%);
+      background:linear-gradient(135deg,var(--verde),#1a8c5e);
+      color:#fff;width:40px;height:40px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+      box-shadow:0 4px 14px rgba(46,204,138,.4);}
+    .quote-text{font-family:'Nunito',sans-serif;font-weight:800;
+      font-size:clamp(1.1rem,2.5vw,1.45rem);color:var(--blanco);
+      line-height:1.6;font-style:italic;margin-bottom:.8rem;}
+    .quote-author{font-size:.88rem;color:var(--gris);font-weight:600;}
 
-    /* LISTA DE CREADORES */
-    .creators-section {
-      background: var(--blanco);
-      border-radius: 20px;
-      padding: 3rem;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-      margin-bottom: 3rem;
-      border-top: 5px solid var(--azul);
-    }
+    /* ── CTA ── */
+    .cta-box{background:
+      radial-gradient(ellipse 60% 80% at 20% 50%,rgba(108,60,225,.2) 0%,transparent 55%),
+      radial-gradient(ellipse 55% 70% at 80% 50%,rgba(0,212,255,.15) 0%,transparent 50%),
+      var(--fondo3);
+      border:1px solid rgba(108,60,225,.25);border-radius:24px;
+      padding:2.2rem 2rem;text-align:center;}
+    .cta-box h2{font-family:'Nunito',sans-serif;font-weight:900;
+      font-size:clamp(1.2rem,2.5vw,1.7rem);color:var(--blanco);margin-bottom:.5rem;}
+    .cta-box p{color:var(--gris);font-size:.9rem;margin-bottom:1.3rem;line-height:1.75;}
+    .cta-btns{display:flex;justify-content:center;gap:.8rem;flex-wrap:wrap;}
+    .btn-cta{display:inline-flex;align-items:center;gap:.5rem;
+      background:linear-gradient(135deg,var(--purp),var(--cian));color:#fff;
+      font-family:'Nunito',sans-serif;font-weight:900;font-size:.9rem;
+      padding:.72rem 1.8rem;border-radius:30px;border:none;cursor:pointer;
+      transition:all .2s;box-shadow:0 8px 26px rgba(108,60,225,.4);}
+    .btn-cta:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(0,212,255,.3);}
+    .btn-cta.sec{background:rgba(255,255,255,.07);box-shadow:none;border:1.5px solid rgba(255,255,255,.2);}
+    .btn-cta.sec:hover{background:rgba(255,255,255,.12);}
 
-    .section-title {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 900;
-      font-size: 1.8rem;
-      color: var(--azul);
-      margin-bottom: 2rem;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.8rem;
+    @media(max-width:600px){
+      .wrap{padding:1.5rem 1rem 3rem;}
+      .autores-box{padding:1.5rem 1rem;}
+      .name-card{flex-direction:column;text-align:center;border-left:none;border-top:3px solid var(--naranja);}
+      .name-card:nth-child(2){border-top-color:var(--purp2);}
+      .name-card:nth-child(3){border-top-color:var(--cian);}
+      .name-card:nth-child(4){border-top-color:var(--verde);}
     }
-
-    .names-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .name-card {
-      background: var(--fondo);
-      padding: 1.5rem;
-      border-radius: 12px;
-      text-align: center;
-      border-left: 4px solid var(--naranja);
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    .name-card:hover {
-      background: rgba(244, 161, 39, 0.1);
-      transform: translateX(5px);
-    }
-
-    .name-icon {
-      background: var(--blanco);
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      flex-shrink: 0;
-    }
-
-    .name-text {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: var(--azul);
-      text-align: left;
-    }
-
-    /* FRASE INSPIRADORA */
-    .quote-box {
-      background: linear-gradient(135deg, rgba(46,204,138,0.1), rgba(26,60,110,0.1));
-      border: 2px dashed var(--verde);
-      border-radius: 20px;
-      padding: 3rem 2rem;
-      text-align: center;
-      margin-top: 2rem;
-      position: relative;
-    }
-
-    .quote-icon {
-      position: absolute;
-      top: -20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--verde);
-      color: var(--blanco);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      box-shadow: 0 4px 10px rgba(46,204,138,0.3);
-    }
-
-    .quote-text {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 1.5rem;
-      color: var(--azul);
-      line-height: 1.5;
-      font-style: italic;
-      margin-bottom: 1rem;
-    }
-
-    .quote-author {
-      font-size: 1rem;
-      color: #666;
-      font-weight: 600;
-    }
-
-    @media(max-width: 768px) {
-      .hero-section { padding: 3rem 1rem 4rem 1rem; }
-      .creators-section { padding: 2rem 1.5rem; }
-      .name-card { justify-content: center; text-align: center; flex-direction: column; }
-      .name-text { text-align: center; }
-    }
+    @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    .wrap>*{animation:fadeIn .5s ease both;}
   </style>
 </head>
 <body>
 
-  <!-- ENCABEZADO -->
-  <div class="hero-section">
-    <h1 class="hero-title">Los Profes que <span>Suman Futuro</span></h1>
-    <p class="hero-subtitle">Detrás de cada número entero, hay un equipo apasionado por hacer que las matemáticas sean una aventura inolvidable.</p>
+<div id="particulas-bg"></div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-tag">👥 Quiénes somos</div>
+  <h1>Los profes que <span>suman futuro</span></h1>
+  <p>Detrás de cada número entero hay un equipo apasionado por hacer que las matemáticas sean una aventura inolvidable para cada estudiante.</p>
+  <div class="hero-badges">
+    <div class="hb">🇨🇴 Piedecuesta, Santander</div>
+    <div class="hb">📐 Grados 6° y 7°</div>
+    <div class="hb">💻 Eduquémonos con TICs</div>
+    <div class="hb">🎯 Aprendizaje activo</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- FOTO DEL EQUIPO -->
+  <div class="foto-card">
+    <img src="./imagen-1.jpeg" alt="Equipo de docentes – Eduquémonos con TICs" class="team-photo"/>
+    <div class="foto-caption">📸 Equipo docente · Eduquémonos con TICs · Piedecuesta, Santander</div>
   </div>
 
-  <!-- CONTENIDO -->
-  <div class="container">
-
-    <!-- FOTO DEL EQUIPO -->
-    <div class="team-photo-card">
-      <img src="./imagen-1.jpeg" alt="Equipo de Profesores" class="team-photo">
-    </div>
-
-    <!-- LISTA DE AUTORES -->
-    <div class="creators-section">
-      <h2 class="section-title">👨‍🏫 Autores del Proyecto</h2>
-
-      <div class="names-grid">
-        <div class="name-card">
-          <div class="name-icon">📐</div>
+  <!-- AUTORES -->
+  <div style="margin-bottom:1.2rem;">
+    <span class="section-label label-purp">👨‍🏫 El equipo creador</span>
+  </div>
+  <div class="autores-box">
+    <div class="autores-titulo">Autores del proyecto Misión ℤ</div>
+    <div class="names-grid">
+      <div class="name-card" onclick="confeti(event)">
+        <div class="name-icon">📐</div>
+        <div>
           <div class="name-text">Ricardo Bautista Ramírez</div>
+          <div class="name-rol">Diseño instruccional · Matemáticas</div>
         </div>
-
-        <div class="name-card">
-          <div class="name-icon">💻</div>
+      </div>
+      <div class="name-card" onclick="confeti(event)">
+        <div class="name-icon">💻</div>
+        <div>
           <div class="name-text">Jefersson Andrei Cárdenas Tirado</div>
+          <div class="name-rol">Desarrollo web · HTML/CSS/JS</div>
         </div>
-
-        <div class="name-card">
-          <div class="name-icon">🧠</div>
+      </div>
+      <div class="name-card" onclick="confeti(event)">
+        <div class="name-icon">🧠</div>
+        <div>
           <div class="name-text">María José Montoya López</div>
+          <div class="name-rol">Diseño pedagógico · Evaluación</div>
         </div>
-
-        <div class="name-card">
-          <div class="name-icon">✨</div>
+      </div>
+      <div class="name-card" onclick="confeti(event)">
+        <div class="name-icon">✨</div>
+        <div>
           <div class="name-text">Linda Jessica Rodríguez Montes</div>
+          <div class="name-rol">UX · Recursos digitales</div>
         </div>
       </div>
     </div>
-
-    <!-- FRASE INSPIRADORA -->
-    <div class="quote-box">
-      <div class="quote-icon">"</div>
-      <p class="quote-text">La matemática es el alfabeto con el cual Dios ha escrito el universo.</p>
-      <p class="quote-author">— Galileo Galilei</p>
-    </div>
-
+    <p style="text-align:center;font-size:.78rem;color:rgba(255,255,255,.3);
+      margin-top:1.2rem;font-family:'Nunito',sans-serif;">
+      💡 Haz clic en cada autor para una sorpresa
+    </p>
   </div>
 
-<!-- SCRIPT DE INTERACTIVIDAD Y EASTER EGGS -->
+  <!-- MISIÓN / VISIÓN / VALORES -->
+  <div style="margin-bottom:1.2rem;">
+    <span class="section-label label-cian">🎯 Propósito</span>
+  </div>
+  <div class="mv-grid">
+    <div class="mv-card mision">
+      <span class="mv-icon">🚀</span>
+      <div class="mv-titulo">Nuestra misión</div>
+      <div class="mv-texto">Diseñar experiencias digitales de aprendizaje matemático que conecten los conceptos abstractos con la vida cotidiana de los estudiantes colombianos de secundaria, fomentando el pensamiento crítico y la autonomía.</div>
+    </div>
+    <div class="mv-card vision">
+      <span class="mv-icon">🔭</span>
+      <div class="mv-titulo">Nuestra visión</div>
+      <div class="mv-texto">Ser un referente regional en innovación pedagógica con TIC, donde cada estudiante de 6° y 7° encuentre en las matemáticas una herramienta para comprender y transformar su entorno.</div>
+    </div>
+    <div class="mv-card valores">
+      <span class="mv-icon">💎</span>
+      <div class="mv-titulo">Nuestros valores</div>
+      <div class="valores-lista">
+        <div class="valor-chip">🌍 Contextualización</div>
+        <div class="valor-chip">🎮 Gamificación</div>
+        <div class="valor-chip">♿ Inclusión</div>
+        <div class="valor-chip">🔬 Rigor académico</div>
+        <div class="valor-chip">🤝 Colaboración</div>
+        <div class="valor-chip">💡 Innovación</div>
+        <div class="valor-chip">📊 Retroalimentación</div>
+        <div class="valor-chip">🇨🇴 Identidad colombiana</div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <!-- FRASE INSPIRADORA -->
+  <div class="quote-box" id="quote-box">
+    <div class="quote-icon-wrap">"</div>
+    <p class="quote-text">La matemática es el alfabeto con el cual Dios ha escrito el universo.</p>
+    <p class="quote-author">— Galileo Galilei</p>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <h2>¿Quieres explorar la plataforma?</h2>
+    <p>Comienza por la teoría, practica con ejercicios gamificados o pon a prueba lo aprendido en la evaluación.</p>
+    <div class="cta-btns">
+      <button class="btn-cta" onclick="navegarA('teoria')">📖 Ir a Teoría</button>
+      <button class="btn-cta" onclick="navegarA('practica')">🎮 Ir a Práctica</button>
+      <button class="btn-cta sec" onclick="navegarA('evaluacion')">📋 Ir a Evaluación</button>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
+/* ── PARTÍCULAS ── */
+(function(){
+  const cont=document.getElementById('particulas-bg');
+  const syms=['-3','+8','-5','0','+12','-1','+4','-7','+2','-10','ℤ'];
+  for(let i=0;i<12;i++){
+    const el=document.createElement('span');
+    el.className='particula';
+    const sz=Math.random()*36+16;
+    el.style.cssText=`left:${Math.random()*100}%;font-size:${sz}px;
+      animation-duration:${Math.random()*18+12}s;animation-delay:${Math.random()*10}s;`;
+    el.textContent=syms[Math.floor(Math.random()*syms.length)];
+    cont.appendChild(el);
+  }
+})();
 
-        // 1. ANIMACIÓN DE ENTRADA AL HACER SCROLL (Scroll Reveal)
-        const quoteBox = document.querySelector('.quote-box');
-        if(quoteBox) {
-            quoteBox.style.opacity = '0';
-            quoteBox.style.transform = 'translateY(40px)';
-            quoteBox.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+/* ── SCROLL REVEAL — QUOTE ── */
+const quoteEl=document.getElementById('quote-box');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');observer.unobserve(e.target);}});
+},{threshold:.3});
+observer.observe(quoteEl);
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.3 });
+/* ── EASTER EGG — CONFETI AL CLICK EN AUTORES ── */
+function confeti(e){
+  const card=e.currentTarget;
+  card.style.transform='scale(0.95)';
+  setTimeout(()=>{card.style.transform='';},150);
+  const colores=['var(--purp2)','var(--cian)','var(--amarillo)','var(--verde)','var(--naranja)','var(--rojo)'];
+  for(let i=0;i<10;i++) crearParticula(e.clientX,e.clientY,colores);
+}
 
-            observer.observe(quoteBox);
-        }
+function crearParticula(x,y,colores){
+  const p=document.createElement('div');
+  const col=colores[Math.floor(Math.random()*colores.length)];
+  p.style.cssText=`position:fixed;left:${x}px;top:${y}px;
+    width:9px;height:9px;background:${col};pointer-events:none;z-index:9999;
+    border-radius:${Math.random()>.5?'50%':'3px'};`;
+  document.body.appendChild(p);
+  const ang=Math.random()*Math.PI*2;
+  const vel=60+Math.random()*100;
+  const tx=Math.cos(ang)*vel, ty=Math.sin(ang)*vel-55;
+  const anim=p.animate([
+    {transform:'translate(0,0) scale(1)',opacity:1},
+    {transform:`translate(${tx}px,${ty}px) scale(0)`,opacity:0}
+  ],{duration:600+Math.random()*400,easing:'cubic-bezier(.25,1,.5,1)'});
+  anim.onfinish=()=>p.remove();
+}
 
-        // 2. EASTER EGG: MINIFUEGOS ARTIFICIALES AL CLICKEAR A LOS AUTORES
-        const creadores = document.querySelectorAll('.name-card');
-
-        creadores.forEach(card => {
-            // Cambiamos el cursor para que sepan que es clickeable
-            card.style.cursor = 'pointer';
-
-            card.addEventListener('click', function(e) {
-                // Pequeño rebote al hacer clic
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => { this.style.transform = ''; }, 150);
-
-                // Generar 8-10 partículas de colores
-                const cantParticulas = 8;
-                const rect = this.getBoundingClientRect();
-                // Calcular centro de la tarjeta clickeada
-                const xCentro = e.clientX; 
-                const yCentro = e.clientY;
-
-                for(let i = 0; i < cantParticulas; i++) {
-                    crearParticula(xCentro, yCentro);
-                }
-            });
-        });
-
-        // Función auxiliar para crear partículas de "confeti"
-        function crearParticula(x, y) {
-            const particula = document.createElement('div');
-            const colores = ['#2ECC8A', '#F4A127', '#1A3C6E', '#FFD166', '#E74C3C'];
-            const colorRandom = colores[Math.floor(Math.random() * colores.length)];
-
-            // Estilos de la partícula
-            particula.style.cssText = `
-                position: fixed;
-                left: ${x}px; top: ${y}px;
-                width: 10px; height: 10px;
-                background-color: ${colorRandom};
-                border-radius: ${Math.random() > 0.5 ? '50%' : '0%'}; /* Círculos y cuadrados */
-                pointer-events: none;
-                z-index: 9999;
-            `;
-
-            document.body.appendChild(particula);
-
-            // Animación física usando Web Animations API
-            const angulo = Math.random() * Math.PI * 2;
-            const velocidad = 50 + Math.random() * 100;
-            const tx = Math.cos(angulo) * velocidad;
-            const ty = Math.sin(angulo) * velocidad - 50; // Gravedad inicial hacia arriba
-
-            const animacion = particula.animate([
-                { transform: 'translate(0,0) scale(1)', opacity: 1 },
-                { transform: `translate(${tx}px, ${ty}px) scale(0)`, opacity: 0 }
-            ], {
-                duration: 600 + Math.random() * 400,
-                easing: 'cubic-bezier(0.25, 1, 0.5, 1)'
-            });
-
-            animacion.onfinish = () => particula.remove();
-        }
-    });
+/* ── NAVEGACIÓN ── */
+function navegarA(id){
+  try{if(window.parent&&typeof window.parent.showPage==='function'){window.parent.showPage(id);return;}}catch(e){}
+  window.parent.postMessage({action:'cambiarPagina',destino:id},'*');
+}
 </script>
 </body>
 </html>
