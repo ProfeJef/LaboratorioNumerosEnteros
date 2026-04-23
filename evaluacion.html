@@ -1046,15 +1046,12 @@ function enviarEvaluacion() {
     if (!p.seccionesVisitadas) p.seccionesVisitadas = [];
     if (!p.seccionesVisitadas.includes('evaluacion')) p.seccionesVisitadas.push('evaluacion');
     escribirLS('edu_progreso', JSON.stringify(p));
-    window.parent.postMessage({
-  action: 'evaluacionCompletada',
-  seccion: 'evaluacion',
-  puntaje: puntos,
-  pct: pct,
-  correctas: correctas,
-  seccionesVisitadas: p.seccionesVisitadas.join(', ')
+ window.parent.postMessage({
+  action:            'evaluacionCompletada',
+  nombre:            leerLS('edu_estudiante') || 'Anónimo',
+  puntos_evaluacion: puntos,   // variable de puntos acumulados en la eval
+  aprobado:          puntos >= 70 ? 'Sí' : 'No'
 }, '*');
-  } catch(e) {} }
 }
 
 /* ════════════════════════════════════
