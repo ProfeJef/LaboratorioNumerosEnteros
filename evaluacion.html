@@ -922,9 +922,19 @@ function respSM(idx, op) {
   const corr = (op === q.corr);
   btns.forEach(b => {
     const o = parseInt(b.dataset.o);
-    if (o === q.corr) b.classList.add(corr && o === op ? 'sel-ok' : 'mostrar-ok');
+       if (o === q.corr) b.classList.add(corr && o === op ? 'sel-ok' : 'mostrar-ok');
     else if (o === op && !corr) b.classList.add('sel-err');
   });
+  if (corr) {
+    card.classList.add('resp-ok'); fb.textContent = q.fb_ok; fb.className = 'preg-fb ok';
+    correctas++; puntos += PTS_SM; secciones.sm++;
+  } else {
+    card.classList.add('resp-err'); fb.textContent = q.fb_err; fb.className = 'preg-fb err';
+    incorrectas++;
+  }
+  actualizarMarcador();
+}
+
   if (corr) {
     card.classList.add('resp-ok'); fb.textContent = q.fb_ok; fb.className = 'preg-fb ok';
     correctas++; puntos += PTS_SM; secciones.sm++;
@@ -1031,7 +1041,7 @@ function enviarEvaluacion() {
     { label: 'Verdadero/Falso',    v: secciones.vf, max: 4, c: 'var(--naranja)' },
   ].forEach(b => {
     const p = b.max > 0 ? (b.v / b.max) * 100 : 0;
-    bw.innerHTML += `<div class="barra-item">
+      bw.innerHTML += `<div class="barra-item">
       <div class="barra-label">${b.label}</div>
       <div class="barra-outer"><div class="barra-inner" style="width:${p}%;background:${b.c}"></div></div>
       <div class="barra-val">${b.v}/${b.max}</div>
@@ -1045,14 +1055,6 @@ function enviarEvaluacion() {
   const raw = leerLS('edu_progreso');
   if (raw) { try {
     const p = JSON.parse(raw);
-    p.evaluacionFinalPuntaje = puntos; p.evaluacionFinalCorrectas = correctas;
-    p.evaluacionFinalPct = pct; p.evaluacionCompletada = true;
-    if (!p.seccionesVisitadas) p.seccionesVisitadas = [];
-    if (!p.seccionesVisitadas.includes('evaluacion')) p.seccionesVisitadas.push('evaluacion');
-    escribirLS('edu_progreso', JSON.stringify(p));
- /* ════════════════════════════════════
-   CIERRE enviarEvaluacion (continuación)
-════════════════════════════════════ */
     p.evaluacionFinalPuntaje   = puntos;
     p.evaluacionFinalCorrectas = correctas;
     p.evaluacionFinalPct       = pct;
@@ -1060,7 +1062,7 @@ function enviarEvaluacion() {
     if (!p.seccionesVisitadas) p.seccionesVisitadas = [];
     if (!p.seccionesVisitadas.includes('evaluacion')) p.seccionesVisitadas.push('evaluacion');
     escribirLS('edu_progreso', JSON.stringify(p));
-  } catch(e) {}
+  } catch(e) {} }
 
   window.parent.postMessage({
     action:            'evaluacionCompletada',
@@ -1074,6 +1076,7 @@ function enviarEvaluacion() {
    REINICIAR
 ════════════════════════════════════ */
 function reiniciar() { location.reload(); }
+
 
 /* ════════════════════════════════════
    RESPUESTAS — VERDADERO / FALSO
@@ -1094,15 +1097,12 @@ function respVF(idx, resp) {
     if (resp === true  && btnV) btnV.classList.add('sel-ok');
     if (resp === false && btnF) btnF.classList.add('sel-ok');
   } else {
-    card.classList.add('resp-err'); fb.textContent = q.fb_err; fb.className = 'preg-fb err';
+        card.classList.add('resp-err'); fb.textContent = q.fb_err; fb.className = 'preg-fb err';
     incorrectas++;
-    if (q.corr === true  && btnV) btnV.classList.add('mostrar-ok');
-    if (q.corr === false && btnF) btnF.classList.add('mostrar-ok');
-    if (resp === true  && btnV) btnV.classList.add('sel-err');
-    if (resp === false && btnF) btnF.classList.add('sel-err');
   }
   actualizarMarcador();
 }
+
 
 /* ════════════════════════════════════
    RESPUESTAS — ABIERTOS (cierre)
