@@ -876,7 +876,14 @@ function sincLS() {
     if (!p.seccionesVisitadas) p.seccionesVisitadas = [];
     if (!p.seccionesVisitadas.includes('evaluacion')) p.seccionesVisitadas.push('evaluacion');
     escribirLS('edu_progreso', JSON.stringify(p));
-    window.parent.postMessage({ action: 'actualizarPuntos' }, '*');
+
+    // ← AGREGA ESTO:
+    window.parent.postMessage({
+      action: 'actualizarPuntos',
+      seccion: 'evaluacion',
+      puntos: puntos,
+      seccionesVisitadas: p.seccionesVisitadas.join(', ')
+    }, '*');
   } catch(e) {}
 }
 
