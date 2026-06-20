@@ -4,364 +4,612 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>¿Quiénes somos? | Misión ℤ – Eduquémonos con TICs</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&f[]=zodiak@400,700&display=swap" rel="stylesheet"/>
   <style>
     :root{
       --purp:#6C3CE1;--purp2:#9B6DFF;--cian:#00D4FF;--amarillo:#FFE94D;
       --verde:#2ECC8A;--rojo:#e74c3c;--naranja:#F39C12;
-      --fondo:#0A0618;--fondo2:#0D0920;--fondo3:#100C24;
-      --blanco:#FFF;--texto:#E8E0FF;--gris:rgba(255,255,255,.55);
+      --fondo:#060410;--blanco:#FFF;--texto:#E8E0FF;--gris:rgba(255,255,255,.5);
     }
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
     html{scroll-behavior:smooth;}
-    body{font-family:'Space Grotesk',sans-serif;background:var(--fondo);
-      color:var(--texto);overflow-x:hidden;padding-bottom:5rem;}
+    body{font-family:'Cabinet Grotesk',sans-serif;background:var(--fondo);
+      color:var(--texto);overflow-x:hidden;}
 
-    /* ── PARTÍCULAS ── */
-    .particula{position:fixed;font-family:'Nunito',sans-serif;font-weight:900;
-      color:rgba(155,109,255,.06);pointer-events:none;
-      animation:floatP linear infinite;z-index:0;}
-    @keyframes floatP{
-      0%{transform:translateY(100vh) scale(.8) rotate(0deg);opacity:0;}
-      10%{opacity:1;}90%{opacity:1;}
-      100%{transform:translateY(-10vh) scale(1.2) rotate(20deg);opacity:0;}}
+    /* ══════════════ CANVAS AURORA ══════════════ */
+    #aurora-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55;}
 
-    /* ── HERO ── */
-    .hero{
-      background:
-        radial-gradient(ellipse 55% 70% at 10% 50%,rgba(108,60,225,.18) 0%,transparent 55%),
-        radial-gradient(ellipse 55% 65% at 90% 50%,rgba(0,212,255,.12) 0%,transparent 55%),
-        linear-gradient(160deg,#070412 0%,#0E0924 55%,#060A18 100%);
-      padding:4rem 2rem 3rem;text-align:center;position:relative;overflow:hidden;z-index:1;}
-    .hero-grid{position:absolute;inset:0;pointer-events:none;
-      background-image:linear-gradient(rgba(108,60,225,.04) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(108,60,225,.04) 1px,transparent 1px);
-      background-size:55px 55px;
-      mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 100%);}
-    .hero-tag{display:inline-flex;align-items:center;gap:.5rem;
-      background:rgba(108,60,225,.15);border:1.5px solid rgba(108,60,225,.4);
-      color:var(--purp2);font-family:'Nunito',sans-serif;font-weight:800;
-      font-size:.74rem;letter-spacing:2.5px;text-transform:uppercase;
-      padding:.35rem 1.1rem;border-radius:30px;margin-bottom:1.2rem;position:relative;z-index:2;}
-    .hero h1{font-family:'Nunito',sans-serif;font-weight:900;
-      font-size:clamp(2rem,5vw,3.2rem);color:var(--blanco);
-      position:relative;z-index:2;line-height:1.15;margin-bottom:.7rem;}
-    .hero h1 span{background:linear-gradient(135deg,var(--purp2),var(--cian));
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-    .hero p{color:rgba(255,255,255,.62);font-size:1rem;max-width:600px;
-      margin:0 auto 2rem;line-height:1.8;position:relative;z-index:2;}
-    .hero-badges{display:flex;justify-content:center;gap:.9rem;flex-wrap:wrap;position:relative;z-index:2;}
-    .hb{display:flex;align-items:center;gap:.4rem;
-      background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
-      border-radius:20px;padding:.35rem 1rem;
-      font-family:'Nunito',sans-serif;font-weight:700;font-size:.8rem;color:rgba(255,255,255,.72);}
+    /* ══════════════ HERO SPLIT ══════════════ */
+    .hero-split{
+      position:relative;z-index:2;
+      display:grid;grid-template-columns:1fr 1fr;min-height:100vh;
+      overflow:hidden;}
+    @media(max-width:768px){.hero-split{grid-template-columns:1fr;min-height:auto;}}
 
-    /* ── WRAP ── */
-    .wrap{max-width:900px;margin:0 auto;padding:2.5rem 1.5rem 4rem;position:relative;z-index:2;}
-
-    /* ── FOTO DEL EQUIPO ── */
-    .foto-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);
-      border-radius:22px;padding:1rem;margin-bottom:3rem;overflow:hidden;
-      box-shadow:0 20px 50px rgba(0,0,0,.4);
-      transition:transform .3s,box-shadow .3s;}
-    .foto-card:hover{transform:translateY(-4px);box-shadow:0 28px 60px rgba(108,60,225,.2);}
-    .foto-card img{width:100%;height:auto;border-radius:14px;display:block;}
-    .foto-caption{text-align:center;font-family:'Nunito',sans-serif;font-weight:700;
-      font-size:.82rem;color:var(--gris);margin-top:.8rem;padding-bottom:.3rem;}
-
-    /* ── SECTION LABEL ── */
-    .section-label{font-family:'Nunito',sans-serif;font-weight:900;font-size:.72rem;
-      text-transform:uppercase;letter-spacing:2px;display:inline-flex;align-items:center;
-      gap:.4rem;padding:.3rem 1rem;border-radius:20px;margin-bottom:1rem;}
-    .label-purp{background:rgba(108,60,225,.15);color:var(--purp2);border:1px solid rgba(108,60,225,.3);}
-    .label-amarillo{background:rgba(255,233,77,.1);color:var(--amarillo);border:1px solid rgba(255,233,77,.25);}
-    .label-verde{background:rgba(46,204,138,.1);color:var(--verde);border:1px solid rgba(46,204,138,.25);}
-    .label-cian{background:rgba(0,212,255,.1);color:var(--cian);border:1px solid rgba(0,212,255,.25);}
-
-    /* ── AUTORES ── */
-    .autores-box{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);
-      border-radius:22px;padding:2.2rem 2rem;margin-bottom:3rem;}
-    .autores-titulo{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.3rem;
-      color:var(--blanco);margin-bottom:1.5rem;text-align:center;}
-    .names-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;}
-    .name-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
-      border-left:4px solid var(--naranja);border-radius:14px;
-      padding:1.1rem 1.2rem;display:flex;align-items:center;gap:.9rem;
-      cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
-    .name-card:hover{background:rgba(243,156,18,.07);border-color:rgba(243,156,18,.5);
-      transform:translateX(4px);}
-    .name-card:nth-child(2){border-left-color:var(--purp2);}
-    .name-card:nth-child(2):hover{background:rgba(155,109,255,.07);border-color:rgba(155,109,255,.5);}
-    .name-card:nth-child(3){border-left-color:var(--cian);}
-    .name-card:nth-child(3):hover{background:rgba(0,212,255,.06);border-color:rgba(0,212,255,.4);}
-    .name-card:nth-child(4){border-left-color:var(--verde);}
-    .name-card:nth-child(4):hover{background:rgba(46,204,138,.06);border-color:rgba(46,204,138,.4);}
-    .name-icon{width:44px;height:44px;border-radius:12px;
-      display:flex;align-items:center;justify-content:center;font-size:1.25rem;
-      flex-shrink:0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);}
-    .name-text{font-family:'Nunito',sans-serif;font-weight:800;font-size:.96rem;
-      color:var(--blanco);line-height:1.3;}
-    .name-rol{font-size:.75rem;color:var(--gris);margin-top:.15rem;}
-
-    /* ── MISIÓN / VISIÓN ── */
-    .mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-bottom:3rem;}
-    @media(max-width:580px){.mv-grid{grid-template-columns:1fr;}}
-    .mv-card{border-radius:18px;padding:1.6rem 1.4rem;}
-    .mv-card.mision{background:linear-gradient(135deg,rgba(108,60,225,.15),rgba(108,60,225,.05));
-      border:1px solid rgba(108,60,225,.3);}
-    .mv-card.vision{background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(0,212,255,.03));
-      border:1px solid rgba(0,212,255,.22);}
-    .mv-card.valores{background:linear-gradient(135deg,rgba(255,233,77,.08),rgba(255,233,77,.02));
-      border:1px solid rgba(255,233,77,.22);grid-column:1/-1;}
-    @media(max-width:580px){.mv-card.valores{grid-column:auto;}}
-    .mv-icon{font-size:2rem;margin-bottom:.6rem;display:block;}
-    .mv-titulo{font-family:'Nunito',sans-serif;font-weight:900;font-size:1rem;
-      color:var(--blanco);margin-bottom:.5rem;}
-    .mv-texto{font-size:.85rem;color:rgba(255,255,255,.7);line-height:1.8;}
-    .valores-lista{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem;}
-    .valor-chip{display:inline-flex;align-items:center;gap:.35rem;
-      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
-      border-radius:20px;padding:.3rem .9rem;
-      font-family:'Nunito',sans-serif;font-weight:700;font-size:.78rem;color:rgba(255,255,255,.75);}
-
-    /* ── LÍNEA DE TIEMPO ── */
-    .timeline{position:relative;padding-left:2rem;margin-bottom:3rem;}
-    .timeline::before{content:'';position:absolute;left:.5rem;top:0;bottom:0;
-      width:2px;background:linear-gradient(to bottom,var(--purp),var(--cian),transparent);}
-    .tl-item{position:relative;margin-bottom:1.6rem;}
-    .tl-dot{position:absolute;left:-1.65rem;top:.3rem;width:12px;height:12px;
-      border-radius:50%;background:linear-gradient(135deg,var(--purp),var(--cian));
-      border:2px solid var(--fondo);}
-    .tl-anio{font-family:'Nunito',sans-serif;font-weight:900;font-size:.78rem;
-      color:var(--cian);letter-spacing:1px;margin-bottom:.15rem;}
-    .tl-titulo{font-family:'Nunito',sans-serif;font-weight:800;font-size:.93rem;
-      color:var(--blanco);margin-bottom:.2rem;}
-    .tl-desc{font-size:.83rem;color:rgba(255,255,255,.62);line-height:1.65;}
-
-    /* ── QUOTE ── */
-    .quote-box{background:linear-gradient(135deg,rgba(46,204,138,.08),rgba(108,60,225,.08));
-      border:2px dashed rgba(46,204,138,.3);border-radius:22px;
-      padding:3rem 2rem;text-align:center;position:relative;margin-bottom:3rem;
-      opacity:0;transform:translateY(40px);
-      transition:all .8s cubic-bezier(.175,.885,.32,1.275);}
-    .quote-box.vis{opacity:1;transform:translateY(0);}
-    .quote-icon-wrap{position:absolute;top:-20px;left:50%;transform:translateX(-50%);
-      background:linear-gradient(135deg,var(--verde),#1a8c5e);
-      color:#fff;width:40px;height:40px;border-radius:50%;
-      display:flex;align-items:center;justify-content:center;font-size:1.1rem;
-      box-shadow:0 4px 14px rgba(46,204,138,.4);}
-    .quote-text{font-family:'Nunito',sans-serif;font-weight:800;
-      font-size:clamp(1.1rem,2.5vw,1.45rem);color:var(--blanco);
-      line-height:1.6;font-style:italic;margin-bottom:.8rem;}
-    .quote-author{font-size:.88rem;color:var(--gris);font-weight:600;}
-
-    /* ── CTA ── */
-    .cta-box{background:
-      radial-gradient(ellipse 60% 80% at 20% 50%,rgba(108,60,225,.2) 0%,transparent 55%),
-      radial-gradient(ellipse 55% 70% at 80% 50%,rgba(0,212,255,.15) 0%,transparent 50%),
-      var(--fondo3);
-      border:1px solid rgba(108,60,225,.25);border-radius:24px;
-      padding:2.2rem 2rem;text-align:center;}
-    .cta-box h2{font-family:'Nunito',sans-serif;font-weight:900;
-      font-size:clamp(1.2rem,2.5vw,1.7rem);color:var(--blanco);margin-bottom:.5rem;}
-    .cta-box p{color:var(--gris);font-size:.9rem;margin-bottom:1.3rem;line-height:1.75;}
-    .cta-btns{display:flex;justify-content:center;gap:.8rem;flex-wrap:wrap;}
-    .btn-cta{display:inline-flex;align-items:center;gap:.5rem;
-      background:linear-gradient(135deg,var(--purp),var(--cian));color:#fff;
-      font-family:'Nunito',sans-serif;font-weight:900;font-size:.9rem;
-      padding:.72rem 1.8rem;border-radius:30px;border:none;cursor:pointer;
-      transition:all .2s;box-shadow:0 8px 26px rgba(108,60,225,.4);}
-    .btn-cta:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(0,212,255,.3);}
-    .btn-cta.sec{background:rgba(255,255,255,.07);box-shadow:none;border:1.5px solid rgba(255,255,255,.2);}
-    .btn-cta.sec:hover{background:rgba(255,255,255,.12);}
-
-    @media(max-width:600px){
-      .wrap{padding:1.5rem 1rem 3rem;}
-      .autores-box{padding:1.5rem 1rem;}
-      .name-card{flex-direction:column;text-align:center;border-left:none;border-top:3px solid var(--naranja);}
-      .name-card:nth-child(2){border-top-color:var(--purp2);}
-      .name-card:nth-child(3){border-top-color:var(--cian);}
-      .name-card:nth-child(4){border-top-color:var(--verde);}
+    .hero-left{
+      padding:clamp(2.5rem,6vw,5rem) clamp(1.5rem,4vw,4rem);
+      display:flex;flex-direction:column;justify-content:center;
+      position:relative;}
+    .hero-left::after{
+      content:'';position:absolute;right:0;top:10%;bottom:10%;
+      width:1px;background:linear-gradient(to bottom,transparent,rgba(155,109,255,.4),transparent);
     }
-    @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-    .wrap>*{animation:fadeIn .5s ease both;}
+    @media(max-width:768px){.hero-left::after{display:none;}}
+
+    .hl-overline{
+      display:inline-flex;align-items:center;gap:.5rem;
+      font-size:.7rem;letter-spacing:3px;text-transform:uppercase;font-weight:800;
+      color:var(--purp2);margin-bottom:1.2rem;}
+    .hl-overline::before{content:'';width:28px;height:2px;
+      background:linear-gradient(90deg,var(--purp),var(--cian));border-radius:2px;}
+
+    .hero-left h1{
+      font-family:'Zodiak',serif;font-weight:700;
+      font-size:clamp(3rem,6vw,5.5rem);line-height:1.05;
+      color:var(--blanco);margin-bottom:1.2rem;position:relative;}
+    .hero-left h1 em{
+      font-style:normal;position:relative;
+      background:linear-gradient(135deg,var(--purp2) 0%,var(--cian) 60%,var(--verde) 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hero-left h1 em::after{
+      content:'';position:absolute;left:0;bottom:-4px;width:100%;height:2px;
+      background:linear-gradient(90deg,var(--purp2),var(--cian));
+      border-radius:2px;opacity:.6;}
+
+    .hero-desc{font-size:clamp(.9rem,1.5vw,1.1rem);color:rgba(255,255,255,.65);
+      line-height:1.85;max-width:480px;margin-bottom:2rem;}
+
+    .hero-stat-row{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+    .hero-stat{text-align:center;}
+    .hs-val{font-family:'Zodiak',serif;font-size:2.2rem;font-weight:700;
+      background:linear-gradient(135deg,var(--amarillo),var(--naranja));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      line-height:1;}
+    .hs-label{font-size:.72rem;color:var(--gris);letter-spacing:1px;text-transform:uppercase;margin-top:.2rem;}
+
+    .scroll-cta{display:inline-flex;align-items:center;gap:.6rem;
+      font-size:.82rem;font-weight:700;color:rgba(255,255,255,.45);
+      animation:bounceY 2.5s ease-in-out infinite;}
+    @keyframes bounceY{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+    /* ── FOTO HERO ── */
+    .hero-right{
+      position:relative;display:flex;align-items:center;justify-content:center;
+      padding:clamp(1.5rem,3vw,3rem);}
+    @media(max-width:768px){.hero-right{padding:1rem 1.5rem 3rem;}}
+
+    .foto-wrapper{position:relative;width:100%;max-width:520px;}
+    .foto-frame{
+      position:relative;border-radius:28px;overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 40px 80px rgba(0,0,0,.6),0 0 0 1px rgba(155,109,255,.15);
+      transition:transform .6s cubic-bezier(.23,1,.32,1);}
+    .foto-frame:hover{transform:scale(1.015) rotate(.5deg);}
+    .foto-frame img{width:100%;height:auto;display:block;
+      filter:saturate(1.05);}
+    .foto-frame::after{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(180deg,transparent 55%,rgba(6,4,16,.85) 100%);
+      pointer-events:none;}
+
+    .foto-badge{
+      position:absolute;bottom:1.5rem;left:1.5rem;right:1.5rem;
+      background:rgba(6,4,16,.75);backdrop-filter:blur(12px) saturate(1.8);
+      border:1px solid rgba(255,255,255,.1);border-radius:16px;
+      padding:.85rem 1.2rem;display:flex;align-items:center;gap:.9rem;z-index:3;}
+    .fb-dot{width:8px;height:8px;border-radius:50%;background:var(--verde);
+      box-shadow:0 0 8px var(--verde);animation:pulse 2s ease-in-out infinite;flex-shrink:0;}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.85)}}
+    .fb-text{font-size:.8rem;font-weight:700;color:rgba(255,255,255,.8);line-height:1.4;}
+    .fb-text span{color:var(--verde);}
+
+    /* Orbes decorativos */
+    .orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(60px);opacity:.35;}
+    .orb-a{width:300px;height:300px;background:var(--purp);top:-80px;right:-80px;}
+    .orb-b{width:200px;height:200px;background:var(--cian);bottom:-40px;left:-40px;}
+
+    /* ══════════════ MAIN CONTENT ══════════════ */
+    .main{position:relative;z-index:2;}
+    .section{max-width:1100px;margin:0 auto;padding:clamp(3rem,6vw,6rem) 1.5rem;}
+
+    /* ── SECTION HEADER ── */
+    .sec-header{display:flex;align-items:center;gap:1.2rem;margin-bottom:3rem;}
+    .sec-num{font-family:'Zodiak',serif;font-size:clamp(3rem,6vw,5rem);font-weight:700;
+      color:transparent;-webkit-text-stroke:1px rgba(155,109,255,.3);line-height:1;
+      flex-shrink:0;}
+    .sec-header-text h2{font-family:'Zodiak',serif;font-weight:700;
+      font-size:clamp(1.4rem,3vw,2.2rem);color:var(--blanco);line-height:1.2;margin-bottom:.3rem;}
+    .sec-header-text p{font-size:.9rem;color:var(--gris);max-width:60ch;line-height:1.7;}
+
+    /* ══════════════ EQUIPO — CARDS HOVER 3D ══════════════ */
+    .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;}
+
+    .team-card{
+      position:relative;border-radius:22px;overflow:hidden;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.07);
+      padding:2rem 1.5rem 1.6rem;
+      cursor:pointer;
+      transition:transform .4s cubic-bezier(.23,1,.32,1),
+        box-shadow .4s,border-color .4s;
+      transform-style:preserve-3d;}
+    .team-card:hover{transform:translateY(-8px) rotate3d(1,0,0,3deg);
+      box-shadow:0 30px 60px rgba(0,0,0,.5);}
+
+    .tc-glow{position:absolute;inset:0;opacity:0;transition:opacity .4s;pointer-events:none;border-radius:22px;}
+    .tc-glow-1{background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(243,156,18,.25),transparent);}
+    .tc-glow-2{background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(155,109,255,.3),transparent);}
+    .tc-glow-3{background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(0,212,255,.22),transparent);}
+    .tc-glow-4{background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(46,204,138,.22),transparent);}
+    .team-card:hover .tc-glow{opacity:1;}
+
+    .tc-top{position:absolute;top:0;left:0;right:0;height:3px;border-radius:22px 22px 0 0;}
+    .tc-top-1{background:linear-gradient(90deg,var(--naranja),var(--amarillo));}
+    .tc-top-2{background:linear-gradient(90deg,var(--purp),var(--purp2));}
+    .tc-top-3{background:linear-gradient(90deg,var(--cian),var(--verde));}
+    .tc-top-4{background:linear-gradient(90deg,var(--verde),var(--cian));}
+
+    .tc-avatar{
+      width:56px;height:56px;border-radius:16px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.6rem;margin-bottom:1.1rem;
+      position:relative;}
+    .tc-avatar::after{content:'';position:absolute;inset:-1px;border-radius:17px;
+      background:linear-gradient(135deg,rgba(255,255,255,.15),transparent);z-index:0;pointer-events:none;}
+
+    .tc-name{font-family:'Zodiak',serif;font-size:1.05rem;font-weight:700;
+      color:var(--blanco);line-height:1.3;margin-bottom:.3rem;}
+    .tc-rol{font-size:.76rem;font-weight:600;color:var(--gris);
+      letter-spacing:.5px;margin-bottom:1.1rem;}
+    .tc-tags{display:flex;flex-wrap:wrap;gap:.35rem;}
+    .tc-tag{font-size:.67rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;
+      background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+      color:rgba(255,255,255,.6);}
+    .tc-confetti{position:absolute;inset:0;pointer-events:none;}
+
+    /* ══════════════ MISIÓN/VISIÓN — DIAGONAL ══════════════ */
+    .mv-diagonal{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;}
+    @media(max-width:640px){.mv-diagonal{grid-template-columns:1fr;}}
+
+    .mv-block{
+      position:relative;border-radius:24px;padding:2.5rem 2rem;overflow:hidden;
+      transition:transform .3s;}
+    .mv-block:hover{transform:translateY(-4px);}
+    .mv-block.mis{
+      background:linear-gradient(135deg,rgba(108,60,225,.18) 0%,rgba(108,60,225,.04) 100%);
+      border:1px solid rgba(108,60,225,.25);}
+    .mv-block.vis{
+      background:linear-gradient(135deg,rgba(0,212,255,.12) 0%,rgba(0,212,255,.03) 100%);
+      border:1px solid rgba(0,212,255,.2);}
+    .mv-block-bg{position:absolute;bottom:-20px;right:-10px;
+      font-family:'Zodiak',serif;font-size:6rem;font-weight:700;
+      color:rgba(255,255,255,.03);pointer-events:none;line-height:1;user-select:none;}
+    .mv-block-icon{font-size:2.2rem;margin-bottom:.8rem;display:block;}
+    .mv-block h3{font-family:'Zodiak',serif;font-size:1.15rem;font-weight:700;
+      color:var(--blanco);margin-bottom:.6rem;}
+    .mv-block p{font-size:.86rem;color:rgba(255,255,255,.68);line-height:1.85;}
+
+    /* ── VALORES ORBIT ── */
+    .valores-orbit{
+      position:relative;border-radius:24px;overflow:hidden;
+      background:linear-gradient(135deg,rgba(255,233,77,.06),rgba(108,60,225,.06));
+      border:1px solid rgba(255,233,77,.15);
+      padding:2.5rem 2rem;}
+    .vo-title{font-family:'Zodiak',serif;font-size:1.15rem;font-weight:700;
+      color:var(--blanco);margin-bottom:1.4rem;display:flex;align-items:center;gap:.7rem;}
+    .vo-title span{font-size:1.5rem;}
+    .valores-flow{display:flex;flex-wrap:wrap;gap:.55rem;}
+    .valor-pill{
+      display:inline-flex;align-items:center;gap:.4rem;
+      padding:.4rem 1rem;border-radius:30px;font-size:.8rem;font-weight:700;
+      cursor:default;transition:transform .2s,background .2s;
+      border:1px solid;}
+    .valor-pill:hover{transform:translateY(-3px) scale(1.05);}
+    .vp-1{background:rgba(108,60,225,.12);border-color:rgba(108,60,225,.3);color:var(--purp2);}
+    .vp-2{background:rgba(0,212,255,.08);border-color:rgba(0,212,255,.25);color:var(--cian);}
+    .vp-3{background:rgba(46,204,138,.08);border-color:rgba(46,204,138,.25);color:var(--verde);}
+    .vp-4{background:rgba(255,233,77,.08);border-color:rgba(255,233,77,.25);color:var(--amarillo);}
+    .vp-5{background:rgba(243,156,18,.1);border-color:rgba(243,156,18,.3);color:var(--naranja);}
+
+    /* ══════════════ TIMELINE HORIZONTAL ══════════════ */
+    .tl-h{overflow-x:auto;padding-bottom:1rem;}
+    .tl-h::-webkit-scrollbar{height:4px;}
+    .tl-h::-webkit-scrollbar-thumb{background:rgba(155,109,255,.3);border-radius:4px;}
+    .tl-track{display:flex;gap:0;min-width:max-content;padding:1rem 0;}
+    .tl-node{display:flex;flex-direction:column;align-items:center;position:relative;width:180px;}
+    .tl-node::before{content:'';position:absolute;top:18px;left:50%;right:-50%;
+      height:2px;background:linear-gradient(90deg,var(--purp),rgba(0,212,255,.5));}
+    .tl-node:last-child::before{display:none;}
+    .tl-dot{width:36px;height:36px;border-radius:50%;
+      background:linear-gradient(135deg,var(--purp),var(--cian));
+      border:3px solid var(--fondo);
+      display:flex;align-items:center;justify-content:center;
+      font-size:.85rem;z-index:1;position:relative;
+      box-shadow:0 0 16px rgba(108,60,225,.5);}
+    .tl-body{margin-top:.8rem;text-align:center;padding:0 .5rem;}
+    .tl-anio{font-size:.68rem;font-weight:800;color:var(--cian);
+      letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.25rem;}
+    .tl-tit{font-size:.82rem;font-weight:800;color:var(--blanco);
+      margin-bottom:.2rem;line-height:1.3;}
+    .tl-des{font-size:.74rem;color:var(--gris);line-height:1.55;}
+
+    /* ══════════════ QUOTE CINEMATOGRÁFICA ══════════════ */
+    .quote-cinema{
+      position:relative;overflow:hidden;
+      padding:clamp(3rem,6vw,5rem) clamp(1.5rem,4vw,5rem);
+      background:linear-gradient(135deg,rgba(46,204,138,.07),rgba(108,60,225,.1));
+      border-top:1px solid rgba(255,255,255,.06);
+      border-bottom:1px solid rgba(255,255,255,.06);
+      margin:0;text-align:center;}
+    .qc-big{position:absolute;top:-1.5rem;left:50%;transform:translateX(-50%);
+      font-family:'Zodiak',serif;font-size:clamp(6rem,18vw,16rem);font-weight:700;
+      color:rgba(155,109,255,.06);line-height:1;pointer-events:none;
+      white-space:nowrap;user-select:none;}
+    .qc-text{font-family:'Zodiak',serif;font-size:clamp(1.2rem,2.8vw,2rem);
+      font-weight:700;color:var(--blanco);line-height:1.55;
+      max-width:720px;margin:0 auto 1rem;position:relative;z-index:1;font-style:italic;}
+    .qc-author{font-size:.82rem;font-weight:700;color:var(--purp2);
+      letter-spacing:2px;text-transform:uppercase;position:relative;z-index:1;}
+
+    /* ══════════════ CTA FINAL ══════════════ */
+    .cta-final{
+      max-width:1100px;margin:0 auto;padding:0 1.5rem clamp(4rem,8vw,7rem);}
+    .cta-inner{
+      position:relative;overflow:hidden;border-radius:28px;
+      background:linear-gradient(135deg,rgba(108,60,225,.18) 0%,rgba(0,212,255,.08) 50%,rgba(46,204,138,.08) 100%);
+      border:1px solid rgba(108,60,225,.25);
+      padding:clamp(2rem,4vw,3.5rem) clamp(1.5rem,4vw,3rem);
+      display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+    .cta-inner::before{
+      content:'ℤ';position:absolute;right:-20px;top:-30px;
+      font-family:'Zodiak',serif;font-size:16rem;font-weight:700;
+      color:rgba(155,109,255,.04);pointer-events:none;line-height:1;}
+    .cta-text h2{font-family:'Zodiak',serif;font-size:clamp(1.3rem,3vw,2rem);
+      font-weight:700;color:var(--blanco);margin-bottom:.4rem;}
+    .cta-text p{font-size:.9rem;color:var(--gris);max-width:50ch;line-height:1.7;}
+    .cta-btns{display:flex;gap:.75rem;flex-wrap:wrap;flex-shrink:0;}
+    .btn-cta{display:inline-flex;align-items:center;gap:.5rem;
+      font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:.88rem;
+      padding:.75rem 1.6rem;border-radius:30px;cursor:pointer;
+      border:none;transition:all .25s;}
+    .btn-cta.primary{
+      background:linear-gradient(135deg,var(--purp),var(--cian));color:#fff;
+      box-shadow:0 8px 24px rgba(108,60,225,.4);}
+    .btn-cta.primary:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(0,212,255,.3);}
+    .btn-cta.ghost{background:rgba(255,255,255,.07);color:rgba(255,255,255,.8);
+      border:1.5px solid rgba(255,255,255,.18);}
+    .btn-cta.ghost:hover{background:rgba(255,255,255,.12);transform:translateY(-2px);}
+
+    /* ══════════════ ANIMACIONES ══════════════ */
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;}
+    .reveal.vis{opacity:1;transform:translateY(0);}
+    .reveal-left{opacity:0;transform:translateX(-30px);transition:opacity .7s ease,transform .7s ease;}
+    .reveal-left.vis{opacity:1;transform:translateX(0);}
+
+    @media(max-width:768px){
+      .team-grid{grid-template-columns:1fr 1fr;}
+      .cta-inner{flex-direction:column;text-align:center;}
+    }
+    @media(max-width:480px){.team-grid{grid-template-columns:1fr;}}
   </style>
 </head>
 <body>
 
-<div id="particulas-bg"></div>
+<!-- AURORA CANVAS -->
+<canvas id="aurora-canvas"></canvas>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-grid" aria-hidden="true"></div>
-  <div class="hero-tag">👥 Quiénes somos</div>
-  <h1>Los profes que <span>suman futuro</span></h1>
-  <p>Detrás de cada número entero hay un equipo apasionado por hacer que las matemáticas sean una aventura inolvidable para cada estudiante.</p>
-  <div class="hero-badges">
-    <div class="hb">🇨🇴 Colombia</div>
-    <div class="hb">📐 Grados 6° y 7°</div>
-    <div class="hb">💻 Eduquémonos con TICs</div>
-    <div class="hb">🎯 Aprendizaje activo</div>
-  </div>
-</div>
-
-<div class="wrap">
-
-  <!-- FOTO DEL EQUIPO -->
-  <div class="foto-card">
-    <img src="./imagen-1.jpeg" alt="Equipo de docentes – Eduquémonos con TICs" class="team-photo"/>
-    <div class="foto-caption">📸 Equipo docente · Eduquémonos con TICs · COLOMBIA </div>
-  </div>
-
-  <!-- AUTORES -->
-  <div style="margin-bottom:1.2rem;">
-    <span class="section-label label-purp">👨‍🏫 El equipo creador</span>
-  </div>
-  <div class="autores-box">
-    <div class="autores-titulo">Autores del proyecto Misión ℤ</div>
-    <div class="names-grid">
-      <div class="name-card" onclick="confeti(event)">
-        <div class="name-icon">📐</div>
-        <div>
-          <div class="name-text">Ricardo Bautista Ramírez</div>
-          <div class="name-rol">Diseño instruccional · Matemáticas</div>
-        </div>
+<!-- ══════ HERO SPLIT ══════ -->
+<section class="hero-split" aria-label="Presentación del equipo">
+  <div class="hero-left">
+    <div class="hl-overline">Eduquémonos con TICs · Colombia</div>
+    <h1>Somos los<br>creadores de<br><em>Misión ℤ</em></h1>
+    <p class="hero-desc">Un equipo de docentes colombianos que creyó que las matemáticas pueden ser una aventura. Diseñamos, programamos y pedagogizamos cada píxel de este recurso para estudiantes de grado 6° y 7°.</p>
+    <div class="hero-stat-row">
+      <div class="hero-stat">
+        <div class="hs-val">4</div>
+        <div class="hs-label">Docentes</div>
       </div>
-      <div class="name-card" onclick="confeti(event)">
-        <div class="name-icon">💻</div>
-        <div>
-          <div class="name-text">Jefersson Andrei Cárdenas Tirado</div>
-          <div class="name-rol">Desarrollo web · HTML/CSS/JS</div>
-        </div>
+      <div class="hero-stat">
+        <div class="hs-val">6</div>
+        <div class="hs-label">Módulos</div>
       </div>
-      <div class="name-card" onclick="confeti(event)">
-        <div class="name-icon">🧠</div>
-        <div>
-          <div class="name-text">María José Montoya López</div>
-          <div class="name-rol">Diseño pedagógico · Evaluación</div>
-        </div>
+      <div class="hero-stat">
+        <div class="hs-val">5</div>
+        <div class="hs-label">Simuladores</div>
       </div>
-      <div class="name-card" onclick="confeti(event)">
-        <div class="name-icon">✨</div>
-        <div>
-          <div class="name-text">Linda Jessica Rodríguez Montes</div>
-          <div class="name-rol">UX · Recursos digitales</div>
-        </div>
+      <div class="hero-stat">
+        <div class="hs-val">∞</div>
+        <div class="hs-label">Aprendizaje</div>
       </div>
     </div>
-    <p style="text-align:center;font-size:.78rem;color:rgba(255,255,255,.3);
-      margin-top:1.2rem;font-family:'Nunito',sans-serif;">
-      💡 Haz clic en cada autor para una sorpresa
+    <div class="scroll-cta" aria-hidden="true">↓ Descubre quiénes somos</div>
+  </div>
+
+  <div class="hero-right">
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="foto-wrapper">
+      <div class="foto-frame">
+        <img src="./imagen-1.jpeg" alt="Equipo docente Eduquémonos con TICs" loading="lazy" width="520" height="390"/>
+      </div>
+      <div class="foto-badge">
+        <div class="fb-dot"></div>
+        <div class="fb-text">📸 Equipo docente · <span>Eduquémonos con TICs</span> · 🇨🇴 Colombia</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ MAIN ══════ -->
+<main class="main">
+
+  <!-- SECCIÓN 01 — EQUIPO -->
+  <section class="section reveal" id="sec-equipo">
+    <div class="sec-header">
+      <div class="sec-num">01</div>
+      <div class="sec-header-text">
+        <h2>El equipo creador</h2>
+        <p>Cuatro docentes con roles complementarios. Un único objetivo: que tus estudiantes amen los números enteros.</p>
+      </div>
+    </div>
+    <div class="team-grid">
+
+      <div class="team-card" onclick="lanzarConfeti(event)" tabindex="0" role="button" aria-label="Ricardo Bautista Ramírez">
+        <div class="tc-glow tc-glow-1"></div>
+        <div class="tc-top tc-top-1"></div>
+        <div class="tc-avatar" style="background:linear-gradient(135deg,rgba(243,156,18,.2),rgba(255,233,77,.1));">📐</div>
+        <div class="tc-name">Ricardo Bautista Ramírez</div>
+        <div class="tc-rol">Diseño instruccional</div>
+        <div class="tc-tags">
+          <span class="tc-tag">Matemáticas</span>
+          <span class="tc-tag">Currículo</span>
+          <span class="tc-tag">Didáctica</span>
+        </div>
+        <canvas class="tc-confetti" id="cc0"></canvas>
+      </div>
+
+      <div class="team-card" onclick="lanzarConfeti(event)" tabindex="0" role="button" aria-label="Jefersson Cárdenas Tirado">
+        <div class="tc-glow tc-glow-2"></div>
+        <div class="tc-top tc-top-2"></div>
+        <div class="tc-avatar" style="background:linear-gradient(135deg,rgba(108,60,225,.2),rgba(155,109,255,.1));">💻</div>
+        <div class="tc-name">Jefersson Andrei Cárdenas Tirado</div>
+        <div class="tc-rol">Desarrollo web</div>
+        <div class="tc-tags">
+          <span class="tc-tag">HTML/CSS</span>
+          <span class="tc-tag">JavaScript</span>
+          <span class="tc-tag">UX</span>
+        </div>
+        <canvas class="tc-confetti" id="cc1"></canvas>
+      </div>
+
+      <div class="team-card" onclick="lanzarConfeti(event)" tabindex="0" role="button" aria-label="María José Montoya López">
+        <div class="tc-glow tc-glow-3"></div>
+        <div class="tc-top tc-top-3"></div>
+        <div class="tc-avatar" style="background:linear-gradient(135deg,rgba(0,212,255,.15),rgba(46,204,138,.1));">🧠</div>
+        <div class="tc-name">María José Montoya López</div>
+        <div class="tc-rol">Diseño pedagógico</div>
+        <div class="tc-tags">
+          <span class="tc-tag">Evaluación</span>
+          <span class="tc-tag">Pedagogía</span>
+          <span class="tc-tag">TIC</span>
+        </div>
+        <canvas class="tc-confetti" id="cc2"></canvas>
+      </div>
+
+      <div class="team-card" onclick="lanzarConfeti(event)" tabindex="0" role="button" aria-label="Linda Jessica Rodríguez Montes">
+        <div class="tc-glow tc-glow-4"></div>
+        <div class="tc-top tc-top-4"></div>
+        <div class="tc-avatar" style="background:linear-gradient(135deg,rgba(46,204,138,.18),rgba(0,212,255,.1));">✨</div>
+        <div class="tc-name">Linda Jessica Rodríguez Montes</div>
+        <div class="tc-rol">UX · Recursos digitales</div>
+        <div class="tc-tags">
+          <span class="tc-tag">Diseño</span>
+          <span class="tc-tag">Recursos</span>
+          <span class="tc-tag">Visual</span>
+        </div>
+        <canvas class="tc-confetti" id="cc3"></canvas>
+      </div>
+
+    </div>
+    <p style="text-align:center;font-size:.75rem;color:rgba(255,255,255,.25);margin-top:1.2rem;font-weight:700;">
+      ✦ Haz clic en cada tarjeta para una sorpresa
     </p>
+  </section>
+
+  <!-- SECCIÓN 02 — MISIÓN / VISIÓN / VALORES -->
+  <section class="section reveal" id="sec-mv" style="padding-top:0;">
+    <div class="sec-header">
+      <div class="sec-num">02</div>
+      <div class="sec-header-text">
+        <h2>Propósito y valores</h2>
+        <p>Lo que nos mueve más allá del aula.</p>
+      </div>
+    </div>
+
+    <div class="mv-diagonal">
+      <div class="mv-block mis">
+        <div class="mv-block-bg">M</div>
+        <span class="mv-block-icon">🚀</span>
+        <h3>Nuestra misión</h3>
+        <p>Diseñar experiencias digitales de aprendizaje matemático que conecten los conceptos abstractos con la vida cotidiana de los estudiantes colombianos de secundaria, fomentando el pensamiento crítico y la autonomía.</p>
+      </div>
+      <div class="mv-block vis">
+        <div class="mv-block-bg">V</div>
+        <span class="mv-block-icon">🔭</span>
+        <h3>Nuestra visión</h3>
+        <p>Ser un referente regional en innovación pedagógica con TIC, donde cada estudiante de 6° y 7° encuentre en las matemáticas una herramienta para comprender y transformar su entorno.</p>
+      </div>
+    </div>
+
+    <div class="valores-orbit">
+      <div class="vo-title"><span>💎</span> Nuestros valores</div>
+      <div class="valores-flow">
+        <span class="valor-pill vp-1">🌍 Contextualización</span>
+        <span class="valor-pill vp-2">🎮 Gamificación</span>
+        <span class="valor-pill vp-3">♿ Inclusión</span>
+        <span class="valor-pill vp-4">🔬 Rigor académico</span>
+        <span class="valor-pill vp-5">🤝 Colaboración</span>
+        <span class="valor-pill vp-1">💡 Innovación</span>
+        <span class="valor-pill vp-2">📊 Retroalimentación</span>
+        <span class="valor-pill vp-3">🇨🇴 Identidad colombiana</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 03 — TIMELINE -->
+  <section class="section reveal" id="sec-tl" style="padding-top:0;">
+    <div class="sec-header">
+      <div class="sec-num">03</div>
+      <div class="sec-header-text">
+        <h2>Cómo nació Misión ℤ</h2>
+        <p>De una idea de clase a un recurso pedagógico completo.</p>
+      </div>
+    </div>
+    <div class="tl-h" role="list">
+      <div class="tl-track">
+        <div class="tl-node" role="listitem">
+          <div class="tl-dot">💡</div>
+          <div class="tl-body">
+            <div class="tl-anio">Etapa 1</div>
+            <div class="tl-tit">La idea</div>
+            <div class="tl-des">Identificamos que los enteros se enseñaban de forma abstracta y desconectada.</div>
+          </div>
+        </div>
+        <div class="tl-node" role="listitem">
+          <div class="tl-dot">🗺️</div>
+          <div class="tl-body">
+            <div class="tl-anio">Etapa 2</div>
+            <div class="tl-tit">Diseño pedagógico</div>
+            <div class="tl-des">Mapeamos objetivos, metodología activa y contextos colombianos reales.</div>
+          </div>
+        </div>
+        <div class="tl-node" role="listitem">
+          <div class="tl-dot">🖥️</div>
+          <div class="tl-body">
+            <div class="tl-anio">Etapa 3</div>
+            <div class="tl-tit">Desarrollo web</div>
+            <div class="tl-des">Construimos simuladores, teoría interactiva y evaluación gamificada.</div>
+          </div>
+        </div>
+        <div class="tl-node" role="listitem">
+          <div class="tl-dot">🧪</div>
+          <div class="tl-body">
+            <div class="tl-anio">Etapa 4</div>
+            <div class="tl-tit">Prueba piloto</div>
+            <div class="tl-des">Validamos el recurso con estudiantes reales y ajustamos el diseño.</div>
+          </div>
+        </div>
+        <div class="tl-node" role="listitem">
+          <div class="tl-dot">🚀</div>
+          <div class="tl-body">
+            <div class="tl-anio">Etapa 5</div>
+            <div class="tl-tit">Lanzamiento</div>
+            <div class="tl-des">Misión ℤ llega a estudiantes de 6° y 7° de Colombia. ¡Bienvenido!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE CINEMATOGRÁFICA -->
+  <div class="quote-cinema reveal" id="quote-cinema">
+    <div class="qc-big" aria-hidden="true">"</div>
+    <p class="qc-text">La matemática es el alfabeto con el cual Dios ha escrito el universo.</p>
+    <p class="qc-author">— Galileo Galilei</p>
   </div>
 
-  <!-- MISIÓN / VISIÓN / VALORES -->
-  <div style="margin-bottom:1.2rem;">
-    <span class="section-label label-cian">🎯 Propósito</span>
-  </div>
-  <div class="mv-grid">
-    <div class="mv-card mision">
-      <span class="mv-icon">🚀</span>
-      <div class="mv-titulo">Nuestra misión</div>
-      <div class="mv-texto">Diseñar experiencias digitales de aprendizaje matemático que conecten los conceptos abstractos con la vida cotidiana de los estudiantes colombianos de secundaria, fomentando el pensamiento crítico y la autonomía.</div>
-    </div>
-    <div class="mv-card vision">
-      <span class="mv-icon">🔭</span>
-      <div class="mv-titulo">Nuestra visión</div>
-      <div class="mv-texto">Ser un referente regional en innovación pedagógica con TIC, donde cada estudiante de 6° y 7° encuentre en las matemáticas una herramienta para comprender y transformar su entorno.</div>
-    </div>
-    <div class="mv-card valores">
-      <span class="mv-icon">💎</span>
-      <div class="mv-titulo">Nuestros valores</div>
-      <div class="valores-lista">
-        <div class="valor-chip">🌍 Contextualización</div>
-        <div class="valor-chip">🎮 Gamificación</div>
-        <div class="valor-chip">♿ Inclusión</div>
-        <div class="valor-chip">🔬 Rigor académico</div>
-        <div class="valor-chip">🤝 Colaboración</div>
-        <div class="valor-chip">💡 Innovación</div>
-        <div class="valor-chip">📊 Retroalimentación</div>
-        <div class="valor-chip">🇨🇴 Identidad colombiana</div>
+  <!-- CTA FINAL -->
+  <div class="cta-final" style="margin-top:4rem;">
+    <div class="cta-inner reveal">
+      <div class="cta-text">
+        <h2>¿Listo para explorar la plataforma?</h2>
+        <p>Comienza por la teoría, practica con los simuladores de vida real o pon a prueba lo aprendido en la evaluación.</p>
+      </div>
+      <div class="cta-btns">
+        <button class="btn-cta primary" onclick="navegarA('teoria')">📖 Ir a Teoría</button>
+        <button class="btn-cta ghost" onclick="navegarA('evaluacion')">📋 Evaluación</button>
       </div>
     </div>
   </div>
 
-  
-
-  <!-- FRASE INSPIRADORA -->
-  <div class="quote-box" id="quote-box">
-    <div class="quote-icon-wrap">"</div>
-    <p class="quote-text">La matemática es el alfabeto con el cual Dios ha escrito el universo.</p>
-    <p class="quote-author">— Galileo Galilei</p>
-  </div>
-
-  <!-- CTA -->
-  <div class="cta-box">
-    <h2>¿Quieres explorar la plataforma?</h2>
-    <p>Comienza por la teoría, practica con ejercicios gamificados o pon a prueba lo aprendido en la evaluación.</p>
-    <div class="cta-btns">
-      <button class="btn-cta" onclick="navegarA('teoria')">📖 Ir a Teoría</button>
-      <button class="btn-cta" onclick="navegarA('practica')">🎮 Ir a Práctica</button>
-      <button class="btn-cta sec" onclick="navegarA('evaluacion')">📋 Ir a Evaluación</button>
-    </div>
-  </div>
-
-</div><!-- /wrap -->
+</main>
 
 <script>
-/* ── PARTÍCULAS ── */
+/* ══ AURORA CANVAS ══ */
 (function(){
-  const cont=document.getElementById('particulas-bg');
-  const syms=['-3','+8','-5','0','+12','-1','+4','-7','+2','-10','ℤ'];
-  for(let i=0;i<12;i++){
-    const el=document.createElement('span');
-    el.className='particula';
-    const sz=Math.random()*36+16;
-    el.style.cssText=`left:${Math.random()*100}%;font-size:${sz}px;
-      animation-duration:${Math.random()*18+12}s;animation-delay:${Math.random()*10}s;`;
-    el.textContent=syms[Math.floor(Math.random()*syms.length)];
-    cont.appendChild(el);
+  const cv=document.getElementById('aurora-canvas');
+  const ctx=cv.getContext('2d');
+  let W,H,t=0;
+  function resize(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;}
+  resize();
+  window.addEventListener('resize',resize);
+
+  const blobs=[
+    {x:.15,y:.35,rx:.45,ry:.55,col:'108,60,225',speed:.0004},
+    {x:.85,y:.25,rx:.4,ry:.5,col:'0,212,255',speed:.0003},
+    {x:.5,y:.8,rx:.5,ry:.38,col:'46,204,138',speed:.00035},
+    {x:.3,y:.65,rx:.35,ry:.4,col:'155,109,255',speed:.00045},
+  ];
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    blobs.forEach((b,i)=>{
+      const ox=Math.sin(t*b.speed*1000+i)*0.07;
+      const oy=Math.cos(t*b.speed*800+i*1.3)*0.06;
+      const grd=ctx.createRadialGradient(
+        (b.x+ox)*W,(b.y+oy)*H,0,
+        (b.x+ox)*W,(b.y+oy)*H,Math.min(W,H)*b.rx);
+      grd.addColorStop(0,`rgba(${b.col},.18)`);
+      grd.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=grd;
+      ctx.fillRect(0,0,W,H);
+    });
+    t+=16;
+    requestAnimationFrame(draw);
   }
+  draw();
 })();
 
-/* ── SCROLL REVEAL — QUOTE ── */
-const quoteEl=document.getElementById('quote-box');
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');observer.unobserve(e.target);}});
-},{threshold:.3});
-observer.observe(quoteEl);
-
-/* ── EASTER EGG — CONFETI AL CLICK EN AUTORES ── */
-function confeti(e){
+/* ══ CONFETI EN TARJETAS ══ */
+function lanzarConfeti(e){
   const card=e.currentTarget;
-  card.style.transform='scale(0.95)';
-  setTimeout(()=>{card.style.transform='';},150);
-  const colores=['var(--purp2)','var(--cian)','var(--amarillo)','var(--verde)','var(--naranja)','var(--rojo)'];
-  for(let i=0;i<10;i++) crearParticula(e.clientX,e.clientY,colores);
+  card.style.transform='translateY(-8px) scale(.97)';
+  setTimeout(()=>{card.style.transform='';},200);
+  const rect=card.getBoundingClientRect();
+  const cols=['#9B6DFF','#00D4FF','#FFE94D','#2ECC8A','#F39C12','#e74c3c','#fff'];
+  for(let i=0;i<18;i++) burst(rect.left+rect.width/2, rect.top+20, cols);
 }
-
-function crearParticula(x,y,colores){
+function burst(x,y,cols){
   const p=document.createElement('div');
-  const col=colores[Math.floor(Math.random()*colores.length)];
-  p.style.cssText=`position:fixed;left:${x}px;top:${y}px;
-    width:9px;height:9px;background:${col};pointer-events:none;z-index:9999;
-    border-radius:${Math.random()>.5?'50%':'3px'};`;
+  const c=cols[Math.floor(Math.random()*cols.length)];
+  const sz=6+Math.random()*6;
+  p.style.cssText=`position:fixed;left:${x}px;top:${y}px;width:${sz}px;height:${sz}px;
+    background:${c};pointer-events:none;z-index:9999;border-radius:${Math.random()>.5?'50%':'2px'};`;
   document.body.appendChild(p);
   const ang=Math.random()*Math.PI*2;
-  const vel=60+Math.random()*100;
-  const tx=Math.cos(ang)*vel, ty=Math.sin(ang)*vel-55;
-  const anim=p.animate([
-    {transform:'translate(0,0) scale(1)',opacity:1},
-    {transform:`translate(${tx}px,${ty}px) scale(0)`,opacity:0}
-  ],{duration:600+Math.random()*400,easing:'cubic-bezier(.25,1,.5,1)'});
-  anim.onfinish=()=>p.remove();
+  const vel=80+Math.random()*120;
+  p.animate([
+    {transform:'translate(0,0) scale(1) rotate(0deg)',opacity:1},
+    {transform:`translate(${Math.cos(ang)*vel}px,${Math.sin(ang)*vel-80}px) scale(0) rotate(${Math.random()*360}deg)`,opacity:0}
+  ],{duration:700+Math.random()*400,easing:'cubic-bezier(.25,1,.5,1)'}).onfinish=()=>p.remove();
 }
 
-/* ── NAVEGACIÓN ── */
+/* ══ SCROLL REVEAL ══ */
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);}});
+},{threshold:.12});
+document.querySelectorAll('.reveal,.reveal-left').forEach(el=>ro.observe(el));
+
+/* ══ NAVEGACIÓN ══ */
 function navegarA(id){
   try{if(window.parent&&typeof window.parent.showPage==='function'){window.parent.showPage(id);return;}}catch(e){}
   window.parent.postMessage({action:'cambiarPagina',destino:id},'*');
 }
+
+/* ── Keyboard support para tarjetas ── */
+document.querySelectorAll('.team-card').forEach(c=>{
+  c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();lanzarConfeti(e);}});
+});
 </script>
 </body>
 </html>
