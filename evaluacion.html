@@ -179,6 +179,29 @@
     .btn-cta.sec{background:rgba(255,255,255,.07);box-shadow:none;border:1.5px solid rgba(255,255,255,.2);}
 
     @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+    /* BLOQUE PEDAGÓGICO EVALUACIÓN */
+    .eval-pedagogico{max-width:860px;margin:2rem auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;padding:0 1.5rem;}
+    .eval-ped-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:1.2rem 1.1rem;display:flex;flex-direction:column;gap:.4rem;transition:transform .25s,border-color .25s;}
+    .eval-ped-card:hover{transform:translateY(-4px);}
+    .eval-ped-card .epc-icon{font-size:1.6rem;}
+    .eval-ped-card h5{font-family:'Nunito',sans-serif;font-weight:800;font-size:.88rem;color:var(--blanco);}
+    .eval-ped-card p{font-size:.78rem;color:var(--gris);line-height:1.55;}
+    .epc-1{border-top:2px solid rgba(231,76,60,.6);}
+    .epc-2{border-top:2px solid rgba(0,212,255,.6);}
+    .epc-3{border-top:2px solid rgba(255,233,77,.6);}
+    .epc-4{border-top:2px solid rgba(46,204,138,.6);}
+    .epc-1:hover{border-color:rgba(231,76,60,.9);box-shadow:0 8px 24px rgba(231,76,60,.1);}
+    .epc-2:hover{border-color:rgba(0,212,255,.9);box-shadow:0 8px 24px rgba(0,212,255,.1);}
+    .epc-3:hover{border-color:rgba(255,233,77,.9);box-shadow:0 8px 24px rgba(255,233,77,.1);}
+    .epc-4:hover{border-color:rgba(46,204,138,.9);box-shadow:0 8px 24px rgba(46,204,138,.1);}
+
+    .eval-pitch-banner{max-width:860px;margin:1.5rem auto 0;padding:0 1.5rem;}
+    .eval-pitch-inner{background:linear-gradient(135deg,rgba(255,233,77,.06) 0%,rgba(108,60,225,.08) 100%);border:1px solid rgba(255,233,77,.25);border-radius:16px;padding:1.2rem 1.5rem;display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;}
+    .eval-pitch-icon{font-size:2.2rem;flex-shrink:0;}
+    .eval-pitch-text h5{font-family:'Nunito',sans-serif;font-weight:900;color:var(--amarillo);font-size:.95rem;margin-bottom:.2rem;}
+    .eval-pitch-text p{font-size:.82rem;color:rgba(255,255,255,.65);line-height:1.6;}
+    .eval-pitch-text strong{color:var(--cian);}
   </style>
 </head>
 <body>
@@ -208,6 +231,40 @@
     <div class="hi">⭐ 100 puntos</div>
     <div class="hi">🎲 Aleatorio</div>
     <div class="hi">🇨🇴 Contexto colombiano</div>
+  </div>
+</div>
+
+
+<div class="eval-pedagogico" role="region" aria-label="Información pedagógica de la evaluación">
+  <div class="eval-ped-card epc-1">
+    <span class="epc-icon">📊</span>
+    <h5>Evaluación formativa</h5>
+    <p>Mide tu comprensión en tiempo real con retroalimentación inmediata en cada pregunta.</p>
+  </div>
+  <div class="eval-ped-card epc-2">
+    <span class="epc-icon">🏆</span>
+    <h5>Evaluación sumativa</h5>
+    <p>12 preguntas de selección múltiple, problemas abiertos y verdadero/falso sobre situaciones reales.</p>
+  </div>
+  <div class="eval-ped-card epc-3">
+    <span class="epc-icon">🎯</span>
+    <h5>Criterios de valoración</h5>
+    <p>Precisión en operaciones, interpretación de contextos, uso correcto de signos y coherencia matemática.</p>
+  </div>
+  <div class="eval-ped-card epc-4">
+    <span class="epc-icon">🔁</span>
+    <h5>Retroalimentación inmediata</h5>
+    <p>Cada respuesta genera un comentario que orienta el aprendizaje sin penalizar la exploración.</p>
+  </div>
+</div>
+
+<div class="eval-pitch-banner">
+  <div class="eval-pitch-inner">
+    <span class="eval-pitch-icon">🎬</span>
+    <div class="eval-pitch-text">
+      <h5>¿Terminaste la evaluación? → Tu siguiente paso: Video Pitch Académico</h5>
+      <p>Graba un video de <strong>1 a 2 minutos</strong> explicando cómo aplicas los números enteros en una situación real: temperatura, deudas, altitud o pisos. Es tu evidencia final de aprendizaje. Revisa el ejemplo en la sección de Inicio.</p>
+    </div>
   </div>
 </div>
 
