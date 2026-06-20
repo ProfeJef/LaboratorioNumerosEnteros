@@ -19,7 +19,7 @@
     @keyframes twinkle{0%,100%{opacity:.15}50%{opacity:1}}
     .modal-overlay{position:fixed;inset:0;background:rgba(10,6,30,.93);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:9999;opacity:0;transition:opacity .4s ease;}
     .modal-overlay.show{display:flex;opacity:1;}
-    .modal-content{background:linear-gradient(145deg,#1A1333,#2A1F50);border:2px solid var(--purp);padding:2.5rem 2rem 2rem;border-radius:24px;width:92%;max-width:460px;text-align:center;box-shadow:0 0 60px rgba(108,60,225,.4),0 20px 50px rgba(0,0,0,.6);transform:translateY(30px) scale(.96);transition:transform .45s cubic-bezier(.175,.885,.32,1.275);position:relative;overflow:hidden;}
+    .modal-content{background:linear-gradient(145deg,#1A1333,#2A1F50);border:2px solid var(--purp);padding:2.5rem 2rem 2rem;border-radius:24px;width:92%;max-width:480px;text-align:center;box-shadow:0 0 60px rgba(108,60,225,.4),0 20px 50px rgba(0,0,0,.6);transform:translateY(30px) scale(.96);transition:transform .45s cubic-bezier(.175,.885,.32,1.275);position:relative;overflow:hidden;max-height:92vh;overflow-y:auto;}
     .modal-content::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--purp),var(--cian),var(--amarillo),var(--purp));background-size:200% 100%;animation:shimmer 3s linear infinite;}
     @keyframes shimmer{0%{background-position:200%}100%{background-position:-200%}}
     .modal-overlay.show .modal-content{transform:translateY(0) scale(1);}
@@ -31,11 +31,16 @@
     .modal-title{font-family:'Nunito',sans-serif;font-weight:900;color:var(--blanco);font-size:1.45rem;margin-bottom:.3rem;}
     .modal-title span{color:var(--amarillo);}
     .modal-text{color:rgba(255,255,255,.65);font-size:.9rem;line-height:1.6;margin-bottom:1rem;}
+    /* ── OBJETIVOS MODAL ── */
     .modal-objetivos{background:rgba(108,60,225,.12);border:1px solid rgba(108,60,225,.4);border-radius:14px;padding:.9rem 1.1rem;margin-bottom:1.3rem;text-align:left;}
     .modal-objetivos h4{font-family:'Nunito',sans-serif;font-weight:800;color:var(--cian);font-size:.78rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:.55rem;}
+    .modal-objetivos h4+h4{margin-top:.7rem;}
+    .modal-objetivos p{font-size:.79rem;color:rgba(255,255,255,.65);line-height:1.6;margin-bottom:.1rem;}
     .modal-objetivos ul{list-style:none;display:flex;flex-direction:column;gap:.4rem;}
     .modal-objetivos li{font-size:.83rem;color:rgba(255,255,255,.8);display:flex;align-items:flex-start;gap:.5rem;}
     .modal-objetivos li::before{content:"▸";color:var(--cian);font-weight:900;flex-shrink:0;}
+    .modal-obj-divider{border:none;border-top:1px dashed rgba(108,60,225,.35);margin:.75rem 0;}
+    /* ── FIN OBJETIVOS MODAL ── */
     .modal-divider{border:none;border-top:1px solid rgba(255,255,255,.08);margin:.4rem 0 1.1rem;}
     .modal-label{display:block;font-family:'Nunito',sans-serif;font-weight:700;color:var(--cian);font-size:.78rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem;text-align:left;}
     .modal-input{width:100%;padding:12px 16px;background:rgba(255,255,255,.06);border:2px solid rgba(108,60,225,.5);border-radius:12px;font-family:'Space Grotesk',sans-serif;font-size:1rem;color:var(--blanco);outline:none;transition:border-color .3s,box-shadow .3s,background .3s;text-align:center;margin-bottom:.5rem;}
@@ -118,15 +123,26 @@
     <h2 class="modal-title" id="modalTitulo">¡Bienvenido, <span>explorador</span>!</h2>
     <p class="modal-text">Vas a dominar los <strong style="color:var(--cian)">Números Enteros</strong>.
       Completa las misiones, gana puntos y demuestra lo que sabes. 🚀</p>
+
     <div class="modal-objetivos" role="region" aria-label="Objetivos de aprendizaje">
-      <h4>🎯 Misiones del módulo</h4>
+
+      <!-- OBJETIVO GENERAL -->
+      <h4>🏆 Objetivo general</h4>
+      <p>Recurso fundamentado en <strong style="color:var(--cian)">Design Thinking</strong> y mediado por TIC, diseñado en el marco de una <strong style="color:var(--amarillo)">Hackatón Pedagógica Virtual</strong> para fortalecer la comprensión de los números enteros mediante experiencias <strong style="color:var(--verde)">gamificadas, interactivas y significativas</strong>.</p>
+
+      <hr class="modal-obj-divider"/>
+
+      <!-- MISIONES DEL MÓDULO -->
+      <h4>🚀 Misiones del módulo</h4>
       <ul>
         <li>Identificar y clasificar los enteros en &#8484;</li>
         <li>Ubicarlos en la recta numérica y compararlos</li>
         <li>Sumar y restar con la ley de signos</li>
         <li>Aplicarlos en temperaturas, finanzas y altitudes</li>
+        <li>Crear tu <strong style="color:var(--amarillo)">video pitch</strong> con una aplicación real</li>
       </ul>
     </div>
+
     <hr class="modal-divider"/>
     <label class="modal-label" for="playerName">👾 ¿Cuál es tu nombre, jugador?</label>
     <input type="text" id="playerName" class="modal-input"
@@ -237,9 +253,7 @@
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwADFi-vW_MbxXOz3_XFHeTxrZ60ZKh5jwnV8bVDxaGssnXKtLiBmnlb-DfLNcmJCCW/exec';
 
 function enviarASheets(tipo, datos) {
-  // Ignorar completamente los registros de práctica
   if (tipo === 'practica') return Promise.resolve();
-
   const now = new Date();
   const payload = Object.assign({
     tipo,
@@ -248,7 +262,6 @@ function enviarASheets(tipo, datos) {
     timestamp:   now.toISOString(),
     dispositivo: /Mobi|Android/i.test(navigator.userAgent) ? 'Móvil' : 'Escritorio'
   }, datos);
-
   return fetch(SHEETS_URL, {
     method:  'POST',
     mode:    'no-cors',
@@ -346,10 +359,7 @@ function guardarNombre() {
     notaEvaluacion:     '',
     seccionesVisitadas: []
   }));
-
   document.getElementById('modalSending').classList.add('visible');
-
-  // Solo registra el inicio (nombre + timestamp) — sin datos de evaluación aún
   enviarASheets('registro', {
     nombre,
     puntos_evaluacion: '',
@@ -358,16 +368,13 @@ function guardarNombre() {
   }).finally(() => {
     document.getElementById('modalSending').classList.remove('visible');
   });
-
   const m = document.getElementById('welcomeModal');
   m.style.opacity = '0';
   setTimeout(() => { m.style.display = 'none'; m.classList.remove('show'); }, 400);
-
   actualizarUIEstudiante(nombre);
   actualizarPuntosNav();
   actualizarProgresoNav();
   mostrarToast(`⚡ ¡Misión iniciada, ${nombre}! Empieza por la Teoría 🧠`);
-
   const iframeInicio = document.querySelector('#page-inicio iframe');
   if (iframeInicio) iframeInicio.src = iframeInicio.src;
 }
@@ -515,19 +522,9 @@ window.addEventListener('message', e => {
   const d = e.data;
   const { action, destino } = d;
 
-  // Navegación cruzada
-  if (action === 'cambiarPagina' && destino) {
-    showPage(destino);
-    return;
-  }
+  if (action === 'cambiarPagina' && destino) { showPage(destino); return; }
+  if (action === 'seccionCompletada' && destino) { marcarSeccionVisitada(destino); return; }
 
-  // Sección completada
-  if (action === 'seccionCompletada' && destino) {
-    marcarSeccionVisitada(destino);
-    return;
-  }
-
-  // Puntos desde Práctica — solo actualiza UI y localStorage, NO envía a Sheets
   if (action === 'actualizarPuntos') {
     try {
       const p = JSON.parse(leerLS(SK.progreso) || '{}');
@@ -541,7 +538,6 @@ window.addEventListener('message', e => {
     return;
   }
 
-  // Evaluación completada → ÚNICO momento que envía a Sheets
   if (
     action === 'evaluacionAprobada'   ||
     action === 'evaluaciónAprobada'   ||
@@ -550,15 +546,11 @@ window.addEventListener('message', e => {
     const nombre = leerLS(SK.estudiante) || 'Anónimo';
     try {
       const p = JSON.parse(leerLS(SK.progreso) || '{}');
-
-      // Leer puntos de evaluación (acepta puntos_evaluacion, puntos o pct)
       const ptsEval = d.puntos_evaluacion !== undefined ? Number(d.puntos_evaluacion)
                     : d.puntos            !== undefined ? Number(d.puntos)
                     : d.pct              !== undefined ? Number(d.pct)
                     : 0;
-
       const aprobado = ptsEval >= 70 ? 'Sí ✅' : 'No ❌';
-
       p.ultimaNota         = ptsEval;
       p.notaEvaluacion     = ptsEval;
       p.evaluacionAprobada = ptsEval >= 70;
@@ -566,11 +558,8 @@ window.addEventListener('message', e => {
       if (!p.seccionesVisitadas.includes('evaluacion'))
         p.seccionesVisitadas.push('evaluacion');
       escribirLS(SK.progreso, JSON.stringify(p));
-
       actualizarPuntosNav();
       actualizarProgresoNav();
-
-      // ── Enviar a Sheets SOLO con columnas requeridas ──
       enviarASheets('evaluacion', {
         nombre,
         puntos_evaluacion: ptsEval,
@@ -578,9 +567,7 @@ window.addEventListener('message', e => {
         correctas:         d.correctas || '',
         evento:            'Evaluación completada'
       });
-
     } catch(err) { console.warn('[index] evaluacion:', err); }
-
     mostrarToast(
       Number((leerLS(SK.progreso) && JSON.parse(leerLS(SK.progreso)).notaEvaluacion) || 0) >= 70
         ? '🏆 ¡Aprobaste! Resultado enviado al docente ✅'
