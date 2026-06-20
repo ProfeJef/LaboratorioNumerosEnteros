@@ -340,6 +340,113 @@
     .app-card:nth-child(3){animation-delay:.2s;}
     .app-card:nth-child(4){animation-delay:.3s;}
     .app-card:nth-child(5){animation-delay:.4s;}
+
+    /* ── OBJETIVOS HERO ── */
+    .hero-objetivos{display:flex;flex-wrap:wrap;justify-content:center;gap:.45rem;
+      margin-bottom:1.2rem;position:relative;z-index:2;}
+    .hero-obj-pill{background:rgba(46,204,138,.07);border:1px solid rgba(46,204,138,.22);
+      color:rgba(255,255,255,.75);font-family:'Nunito',sans-serif;font-weight:700;
+      font-size:.73rem;padding:.28rem .9rem;border-radius:20px;
+      display:flex;align-items:center;gap:.3rem;}
+    .hero-obj-pill::before{content:"▸";color:var(--verde);}
+
+    /* ── DATOS REALES ── */
+    .datos-reales{max-width:1100px;margin:1.8rem auto 0;padding:0 1.5rem;}
+    .datos-titulo{font-family:'Nunito',sans-serif;font-weight:800;font-size:.72rem;
+      text-transform:uppercase;letter-spacing:2.5px;color:var(--verde);
+      text-align:center;margin-bottom:.9rem;display:flex;align-items:center;
+      justify-content:center;gap:.5rem;}
+    .datos-titulo::before,.datos-titulo::after{content:'';flex:1;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(46,204,138,.3));}
+    .datos-titulo::after{background:linear-gradient(90deg,rgba(46,204,138,.3),transparent);}
+    .datos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;}
+    .dato-card{background:rgba(46,204,138,.05);border:1px solid rgba(46,204,138,.15);
+      border-radius:14px;padding:.9rem .8rem;text-align:center;transition:transform .2s,border-color .2s;}
+    .dato-card:hover{transform:translateY(-3px);border-color:rgba(46,204,138,.35);}
+    .dato-card .dc-val{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.5rem;
+      color:var(--verde);line-height:1;}
+    .dato-card .dc-label{font-size:.74rem;color:rgba(255,255,255,.55);margin-top:.25rem;line-height:1.4;}
+    .dato-card .dc-entero{font-family:'Nunito',sans-serif;font-weight:800;font-size:.72rem;
+      color:var(--cian);margin-top:.3rem;background:rgba(0,212,255,.08);
+      border-radius:20px;padding:.15rem .6rem;display:inline-block;}
+
+    /* ── INDICADOR DE PROGRESO ── */
+    .progreso-sims{max-width:1100px;margin:1.2rem auto 0;padding:0 1.5rem;
+      display:flex;align-items:center;gap:.8rem;justify-content:center;flex-wrap:wrap;}
+    .prog-sim-label{font-family:'Nunito',sans-serif;font-weight:700;font-size:.78rem;
+      color:var(--gris);}
+    .prog-sim-steps{display:flex;gap:.4rem;}
+    .prog-sim-step{width:28px;height:6px;border-radius:10px;
+      background:rgba(255,255,255,.1);transition:background .4s,width .3s;}
+    .prog-sim-step.done{background:var(--verde);box-shadow:0 0 6px rgba(46,204,138,.5);}
+    .prog-sim-step.active{background:var(--amarillo);}
+    .prog-sim-pct{font-family:'Nunito',sans-serif;font-weight:900;font-size:.85rem;
+      color:var(--amarillo);min-width:36px;}
+
+    /* ── REFLEXIÓN POR SIMULADOR ── */
+    .reflexion-sim{margin-top:1rem;background:rgba(108,60,225,.08);
+      border:1px solid rgba(108,60,225,.22);border-left:3px solid var(--purp2);
+      border-radius:0 12px 12px 0;padding:.8rem 1rem;
+      font-size:.83rem;color:rgba(255,255,255,.7);line-height:1.65;
+      text-align:left;width:100%;}
+    .reflexion-sim strong{color:var(--purp2);}
+    .reflexion-sim .ref-q{font-family:'Nunito',sans-serif;font-weight:800;
+      color:var(--amarillo);font-size:.8rem;margin-top:.45rem;display:block;}
+
+    /* ── RETO INTEGRADOR ── */
+    .reto-section{max-width:1100px;margin:2.5rem auto 0;padding:0 1.5rem;}
+    .reto-inner{background:radial-gradient(ellipse 70% 60% at 50% 40%,rgba(255,233,77,.07) 0%,transparent 60%),
+      rgba(255,255,255,.03);border:1px solid rgba(255,233,77,.2);
+      border-top:3px solid var(--amarillo);border-radius:22px;padding:2rem 1.8rem;}
+    .reto-label{font-family:'Nunito',sans-serif;font-weight:800;font-size:.72rem;
+      letter-spacing:2.5px;text-transform:uppercase;color:var(--amarillo);
+      margin-bottom:.6rem;display:inline-flex;align-items:center;gap:.5rem;}
+    .reto-label::before{content:'🧩';}
+    .reto-inner h3{font-family:'Nunito',sans-serif;font-weight:900;
+      font-size:clamp(1.1rem,2.5vw,1.5rem);color:var(--blanco);margin-bottom:.5rem;}
+    .reto-inner h3 span{color:var(--amarillo);}
+    .reto-contexto{background:rgba(108,60,225,.08);border:1px solid rgba(108,60,225,.2);
+      border-radius:12px;padding:1rem 1.2rem;font-size:.88rem;
+      color:rgba(255,255,255,.8);line-height:1.85;margin-bottom:1.2rem;}
+    .reto-contexto strong{color:var(--cian);}
+    .reto-preguntas{display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.2rem;}
+    .reto-preg{display:flex;align-items:flex-start;gap:.7rem;}
+    .reto-preg-num{width:26px;height:26px;border-radius:8px;flex-shrink:0;
+      background:linear-gradient(135deg,var(--purp),var(--cian));
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Nunito',sans-serif;font-weight:900;font-size:.8rem;color:#fff;}
+    .reto-inp-wrap{flex:1;}
+    .reto-enun{font-size:.86rem;color:rgba(255,255,255,.82);line-height:1.6;margin-bottom:.4rem;}
+    .reto-inp{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.15);
+      border-radius:10px;padding:.45rem .9rem;color:var(--blanco);
+      font-family:'Nunito',sans-serif;font-weight:700;font-size:.95rem;
+      width:120px;text-align:center;outline:none;transition:border-color .2s;}
+    .reto-inp:focus{border-color:var(--amarillo);}
+    .reto-fb{font-size:.8rem;min-height:18px;font-family:'Nunito',sans-serif;
+      font-weight:800;margin-top:.25rem;transition:color .2s;}
+    .reto-btn{font-family:'Nunito',sans-serif;font-weight:900;font-size:.88rem;
+      padding:.6rem 1.6rem;border-radius:20px;cursor:pointer;
+      background:linear-gradient(135deg,rgba(255,233,77,.2),rgba(108,60,225,.2));
+      border:1.5px solid rgba(255,233,77,.4);color:var(--amarillo);
+      transition:all .2s;}
+    .reto-btn:hover{background:linear-gradient(135deg,rgba(255,233,77,.3),rgba(108,60,225,.3));
+      transform:translateY(-2px);}
+    .reto-resultado{display:none;margin-top:1rem;padding:1rem 1.2rem;border-radius:14px;
+      font-family:'Nunito',sans-serif;font-weight:800;font-size:.9rem;
+      text-align:center;animation:fadeIn .4s ease;}
+    .reto-resultado.ok{background:rgba(46,204,138,.12);border:1px solid rgba(46,204,138,.3);color:var(--verde);}
+    .reto-resultado.parcial{background:rgba(255,233,77,.08);border:1px solid rgba(255,233,77,.25);color:var(--amarillo);}
+
+    /* ── BANNER PITCH EN VIDA REAL ── */
+    .pitch-vida-banner{max-width:1100px;margin:1.8rem auto 0;padding:0 1.5rem;}
+    .pitch-vida-inner{background:linear-gradient(135deg,rgba(255,233,77,.05),rgba(108,60,225,.08));
+      border:1px solid rgba(255,233,77,.22);border-radius:16px;
+      padding:1.1rem 1.4rem;display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap;}
+    .pitch-vida-inner .pvi-icon{font-size:2rem;flex-shrink:0;}
+    .pitch-vida-inner h5{font-family:'Nunito',sans-serif;font-weight:900;
+      color:var(--amarillo);font-size:.9rem;margin-bottom:.2rem;}
+    .pitch-vida-inner p{font-size:.8rem;color:rgba(255,255,255,.6);line-height:1.55;}
+    .pitch-vida-inner strong{color:var(--cian);}
   </style>
 </head>
 <body>
@@ -350,6 +457,12 @@
 <div class="hero">
   <div class="hero-grid" aria-hidden="true"></div>
   <div class="hero-tag">🌍 Vida Real</div>
+  <div class="hero-objetivos">
+    <span class="hero-obj-pill">Conectar enteros con situaciones reales</span>
+    <span class="hero-obj-pill">Interpretar positivos y negativos en contexto</span>
+    <span class="hero-obj-pill">Resolver problemas con datos reales de Colombia</span>
+    <span class="hero-obj-pill">Preparar argumentos para tu video pitch 🎬</span>
+  </div>
   <h1>Los enteros en tu <span>mundo</span></h1>
   <p>Explora 5 simuladores interactivos y descubre cómo los números positivos y negativos están por todas partes. ¡Sin ellos el mundo sería un caos!</p>
   <div class="hero-badges">
@@ -373,6 +486,55 @@
     <span class="sim-dot" id="dot-futbol">⚽ Fútbol</span>
     <span class="premio-label" style="color:var(--amarillo)">→ +50 ⭐</span>
   </div>
+</div>
+
+
+<div class="datos-reales" role="region" aria-label="Enteros en Colombia hoy">
+  <div class="datos-titulo">📍 Enteros en Colombia — datos reales</div>
+  <div class="datos-grid">
+    <div class="dato-card">
+      <div class="dc-val">4°C</div>
+      <div class="dc-label">Temperatura mínima Bogotá (amanecer)</div>
+      <div class="dc-entero">Entero: +4</div>
+    </div>
+    <div class="dato-card">
+      <div class="dc-val">−4°C</div>
+      <div class="dc-label">Temperatura en páramos colombianos</div>
+      <div class="dc-entero">Entero: −4</div>
+    </div>
+    <div class="dato-card">
+      <div class="dc-val">5.230 m</div>
+      <div class="dc-label">Altitud Nevado del Huila</div>
+      <div class="dc-entero">Entero: +5230</div>
+    </div>
+    <div class="dato-card">
+      <div class="dc-val">−200 m</div>
+      <div class="dc-label">Prof. minas de carbón (Cerrejón)</div>
+      <div class="dc-entero">Entero: −200</div>
+    </div>
+    <div class="dato-card">
+      <div class="dc-val">−$50.000</div>
+      <div class="dc-label">Deuda promedio mensual de un estudiante</div>
+      <div class="dc-entero">Entero: −50000</div>
+    </div>
+    <div class="dato-card">
+      <div class="dc-val">+3</div>
+      <div class="dc-label">Diferencia goles Colombia vs. Ecuador (Eliminatorias 2026)</div>
+      <div class="dc-entero">Entero: +3</div>
+    </div>
+  </div>
+</div>
+
+<div class="progreso-sims" role="status" aria-live="polite" aria-label="Progreso de simuladores">
+  <span class="prog-sim-label">Simuladores explorados:</span>
+  <div class="prog-sim-steps">
+    <div class="prog-sim-step" id="pss-0"></div>
+    <div class="prog-sim-step" id="pss-1"></div>
+    <div class="prog-sim-step" id="pss-2"></div>
+    <div class="prog-sim-step" id="pss-3"></div>
+    <div class="prog-sim-step" id="pss-4"></div>
+  </div>
+  <span class="prog-sim-pct" id="pss-pct">0/5</span>
 </div>
 
 <div class="wrap">
@@ -426,6 +588,10 @@
   </div>
 
   <div class="status-text" id="t-status" style="font-size:.85rem;"></div>
+  <div class="reflexion-sim">
+    🌡️ En Colombia las ciudades varían entre <strong>−4°C</strong> en los páramos y <strong>+40°C</strong> en la costa. Estos valores son enteros en la recta numérica.
+    <span class="ref-q">💭 ¿Cuántos grados hay de diferencia entre Bogotá (4°C) y Leticia (32°C)? Escríbelo como operación con enteros.</span>
+  </div>
 </div>
 
 <!-- ══════════════════════════════════
@@ -490,6 +656,10 @@
     <button class="btn-vr amarillo" onclick="resetBanco()">↺ Reiniciar</button>
   </div>
   <div class="status-text" id="b-status" style="font-size:.84rem;min-height:auto;margin-top:.5rem;"></div>
+  <div class="reflexion-sim">
+    💰 Un saldo <strong>negativo</strong> significa que debes más de lo que tienes. Un saldo <strong>positivo</strong> indica ahorro.
+    <span class="ref-q">💭 Si tienes $20.000 y haces una compra de $35.000, ¿cuál es tu saldo? ¿Qué entero lo representa?</span>
+  </div>
 </div>
 
 <!-- ══════════════════════════════════
@@ -546,6 +716,10 @@
   </div>
 
   <div class="recta-result" id="recta-result"></div>
+  <div class="reflexion-sim" style="margin-top:.8rem;">
+    📏 La recta numérica muestra visualmente que los enteros tienen <strong>dirección</strong> (+ derecha, − izquierda) y <strong>distancia</strong> desde el cero (valor absoluto).
+    <span class="ref-q">💭 ¿Qué pares de números están a la misma distancia del cero? ¿Cómo se llaman esos números?</span>
+  </div>
 
   <div class="controls" style="margin-top:.5rem;">
     <button class="btn-vr purp" onclick="ejemploRecta(-5,3,'+')">Ej: −5+3</button>
@@ -593,11 +767,75 @@
   <div class="asc-formula" id="futbol-formula" style="margin-top:.7rem;">
     Entero del local: 0 − 0 = 0 (neutro)
   </div>
+  <div class="reflexion-sim">
+    ⚽ La diferencia de goles es un entero: <strong>positiva</strong> cuando vas ganando, <strong>negativa</strong> cuando vas perdiendo, <strong>cero</strong> en empate.
+    <span class="ref-q">💭 Si Colombia pierde 1–3 contra Brasil, ¿qué entero expresa la diferencia de goles de Colombia?</span>
+  </div>
 </div>
 
 </div><!-- /apps-grid -->
 
 <!-- VIDEO -->
+
+<div class="reto-section" role="region" aria-label="Reto integrador">
+  <div class="reto-inner">
+    <div class="reto-label">Reto integrador</div>
+    <h3>¡Combina los 5 contextos en un solo <span>problema!</span></h3>
+    <div class="reto-contexto">
+      Juliana es una estudiante bogotana. El lunes amanece con una temperatura de <strong>−2°C</strong> en su barrio.
+      Sube al <strong>piso +4</strong> de su edificio donde hace <strong>+3°C</strong> más. Luego va al banco y su saldo es
+      <strong>−$15.000</strong>; recibe una transferencia de <strong>+$40.000</strong>. Por la tarde ve el partido:
+      Colombia va <strong>2–0</strong> ganando. Al cerrar el día, la temperatura baja <strong>5°C</strong> desde los +3°C.
+    </div>
+    <div class="reto-preguntas">
+      <div class="reto-preg">
+        <div class="reto-preg-num">1</div>
+        <div class="reto-inp-wrap">
+          <div class="reto-enun">¿Cuál es la temperatura en el piso +4? (−2 + 3 = ?)</div>
+          <input class="reto-inp" id="r1" type="number" placeholder="°C"/>
+          <div class="reto-fb" id="fb1"></div>
+        </div>
+      </div>
+      <div class="reto-preg">
+        <div class="reto-preg-num">2</div>
+        <div class="reto-inp-wrap">
+          <div class="reto-enun">¿Cuál es el nuevo saldo bancario de Juliana? (−15.000 + 40.000 = ?)</div>
+          <input class="reto-inp" id="r2" type="number" placeholder="$"/>
+          <div class="reto-fb" id="fb2"></div>
+        </div>
+      </div>
+      <div class="reto-preg">
+        <div class="reto-preg-num">3</div>
+        <div class="reto-inp-wrap">
+          <div class="reto-enun">Diferencia de goles de Colombia en el partido (2 − 0 = ?)</div>
+          <input class="reto-inp" id="r3" type="number" placeholder="goles"/>
+          <div class="reto-fb" id="fb3"></div>
+        </div>
+      </div>
+      <div class="reto-preg">
+        <div class="reto-preg-num">4</div>
+        <div class="reto-inp-wrap">
+          <div class="reto-enun">¿Cuál es la temperatura al final del día? (+3 − 5 = ?)</div>
+          <input class="reto-inp" id="r4" type="number" placeholder="°C"/>
+          <div class="reto-fb" id="fb4"></div>
+        </div>
+      </div>
+    </div>
+    <button class="reto-btn" onclick="verificarReto()">🧩 Verificar respuestas</button>
+    <div class="reto-resultado" id="reto-resultado"></div>
+  </div>
+</div>
+
+<div class="pitch-vida-banner">
+  <div class="pitch-vida-inner">
+    <span class="pvi-icon">🎬</span>
+    <div>
+      <h5>¿Listo para tu Video Pitch?</h5>
+      <p>Acabas de explorar <strong>5 contextos reales</strong> con enteros. Elige uno y graba tu pitch explicando cómo los números positivos y negativos aparecen en esa situación. Tienes todo el argumento aquí.</p>
+    </div>
+  </div>
+</div>
+
 <div class="video-section">
   <h2>📺 Para terminar de entender…</h2>
   <p>Observa este resumen animado sobre cómo los números enteros aparecen en la vida cotidiana.</p>
@@ -647,6 +885,19 @@ try{const r=localStorage.getItem('edu_progreso');if(r)progreso=JSON.parse(r);}ca
 const exploracion={termo:false,asc:false,banco:false,recta:false,futbol:false};
 let premioEntregado=false;
 
+function actualizarProgSims(){
+  const orden=['termo','asc','banco','recta','futbol'];
+  const done=orden.filter(s=>exploracion[s]).length;
+  orden.forEach((s,i)=>{
+    const el=document.getElementById('pss-'+i);
+    if(!el)return;
+    el.classList.remove('done','active');
+    if(exploracion[s])el.classList.add('done');
+    else if(i===done)el.classList.add('active');
+  });
+  const pct=document.getElementById('pss-pct');
+  if(pct)pct.textContent=done+'/5';
+}
 function marcarSim(sim){
   if(exploracion[sim]) return;
   exploracion[sim]=true;
@@ -945,6 +1196,36 @@ function resetPartido(){
   document.getElementById('futbol-formula').textContent='Entero del local: 0 − 0 = 0 (neutro)';
 }
 
+
+/* ══ RETO INTEGRADOR ══ */
+function verificarReto(){
+  const respuestas=[{id:'r1',fb:'fb1',correcto:1,unidad:'°C'},
+    {id:'r2',fb:'fb2',correcto:25000,unidad:'$'},
+    {id:'r3',fb:'fb3',correcto:2,unidad:'goles'},
+    {id:'r4',fb:'fb4',correcto:-2,unidad:'°C'}];
+  let ok=0;
+  respuestas.forEach(({id,fb,correcto,unidad})=>{
+    const val=parseInt(document.getElementById(id).value);
+    const el=document.getElementById(fb);
+    if(isNaN(val)){el.style.color='var(--gris)';el.textContent='⚠️ Escribe un número';return;}
+    if(val===correcto){
+      el.style.color='var(--verde)';
+      el.textContent='✅ ¡Correcto! La respuesta es '+(correcto>0?'+':'')+correcto+' '+unidad;ok++;
+    } else {
+      el.style.color='var(--rojo)';
+      el.textContent='❌ Revisa. Pista: aplica la regla de signos paso a paso.';
+    }
+  });
+  const res=document.getElementById('reto-resultado');
+  res.style.display='block';
+  if(ok===4){
+    res.className='reto-resultado ok';
+    res.innerHTML='🏆 ¡Perfecto! Resolviste los 4 puntos. ¡Ya tienes argumentos sólidos para tu video pitch!';
+  } else {
+    res.className='reto-resultado parcial';
+    res.innerHTML=`✨ ${ok}/4 correctas. Revisa los errores y vuelve a intentarlo. ¡Casi!`;
+  }
+}
 </script>
 </body>
 </html>
