@@ -25,15 +25,12 @@
     html { scroll-behavior:smooth; }
     body { font-family:'Space Grotesk',sans-serif; background:var(--fondo); color:var(--texto); overflow-x:hidden; }
 
-    /* ══ CURSOR GLOW ══ */
     #cursor-glow {
       position:fixed; width:300px; height:300px; border-radius:50%;
       background:radial-gradient(circle, rgba(108,60,225,.12) 0%, transparent 70%);
       pointer-events:none; z-index:0; transform:translate(-50%,-50%);
       transition:left .08s, top .08s;
     }
-
-    /* ══ PARTÍCULAS ══ */
     #particles { position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0; }
     #particles span {
       position:absolute; font-family:'Nunito',sans-serif; font-weight:900;
@@ -57,8 +54,6 @@
       flex-direction:column; text-align:center;
       padding:6rem 2rem 5rem; position:relative; overflow:hidden;
     }
-
-    /* Grid lines de fondo */
     .hero-grid {
       position:absolute; inset:0; pointer-events:none; z-index:0;
       background-image:
@@ -67,8 +62,6 @@
       background-size:60px 60px;
       mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
     }
-
-    /* Badge grado */
     .hero-badge {
       display:inline-flex; align-items:center; gap:.5rem;
       background:rgba(255,233,77,.08); border:1.5px solid rgba(255,233,77,.35);
@@ -84,8 +77,6 @@
       animation:pulseDot 1.5s infinite;
     }
     @keyframes pulseDot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.5)} }
-
-    /* Pills objetivos */
     .hero-objetivos {
       display:inline-flex; flex-wrap:wrap; justify-content:center;
       gap:.5rem; margin-bottom:1.8rem; position:relative; z-index:2;
@@ -95,13 +86,10 @@
       background:rgba(0,212,255,.07); border:1px solid rgba(0,212,255,.25);
       color:rgba(255,255,255,.8); font-family:'Nunito',sans-serif; font-weight:700;
       font-size:.74rem; padding:.3rem 1rem; border-radius:20px;
-      display:flex; align-items:center; gap:.35rem;
-      transition:all .25s;
+      display:flex; align-items:center; gap:.35rem; transition:all .25s;
     }
     .obj-pill:hover { background:rgba(0,212,255,.15); border-color:rgba(0,212,255,.5); transform:translateY(-2px); }
     .obj-pill::before { content:"▸"; color:var(--cian); font-size:.8rem; }
-
-    /* Título principal */
     .hero-eyebrow {
       font-family:'Nunito',sans-serif; font-weight:700; font-size:.9rem;
       color:var(--purp2); letter-spacing:3px; text-transform:uppercase;
@@ -114,16 +102,12 @@
       line-height:1; position:relative; z-index:2;
       animation:fadeDown .9s .15s ease forwards; opacity:0;
     }
-    .h1-line1 {
-      display:block; color:var(--blanco);
-      text-shadow:0 0 40px rgba(108,60,225,.5);
-    }
+    .h1-line1 { display:block; color:var(--blanco); text-shadow:0 0 40px rgba(108,60,225,.5); }
     .h1-line2 {
       display:block;
       background:linear-gradient(135deg, var(--purp2), var(--cian), var(--cian2));
       -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-      background-clip:text;
-      filter:drop-shadow(0 0 20px rgba(0,212,255,.4));
+      background-clip:text; filter:drop-shadow(0 0 20px rgba(0,212,255,.4));
     }
     .h1-z {
       display:inline-block; font-size:.7em;
@@ -131,8 +115,6 @@
       -webkit-background-clip:text; -webkit-text-fill-color:transparent;
       background-clip:text;
     }
-
-    /* Sub */
     .hero-sub {
       color:rgba(255,255,255,.6); font-size:clamp(.95rem,2.5vw,1.1rem);
       max-width:520px; margin:.9rem auto 0; line-height:1.8;
@@ -140,15 +122,11 @@
       animation:fadeDown 1s .2s ease forwards; opacity:0;
     }
     .hero-sub strong { color:var(--cian); }
-
-    /* Recta numérica */
     .number-line-wrap {
       margin:2.2rem auto 0; position:relative; z-index:2;
       animation:fadeDown 1.1s .3s ease forwards; opacity:0;
     }
     .number-line-wrap canvas { display:block; max-width:100%; }
-
-    /* Barra progreso */
     .hero-progress {
       display:none; flex-direction:column; align-items:center; gap:.55rem;
       margin-top:1.8rem; position:relative; z-index:2;
@@ -160,13 +138,10 @@
     .h-step {
       font-family:'Nunito',sans-serif; font-weight:700; font-size:.74rem;
       padding:.25rem .85rem; border-radius:20px;
-      border:1.5px solid rgba(255,255,255,.12); color:rgba(255,255,255,.35);
-      transition:all .3s;
+      border:1.5px solid rgba(255,255,255,.12); color:rgba(255,255,255,.35); transition:all .3s;
     }
     .h-step.done   { background:var(--verde);    border-color:var(--verde);    color:#0A0618; }
     .h-step.active { background:var(--amarillo); border-color:var(--amarillo); color:#0A0618; box-shadow:0 0 14px rgba(255,233,77,.4); }
-
-    /* CTA */
     .cta-group {
       display:flex; flex-wrap:wrap; gap:1rem; justify-content:center;
       margin-top:2.2rem; position:relative; z-index:2;
@@ -176,27 +151,15 @@
       font-family:'Nunito',sans-serif; font-weight:900; font-size:1rem;
       padding:.85rem 2.2rem; border-radius:40px; border:none; cursor:pointer;
       display:inline-flex; align-items:center; gap:.55rem;
-      position:relative; overflow:hidden;
-      transition:transform .2s, box-shadow .2s;
+      position:relative; overflow:hidden; transition:transform .2s, box-shadow .2s;
     }
-    .btn::after {
-      content:''; position:absolute; inset:0; border-radius:40px;
-      background:rgba(255,255,255,.08); opacity:0; transition:opacity .2s;
-    }
+    .btn::after { content:''; position:absolute; inset:0; border-radius:40px; background:rgba(255,255,255,.08); opacity:0; transition:opacity .2s; }
     .btn:hover::after { opacity:1; }
     .btn:hover { transform:translateY(-3px); }
-    .btn-primary {
-      background:linear-gradient(135deg,var(--purp),var(--cian));
-      color:var(--blanco); box-shadow:0 8px 28px rgba(108,60,225,.5);
-    }
+    .btn-primary { background:linear-gradient(135deg,var(--purp),var(--cian)); color:var(--blanco); box-shadow:0 8px 28px rgba(108,60,225,.5); }
     .btn-primary:hover { box-shadow:0 14px 36px rgba(0,212,255,.45); }
-    .btn-outline {
-      background:rgba(255,255,255,.05); color:var(--blanco);
-      border:1.5px solid rgba(255,255,255,.25);
-      backdrop-filter:blur(8px);
-    }
+    .btn-outline { background:rgba(255,255,255,.05); color:var(--blanco); border:1.5px solid rgba(255,255,255,.25); backdrop-filter:blur(8px); }
     .btn-outline:hover { border-color:var(--cian); color:var(--cian); box-shadow:0 8px 24px rgba(0,212,255,.2); }
-
     .scroll-hint {
       position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
       color:rgba(255,255,255,.2); font-size:.72rem; letter-spacing:2px;
@@ -205,7 +168,7 @@
     }
     @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-8px)} }
 
-    /* ══ STATS RÁPIDAS ══ */
+    /* ══ STATS ══ */
     .stats-bar {
       background:rgba(108,60,225,.08);
       border-top:1px solid rgba(108,60,225,.2);
@@ -217,18 +180,7 @@
     .stat-num { font-family:'Nunito',sans-serif; font-weight:900; font-size:1.8rem; color:var(--cian); display:block; line-height:1; }
     .stat-label { font-size:.72rem; color:var(--gris); letter-spacing:1px; text-transform:uppercase; font-family:'Nunito',sans-serif; font-weight:700; }
 
-    /* ══ RUTA ══ */
-    .ruta-section {
-      background:var(--fondo2); padding:4rem 2rem; text-align:center;
-      position:relative; overflow:hidden;
-    }
-    .ruta-section::before {
-      content:''; position:absolute; top:-80px; left:50%;
-      transform:translateX(-50%);
-      width:500px; height:200px; border-radius:50%;
-      background:radial-gradient(circle, rgba(108,60,225,.12) 0%, transparent 70%);
-      pointer-events:none;
-    }
+    /* ══ SECCIONES COMPARTIDAS ══ */
     .section-label {
       display:inline-block; font-family:'Nunito',sans-serif; font-weight:800;
       font-size:.72rem; letter-spacing:3px; text-transform:uppercase;
@@ -241,22 +193,29 @@
     }
     .section-sub { color:var(--gris); font-size:.93rem; margin-bottom:2.5rem; }
 
+    /* ══ RUTA ══ */
+    .ruta-section {
+      background:var(--fondo2); padding:4rem 2rem; text-align:center;
+      position:relative; overflow:hidden;
+    }
+    .ruta-section::before {
+      content:''; position:absolute; top:-80px; left:50%; transform:translateX(-50%);
+      width:500px; height:200px; border-radius:50%;
+      background:radial-gradient(circle, rgba(108,60,225,.12) 0%, transparent 70%);
+      pointer-events:none;
+    }
     .ruta-steps { display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:0; max-width:860px; margin:0 auto; }
     .ruta-item { display:flex; flex-direction:column; align-items:center; gap:.6rem; width:160px; cursor:pointer; }
     .ruta-num {
       width:64px; height:64px; border-radius:50%;
-      background:rgba(108,60,225,.15);
-      border:2px solid rgba(108,60,225,.4);
+      background:rgba(108,60,225,.15); border:2px solid rgba(108,60,225,.4);
       color:var(--blanco); font-family:'Nunito',sans-serif; font-weight:900; font-size:1.4rem;
       display:flex; align-items:center; justify-content:center;
-      box-shadow:0 0 0 0 rgba(108,60,225,.4);
-      transition:transform .25s, box-shadow .25s, background .25s;
-      position:relative;
+      transition:transform .25s, box-shadow .25s, background .25s; position:relative;
     }
     .ruta-num::before {
       content:''; position:absolute; inset:-4px; border-radius:50%;
-      border:1px dashed rgba(108,60,225,.3);
-      animation:spinSlow 12s linear infinite;
+      border:1px dashed rgba(108,60,225,.3); animation:spinSlow 12s linear infinite;
     }
     @keyframes spinSlow { to { transform:rotate(360deg); } }
     .ruta-item:hover .ruta-num {
@@ -268,14 +227,7 @@
     .ruta-num.done::before { border-color:rgba(46,204,138,.4); }
     .ruta-label    { font-family:'Nunito',sans-serif; font-weight:800; color:var(--blanco); font-size:.88rem; }
     .ruta-sublabel { font-size:.73rem; color:var(--gris); }
-    .ruta-arrow    { font-size:1.6rem; color:rgba(108,60,225,.3); margin:0 -.5rem; flex-shrink:0; }
-
-    /* Línea conectora */
-    .ruta-connector {
-      flex:1; height:2px; min-width:20px; max-width:40px;
-      background:linear-gradient(90deg, rgba(108,60,225,.4), rgba(0,212,255,.4));
-      border-radius:2px; margin-bottom:24px;
-    }
+    .ruta-connector { flex:1; height:2px; min-width:20px; max-width:40px; background:linear-gradient(90deg,rgba(108,60,225,.4),rgba(0,212,255,.4)); border-radius:2px; margin-bottom:24px; }
 
     /* ══ TARJETAS ══ */
     .cards-section {
@@ -285,77 +237,51 @@
       content:''; position:absolute; bottom:0; left:0; right:0; height:1px;
       background:linear-gradient(90deg,transparent,rgba(108,60,225,.3),transparent);
     }
-
-    .cards-grid {
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-      gap:1.5rem; max-width:1080px; margin:0 auto;
-    }
-
+    .cards-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:1.5rem; max-width:1080px; margin:0 auto; }
     .card {
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.07);
-      border-radius:20px; padding:2rem 1.5rem;
-      text-align:center; cursor:pointer;
-      opacity:0; transform:translateY(32px);
-      position:relative; overflow:hidden;
+      background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.07);
+      border-radius:20px; padding:2rem 1.5rem; text-align:center; cursor:pointer;
+      opacity:0; transform:translateY(32px); position:relative; overflow:hidden;
       transition:transform .28s, box-shadow .28s, border-color .28s, background .28s;
     }
-    /* Brillo esquina */
     .card::before {
-      content:''; position:absolute; top:0; left:0;
-      width:100%; height:100%;
+      content:''; position:absolute; top:0; left:0; width:100%; height:100%;
       background:radial-gradient(circle at 0% 0%, rgba(255,255,255,.07) 0%, transparent 50%);
-      opacity:0; transition:opacity .3s;
-      pointer-events:none;
+      opacity:0; transition:opacity .3s; pointer-events:none;
     }
     .card:hover::before { opacity:1; }
-    /* Borde superior color */
     .card::after {
       content:''; position:absolute; top:0; left:0; right:0; height:3px;
-      border-radius:20px 20px 0 0;
-      transition:height .3s, opacity .3s;
+      border-radius:20px 20px 0 0; transition:height .3s, opacity .3s;
     }
     .card.visible { animation:riseUp .65s ease forwards; }
     @keyframes riseUp { to { opacity:1; transform:translateY(0); } }
-
-    .card:hover {
-      transform:translateY(-9px) scale(1.02);
-      background:rgba(255,255,255,.06);
-    }
-
-    /* Colores por tipo */
+    .card:hover { transform:translateY(-9px) scale(1.02); background:rgba(255,255,255,.06); }
     .c-teoria     { border-color:rgba(0,212,255,.15); }
     .c-practica   { border-color:rgba(46,204,138,.15); }
     .c-evaluacion { border-color:rgba(255,233,77,.15); }
     .c-vida       { border-color:rgba(155,109,255,.15); }
     .c-recursos   { border-color:rgba(255,77,109,.15); }
-
     .c-teoria::after     { background:linear-gradient(90deg,var(--cian),rgba(0,212,255,0)); }
     .c-practica::after   { background:linear-gradient(90deg,var(--verde),rgba(46,204,138,0)); }
     .c-evaluacion::after { background:linear-gradient(90deg,var(--amarillo),rgba(255,233,77,0)); }
     .c-vida::after       { background:linear-gradient(90deg,var(--purp2),rgba(155,109,255,0)); }
     .c-recursos::after   { background:linear-gradient(90deg,var(--rojo),rgba(255,77,109,0)); }
-
-    .c-teoria:hover     { border-color:rgba(0,212,255,.4);    box-shadow:0 20px 50px rgba(0,212,255,.15); }
-    .c-practica:hover   { border-color:rgba(46,204,138,.4);   box-shadow:0 20px 50px rgba(46,204,138,.15); }
-    .c-evaluacion:hover { border-color:rgba(255,233,77,.4);   box-shadow:0 20px 50px rgba(255,233,77,.15); }
-    .c-vida:hover       { border-color:rgba(155,109,255,.4);  box-shadow:0 20px 50px rgba(155,109,255,.15); }
-    .c-recursos:hover   { border-color:rgba(255,77,109,.4);   box-shadow:0 20px 50px rgba(255,77,109,.15); }
-
-    /* Icono con fondo */
+    .c-teoria:hover     { border-color:rgba(0,212,255,.4);   box-shadow:0 20px 50px rgba(0,212,255,.15); }
+    .c-practica:hover   { border-color:rgba(46,204,138,.4);  box-shadow:0 20px 50px rgba(46,204,138,.15); }
+    .c-evaluacion:hover { border-color:rgba(255,233,77,.4);  box-shadow:0 20px 50px rgba(255,233,77,.15); }
+    .c-vida:hover       { border-color:rgba(155,109,255,.4); box-shadow:0 20px 50px rgba(155,109,255,.15); }
+    .c-recursos:hover   { border-color:rgba(255,77,109,.4);  box-shadow:0 20px 50px rgba(255,77,109,.15); }
     .card-icon-wrap {
       width:64px; height:64px; border-radius:18px; margin:0 auto 1.1rem;
-      display:flex; align-items:center; justify-content:center;
-      font-size:1.9rem;
-      transition:transform .25s;
+      display:flex; align-items:center; justify-content:center; font-size:1.9rem; transition:transform .25s;
     }
     .card:hover .card-icon-wrap { transform:scale(1.12) rotate(-5deg); }
-    .c-teoria     .card-icon-wrap { background:rgba(0,212,255,.1);    border:1.5px solid rgba(0,212,255,.25); }
-    .c-practica   .card-icon-wrap { background:rgba(46,204,138,.1);   border:1.5px solid rgba(46,204,138,.25); }
-    .c-evaluacion .card-icon-wrap { background:rgba(255,233,77,.1);   border:1.5px solid rgba(255,233,77,.25); }
-    .c-vida       .card-icon-wrap { background:rgba(155,109,255,.1);  border:1.5px solid rgba(155,109,255,.25); }
-    .c-recursos   .card-icon-wrap { background:rgba(255,77,109,.1);   border:1.5px solid rgba(255,77,109,.25); }
-
+    .c-teoria     .card-icon-wrap { background:rgba(0,212,255,.1);   border:1.5px solid rgba(0,212,255,.25); }
+    .c-practica   .card-icon-wrap { background:rgba(46,204,138,.1);  border:1.5px solid rgba(46,204,138,.25); }
+    .c-evaluacion .card-icon-wrap { background:rgba(255,233,77,.1);  border:1.5px solid rgba(255,233,77,.25); }
+    .c-vida       .card-icon-wrap { background:rgba(155,109,255,.1); border:1.5px solid rgba(155,109,255,.25); }
+    .c-recursos   .card-icon-wrap { background:rgba(255,77,109,.1);  border:1.5px solid rgba(255,77,109,.25); }
     .card h3 { font-family:'Nunito',sans-serif; font-weight:800; color:var(--blanco); font-size:1.05rem; margin-bottom:.45rem; }
     .card p  { font-size:.83rem; color:var(--gris); line-height:1.65; }
     .card-tag {
@@ -363,11 +289,11 @@
       font-size:.68rem; font-weight:800; font-family:'Nunito',sans-serif;
       padding:.25rem .85rem; border-radius:20px; text-transform:uppercase; letter-spacing:.5px;
     }
-    .c-teoria     .card-tag { background:rgba(0,212,255,.1);    color:var(--cian); }
-    .c-practica   .card-tag { background:rgba(46,204,138,.1);   color:var(--verde); }
-    .c-evaluacion .card-tag { background:rgba(255,233,77,.1);   color:var(--amarillo); }
-    .c-vida       .card-tag { background:rgba(155,109,255,.1);  color:var(--purp2); }
-    .c-recursos   .card-tag { background:rgba(255,77,109,.1);   color:var(--rojo); }
+    .c-teoria     .card-tag { background:rgba(0,212,255,.1);   color:var(--cian); }
+    .c-practica   .card-tag { background:rgba(46,204,138,.1);  color:var(--verde); }
+    .c-evaluacion .card-tag { background:rgba(255,233,77,.1);  color:var(--amarillo); }
+    .c-vida       .card-tag { background:rgba(155,109,255,.1); color:var(--purp2); }
+    .c-recursos   .card-tag { background:rgba(255,77,109,.1);  color:var(--rojo); }
     .card-estado { display:none; margin-top:.6rem; font-size:.74rem; font-family:'Nunito',sans-serif; font-weight:700; color:var(--verde); }
 
     /* ══ DATO CURIOSO ══ */
@@ -382,30 +308,211 @@
     .curiosidad-inner {
       max-width:680px; margin:0 auto;
       background:rgba(255,255,255,.03); border:1px solid rgba(108,60,225,.25);
-      border-radius:24px; padding:2.5rem 2rem;
-      position:relative;
+      border-radius:24px; padding:2.5rem 2rem; position:relative;
     }
-    .curiosidad-inner::before {
-      content:'💡'; position:absolute; right:1.5rem; top:1rem;
-      font-size:3rem; opacity:.08; pointer-events:none;
-    }
+    .curiosidad-inner::before { content:'💡'; position:absolute; right:1.5rem; top:1rem; font-size:3rem; opacity:.08; pointer-events:none; }
     .curiosidad-section h2 { font-family:'Nunito',sans-serif; font-weight:900; font-size:1.5rem; color:var(--amarillo); margin-bottom:.8rem; }
     .curiosidad-section p  { color:rgba(255,255,255,.7); font-size:.97rem; line-height:1.8; }
     .curiosidad-section strong { color:var(--cian); }
 
-    /* ══ REFLEXIÓN ══ */
-    .reflexion-section {
-      background:var(--fondo3); padding:4rem 2rem; text-align:center;
+    /* ══ METODOLOGÍA ══ */
+    .metodologia-section {
+      background:var(--fondo); padding:5rem 2rem; text-align:center; position:relative; overflow:hidden;
     }
+    .metodologia-section::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:1px;
+      background:linear-gradient(90deg,transparent,rgba(0,212,255,.3),transparent);
+    }
+    .metodo-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:1.2rem; max-width:1080px; margin:0 auto 2rem;
+    }
+    .metodo-card {
+      background:rgba(255,255,255,.025);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:18px; padding:1.6rem 1.2rem; text-align:center;
+      transition:transform .25s, box-shadow .25s, border-color .25s;
+      position:relative; overflow:hidden;
+    }
+    .metodo-card::after {
+      content:''; position:absolute; bottom:0; left:0; right:0; height:2px;
+      border-radius:0 0 18px 18px;
+    }
+    .metodo-card:hover { transform:translateY(-6px); }
+    .metodo-card .mc-icon { font-size:2rem; margin-bottom:.7rem; display:block; }
+    .metodo-card h4 { font-family:'Nunito',sans-serif; font-weight:800; color:var(--blanco); font-size:.95rem; margin-bottom:.35rem; }
+    .metodo-card p  { font-size:.78rem; color:var(--gris); line-height:1.6; }
+
+    .mc-1 { border-top:2px solid rgba(0,212,255,.5);  }
+    .mc-2 { border-top:2px solid rgba(46,204,138,.5); }
+    .mc-3 { border-top:2px solid rgba(255,233,77,.5); }
+    .mc-4 { border-top:2px solid rgba(155,109,255,.5);}
+    .mc-5 { border-top:2px solid rgba(255,77,109,.5); }
+    .mc-6 { border-top:2px solid rgba(0,255,234,.5);  }
+
+    .mc-1:hover { border-color:rgba(0,212,255,.9);   box-shadow:0 12px 32px rgba(0,212,255,.12); }
+    .mc-2:hover { border-color:rgba(46,204,138,.9);  box-shadow:0 12px 32px rgba(46,204,138,.12); }
+    .mc-3:hover { border-color:rgba(255,233,77,.9);  box-shadow:0 12px 32px rgba(255,233,77,.12); }
+    .mc-4:hover { border-color:rgba(155,109,255,.9); box-shadow:0 12px 32px rgba(155,109,255,.12); }
+    .mc-5:hover { border-color:rgba(255,77,109,.9);  box-shadow:0 12px 32px rgba(255,77,109,.12); }
+    .mc-6:hover { border-color:rgba(0,255,234,.9);   box-shadow:0 12px 32px rgba(0,255,234,.12); }
+
+    .metodo-secuencia {
+      display:flex; flex-wrap:wrap; justify-content:center; align-items:center;
+      gap:.5rem; max-width:860px; margin:1rem auto 0;
+    }
+    .mseq-paso {
+      font-family:'Nunito',sans-serif; font-weight:700; font-size:.78rem;
+      background:rgba(108,60,225,.12); border:1px solid rgba(108,60,225,.3);
+      color:rgba(255,255,255,.75); padding:.35rem 1rem; border-radius:20px;
+      display:flex; align-items:center; gap:.4rem;
+    }
+    .mseq-arrow { color:rgba(108,60,225,.5); font-size:1.1rem; }
+
+    /* ══ ACTIVIDADES INNOVADORAS ══ */
+    .actividades-section {
+      background:var(--fondo2); padding:5rem 2rem; text-align:center; position:relative; overflow:hidden;
+    }
+    .actividades-section::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:1px;
+      background:linear-gradient(90deg,transparent,rgba(46,204,138,.3),transparent);
+    }
+    .activ-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:1.5rem; max-width:1080px; margin:0 auto;
+    }
+    .activ-card {
+      background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.07);
+      border-radius:20px; padding:1.8rem 1.5rem; text-align:left;
+      position:relative; overflow:hidden;
+      transition:transform .28s, box-shadow .28s, border-color .28s;
+      cursor:default;
+    }
+    .activ-card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:3px;
+      border-radius:20px 20px 0 0;
+    }
+    .activ-card:hover { transform:translateY(-7px); }
+    .activ-card .ac-icon { font-size:2.1rem; margin-bottom:.9rem; display:block; }
+    .activ-card h4 { font-family:'Nunito',sans-serif; font-weight:800; color:var(--blanco); font-size:1rem; margin-bottom:.5rem; }
+    .activ-card p  { font-size:.82rem; color:var(--gris); line-height:1.65; margin-bottom:.8rem; }
+    .activ-badge {
+      display:inline-block; font-family:'Nunito',sans-serif; font-weight:800;
+      font-size:.66rem; text-transform:uppercase; letter-spacing:.5px;
+      padding:.2rem .8rem; border-radius:20px;
+    }
+    .ac-1 { border-top:3px solid rgba(0,212,255,.6);   border-color:rgba(0,212,255,.15); }
+    .ac-2 { border-top:3px solid rgba(46,204,138,.6);  border-color:rgba(46,204,138,.15); }
+    .ac-3 { border-top:3px solid rgba(255,233,77,.6);  border-color:rgba(255,233,77,.15); }
+    .ac-4 { border-top:3px solid rgba(155,109,255,.6); border-color:rgba(155,109,255,.15); }
+    .ac-1::before { background:linear-gradient(90deg,var(--cian),rgba(0,212,255,0)); }
+    .ac-2::before { background:linear-gradient(90deg,var(--verde),rgba(46,204,138,0)); }
+    .ac-3::before { background:linear-gradient(90deg,var(--amarillo),rgba(255,233,77,0)); }
+    .ac-4::before { background:linear-gradient(90deg,var(--purp2),rgba(155,109,255,0)); }
+    .ac-1:hover { border-color:rgba(0,212,255,.4);   box-shadow:0 16px 40px rgba(0,212,255,.12); }
+    .ac-2:hover { border-color:rgba(46,204,138,.4);  box-shadow:0 16px 40px rgba(46,204,138,.12); }
+    .ac-3:hover { border-color:rgba(255,233,77,.4);  box-shadow:0 16px 40px rgba(255,233,77,.12); }
+    .ac-4:hover { border-color:rgba(155,109,255,.4); box-shadow:0 16px 40px rgba(155,109,255,.12); }
+    .ac-1 .activ-badge { background:rgba(0,212,255,.1);   color:var(--cian); }
+    .ac-2 .activ-badge { background:rgba(46,204,138,.1);  color:var(--verde); }
+    .ac-3 .activ-badge { background:rgba(255,233,77,.1);  color:var(--amarillo); }
+    .ac-4 .activ-badge { background:rgba(155,109,255,.1); color:var(--purp2); }
+
+    /* ══ VIDEO PITCH ══ */
+    .pitch-section {
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 40%, rgba(255,233,77,.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 20% 80%, rgba(108,60,225,.15) 0%, transparent 55%),
+        var(--fondo3);
+      padding:5rem 2rem; text-align:center; position:relative; overflow:hidden;
+    }
+    .pitch-section::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:1px;
+      background:linear-gradient(90deg,transparent,rgba(255,233,77,.4),transparent);
+    }
+    .pitch-inner {
+      max-width:900px; margin:0 auto;
+      background:rgba(255,255,255,.025);
+      border:1px solid rgba(255,233,77,.2);
+      border-radius:28px; padding:3rem 2.5rem;
+      position:relative; overflow:hidden;
+    }
+    .pitch-inner::before {
+      content:'🎬'; position:absolute; right:2rem; top:1.5rem;
+      font-size:5rem; opacity:.07; pointer-events:none;
+    }
+    .pitch-label {
+      display:inline-block; font-family:'Nunito',sans-serif; font-weight:800;
+      font-size:.72rem; letter-spacing:3px; text-transform:uppercase;
+      color:var(--amarillo); margin-bottom:.8rem;
+      background:rgba(255,233,77,.1); border:1px solid rgba(255,233,77,.3);
+      padding:.3rem 1rem; border-radius:20px;
+    }
+    .pitch-section h2 {
+      font-family:'Nunito',sans-serif; font-weight:900;
+      font-size:clamp(1.5rem,3.5vw,2.2rem); color:var(--blanco); margin-bottom:.5rem;
+    }
+    .pitch-section h2 span { color:var(--amarillo); }
+    .pitch-desc { color:rgba(255,255,255,.65); font-size:.97rem; line-height:1.8; margin-bottom:2rem; max-width:600px; margin-left:auto; margin-right:auto; }
+    .pitch-desc strong { color:var(--cian); }
+
+    .pitch-cards {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:1.2rem; margin-bottom:2rem;
+    }
+    .pitch-card {
+      background:rgba(255,255,255,.04); border:1px solid rgba(255,233,77,.12);
+      border-radius:16px; padding:1.4rem 1rem; text-align:center;
+      transition:transform .25s, box-shadow .25s;
+    }
+    .pitch-card:hover { transform:translateY(-4px); box-shadow:0 10px 28px rgba(255,233,77,.1); }
+    .pitch-card .pc-icon { font-size:1.8rem; margin-bottom:.6rem; display:block; }
+    .pitch-card h5 { font-family:'Nunito',sans-serif; font-weight:800; color:var(--amarillo); font-size:.88rem; margin-bottom:.3rem; }
+    .pitch-card p  { font-size:.77rem; color:var(--gris); line-height:1.55; }
+
+    .pitch-temas {
+      background:rgba(255,233,77,.05); border:1px solid rgba(255,233,77,.2);
+      border-radius:16px; padding:1.4rem 1.6rem; margin-bottom:1.8rem; text-align:left;
+    }
+    .pitch-temas h5 {
+      font-family:'Nunito',sans-serif; font-weight:800; color:var(--amarillo);
+      font-size:.8rem; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:.85rem;
+      display:flex; align-items:center; gap:.5rem;
+    }
+    .pitch-temas-list {
+      display:flex; flex-wrap:wrap; gap:.6rem;
+    }
+    .tema-chip {
+      font-family:'Nunito',sans-serif; font-weight:700; font-size:.78rem;
+      background:rgba(255,233,77,.1); border:1px solid rgba(255,233,77,.25);
+      color:rgba(255,255,255,.8); padding:.3rem .9rem; border-radius:20px;
+      display:flex; align-items:center; gap:.35rem; transition:all .2s;
+    }
+    .tema-chip:hover { background:rgba(255,233,77,.2); border-color:rgba(255,233,77,.5); transform:scale(1.04); }
+    .tema-chip::before { content:"▸"; color:var(--amarillo); }
+
+    .pitch-criterios {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+      gap:.8rem; text-align:left;
+    }
+    .criterio-item {
+      display:flex; align-items:flex-start; gap:.6rem;
+      font-size:.82rem; color:rgba(255,255,255,.7); line-height:1.5;
+    }
+    .criterio-item .ci-dot {
+      width:7px; height:7px; border-radius:50%; background:var(--verde);
+      flex-shrink:0; margin-top:5px;
+    }
+    .criterio-item strong { color:var(--blanco); font-family:'Nunito',sans-serif; }
+
+    /* ══ REFLEXIÓN ══ */
+    .reflexion-section { background:var(--fondo3); padding:4rem 2rem; text-align:center; }
     .reflexion-preguntas { display:flex; flex-wrap:wrap; justify-content:center; gap:1.2rem; max-width:880px; margin:1.2rem auto 0; }
     .ref-pill {
       flex:1; min-width:240px; max-width:360px;
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(108,60,225,.2);
-      border-left:3px solid var(--purp2);
-      border-radius:14px; padding:1.1rem 1.3rem;
-      font-size:.88rem; color:rgba(255,255,255,.7);
-      text-align:left; line-height:1.65;
+      background:rgba(255,255,255,.03); border:1px solid rgba(108,60,225,.2);
+      border-left:3px solid var(--purp2); border-radius:14px; padding:1.1rem 1.3rem;
+      font-size:.88rem; color:rgba(255,255,255,.7); text-align:left; line-height:1.65;
       transition:border-left-color .2s, transform .2s, box-shadow .2s;
     }
     .ref-pill:hover { border-left-color:var(--cian); transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,212,255,.1); }
@@ -418,15 +525,15 @@
     }
     footer span { color:var(--cian); font-weight:700; }
 
-    /* ══ KEYFRAMES GLOBALES ══ */
     @keyframes fadeDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
 
-    /* ══ RESPONSIVE ══ */
     @media (max-width:600px) {
       .ruta-connector { display:none; }
       .ruta-item      { width:80px; }
       .ruta-num       { width:52px; height:52px; font-size:1.1rem; }
       .stats-bar      { gap:1.5rem; }
+      .pitch-inner    { padding:2rem 1.2rem; }
+      .metodo-secuencia { gap:.4rem; }
     }
   </style>
 </head>
@@ -439,21 +546,19 @@
 <section class="hero" id="inicio" aria-label="Presentación del módulo">
   <div class="hero-grid" aria-hidden="true"></div>
 
-  <!-- Badge grado -->
   <div class="hero-badge">
     <span class="badge-dot"></span>
     📐 Matemáticas &middot; Grado 6° &amp; 7°
   </div>
 
-  <!-- Objetivos -->
   <div class="hero-objetivos" role="list" aria-label="Objetivos de aprendizaje">
     <div class="obj-pill" role="listitem">Identificar los enteros en ℤ</div>
     <div class="obj-pill" role="listitem">Recta numérica y comparación</div>
     <div class="obj-pill" role="listitem">Ley de signos y operaciones</div>
     <div class="obj-pill" role="listitem">Aplicaciones en la vida real</div>
+    <div class="obj-pill" role="listitem">Video pitch académico 🎬</div>
   </div>
 
-  <!-- Título -->
   <p class="hero-eyebrow">MÓDULO INTERACTIVO</p>
   <h1>
     <span class="h1-line1">Los Números</span>
@@ -465,12 +570,10 @@
     Aprende con teoría, juegos y situaciones reales.
   </p>
 
-  <!-- Recta numérica canvas -->
   <div class="number-line-wrap" aria-hidden="true">
     <canvas id="numberLine" width="720" height="90"></canvas>
   </div>
 
-  <!-- Progreso personal -->
   <div class="hero-progress" id="heroProgress">
     <span class="hero-progress-label">Tu progreso en el módulo</span>
     <div class="hero-progress-track">
@@ -484,7 +587,6 @@
     </div>
   </div>
 
-  <!-- CTA -->
   <div class="cta-group">
     <button class="btn btn-primary" id="btnEmpezar" aria-label="Ir a Teoría">
       🧠 Empezar por la Teoría
@@ -557,50 +659,39 @@
   <p class="section-sub">Cinco misiones para dominar los números enteros.</p>
 
   <div class="cards-grid" id="cardsGrid">
-
-    <div class="card c-teoria" data-delay="0" data-nav="teoria"
-         role="button" tabindex="0" aria-label="Ir a Teoría">
+    <div class="card c-teoria" data-delay="0" data-nav="teoria" role="button" tabindex="0" aria-label="Ir a Teoría">
       <div class="card-icon-wrap">📖</div>
       <h3>Teoría</h3>
       <p>Concepto, recta numérica y valor absoluto con explicaciones visuales e interactivas.</p>
       <span class="card-tag">Comprender</span>
       <div class="card-estado" id="estado-teoria"></div>
     </div>
-
-    <div class="card c-practica" data-delay="100" data-nav="practica"
-         role="button" tabindex="0" aria-label="Ir a Práctica">
+    <div class="card c-practica" data-delay="100" data-nav="practica" role="button" tabindex="0" aria-label="Ir a Práctica">
       <div class="card-icon-wrap">🎮</div>
       <h3>Práctica</h3>
       <p>Actividades interactivas, Kahoot, ejercicios y problemas contextualizados.</p>
       <span class="card-tag">Aplicar</span>
       <div class="card-estado" id="estado-practica"></div>
     </div>
-
-    <div class="card c-evaluacion" data-delay="200" data-nav="evaluacion"
-         role="button" tabindex="0" aria-label="Ir a Evaluación">
+    <div class="card c-evaluacion" data-delay="200" data-nav="evaluacion" role="button" tabindex="0" aria-label="Ir a Evaluación">
       <div class="card-icon-wrap">✅</div>
       <h3>Evaluación</h3>
       <p>Quiz cronometrado con retroalimentación inmediata y puntaje guardado.</p>
       <span class="card-tag">Evaluar</span>
       <div class="card-estado" id="estado-evaluacion"></div>
     </div>
-
-    <div class="card c-vida" data-delay="300" data-nav="vida_real"
-         role="button" tabindex="0" aria-label="Abrir Vida Real">
+    <div class="card c-vida" data-delay="300" data-nav="vida_real" role="button" tabindex="0" aria-label="Abrir Vida Real">
       <div class="card-icon-wrap">🌍</div>
       <h3>Vida Real</h3>
       <p>Finanzas, temperaturas y altitudes: los enteros en tu día a día.</p>
       <span class="card-tag">Contextualizar</span>
     </div>
-
-    <div class="card c-recursos" data-delay="400" data-nav="recursos"
-         role="button" tabindex="0" aria-label="Ir a Recursos">
+    <div class="card c-recursos" data-delay="400" data-nav="recursos" role="button" tabindex="0" aria-label="Ir a Recursos">
       <div class="card-icon-wrap">🎒</div>
       <h3>Recursos Extra</h3>
       <p>Videos, GeoGebra y Kahoot para ampliar y repasar cuando quieras.</p>
       <span class="card-tag">Ampliar</span>
     </div>
-
   </div>
 </section>
 
@@ -612,6 +703,174 @@
       <strong>China antigua hace más de 2.000 años</strong>
       para registrar deudas en varillas de bambú.
       ¡Los enteros llevan milenios resolviendo problemas del mundo real!</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     METODOLOGÍA  ← NUEVA SECCIÓN
+═══════════════════════════════════════════════════════ -->
+<section class="metodologia-section" aria-label="Metodología del recurso">
+  <p class="section-label">Cómo aprendemos</p>
+  <h2 class="section-title">⚙️ Metodología</h2>
+  <p class="section-sub">
+    Recurso fundamentado en <strong style="color:var(--cian)">Design Thinking</strong> y mediado por TIC,
+    desarrollado en el marco de una <strong style="color:var(--amarillo)">Hackatón Pedagógica Virtual</strong>.
+    El proceso sigue una secuencia de aprendizaje activo.
+  </p>
+
+  <div class="metodo-grid">
+    <div class="metodo-card mc-1">
+      <span class="mc-icon">🔍</span>
+      <h4>Exploración activa</h4>
+      <p>El estudiante construye el conocimiento desde la curiosidad, explorando conceptos con animaciones e interacciones.</p>
+    </div>
+    <div class="metodo-card mc-2">
+      <span class="mc-icon">🎮</span>
+      <h4>Gamificación</h4>
+      <p>XP, niveles y retos convierten cada actividad en una misión con recompensas inmediatas.</p>
+    </div>
+    <div class="metodo-card mc-3">
+      <span class="mc-icon">🌍</span>
+      <h4>Contextualización</h4>
+      <p>Cada concepto se conecta con situaciones reales: deudas, temperatura, altitud, elevadores y pisos.</p>
+    </div>
+    <div class="metodo-card mc-4">
+      <span class="mc-icon">💻</span>
+      <h4>Mediación TIC</h4>
+      <p>GeoGebra, Kahoot, Genially y simuladores interactivos como herramientas de aprendizaje digital.</p>
+    </div>
+    <div class="metodo-card mc-5">
+      <span class="mc-icon">🔁</span>
+      <h4>Retroalimentación inmediata</h4>
+      <p>Cada respuesta o interacción genera un comentario instantáneo que orienta el aprendizaje.</p>
+    </div>
+    <div class="metodo-card mc-6">
+      <span class="mc-icon">🏆</span>
+      <h4>Evaluación formativa</h4>
+      <p>Quiz con criterios transparentes, autoevaluación y evidencia de aprendizaje mediante el video pitch.</p>
+    </div>
+  </div>
+
+  <p class="section-sub" style="margin-bottom:.8rem;margin-top:.5rem;">Secuencia didáctica</p>
+  <div class="metodo-secuencia" role="list" aria-label="Secuencia de aprendizaje">
+    <div class="mseq-paso" role="listitem">🎯 Motivación</div>
+    <span class="mseq-arrow" aria-hidden="true">›</span>
+    <div class="mseq-paso" role="listitem">📖 Teoría interactiva</div>
+    <span class="mseq-arrow" aria-hidden="true">›</span>
+    <div class="mseq-paso" role="listitem">🎮 Práctica guiada</div>
+    <span class="mseq-arrow" aria-hidden="true">›</span>
+    <div class="mseq-paso" role="listitem">🌍 Aplicación real</div>
+    <span class="mseq-arrow" aria-hidden="true">›</span>
+    <div class="mseq-paso" role="listitem">🏆 Evaluación</div>
+    <span class="mseq-arrow" aria-hidden="true">›</span>
+    <div class="mseq-paso" role="listitem">🎬 Video Pitch</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     ACTIVIDADES INNOVADORAS  ← NUEVA SECCIÓN
+═══════════════════════════════════════════════════════ -->
+<section class="actividades-section" aria-label="Actividades innovadoras">
+  <p class="section-label">Innovación didáctica</p>
+  <h2 class="section-title">✨ Actividades Innovadoras</h2>
+  <p class="section-sub">Experiencias diseñadas para aprender haciendo, no solo leyendo.</p>
+
+  <div class="activ-grid">
+    <div class="activ-card ac-1">
+      <span class="ac-icon">📐</span>
+      <h4>Recta numérica interactiva</h4>
+      <p>Explora y arrastra puntos en una recta numérica animada con GeoGebra. Visualiza positivos, negativos y el valor absoluto en tiempo real.</p>
+      <span class="activ-badge">GeoGebra · Interactivo</span>
+    </div>
+    <div class="activ-card ac-2">
+      <span class="ac-icon">🌡️</span>
+      <h4>Simuladores de contexto real</h4>
+      <p>Controla la temperatura de una ciudad, el saldo bancario o la altitud de un avión. Observa cómo los enteros cambian en situaciones cotidianas.</p>
+      <span class="activ-badge">Simulación · Vida real</span>
+    </div>
+    <div class="activ-card ac-3">
+      <span class="ac-icon">⚡</span>
+      <h4>Kahoot de refuerzo gamificado</h4>
+      <p>Reto en tiempo real contra tus compañeros: 12 preguntas sobre enteros con conteo regresivo, puntos y ranking en vivo.</p>
+      <span class="activ-badge">Kahoot · Competitivo</span>
+    </div>
+    <div class="activ-card ac-4">
+      <span class="ac-icon">🧩</span>
+      <h4>Retos de toma de decisiones</h4>
+      <p>Resuelve problemas abiertos donde debes elegir el entero correcto para resolver una situación: deudas, ascensores, goles a favor y en contra.</p>
+      <span class="activ-badge">Pensamiento crítico</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     VIDEO PITCH ACADÉMICO  ← NUEVA SECCIÓN
+═══════════════════════════════════════════════════════ -->
+<section class="pitch-section" aria-label="Video pitch académico">
+  <div class="pitch-inner">
+    <div class="pitch-label">🎬 Producto final del módulo</div>
+    <h2 class="section-title" style="margin-bottom:.5rem;">Video Pitch <span>Académico</span></h2>
+    <p class="pitch-desc">
+      Tu misión final: grabar un <strong>video corto de 1 a 2 minutos</strong> donde expliques cómo aplicas los números enteros en una situación de la vida real.
+      No necesitas ser perfecto, ¡necesitas ser claro y convincente!
+    </p>
+
+    <div class="pitch-cards">
+      <div class="pitch-card">
+        <span class="pc-icon">⏱️</span>
+        <h5>Duración</h5>
+        <p>1 a 2 minutos. Directo, claro y con ejemplo concreto.</p>
+      </div>
+      <div class="pitch-card">
+        <span class="pc-icon">🎯</span>
+        <h5>Propósito</h5>
+        <p>Demostrar que entiendes cómo los enteros resuelven problemas reales.</p>
+      </div>
+      <div class="pitch-card">
+        <span class="pc-icon">📱</span>
+        <h5>Formato</h5>
+        <p>Video grabado con celular, Loom, Canva o cualquier herramienta digital.</p>
+      </div>
+      <div class="pitch-card">
+        <span class="pc-icon">📤</span>
+        <h5>Entrega</h5>
+        <p>Comparte el enlace con tu docente según las instrucciones del aula virtual.</p>
+      </div>
+    </div>
+
+    <div class="pitch-temas">
+      <h5>🌍 Temas sugeridos para tu pitch</h5>
+      <div class="pitch-temas-list">
+        <span class="tema-chip">Temperatura bajo cero</span>
+        <span class="tema-chip">Deudas y ahorros</span>
+        <span class="tema-chip">Pisos de un edificio</span>
+        <span class="tema-chip">Altitud y profundidad</span>
+        <span class="tema-chip">Goles a favor y en contra</span>
+        <span class="tema-chip">Subidas y bajadas de precios</span>
+        <span class="tema-chip">Coordenadas en mapas</span>
+        <span class="tema-chip">Cronología histórica</span>
+      </div>
+    </div>
+
+    <p style="font-family:'Nunito',sans-serif;font-weight:800;font-size:.8rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.9rem;">Criterios de evaluación</p>
+    <div class="pitch-criterios">
+      <div class="criterio-item">
+        <span class="ci-dot"></span>
+        <span><strong>Claridad conceptual</strong> — Explica correctamente qué son los enteros y cómo funcionan en el contexto elegido.</span>
+      </div>
+      <div class="criterio-item">
+        <span class="ci-dot"></span>
+        <span><strong>Ejemplo concreto</strong> — Presenta al menos un caso real con números específicos (positivos, negativos o cero).</span>
+      </div>
+      <div class="criterio-item">
+        <span class="ci-dot"></span>
+        <span><strong>Coherencia matemática</strong> — Usa los signos, la recta o las operaciones de forma correcta.</span>
+      </div>
+      <div class="criterio-item">
+        <span class="ci-dot"></span>
+        <span><strong>Expresión y fluidez</strong> — Habla con seguridad, explica paso a paso y se entiende el mensaje.</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -728,14 +987,11 @@ function drawNumberLine() {
 
   function draw() {
     ctx.clearRect(0, 0, W, H);
-    // Fondo sutil
     const bgGrad = ctx.createLinearGradient(0,0,W,0);
     bgGrad.addColorStop(0, 'rgba(10,6,24,0)');
     bgGrad.addColorStop(.5,'rgba(108,60,225,.06)');
     bgGrad.addColorStop(1, 'rgba(10,6,24,0)');
     ctx.fillStyle = bgGrad; ctx.fillRect(0, cy-20, W, 40);
-
-    // Línea gradiente
     const lineGrad = ctx.createLinearGradient(20,cy,W-20,cy);
     lineGrad.addColorStop(0,   'rgba(108,60,225,0)');
     lineGrad.addColorStop(.25, 'rgba(108,60,225,.7)');
@@ -743,42 +999,31 @@ function drawNumberLine() {
     lineGrad.addColorStop(1,   'rgba(0,212,255,0)');
     ctx.strokeStyle = lineGrad; ctx.lineWidth = 2;
     ctx.beginPath(); ctx.moveTo(20,cy); ctx.lineTo(W-20,cy); ctx.stroke();
-
-    // Flechas
     [[20,1],[W-20,-1]].forEach(([x,d]) => {
       ctx.beginPath();
       ctx.moveTo(x+12*d,cy-6); ctx.lineTo(x,cy); ctx.lineTo(x+12*d,cy+6);
       ctx.strokeStyle = 'rgba(255,255,255,.3)'; ctx.lineWidth = 2; ctx.stroke();
     });
-    // Marcas y números
     nums.forEach(n => {
       const x = cx + n*step;
       ctx.lineWidth = n===0 ? 2.5 : 1.5;
-      ctx.strokeStyle = n===0 ? 'rgba(255,233,77,.9)'
-                      : n>0   ? 'rgba(0,212,255,.5)'
-                               : 'rgba(155,109,255,.5)';
+      ctx.strokeStyle = n===0 ? 'rgba(255,233,77,.9)' : n>0 ? 'rgba(0,212,255,.5)' : 'rgba(155,109,255,.5)';
       ctx.beginPath(); ctx.moveTo(x,cy-10); ctx.lineTo(x,cy+10); ctx.stroke();
       ctx.font = n===0 ? 'bold 13px Space Grotesk,sans-serif' : '11px Space Grotesk,sans-serif';
-      ctx.fillStyle = n===0 ? '#FFE94D'
-                    : n>0   ? 'rgba(0,212,255,.8)'
-                             : 'rgba(183,148,255,.8)';
+      ctx.fillStyle = n===0 ? '#FFE94D' : n>0 ? 'rgba(0,212,255,.8)' : 'rgba(183,148,255,.8)';
       ctx.textAlign = 'center';
       ctx.fillText(n>0 ? '+'+n : n, x, cy+26);
     });
-    // Punto animado con glow
     ctx.shadowColor = '#FFE94D'; ctx.shadowBlur = 16;
     ctx.beginPath(); ctx.arc(dotX, cy, 9, 0, Math.PI*2);
     ctx.fillStyle = '#FFE94D'; ctx.fill();
     ctx.shadowBlur = 0;
-    // Anillo exterior
     ctx.beginPath(); ctx.arc(dotX, cy, 15, 0, Math.PI*2);
     ctx.strokeStyle = 'rgba(255,233,77,.25)'; ctx.lineWidth = 3; ctx.stroke();
-    // Etiqueta
     const cur = Math.round((dotX-cx)/step);
     ctx.font = 'bold 13px Space Grotesk,sans-serif';
     ctx.fillStyle = 'rgba(255,255,255,.9)'; ctx.textAlign = 'center';
     ctx.fillText(cur>0?'+'+cur:cur, dotX, cy-22);
-
     dotX += (targetX-dotX)*.035;
     if (Math.abs(dotX-targetX)<1.2) {
       targetX = cx + nums[Math.floor(Math.random()*nums.length)]*step;
