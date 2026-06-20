@@ -301,11 +301,144 @@
     @keyframes riseUp{to{opacity:1;transform:translateY(0);}}
     @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
     @media(max-width:600px){.tabs{gap:.4rem;}.tab-btn{padding:.6rem 1rem;font-size:.82rem;}}
+
+    /* ── INDICADOR SECCIÓN ACTIVA ── */
+    #sec-indicator{
+      position:fixed;top:6px;left:50%;transform:translateX(-50%);z-index:999;
+      background:rgba(6,4,16,.85);backdrop-filter:blur(10px);
+      border:1px solid rgba(155,109,255,.25);border-radius:30px;
+      padding:.3rem 1.1rem;font-family:'Nunito',sans-serif;font-weight:800;
+      font-size:.72rem;color:rgba(255,255,255,.6);
+      display:flex;align-items:center;gap:.5rem;pointer-events:none;
+      transition:opacity .4s;}
+    #sec-indicator .si-dot{width:6px;height:6px;border-radius:50%;
+      background:linear-gradient(135deg,var(--purp2),var(--cian));
+      box-shadow:0 0 6px var(--purp2);}
+    #sec-indicator .si-text{color:var(--cian);}
+
+    /* ── TRACKER DE SECCIONES ── */
+    .sec-tracker{
+      max-width:960px;margin:1.5rem auto 0;padding:0 1.5rem;
+      display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap;}
+    .st-step{display:flex;align-items:center;gap:.35rem;
+      font-family:'Nunito',sans-serif;font-weight:700;font-size:.72rem;
+      padding:.28rem .8rem;border-radius:20px;
+      background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+      color:rgba(255,255,255,.35);transition:all .4s;}
+    .st-step.done{background:rgba(46,204,138,.12);border-color:rgba(46,204,138,.35);
+      color:var(--verde);}
+    .st-step.active{background:rgba(108,60,225,.15);border-color:rgba(108,60,255,.4);
+      color:var(--purp2);}
+    .st-step .st-check{font-size:.75rem;}
+
+    /* ── CURIOSIDAD / SABÍAS QUE ── */
+    .sabias-card{
+      margin:1.4rem 0;padding:1rem 1.2rem;
+      background:rgba(0,212,255,.05);
+      border:1px solid rgba(0,212,255,.18);border-left:3px solid var(--cian);
+      border-radius:0 14px 14px 0;
+      display:flex;align-items:flex-start;gap:.8rem;}
+    .sabias-icon{font-size:1.4rem;flex-shrink:0;margin-top:.1rem;}
+    .sabias-body strong{font-family:'Nunito',sans-serif;font-weight:900;
+      font-size:.72rem;color:var(--cian);text-transform:uppercase;
+      letter-spacing:1.5px;display:block;margin-bottom:.25rem;}
+    .sabias-body p{font-size:.84rem;color:rgba(255,255,255,.72);line-height:1.7;}
+
+    /* ── PUENTE DE TRANSICIÓN ── */
+    .puente{
+      display:flex;align-items:center;justify-content:space-between;gap:1rem;
+      margin:1.6rem 0 0;padding:1rem 1.4rem;
+      background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);
+      border-radius:14px;flex-wrap:wrap;}
+    .puente-txt{font-family:'Nunito',sans-serif;font-weight:700;
+      font-size:.84rem;color:rgba(255,255,255,.6);line-height:1.55;}
+    .puente-txt strong{color:var(--blanco);}
+    .puente-btn{display:inline-flex;align-items:center;gap:.4rem;
+      font-family:'Nunito',sans-serif;font-weight:800;font-size:.78rem;
+      padding:.42rem 1.1rem;border-radius:20px;cursor:pointer;
+      background:linear-gradient(135deg,rgba(108,60,225,.2),rgba(0,212,255,.15));
+      border:1px solid rgba(108,60,225,.35);color:var(--purp2);
+      transition:all .2s;white-space:nowrap;}
+    .puente-btn:hover{transform:translateX(3px);
+      background:linear-gradient(135deg,rgba(108,60,225,.3),rgba(0,212,255,.22));}
+
+    /* ── TABLA LEY DE SIGNOS ANIMADA ── */
+    .ley-signos-table{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;
+      margin:1.2rem 0;}
+    .ls-cell{
+      border-radius:14px;padding:1rem .8rem;text-align:center;
+      border:1px solid rgba(255,255,255,.08);
+      transition:transform .2s,border-color .2s,box-shadow .2s;cursor:default;}
+    .ls-cell:hover{transform:translateY(-4px) scale(1.04);}
+    .ls-cell .ls-op{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.4rem;line-height:1;}
+    .ls-cell .ls-res{font-family:'Nunito',sans-serif;font-weight:900;font-size:.78rem;
+      margin-top:.4rem;letter-spacing:.5px;}
+    .ls-cell .ls-ej{font-size:.72rem;color:var(--gris);margin-top:.2rem;}
+    .ls-pp{background:rgba(46,204,138,.08);border-color:rgba(46,204,138,.25);}
+    .ls-pp:hover{border-color:var(--verde);box-shadow:0 8px 20px rgba(46,204,138,.2);}
+    .ls-pp .ls-op{color:var(--verde);}
+    .ls-pp .ls-res{color:var(--verde);}
+    .ls-pn{background:rgba(231,76,60,.07);border-color:rgba(231,76,60,.2);}
+    .ls-pn:hover{border-color:var(--rojo);box-shadow:0 8px 20px rgba(231,76,60,.15);}
+    .ls-pn .ls-op{color:var(--rojo);}
+    .ls-pn .ls-res{color:rgba(255,255,255,.7);}
+    .ls-nn{background:rgba(46,204,138,.08);border-color:rgba(46,204,138,.25);}
+    .ls-nn:hover{border-color:var(--verde);box-shadow:0 8px 20px rgba(46,204,138,.2);}
+    .ls-nn .ls-op{color:var(--verde);}
+    .ls-nn .ls-res{color:var(--verde);}
+    .ls-label{font-family:'Nunito',sans-serif;font-weight:900;font-size:.7rem;
+      text-transform:uppercase;letter-spacing:1.5px;color:var(--gris);
+      text-align:center;margin-bottom:.5rem;}
+
+    /* ── MINI-QUIZ POR SECCIÓN ── */
+    .mini-quiz{
+      margin-top:1.6rem;padding:1.4rem 1.4rem 1.2rem;
+      background:rgba(108,60,225,.06);
+      border:1px solid rgba(108,60,225,.2);border-top:3px solid var(--purp2);
+      border-radius:0 0 16px 16px;}
+    .mq-label{font-family:'Nunito',sans-serif;font-weight:900;font-size:.68rem;
+      text-transform:uppercase;letter-spacing:2px;color:var(--purp2);margin-bottom:.6rem;
+      display:flex;align-items:center;gap:.4rem;}
+    .mq-pregunta{font-family:'Nunito',sans-serif;font-weight:800;font-size:.95rem;
+      color:var(--blanco);margin-bottom:.9rem;line-height:1.5;}
+    .mq-opciones{display:flex;flex-direction:column;gap:.5rem;margin-bottom:.6rem;}
+    .mq-opcion{display:flex;align-items:center;gap:.7rem;
+      padding:.55rem .9rem;border-radius:12px;cursor:pointer;
+      background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+      font-family:'Nunito',sans-serif;font-weight:700;font-size:.88rem;
+      color:rgba(255,255,255,.8);transition:all .2s;text-align:left;}
+    .mq-opcion:hover:not(.bloqueada){background:rgba(108,60,225,.12);
+      border-color:rgba(108,60,225,.35);color:var(--blanco);}
+    .mq-opcion.correcta{background:rgba(46,204,138,.14);border-color:var(--verde);color:var(--verde);}
+    .mq-opcion.incorrecta{background:rgba(231,76,60,.1);border-color:var(--rojo);color:var(--rojo);}
+    .mq-opcion.bloqueada{cursor:default;}
+    .mq-fb{font-family:'Nunito',sans-serif;font-weight:800;font-size:.82rem;
+      min-height:20px;transition:all .3s;line-height:1.5;}
+    .mq-fb.ok{color:var(--verde);}
+    .mq-fb.err{color:var(--rojo);}
+
+    /* ── BANNER PITCH ── */
+    .pitch-teoria-banner{
+      max-width:960px;margin:2rem auto 0;padding:0 1.5rem;}
+    .pth-inner{
+      background:linear-gradient(135deg,rgba(255,233,77,.05),rgba(108,60,225,.08));
+      border:1px solid rgba(255,233,77,.2);border-radius:16px;
+      padding:1.1rem 1.4rem;display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap;}
+    .pth-inner .pth-icon{font-size:2rem;flex-shrink:0;}
+    .pth-inner h5{font-family:'Nunito',sans-serif;font-weight:900;
+      color:var(--amarillo);font-size:.9rem;margin-bottom:.2rem;}
+    .pth-inner p{font-size:.8rem;color:rgba(255,255,255,.6);line-height:1.55;}
+    .pth-inner strong{color:var(--cian);}
   </style>
 </head>
 <body>
 
 <div id="read-progress" role="progressbar" aria-label="Progreso de lectura"></div>
+<div id="sec-indicator" aria-live="polite">
+  <div class="si-dot"></div>
+  <span class="si-text">📖 ¿Qué son los enteros?</span>
+</div>
 
 <div class="teoria-hero">
   <div class="hero-grid" aria-hidden="true"></div>
@@ -333,6 +466,14 @@
     <div class="obj-item"><span class="obj-icon">4️⃣</span>Sumar y restar aplicando la ley de signos</div>
     <div class="obj-item"><span class="obj-icon">5️⃣</span>Usar los enteros en situaciones cotidianas</div>
   </div>
+</div>
+
+<div class="sec-tracker" role="navigation" aria-label="Progreso por sección">
+  <div class="st-step active" id="st-que-son"><span class="st-check">📖</span>¿Qué son?</div>
+  <div class="st-step" id="st-orden"><span class="st-check">📊</span>Orden</div>
+  <div class="st-step" id="st-recta"><span class="st-check">📏</span>Recta</div>
+  <div class="st-step" id="st-valor-abs"><span class="st-check">⚡</span>Valor absoluto</div>
+  <div class="st-step" id="st-operaciones"><span class="st-check">➕</span>Operaciones</div>
 </div>
 
 <section id="que-son">
@@ -405,6 +546,31 @@
         <div class="vr-display"><span class="vr-valor" id="vr-val-edificio" style="color:var(--cian)">+5</span><span class="vr-etiqueta" id="vr-lab-edificio">Piso 5 — sobre tierra</span></div>
       </div>
     </div>
+    <div class="sabias-card">
+      <div class="sabias-icon">🌋</div>
+      <div class="sabias-body">
+        <strong>¿Sabías que?</strong>
+        <p>La fosa de Cayman, en el Mar Caribe, tiene una profundidad de <strong>−7.686 m</strong> bajo el nivel del mar. ¡Es el punto más profundo del Atlántico y se representa con un entero negativo!</p>
+      </div>
+    </div>
+    <div class="puente">
+      <div class="puente-txt">¡Ahora que conoces qué son los enteros…<br><strong>¿sabes cómo compararlos entre sí?</strong></div>
+      <a href="#orden" class="puente-btn">Ver Orden y Comparación →</a>
+    </div>
+    <div class="mini-quiz" data-quiz="que-son">
+      <div class="mq-label">🎯 Checkpoint — ¿Qué son los enteros?</div>
+      <div class="mq-pregunta">¿Cuál de estos es un número entero negativo?</div>
+      <div class="mq-opciones">
+        <button class="mq-opcion" onclick="responder(this,'que-son',false)">A) &nbsp; +3</button>
+        <button class="mq-opcion" onclick="responder(this,'que-son',true)">B) &nbsp; −7</button>
+        <button class="mq-opcion" onclick="responder(this,'que-son',false)">C) &nbsp; 0</button>
+      </div>
+      <div class="mq-fb" id="mq-fb-que-son"></div>
+    </div>
+    <div class="puente">
+      <div class="puente-txt">Ahora que sabes qué son…<br><strong>¿cómo se comparan entre sí?</strong></div>
+      <a href="#orden" class="puente-btn">Ver Orden y Comparación →</a>
+    </div>
   </div>
 </section>
 
@@ -418,6 +584,27 @@
       <div class="regla-orden-card"><div class="r-titulo">📌 Regla 2</div><p>Un <strong>positivo siempre es mayor</strong> que cualquier negativo sin excepción.</p><span class="r-ej">+1 &gt; −100</span></div>
       <div class="regla-orden-card"><div class="r-titulo">📌 Regla 3</div><p>Entre dos <strong>negativos</strong>, es mayor el más cercano al cero.</p><span class="r-ej">−3 &gt; −7 &nbsp;|&nbsp; |−3| &lt; |−7|</span></div>
       <div class="regla-orden-card"><div class="r-titulo">📌 Regla 4</div><p>Entre dos <strong>positivos</strong>, es mayor el de mayor valor absoluto.</p><span class="r-ej">+10 &gt; +3 &nbsp;|&nbsp; |10| &gt; |3|</span></div>
+    </div>
+    <div class="sabias-card">
+      <div class="sabias-icon">🏔️</div>
+      <div class="sabias-body">
+        <strong>¿Sabías que?</strong>
+        <p>El <strong>Nevado del Huila</strong> (Colombia) está a +5.365 m y el <strong>lago Titicaca</strong> a +3.812 m. Aunque ambos son positivos, el Huila es mayor: 5.365 > 3.812. ¡La regla 4 en acción!</p>
+      </div>
+    </div>
+    <div class="mini-quiz" data-quiz="orden">
+      <div class="mq-label">🎯 Checkpoint — Orden</div>
+      <div class="mq-pregunta">¿Cuál de estos pares está ordenado de menor a mayor?</div>
+      <div class="mq-opciones">
+        <button class="mq-opcion" onclick="responder(this,'orden',false)">A) &nbsp; −2 &nbsp;&gt;&nbsp; −8 &nbsp;&gt;&nbsp; 0</button>
+        <button class="mq-opcion" onclick="responder(this,'orden',true)">B) &nbsp; −8 &nbsp;&lt;&nbsp; −2 &nbsp;&lt;&nbsp; 0 &nbsp;&lt;&nbsp; +5</button>
+        <button class="mq-opcion" onclick="responder(this,'orden',false)">C) &nbsp; +5 &nbsp;&lt;&nbsp; 0 &nbsp;&lt;&nbsp; −2</button>
+      </div>
+      <div class="mq-fb" id="mq-fb-orden"></div>
+    </div>
+    <div class="puente">
+      <div class="puente-txt">¡Sabes compararlos!<br><strong>Ahora ubícalos visualmente en la recta numérica.</strong></div>
+      <a href="#recta" class="puente-btn">Ver Recta Numérica →</a>
     </div>
   </div>
 </section>
@@ -444,6 +631,27 @@
           allowfullscreen loading="lazy"></iframe>
       </div>
     </div>
+    <div class="sabias-card">
+      <div class="sabias-icon">🧭</div>
+      <div class="sabias-body">
+        <strong>¿Sabías que?</strong>
+        <p>La recta numérica fue usada por primera vez por el matemático <strong>John Wallis en 1685</strong>. Antes de eso, los números negativos se consideraban "imposibles" o "absurdos". ¡Hoy son indispensables!</p>
+      </div>
+    </div>
+    <div class="mini-quiz" data-quiz="recta">
+      <div class="mq-label">🎯 Checkpoint — Recta numérica</div>
+      <div class="mq-pregunta">En la recta numérica, ¿qué número está más a la derecha?</div>
+      <div class="mq-opciones">
+        <button class="mq-opcion" onclick="responder(this,'recta',false)">A) &nbsp; −3</button>
+        <button class="mq-opcion" onclick="responder(this,'recta',false)">B) &nbsp; 0</button>
+        <button class="mq-opcion" onclick="responder(this,'recta',true)">C) &nbsp; +5</button>
+      </div>
+      <div class="mq-fb" id="mq-fb-recta"></div>
+    </div>
+    <div class="puente">
+      <div class="puente-txt">¡Excelente! ¿Sabes calcular la<br><strong>distancia de un número al cero?</strong></div>
+      <a href="#valor-abs" class="puente-btn">Ver Valor Absoluto →</a>
+    </div>
   </div>
 </section>
 
@@ -462,6 +670,27 @@
       <div class="va-card"><div class="va-expr">|−15|</div><span class="va-arrow">↓</span><div class="va-result">15</div><div class="va-hint">El signo desaparece</div></div>
       <div class="va-card"><div class="va-expr">|0|</div><span class="va-arrow">↓</span><div class="va-result">0</div><div class="va-hint">El cero está en el cero</div></div>
     </div>
+    <div class="sabias-card">
+      <div class="sabias-icon">🌡️</div>
+      <div class="sabias-body">
+        <strong>¿Sabías que?</strong>
+        <p>La diferencia de temperatura entre <strong>Leticia (32°C)</strong> y un páramo colombiano <strong>(−4°C)</strong> se calcula con valor absoluto: |32 − (−4)| = |36| = 36°C. ¡Una diferencia enorme en el mismo país!</p>
+      </div>
+    </div>
+    <div class="mini-quiz" data-quiz="valabs">
+      <div class="mq-label">🎯 Checkpoint — Valor absoluto</div>
+      <div class="mq-pregunta">¿Cuánto vale |−12| + |+5|?</div>
+      <div class="mq-opciones">
+        <button class="mq-opcion" onclick="responder(this,'valabs',false)">A) &nbsp; −7</button>
+        <button class="mq-opcion" onclick="responder(this,'valabs',true)">B) &nbsp; 17</button>
+        <button class="mq-opcion" onclick="responder(this,'valabs',false)">C) &nbsp; −17</button>
+      </div>
+      <div class="mq-fb" id="mq-fb-valabs"></div>
+    </div>
+    <div class="puente">
+      <div class="puente-txt">¡Casi terminas!<br><strong>Ahora aprende a sumar y restar con la ley de signos.</strong></div>
+      <a href="#operaciones" class="puente-btn">Ver Operaciones →</a>
+    </div>
   </div>
 </section>
 
@@ -470,6 +699,24 @@
     <span class="tag tag-cian">➕ Operaciones</span>
     <h2 class="section-title">Operaciones con Enteros</h2>
     <p class="section-sub">La <strong style="color:var(--cian)">ley de signos</strong> rige todas las sumas y restas. Selecciona una operación:</p>
+    <div class="ls-label">🔑 Ley de signos — referencia rápida</div>
+    <div class="ley-signos-table" aria-label="Tabla ley de signos">
+      <div class="ls-cell ls-pp">
+        <div class="ls-op">(+)(+)</div>
+        <div class="ls-res">→ POSITIVO ✅</div>
+        <div class="ls-ej">+4 + +3 = +7</div>
+      </div>
+      <div class="ls-cell ls-pn">
+        <div class="ls-op">(+)(−)</div>
+        <div class="ls-res">→ Depende del mayor</div>
+        <div class="ls-ej">+8 + (−3) = +5</div>
+      </div>
+      <div class="ls-cell ls-nn">
+        <div class="ls-op">(−)(−)</div>
+        <div class="ls-res">→ NEGATIVO ✅</div>
+        <div class="ls-ej">−4 + (−3) = −7</div>
+      </div>
+    </div>
     <div class="tabs" role="tablist">
       <button class="tab-btn active" data-tab="suma" role="tab" aria-selected="true">➕ Suma</button>
       <button class="tab-btn" data-tab="resta" role="tab" aria-selected="false">➖ Resta</button>
@@ -577,7 +824,36 @@
       </div>
     </div>
   </div>
+    <div class="sabias-card" style="margin-top:1.5rem;">
+      <div class="sabias-icon">⚽</div>
+      <div class="sabias-body">
+        <strong>¿Sabías que?</strong>
+        <p>En el fútbol colombiano, la <strong>diferencia de goles</strong> usa enteros. Si Colombia anota 3 y recibe 5, su diferencia es 3 − 5 = <strong>−2</strong>. Si anota 4 y recibe 1, es 4 − 1 = <strong>+3</strong>. ¡La ley de signos en la cancha!</p>
+      </div>
+    </div>
+    <div class="mini-quiz" data-quiz="ops">
+      <div class="mq-label">🎯 Checkpoint — Operaciones</div>
+      <div class="mq-pregunta">(−6) + (+10) − (−4) = ?</div>
+      <div class="mq-opciones">
+        <button class="mq-opcion" onclick="responder(this,'ops',false)">A) &nbsp; 0</button>
+        <button class="mq-opcion" onclick="responder(this,'ops',true)">B) &nbsp; +8</button>
+        <button class="mq-opcion" onclick="responder(this,'ops',false)">C) &nbsp; −8</button>
+      </div>
+      <div class="mq-fb" id="mq-fb-ops"></div>
+    </div>
+  </div>
 </section>
+
+<!-- BANNER PITCH -->
+<div class="pitch-teoria-banner">
+  <div class="pth-inner">
+    <span class="pth-icon">🎬</span>
+    <div>
+      <h5>¡Ya dominas la teoría! ¿Puedes explicársela a alguien más?</h5>
+      <p>Graba un <strong>video pitch de 1–2 minutos</strong> explicando qué son los enteros y para qué sirven. Usa ejemplos colombianos reales: temperatura, altitud, finanzas o fútbol.</p>
+    </div>
+  </div>
+</div>
 
 <div class="cta-final">
   <h2>¡Teoría <span>completada</span>! 🏆</h2>
@@ -772,6 +1048,59 @@ document.querySelectorAll('.ej-item').forEach(item=>{
   document.querySelectorAll('.vr-card').forEach(c=>obs.observe(c));
 })();
 calcular('suma');calcular('resta');
+
+/* ── INDICADOR + TRACKER DE SECCIONES ── */
+const secIds=['que-son','orden','recta','valor-abs','operaciones'];
+const secNames={'que-son':'📖 ¿Qué son los enteros?','orden':'📊 Orden y comparación',
+  'recta':'📏 Recta numérica','valor-abs':'⚡ Valor absoluto','operaciones':'➕ Operaciones'};
+const secLeidas=new Set();
+
+function actualizarIndicador(){
+  let actual='que-son';
+  secIds.forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    const r=el.getBoundingClientRect();
+    if(r.top<=120)actual=id;
+  });
+  const ind=document.getElementById('sec-indicator');
+  if(ind)ind.querySelector('.si-text').textContent=secNames[actual]||'';
+  
+  secIds.forEach(id=>{
+    const st=document.getElementById('st-'+id);
+    if(!st)return;
+    st.classList.remove('active','done');
+    if(id===actual)st.classList.add('active');
+    else if(secLeidas.has(id))st.classList.add('done');
+  });
+
+  const el=document.getElementById(actual);
+  if(el){
+    const r=el.getBoundingClientRect();
+    if(r.top<0 && actual!=='operaciones')secLeidas.add(actual);
+  }
+}
+window.addEventListener('scroll',actualizarIndicador,{passive:true});
+actualizarIndicador();
+
+/* ── MINI-QUIZ ── */
+function responder(btn,quiz,esCorrecta){
+  const contenedor=btn.closest('.mq-opciones');
+  const fb=document.getElementById('mq-fb-'+quiz);
+  contenedor.querySelectorAll('.mq-opcion').forEach(b=>b.classList.add('bloqueada'));
+  if(esCorrecta){
+    btn.classList.add('correcta');
+    fb.className='mq-fb ok';
+    fb.textContent='✅ ¡Correcto! Continúa con la siguiente sección.';
+    secLeidas.add(quiz==='valabs'?'valor-abs':quiz==='ops'?'operaciones':quiz);
+    actualizarIndicador();
+    registrarInteraccion();
+  } else {
+    btn.classList.add('incorrecta');
+    fb.className='mq-fb err';
+    fb.textContent='❌ Revisa las reglas de arriba y vuelve a intentarlo en la práctica.';
+  }
+}
 </script>
 </body>
 </html>
